@@ -7,9 +7,11 @@ import { initGA, logPageView } from 'utils/analytics';
 // Next
 import { Router } from 'routes';
 
+import { Header } from 'aqueduct-components';
+
 // Components
 import Head from 'layout/head';
-import Header from 'layout/header';
+// import Header from 'layout/header';
 import LoadingBar from 'react-redux-loading-bar';
 
 class Layout extends PureComponent {

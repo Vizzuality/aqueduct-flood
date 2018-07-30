@@ -16,9 +16,9 @@ class ErrorPage extends Page {
     return { ...props, statusCode };
   }
 
-  componentDidMount() {
-    this.props.setRoutes(this.props.url);
-  }
+  // componentDidMount() {
+  //   this.props.setRoutes(this.props.url);
+  // }
 
   render() {
     const { statusCode } = this.props;
