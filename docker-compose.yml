@@ -1,0 +1,17 @@
+version: "1"
+services:
+  app:
+    command: "yarn start"
+    build:
+      context: .
+      args:
+        - API_URL
+        - PORT
+        - NODE_ENV
+        - GOOGLE_ANALYTICS
+    image: aq-flood-front
+    env_file: .env
+    ports:
+      - "3001:3000"
+    restart: always
+    container_name: aq-flood

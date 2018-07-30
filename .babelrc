@@ -1,0 +1,27 @@
+{
+  "plugins": [
+    [
+      "module-resolver", {
+        "root": ["."],
+        "alias": {
+          "components": "./components",
+          "modules": "./modules",
+          "pages": "./pages",
+          "layout": "./layout",
+          "css": "./css",
+          "utils": "./utils"
+        },
+        "cwd": "babelrc"
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": { "modules": "commonjs" }
+      }
+    ]
+  ],
+  "ignore": []
+}
