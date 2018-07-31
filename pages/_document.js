@@ -1,7 +1,8 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
+import { Icons as AQIcons }  from 'aqueduct-components';
 
-// Layout components
+// layout components
 import Icons from 'components/ui/icons';
 
 export default class MyDocument extends Document {
@@ -15,10 +16,18 @@ export default class MyDocument extends Document {
           this file will only be rendered in the server side
         */}
         <Head>
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+          <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" />
+          <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js" />
+          <script src="https://unpkg.com/leaflet-utfgrid/L.UTFGrid-min.js" />
+
+
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
           <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
         <body>
-          {/* Icons */}
+          {/* icons */}
+          <AQIcons />
           <Icons />
 
           {/* Main */}

@@ -1,0 +1,10 @@
+@import 'css/settings';
+
+.c-analyzer-outputs {
+  position: absolute;
+  left: $sidebar-width;
+  top: 0;
+  width: calc(100% - #{$sidebar-width});
+  height: calc(100vh - #{$size-header});
+  background: palette(sand);
+}

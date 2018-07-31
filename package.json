@@ -47,8 +47,9 @@
     "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
     "redux-tools": "github:vizzuality/redux-tools#3.3.0",
-    "sass-flex-mixin": "1.0.3",
-    "webpack": "^3.1.0"
+    "sass-flex-mixin": "^1.0.3",
+    "webpack": "^3.1.0",
+    "wri-api-components": "^2.0.9"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

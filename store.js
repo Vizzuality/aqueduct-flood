@@ -1,12 +1,25 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
+import { handleModule } from 'redux-tools';
 
+// third-party reducers
 import { loadingBarReducer } from 'react-redux-loading-bar';
+
+// modules
+import * as appModule from 'modules/app';
+import * as routesModule from 'modules/routes';
+import * as filtersModule from 'modules/filters';
+import * as filtersCompareModule from 'modules/filters-compare';
 
 const reducer = combineReducers({
   // Global
   loadingBar: loadingBarReducer,
+
+  app: handleModule(appModule),
+  routes: handleModule(routesModule),
+  filters: handleModule(filtersModule),
+  filtersCompare: handleModule(filtersCompareModule)
 });
 
 const initStore = (initialState = {}) => createStore(
