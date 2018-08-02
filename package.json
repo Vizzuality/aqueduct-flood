@@ -71,8 +71,8 @@
     "start": "NODE_ENV=production node index.js",
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx ."
   },
+  "heroku-postbuild": "yarn build",
   "engines": {
     "node": "10.7.x"
-  },
-  "peerDependencies": {}
+  }
 }
