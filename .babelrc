@@ -9,7 +9,8 @@
           "pages": "./pages",
           "layout": "./layout",
           "css": "./css",
-          "utils": "./utils"
+          "utils": "./utils",
+          "constants": "./constants"
         },
         "cwd": "babelrc"
       }

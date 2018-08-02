@@ -5,5 +5,6 @@ const routes = nextRoutes();
 
 // ========================= APP ROUTES =====================
 routes.add('home', '/', 'home');
+routes.add('compare', '/compare', 'compare');
 
 module.exports = routes;
