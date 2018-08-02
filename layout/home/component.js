@@ -44,22 +44,20 @@ class Home extends PureComponent {
     return (
       <Layout title="Homepage" description="Aqueduct Flood description">
         <section className="l-home">
-          <div className="l-sidebar">
-            <Sidebar
-              visible={sidebar}
-              onToggle={nextVisible => { setSidebarVisibility(nextVisible)}}
-              customClass="sidebar"
-            >
-              <div className="overflow-container">
-                <Tabs
-                  tabs={APP_TABS}
-                  onChange={({ value }) => setTab(value)}
-                  customClass="l-tabs"
-                />
-                {isAnalyzerTab && <Analyzer />}
-              </div>
-            </Sidebar>
-          </div>
+          <Sidebar
+            visible={sidebar}
+            onToggle={nextVisible => { setSidebarVisibility(nextVisible)}}
+            customClass="l-sidebar"
+          >
+            <div className="overflow-container">
+              <Tabs
+                tabs={APP_TABS}
+                onChange={({ value }) => setTab(value)}
+                customClass="l-tabs"
+              />
+              {isAnalyzerTab && <Analyzer />}
+            </div>
+          </Sidebar>
 
           {isAnalyzerTab && <AnalyzerOutputs />}
 

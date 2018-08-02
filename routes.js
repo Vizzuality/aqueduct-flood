@@ -5,6 +5,6 @@ const routes = nextRoutes();
 
 // ========================= APP ROUTES =====================
 routes.add('home', '/', 'home');
-routes.add('compare', '/compare', 'compare');
+routes.add('analyzer-compare', '/analyzer-compare', 'analyzer-compare');
 
 module.exports = routes;

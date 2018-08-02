@@ -9,26 +9,33 @@
     height: calc(100vh - #{$size-header});
     max-width: $sidebar-width;
     width: 100%;
+    background: palette(sand);
 
-    > .sidebar {
-      width: 100%;
+    > .overflow-container {
+      height: 100%;
+      overflow-y: hidden;
+    }
+
+    > .overflow-container {
+      overflow: hidden;
       height: 100%;
 
-      > .overflow-container {
-        overflow: hidden;
-        height: 100%;
+      .l-tabs {
+        > ul {
+          height: 53px;
 
-        .l-tabs {
-          > ul {
-            height: 53px;
-
-            button {
-              height: 100%;
-            }
+          button {
+            height: 100%;
           }
         }
       }
     }
+
+    // > .sidebar {
+
+
+
+    // }
   }
 
   .l-map {

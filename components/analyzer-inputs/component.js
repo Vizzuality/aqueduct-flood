@@ -18,11 +18,21 @@ class AnalyzerInputs extends PureComponent {
   });
 
   static propTypes = {
-    filters: PropTypes.object.isRequired,
+    filters: PropTypes.shape({
+      existingProtectionLevel: PropTypes.string,
+      designProtectionLevel: PropTypes.string,
+      targetYearDesignProtectionLevel: PropTypes.string,
+      implementationStartYear: PropTypes.string,
+      implementationEndYear: PropTypes.string,
+      infrastructureLifetime: PropTypes.string,
+      benefitStartYear: PropTypes.string,
+      unitCost: PropTypes.string,
+      annualDiscountRate: PropTypes.string,
+      operationCost: PropTypes.string
+    }).isRequired,
     onChangeFilter: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired
   };
-
 
   render() {
     const { filters, onChangeFilter, setModal } = this.props;
@@ -51,7 +61,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.existingProtectionLevel}
                 onChange={({ value }) => onChangeFilter({ existingProtectionLevel: value })}
               />
             </Field>
@@ -66,13 +76,13 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.designProtectionLevel}
                 onChange={({ value }) => onChangeFilter({ designProtectionLevel: value })}
               />
             </Field>
 
             <Field
-              name="design-protection-level"
+              name="target-year-design-protection-level"
               theme="dark"
               label="Target Year for the Design Protection Level"
               className="-inline -bolder"
@@ -81,8 +91,8 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
-                onChange={({ value }) => onChangeFilter({ scenario: value })}
+                defaultValue={filters.targetYearDesignProtectionLevel}
+                onChange={({ value }) => onChangeFilter({ targetYearDesignProtectionLevel: value })}
               />
             </Field>
           </div>
@@ -109,7 +119,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.implementationStartYear}
                 onChange={({ value }) => onChangeFilter({ implementationStartYear: value })}
               />
             </Field>
@@ -124,7 +134,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.implementationEndYear}
                 onChange={({ value }) => onChangeFilter({ implementationEndYear: value })}
               />
             </Field>
@@ -139,7 +149,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.infrastructureLifetime}
                 onChange={({ value }) => onChangeFilter({ infrastructureLifetime: value })}
               />
             </Field>
@@ -154,7 +164,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.benefitStartYear}
                 onChange={({ value }) => onChangeFilter({ benefitStartYear: value })}
               />
             </Field>
@@ -182,7 +192,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.unitCost}
                 onChange={({ value }) => onChangeFilter({ unitCost: value })}
               />
             </Field>
@@ -197,7 +207,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.annualDiscountRate}
                 onChange={({ value }) => onChangeFilter({ annualDiscountRate: value })}
               />
             </Field>
@@ -212,7 +222,7 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={DESIGN_PROTECTION_LEVEL_OPTIONS.find(opt => opt.value === filters.scenario)}
+                defaultValue={filters.operationCost}
                 onChange={({ value }) => onChangeFilter({ operationCost: value })}
               />
             </Field>

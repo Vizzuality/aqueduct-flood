@@ -4,4 +4,30 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 0 0 $space-1 * 16;
+
+  > .analyzer-filters {
+    padding: $space-1 * 6 $padding-md;
+    background: palette(blue);
+
+    > .filter-row {
+      display: flex;
+      justify-content: space-between;
+
+      &:not(:first-child) {
+        padding: $padding-md 0 0;
+      }
+    }
+  }
+
+  > .filters-btn-container {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: $space-1 * 4 0;
+    background: rgba(palette(sand), .8);
+  }
 }

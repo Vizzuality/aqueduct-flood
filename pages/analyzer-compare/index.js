@@ -6,14 +6,11 @@ import Page from "layout/page";
 // Redux
 import withRedux from "next-redux-wrapper";
 import initStore from "store";
+import AnalyzerCompare from "layout/analyzer-compare";
 
-// TO-DO
 class HomePage extends Page {
   render() {
-    return (
-      <div>
-        Compare goes here
-      </div>);
+    return <AnalyzerCompare />;
   }
 }
 
