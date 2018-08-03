@@ -7,12 +7,12 @@ import AnalyzerCompareFilters from './filters';
 import './styles.scss';
 
 class AnalyzerCompare extends PureComponent {
-  static propTypes = {}
-
   render() {
     return (
       <div className="c-analyzer-compare">
-        <AnalyzerCompareFilters />
+        <div className="l-filters">
+          <AnalyzerCompareFilters />
+        </div>
       </div>
     );
   }

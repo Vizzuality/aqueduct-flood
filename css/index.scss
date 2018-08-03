@@ -1,8 +1,10 @@
 @import 'reset';
 @import 'settings';
 @import 'mixins';
+
 @import 'base';
 @import 'grid';
+@import 'layout';
 
 // WRI-API-components
 @import '../node_modules/wri-api-components/dist/components.css';

@@ -1,0 +1,7 @@
+.l-filters {
+  .row {
+    &:not(:first-child) {
+      padding: $padding-md 0 0;
+    }
+  }
+}

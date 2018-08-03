@@ -35,23 +35,23 @@ class AnalyzerCompareFilters extends PureComponent {
           <div className="row">
             {/* filters */}
             <div className="col-md-6">
-              <div className="filter-row">
-                {/* location */}
-                <Field
-                  name="location-filter"
-                  label="Select a location"
-                  className="-bigger"
-                >
-                  <CustomSelect
-                    options={SCENARIOS_OPTIONS}
-                    placeholder="Select a location"
-                    value={filters.location}
-                    onChange={opt => { setFilter({ location: opt && opt.value })}}
-                    isClearable
-                  />
-                </Field>
-              </div>
-              <div className="filter-row">
+              {/* location */}
+              <Field
+                name="location-filter"
+                label="Select a location"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={SCENARIOS_OPTIONS}
+                  placeholder="Select a location"
+                  value={filters.location}
+                  onChange={opt => { setFilter({ location: opt && opt.value })}}
+                  isClearable
+                />
+              </Field>
+            </div>
+            <div className="col-md-6">
+              <div className="clear-comparison-section">
                 {/* scenario */}
                 <Field
                   name="scenario-filter"
@@ -65,25 +65,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     onChange={opt => { setFilter({ scenario: opt && opt.value })}}
                   />
                 </Field>
-              </div>
-            </div>
-            {/* compare filters */}
-            <div className="col-md-6">
-              <div className="filter-row -align-start">
-                {/* location */}
-                <Field
-                  name="location-compare-filter"
-                  label="Select a location"
-                  className="-bigger"
-                >
-                  <CustomSelect
-                    options={SCENARIOS_OPTIONS}
-                    placeholder="Select a location"
-                    isDisabled={!filters.location}
-                    value={filters.locationCompare}
-                    onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
-                  />
-                </Field>
                 <Button
                   onClick={() => clearCompareFilters()}
                   theme="blue"
@@ -92,22 +73,41 @@ class AnalyzerCompareFilters extends PureComponent {
                   Clear comparison
                 </Button>
               </div>
-              <div className="filter-row">
-                {/* scenario */}
-                <Field
-                  name="scenario-compare-filter"
-                  label="Select a Future Scenario"
-                  className="-bigger"
-                >
-                  <CustomSelect
-                    options={SCENARIOS_OPTIONS}
-                    placeholder="Select a scenario"
-                    isDisabled={!filters.location}
-                    value={filters.scenarioCompare}
-                    onChange={opt => { setCompareFilter({ scenario: opt && opt.value })}}
-                  />
-                </Field>
-              </div>
+            </div>
+          </div>
+          {/* compare filters */}
+          <div className="row">
+            <div className="col-md-6">
+              {/* location */}
+              <Field
+                name="location-compare-filter"
+                label="Select a location"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={SCENARIOS_OPTIONS}
+                  placeholder="Select a location"
+                  isDisabled={!filters.location}
+                  value={filters.locationCompare}
+                  onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
+                />
+              </Field>
+            </div>
+            <div className="col-md-6">
+              {/* scenario */}
+              <Field
+                name="scenario-compare-filter"
+                label="Select a Future Scenario"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={SCENARIOS_OPTIONS}
+                  placeholder="Select a scenario"
+                  isDisabled={!filters.location}
+                  value={filters.scenarioCompare}
+                  onChange={opt => { setCompareFilter({ scenario: opt && opt.value })}}
+                />
+              </Field>
             </div>
           </div>
         </div>

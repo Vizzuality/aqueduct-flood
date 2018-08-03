@@ -1,19 +1,12 @@
 @import 'css/settings';
 
 .c-analyzer-compare-filters {
-  padding: $space-1 * 6 $padding-md;
+  padding: $space-1 * 6 0;
   background: palette(blue);
 
-  .filter-row {
+  .clear-comparison-section {
     display: flex;
     justify-content: space-between;
-
-    &:not(:first-child) {
-      padding: $padding-md 0 0;
-    }
-
-    &.-align-start {
-      align-items: flex-start;
-    }
+    align-items: flex-start;
   }
 }
