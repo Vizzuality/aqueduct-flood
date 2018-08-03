@@ -46,7 +46,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     options={SCENARIOS_OPTIONS}
                     placeholder="Select a location"
                     value={filters.location}
-                    defaultValue={filters.location}
                     onChange={opt => { setFilter({ location: opt && opt.value })}}
                     isClearable
                   />
@@ -63,7 +62,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     options={SCENARIOS_OPTIONS}
                     placeholder="Select a scenario"
                     value={filters.scenario}
-                    defaultValue={filters.scenario}
                     onChange={opt => { setFilter({ scenario: opt && opt.value })}}
                   />
                 </Field>
@@ -83,7 +81,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     placeholder="Select a location"
                     isDisabled={!filters.location}
                     value={filters.locationCompare}
-                    defaultValue={filters.locationCompare}
                     onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
                   />
                 </Field>
@@ -107,7 +104,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     placeholder="Select a scenario"
                     isDisabled={!filters.location}
                     value={filters.scenarioCompare}
-                    defaultValue={filters.scenarioCompare}
                     onChange={opt => { setCompareFilter({ scenario: opt && opt.value })}}
                   />
                 </Field>

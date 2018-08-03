@@ -61,8 +61,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.existingProtectionLevel}
-                onChange={({ value }) => onChangeFilter({ existingProtectionLevel: value })}
+                value={filters.existingProtectionLevel}
+                isClearable
+                onChange={opt => onChangeFilter({ existingProtectionLevel: opt && opt.value })}
               />
             </Field>
 
@@ -76,8 +77,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.designProtectionLevel}
-                onChange={({ value }) => onChangeFilter({ designProtectionLevel: value })}
+                value={filters.designProtectionLevel}
+                isClearable
+                onChange={opt => onChangeFilter({ designProtectionLevel: opt && opt.value })}
               />
             </Field>
 
@@ -91,8 +93,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.targetYearDesignProtectionLevel}
-                onChange={({ value }) => onChangeFilter({ targetYearDesignProtectionLevel: value })}
+                value={filters.targetYearDesignProtectionLevel}
+                isClearable
+                onChange={opt => onChangeFilter({ targetYearDesignProtectionLevel: opt && opt.value })}
               />
             </Field>
           </div>
@@ -119,8 +122,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.implementationStartYear}
-                onChange={({ value }) => onChangeFilter({ implementationStartYear: value })}
+                value={filters.implementationStartYear}
+                isClearable
+                onChange={opt => onChangeFilter({ implementationStartYear: opt && opt.value })}
               />
             </Field>
 
@@ -134,8 +138,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.implementationEndYear}
-                onChange={({ value }) => onChangeFilter({ implementationEndYear: value })}
+                value={filters.implementationEndYear}
+                isClearable
+                onChange={opt => onChangeFilter({ implementationEndYear: opt && opt.value })}
               />
             </Field>
 
@@ -149,8 +154,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.infrastructureLifetime}
-                onChange={({ value }) => onChangeFilter({ infrastructureLifetime: value })}
+                value={filters.infrastructureLifetime}
+                isClearable
+                onChange={opt => onChangeFilter({ infrastructureLifetime: opt && opt.value })}
               />
             </Field>
 
@@ -164,8 +170,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.benefitStartYear}
-                onChange={({ value }) => onChangeFilter({ benefitStartYear: value })}
+                value={filters.benefitStartYear}
+                isClearable
+                onChange={opt => onChangeFilter({ benefitStartYear: opt && opt.value })}
               />
             </Field>
           </div>
@@ -192,8 +199,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.unitCost}
-                onChange={({ value }) => onChangeFilter({ unitCost: value })}
+                value={filters.unitCost}
+                isClearable
+                onChange={opt => onChangeFilter({ unitCost: opt && opt.value })}
               />
             </Field>
 
@@ -207,8 +215,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.annualDiscountRate}
-                onChange={({ value }) => onChangeFilter({ annualDiscountRate: value })}
+                value={filters.annualDiscountRate}
+                isClearable
+                onChange={opt => onChangeFilter({ annualDiscountRate: opt && opt.value })}
               />
             </Field>
 
@@ -222,8 +231,9 @@ class AnalyzerInputs extends PureComponent {
                 options={DESIGN_PROTECTION_LEVEL_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                defaultValue={filters.operationCost}
-                onChange={({ value }) => onChangeFilter({ operationCost: value })}
+                value={filters.operationCost}
+                isClearable
+                onChange={opt => onChangeFilter({ operationCost: opt && opt.value })}
               />
             </Field>
           </div>

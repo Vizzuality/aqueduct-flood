@@ -43,8 +43,9 @@ class Analyzer extends PureComponent {
               <CustomSelect
                 options={SCENARIOS_OPTIONS}
                 placeholder="Select a location"
-                defaultValue={filters.location}
-                onChange={({ value }) => setFilter({ location: value })}
+                value={filters.location}
+                onChange={opt => setFilter({ location: opt && opt.value })}
+                isClearable
               />
             </Field>
 
@@ -58,11 +59,12 @@ class Analyzer extends PureComponent {
                 options={SCENARIOS_OPTIONS}
                 placeholder="Compare with"
                 isDisabled={!filters.location}
-                defaultValue={filters.compareLocation}
-                onChange={({ value }) => {
-                  setCompareFilter({ location: value });
-                  Router.push('/analyzer-compare');
+                value={filters.compareLocation}
+                onChange={(opt) => {
+                  setCompareFilter({ location: opt && opt.value });
+                  if (opt) Router.push('/analyzer-compare');
                 }}
+                isClearable
               />
             </Field>
           </div>
@@ -76,8 +78,9 @@ class Analyzer extends PureComponent {
               <CustomSelect
                 options={SCENARIOS_OPTIONS}
                 placeholder="Select a future scenario"
-                defaultValue={filters.scenario}
-                onChange={({ value }) => setFilter({ scenario: value })}
+                value={filters.scenario}
+                onChange={opt => setFilter({ scenario: opt && opt.value })}
+                isClearable
               />
             </Field>
           </div>
