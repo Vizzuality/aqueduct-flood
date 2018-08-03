@@ -53,18 +53,21 @@ class AnalyzerCompareFilters extends PureComponent {
             <div className="col-md-6">
               <div className="clear-comparison-section">
                 {/* scenario */}
+                {/* location */}
                 <Field
-                  name="scenario-filter"
-                  label="Select a Future Scenario"
+                  name="location-compare-filter"
+                  label="Select a location"
                   className="-bigger"
                 >
                   <CustomSelect
                     options={SCENARIOS_OPTIONS}
-                    placeholder="Select a scenario"
-                    value={filters.scenario}
-                    onChange={opt => { setFilter({ scenario: opt && opt.value })}}
+                    placeholder="Select a location"
+                    isDisabled={!filters.location}
+                    value={filters.locationCompare}
+                    onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
                   />
                 </Field>
+
                 <Button
                   onClick={() => clearCompareFilters()}
                   theme="blue"
@@ -78,18 +81,16 @@ class AnalyzerCompareFilters extends PureComponent {
           {/* compare filters */}
           <div className="row">
             <div className="col-md-6">
-              {/* location */}
               <Field
-                name="location-compare-filter"
-                label="Select a location"
+                name="scenario-filter"
+                label="Select a Future Scenario"
                 className="-bigger"
               >
                 <CustomSelect
                   options={SCENARIOS_OPTIONS}
-                  placeholder="Select a location"
-                  isDisabled={!filters.location}
-                  value={filters.locationCompare}
-                  onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
+                  placeholder="Select a scenario"
+                  value={filters.scenario}
+                  onChange={opt => { setFilter({ scenario: opt && opt.value })}}
                 />
               </Field>
             </div>
