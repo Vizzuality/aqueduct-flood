@@ -10,6 +10,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import * as appModule from 'modules/app';
 import * as routesModule from 'modules/routes';
 import * as locationsModule from 'modules/locations';
+import * as widgetsModule from 'modules/widgets';
 import * as filtersModule from 'modules/filters';
 import * as filtersCompareModule from 'modules/filters-compare';
 
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   app: handleModule(appModule),
   routes: handleModule(routesModule),
   locations: handleModule(locationsModule),
+  widgets: handleModule(widgetsModule),
   filters: handleModule(filtersModule),
   filtersCompare: handleModule(filtersCompareModule)
 });

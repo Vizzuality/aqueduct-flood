@@ -11,19 +11,28 @@ import { WIDGETS } from 'mocks/widgets';
 // styles
 import './styles.scss';
 
-class AnalyzerOutputs extends PureComponent {
-  static propTypes = { filters: PropTypes.object.isRequired }
+class AnalyzerCompareOutputs extends PureComponent {
+  static propTypes = {
+    filters: PropTypes.object.isRequired,
+    filtersCompare: PropTypes.object.isRequired
+  }
 
   render() {
-    const { filters } = this.props;
+    const { filters, filtersCompare } = this.props;
 
     return (
-      <div className="c-analyzer-outputs">
+      <div className="c-analyzer-compare-outputs">
         <div className="container">
           {WIDGETS.map(widget => (
             <div key={widget.id} className="widget-row">
               <Widget
                 params={{ id: widget.id, filters }}
+              >
+                {_widget => (<BarChart data={{ table: _widget.data}} />)}
+              </Widget>
+
+              <Widget
+                params={{ id: widget.id, filters: filtersCompare }}
               >
                 {_widget => (<BarChart data={{ table: _widget.data}} />)}
               </Widget>
@@ -35,4 +44,4 @@ class AnalyzerOutputs extends PureComponent {
   }
 }
 
-export default AnalyzerOutputs;
+export default AnalyzerCompareOutputs;
