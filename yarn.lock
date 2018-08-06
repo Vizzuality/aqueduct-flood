@@ -4780,9 +4780,9 @@ json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
-jsona@^1.1.10:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/jsona/-/jsona-1.1.12.tgz#c9b070fee1bb759bbb29efac8fd8ff4d2186452e"
+jsona@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/jsona/-/jsona-1.1.14.tgz#886f974ead96b4812244a4534c6f17a3f022032d"
 
 jsonfile@^4.0.0:
   version "4.0.0"

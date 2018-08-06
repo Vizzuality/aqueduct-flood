@@ -33,9 +33,8 @@ class AnalyzerCompareFilters extends PureComponent {
       <div className="c-analyzer-compare-filters">
         <div className="wrapper">
           <div className="row">
-            {/* filters */}
+            {/* location filters */}
             <div className="col-md-6">
-              {/* location */}
               <Field
                 name="location-filter"
                 label="Select a location"
@@ -51,9 +50,8 @@ class AnalyzerCompareFilters extends PureComponent {
               </Field>
             </div>
             <div className="col-md-6">
+              {/* scenario filters */}
               <div className="clear-comparison-section">
-                {/* scenario */}
-                {/* location */}
                 <Field
                   name="location-compare-filter"
                   label="Select a location"
@@ -67,7 +65,6 @@ class AnalyzerCompareFilters extends PureComponent {
                     onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
                   />
                 </Field>
-
                 <Button
                   onClick={() => clearCompareFilters()}
                   theme="blue"
