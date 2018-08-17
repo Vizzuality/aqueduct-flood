@@ -8,7 +8,7 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-sass": "^0.1.2",
-    "aqueduct-components": "1.0.5",
+    "aqueduct-components": "^1.0.6",
     "autoprefixer": "^9.0.1",
     "babel-core": "^6.26.0",
     "babel-plugin-module-resolver": "^3.1.1",
