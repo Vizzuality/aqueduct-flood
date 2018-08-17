@@ -1,4 +1,4 @@
-@import "../node_modules/sass-flex-mixin/_flex";
+@import "~sass-flex-mixin/_flex";
 
 $flexboxgrid-gutter-compensation: $flexboxgrid-gutter-width * .5 * -1;
 $flexbox-grid-half-gutter-width: $flexboxgrid-gutter-width * .5;

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
-const path = require('path');
+// const path = require('path');
+// const glob = require('glob');
 const withSass = require('@zeit/next-sass');
 
 module.exports = withSass({
@@ -16,11 +17,16 @@ module.exports = withSass({
       });
     });
 
-    config.module.rules.push({
-      test: path.resolve('./node_modules/psa-check'),
-      loader: 'babel-loader',
-      options: { babelrc: false, cacheDirectory: false, presets: [ 'env' ] },
-    });
+    // config.module.rules.push({
+    //   test: /\.css$/,
+    //   loader: 'style-loader',
+    //   options: {
+    //     includePaths: ['./node_modules']
+    //       .map(d => path.join(__dirname, d))
+    //       .map(g => glob.sync(g))
+    //       .reduce((a, c) => a.concat(c), [])
+    //   }
+    // });
 
     config.plugins.push(new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(

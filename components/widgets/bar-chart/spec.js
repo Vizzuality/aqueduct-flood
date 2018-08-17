@@ -1,79 +1,70 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
   "width": 400,
-  "height": 250,
-  "padding": 5,
-  "data": [{ "name": "table" }
-  ],
+  "height": 200,
 
-  "signals": [
-    {
-      "name": "tooltip",
-      "value": {},
-      "on": [
-        {"events": "rect:mouseover", "update": "datum"},
-        {"events": "rect:mouseout",  "update": "{}"}
-      ]
-    }
-  ],
-
+  "data": [ { "name": "table" } ],
   "scales": [
     {
       "name": "xscale",
       "type": "band",
-      "domain": {"data": "table", "field": "x"},
+      "domain": { "data": "table", "field": "year" },
       "range": "width",
-      "padding": 0.05,
-      "round": true
+      "zero": false,
+      "nice": true
     },
     {
       "name": "yscale",
-      "domain": {"data": "table", "field": "y"},
+      "domain": { "data": "table", "field": "value" },
       "nice": true,
       "range": "height"
     }
   ],
 
   "axes": [
-    { "orient": "bottom", "scale": "xscale" },
-    { "orient": "left", "scale": "yscale" }
+    {
+      "orient": "bottom",
+      "bandPosition": 0.5,
+      "labelOverlap": "parity",
+      "ticks": false,
+      "domain": false,
+      "labelBaseline": "top",
+      "offset": 5,
+      "scale": "xscale"
+    },
+    {
+      "orient": "left",
+      "grid": true,
+      "labelOverlap": "parity",
+      "scale": "yscale"
+    }
   ],
 
   "marks": [
     {
       "type": "rect",
-      "from": {"data":"table"},
+      "from": { "data": "table" },
       "encode": {
         "enter": {
-          "x": {"scale": "xscale", "field": "x"},
-          "width": {"scale": "xscale", "band": 1},
-          "y": {"scale": "yscale", "field": "y"},
-          "y2": {"scale": "yscale", "value": 0}
+          "x": { "scale": "xscale", "field": "year" },
+          "width": { "scale": "xscale", "band": 1 },
+          "y": { "scale": "yscale", "field": "value" },
+          "y2": { "scale": "yscale", "value": 0 },
+          "fill": [
+            {
+              "test": "datum.value<0",
+              "value": "red"
+            },
+            { "value": "grey" }
+          ]
         },
         "update": {
-          "fill": {"value": "steelblue"}
+
+          "opacity": { "value": 1 }
+
         },
         "hover": {
-          "fill": {"value": "red"}
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "align": {"value": "center"},
-          "baseline": {"value": "bottom"},
-          "fill": {"value": "#333"}
-        },
-        "update": {
-          "x": {"scale": "xscale", "signal": "tooltip.x", "band": 0.5},
-          "y": {"scale": "yscale", "signal": "tooltip.y", "offset": -2},
-          "text": {"signal": "tooltip.y"},
-          "fillOpacity": [
-            {"test": "datum === tooltip", "value": 0},
-            {"value": 1}
-          ]
+          "opacity": { "value": 0.5 }
         }
       }
     }

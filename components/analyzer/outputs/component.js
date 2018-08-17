@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 // componets
 import Widget from 'components/widget';
 import BarChart from 'components/widgets/bar-chart';
+import LineChart from 'components/widgets/line';
+import MultiLineChart from 'components/widgets/multi-line';
 
 // constants
 import { WIDGETS } from 'mocks/widgets';
@@ -25,7 +27,16 @@ class AnalyzerOutputs extends PureComponent {
               <Widget
                 params={{ id: widget.id, filters }}
               >
-                {_widget => (<BarChart data={{ table: _widget.data}} />)}
+                {({ data }) => {
+
+                  if (widget.type === 'bar') return (<BarChart data={{ table: data }} />)
+
+                  if (widget.type === 'line') return (<LineChart data={{ table: data }} />)
+
+                  if (widget.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+
+                  return null;
+                }}
               </Widget>
             </div>
           ))}

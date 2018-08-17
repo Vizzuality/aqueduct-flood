@@ -4,8 +4,7 @@ import { VegaChart } from 'wri-api-components';
 
 import SPEC from './spec';
 
-
-class BarChart extends PureComponent {
+class MultiLine extends PureComponent {
   static propTypes = { data: PropTypes.object.isRequired }
 
   render() {
@@ -16,4 +15,4 @@ class BarChart extends PureComponent {
   }
 }
 
-export default BarChart;
+export default MultiLine;

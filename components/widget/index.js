@@ -1,10 +1,12 @@
+// import React from 'react';
 import { connect } from 'react-redux';
+import { Widget } from 'aqueduct-components';
 
 // actions
 import { getWidgetData } from 'modules/widgets/actions';
 
-// component
-import Widget from './component';
+// const Widget = () => (<div className="widget" />);
+
 
 export default connect(
   (state, { params }) => {

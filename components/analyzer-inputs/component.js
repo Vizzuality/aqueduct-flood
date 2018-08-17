@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Button, Field, CustomSelect } from 'aqueduct-components';
+import { Icon, Button, Field, CustomSelect, Range } from 'aqueduct-components';
 
 // components
 import SectionHeader from 'components/ui/section-header';
@@ -51,6 +51,21 @@ class AnalyzerInputs extends PureComponent {
             </Button>
           </div>
           <div className="selectors-container">
+            <Field
+              name="test"
+              theme="dark"
+              label="Existing Protection Level (Return Period)"
+              className="-bolder"
+            >
+              <Range
+                min={0}
+                max={20}
+                theme="dark"
+                defaultValue={[3, 10]}
+                onAfterChange={value => console.log(value)}
+              />
+            </Field>
+
             <Field
               name="existing-protection-level"
               theme="dark"
