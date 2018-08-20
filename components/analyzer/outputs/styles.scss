@@ -2,6 +2,7 @@
 
 .c-analyzer-outputs {
   z-index: 2;
+  overflow: auto;
   position: absolute;
   left: $sidebar-width;
   top: 0;

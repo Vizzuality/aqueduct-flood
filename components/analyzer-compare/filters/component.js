@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect, Button } from 'aqueduct-components';
+import { Router } from 'routes';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
@@ -19,6 +20,14 @@ class AnalyzerCompareFilters extends PureComponent {
     setFilter: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired,
     setCompareFilter: PropTypes.func.isRequired,
+  }
+
+  onClearCompareFilters = () => {
+    const { clearCompareFilters } = this.props;
+
+    clearCompareFilters();
+
+    Router.push('/');
   }
 
   render() {
@@ -66,7 +75,7 @@ class AnalyzerCompareFilters extends PureComponent {
                   />
                 </Field>
                 <Button
-                  onClick={() => clearCompareFilters()}
+                  onClick={this.onClearCompareFilters}
                   theme="blue"
                   className="-regular -bg-white"
                 >

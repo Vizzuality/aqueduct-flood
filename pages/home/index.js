@@ -17,7 +17,7 @@ class HomePage extends Page {
     const { store } = context;
 
     // fetch locations
-    await store.dispatch(getLocations());
+    // await store.dispatch(getLocations());
 
     return { ...props };
   }

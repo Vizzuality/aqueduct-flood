@@ -28,7 +28,13 @@ class Analyzer extends PureComponent {
         </div>
 
         <div className="l-analyzer-inputs">
-          <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+          <div className="wrapper">
+            <div className="row">
+              <div className="col-xs-12">
+                <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="filters-btn-container">

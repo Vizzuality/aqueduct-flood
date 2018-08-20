@@ -1,12 +1,28 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Button, Field, CustomSelect, Range } from 'aqueduct-components';
+import {
+  Icon,
+  Button,
+  Field,
+  CustomSelect,
+  Range,
+  Slider
+} from 'aqueduct-components';
 
 // components
 import SectionHeader from 'components/ui/section-header';
 
 // constants
-import { DESIGN_PROTECTION_LEVEL_OPTIONS } from './constants';
+import {
+  DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS,
+  EXISTING_PROTECTION_LEVEL_MARKS,
+  EXISTING_PROTECTION_LEVEL_OPTIONS,
+  IMPLEMENTATION_YEAR_OPTIONS,
+  INFRASTRUCTURE_LIFE_TIME_OPTIONS,
+  UNIT_COST_OPTIONS,
+  DISCOUNT_RATE_OPTIONS,
+  OPERATION_MAINTENANCE_COST_OPTIONS
+} from './constants';
 
 // styles
 import './styles.scss';
@@ -19,23 +35,59 @@ class AnalyzerInputs extends PureComponent {
 
   static propTypes = {
     filters: PropTypes.shape({
-      existingProtectionLevel: PropTypes.string,
-      designProtectionLevel: PropTypes.string,
-      targetYearDesignProtectionLevel: PropTypes.string,
-      implementationStartYear: PropTypes.string,
-      implementationEndYear: PropTypes.string,
-      infrastructureLifetime: PropTypes.string,
-      benefitStartYear: PropTypes.string,
-      unitCost: PropTypes.string,
-      annualDiscountRate: PropTypes.string,
-      operationCost: PropTypes.string
+      existing_prot: PropTypes.number.isRequired,
+      prot_fut: PropTypes.number.isRequired,
+      ref_year: PropTypes.number.isRequired,
+      implementationYearRange: PropTypes.array.isRequired,
+      infrastructure_life: PropTypes.number.isRequired,
+      benefits_start: PropTypes.number.isRequired,
+      user_urb_cost: PropTypes.number,
+      discount_rate: PropTypes.number.isRequired,
+      om_costs: PropTypes.number.isRequired
     }).isRequired,
     onChangeFilter: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired
   };
 
+  componentWillMount() {
+    const { filters } = this.props;
+    const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === filters.existing_prot);
+    const nextIndex = indexExistingProtection + 1 > EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
+      indexExistingProtection : indexExistingProtection + 1;
+
+    this.designProtectionOptions = [...EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex)];
+    this. designProtectionMarks = {};
+
+    this.designProtectionOptions.forEach(opt => {
+      this.designProtectionMarks[opt] = opt;
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { existing_prot: nextExistingProt } = nextProps.filters;
+    const { filters } = this.props;
+    const { existing_prot: existingProt } = filters;
+
+    if (existingProt === nextExistingProt) {
+      const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === existingProt);
+      const nextIndex = indexExistingProtection + 1 > EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
+        indexExistingProtection : indexExistingProtection + 1;
+
+      this.designProtectionOptions = [...EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex)];
+      this. designProtectionMarks = {};
+
+      this.designProtectionOptions.forEach(opt => {
+        this.designProtectionMarks[opt] = opt;
+      });
+    }
+  }
+
   render() {
     const { filters, onChangeFilter, setModal } = this.props;
+
+    console.log(this.designProtectionOptions);
+    console.log(this. designProtectionMarks);
+
     return (
       <div className="c-analyzer-inputs">
         <SectionHeader title="input table" />
@@ -52,33 +104,19 @@ class AnalyzerInputs extends PureComponent {
           </div>
           <div className="selectors-container">
             <Field
-              name="test"
+              name="existing-protection-level"
               theme="dark"
               label="Existing Protection Level (Return Period)"
               className="-bolder"
             >
-              <Range
-                min={0}
-                max={20}
+              <Slider
+                min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
+                max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
                 theme="dark"
-                defaultValue={[3, 10]}
-                onAfterChange={value => console.log(value)}
-              />
-            </Field>
-
-            <Field
-              name="existing-protection-level"
-              theme="dark"
-              label="Existing Protection Level (Return Period)"
-              className="-inline -bolder"
-            >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
-                theme="dark"
-                value={filters.existingProtectionLevel}
-                isClearable
-                onChange={opt => onChangeFilter({ existingProtectionLevel: opt && opt.value })}
+                step={null}
+                marks={EXISTING_PROTECTION_LEVEL_MARKS}
+                defaultValue={filters.existing_prot}
+                onAfterChange={value => { onChangeFilter({ existing_prot: value }) }}
               />
             </Field>
 
@@ -86,15 +124,17 @@ class AnalyzerInputs extends PureComponent {
               name="design-protection-level"
               theme="dark"
               label="Design Protection Level (Return Period)"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={this.designProtectionOptions[0]}
+                max={this.designProtectionOptions[this.designProtectionOptions.length - 1]}
+                disabled={this.designProtectionOptions[0] === this.designProtectionOptions[this.designProtectionOptions.length - 1]}
                 theme="dark"
-                value={filters.designProtectionLevel}
-                isClearable
-                onChange={opt => onChangeFilter({ designProtectionLevel: opt && opt.value })}
+                step={null}
+                marks={this.designProtectionMarks}
+                defaultValue={filters.prot_fut}
+                onAfterChange={value => { onChangeFilter({ prot_fut: value }) }}
               />
             </Field>
 
@@ -105,12 +145,11 @@ class AnalyzerInputs extends PureComponent {
               className="-inline -bolder"
             >
               <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
+                options={DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
-                value={filters.targetYearDesignProtectionLevel}
-                isClearable
-                onChange={opt => onChangeFilter({ targetYearDesignProtectionLevel: opt && opt.value })}
+                value={filters.ref_year}
+                onChange={opt => onChangeFilter({ ref_year: opt && opt.value })}
               />
             </Field>
           </div>
@@ -128,34 +167,23 @@ class AnalyzerInputs extends PureComponent {
           </div>
           <div className="selectors-container">
             <Field
-              name="implementation-start-year"
+              name="implementation-year"
               theme="dark"
-              label="Implementatation Start Year"
-              className="-inline -bolder"
+              label="Implementation Range"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Range
+                min={IMPLEMENTATION_YEAR_OPTIONS[0]}
+                max={IMPLEMENTATION_YEAR_OPTIONS[1]}
                 theme="dark"
-                value={filters.implementationStartYear}
-                isClearable
-                onChange={opt => onChangeFilter({ implementationStartYear: opt && opt.value })}
-              />
-            </Field>
-
-            <Field
-              name="implementation-end-year"
-              theme="dark"
-              label="Implementatation End Year"
-              className="-inline -bolder"
-            >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
-                theme="dark"
-                value={filters.implementationEndYear}
-                isClearable
-                onChange={opt => onChangeFilter({ implementationEndYear: opt && opt.value })}
+                defaultValue={filters.implementationYearRange}
+                onAfterChange={value => {
+                  onChangeFilter({
+                    implementationYearRange: value,
+                    benefits_start: value[0]
+                  })
+                }}
+                pushable
               />
             </Field>
 
@@ -163,15 +191,14 @@ class AnalyzerInputs extends PureComponent {
               name="infrastructure-life-time"
               theme="dark"
               label="Infrastructure Life Time"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={INFRASTRUCTURE_LIFE_TIME_OPTIONS[0]}
+                max={INFRASTRUCTURE_LIFE_TIME_OPTIONS[1]}
                 theme="dark"
-                value={filters.infrastructureLifetime}
-                isClearable
-                onChange={opt => onChangeFilter({ infrastructureLifetime: opt && opt.value })}
+                defaultValue={filters.infrastructure_life}
+                onAfterChange={value => { onChangeFilter({ infrastructure_life: value }) }}
               />
             </Field>
 
@@ -179,15 +206,14 @@ class AnalyzerInputs extends PureComponent {
               name="benefit-start-year"
               theme="dark"
               label="Benefit Start Year"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={filters.implementationYearRange[0]}
+                max={filters.implementationYearRange[1]}
                 theme="dark"
-                value={filters.benefitStartYear}
-                isClearable
-                onChange={opt => onChangeFilter({ benefitStartYear: opt && opt.value })}
+                defaultValue={filters.benefits_start}
+                onAfterChange={value => { onChangeFilter({ benefits_start: value }) }}
               />
             </Field>
           </div>
@@ -205,34 +231,34 @@ class AnalyzerInputs extends PureComponent {
           </div>
           <div className="selectors-container">
             <Field
-              name="unit-cost"
+              name="user-urb-cost"
               theme="dark"
               label="Unit Cost ($million/meter/kilometer)"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={UNIT_COST_OPTIONS[0]}
+                max={UNIT_COST_OPTIONS[1]}
+                step={0.01}
                 theme="dark"
-                value={filters.unitCost}
-                isClearable
-                onChange={opt => onChangeFilter({ unitCost: opt && opt.value })}
+                defaultValue={filters.user_urb_cost}
+                onAfterChange={value => { onChangeFilter({ user_urb_cost: value }) }}
               />
             </Field>
 
             <Field
-              name="annual-discount-rate"
+              name="discount-rate"
               theme="dark"
               label="Annual Discount Rate (%)"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={DISCOUNT_RATE_OPTIONS[0]}
+                max={DISCOUNT_RATE_OPTIONS[1]}
                 theme="dark"
-                value={filters.annualDiscountRate}
-                isClearable
-                onChange={opt => onChangeFilter({ annualDiscountRate: opt && opt.value })}
+                defaultValue={filters.discount_rate}
+                formatValue={value => `${value}%`}
+                onAfterChange={value => { onChangeFilter({ discount_rate: value }) }}
               />
             </Field>
 
@@ -240,15 +266,15 @@ class AnalyzerInputs extends PureComponent {
               name="operation-maintenance-cost"
               theme="dark"
               label="Operation & Maintenance Cost (%)"
-              className="-inline -bolder"
+              className="-bolder"
             >
-              <CustomSelect
-                options={DESIGN_PROTECTION_LEVEL_OPTIONS}
-                placeholder="Select a year"
+              <Slider
+                min={OPERATION_MAINTENANCE_COST_OPTIONS[0]}
+                max={OPERATION_MAINTENANCE_COST_OPTIONS[1]}
                 theme="dark"
-                value={filters.operationCost}
-                isClearable
-                onChange={opt => onChangeFilter({ operationCost: opt && opt.value })}
+                defaultValue={filters.om_costs}
+                formatValue={value => `${value}%`}
+                onAfterChange={value => { onChangeFilter({ om_costs: value }) }}
               />
             </Field>
           </div>
