@@ -52,11 +52,11 @@ class AnalyzerInputs extends PureComponent {
   componentWillMount() {
     const { filters } = this.props;
     const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === filters.existing_prot);
-    const nextIndex = indexExistingProtection + 1 > EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
+    const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
       indexExistingProtection : indexExistingProtection + 1;
 
-    this.designProtectionOptions = [...EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex)];
-    this. designProtectionMarks = {};
+    this.designProtectionOptions = EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex);
+    this.designProtectionMarks = {};
 
     this.designProtectionOptions.forEach(opt => {
       this.designProtectionMarks[opt] = opt;
@@ -68,13 +68,13 @@ class AnalyzerInputs extends PureComponent {
     const { filters } = this.props;
     const { existing_prot: existingProt } = filters;
 
-    if (existingProt === nextExistingProt) {
-      const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === existingProt);
-      const nextIndex = indexExistingProtection + 1 > EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
+    if (existingProt !== nextExistingProt) {
+      const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === nextExistingProt);
+      const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
         indexExistingProtection : indexExistingProtection + 1;
 
-      this.designProtectionOptions = [...EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex)];
-      this. designProtectionMarks = {};
+      this.designProtectionOptions = EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex);
+      this.designProtectionMarks = {};
 
       this.designProtectionOptions.forEach(opt => {
         this.designProtectionMarks[opt] = opt;
@@ -82,11 +82,20 @@ class AnalyzerInputs extends PureComponent {
     }
   }
 
+  onChangeExistingProtectionLevel = (value) => {
+    const { onChangeFilter } = this.props;
+
+    const indexValue = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === value);
+
+    onChangeFilter({
+      existing_prot: value,
+      prot_fut: indexValue + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
+        EXISTING_PROTECTION_LEVEL_OPTIONS[indexValue] : EXISTING_PROTECTION_LEVEL_OPTIONS[indexValue + 1]
+    });
+  }
+
   render() {
     const { filters, onChangeFilter, setModal } = this.props;
-
-    console.log(this.designProtectionOptions);
-    console.log(this. designProtectionMarks);
 
     return (
       <div className="c-analyzer-inputs">
@@ -116,7 +125,7 @@ class AnalyzerInputs extends PureComponent {
                 step={null}
                 marks={EXISTING_PROTECTION_LEVEL_MARKS}
                 defaultValue={filters.existing_prot}
-                onAfterChange={value => { onChangeFilter({ existing_prot: value }) }}
+                onAfterChange={this.onChangeExistingProtectionLevel}
               />
             </Field>
 
@@ -129,7 +138,7 @@ class AnalyzerInputs extends PureComponent {
               <Slider
                 min={this.designProtectionOptions[0]}
                 max={this.designProtectionOptions[this.designProtectionOptions.length - 1]}
-                disabled={this.designProtectionOptions[0] === this.designProtectionOptions[this.designProtectionOptions.length - 1]}
+                disabled={this.designProtectionOptions.length <= 1}
                 theme="dark"
                 step={null}
                 marks={this.designProtectionMarks}
