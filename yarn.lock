@@ -891,9 +891,9 @@ aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
-aqueduct-components@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.7.tgz#dbc193e364d1a7973de2f0479e6afe4edb3975c7"
+aqueduct-components@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.8.tgz#a0a29346772b55418cf6da6b0f328810b6fbc993"
   dependencies:
     classnames "^2.2.5"
     clipboard "^2.0.1"
@@ -4873,6 +4873,14 @@ kind-of@^5.0.0:
 kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
+
+layer-manager@^1.0.19:
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.0.19.tgz#c3a57183ab90984639c16ec885da4ff64e6ff86d"
+  dependencies:
+    bluebird "^3.5.1"
+    lodash "^4.17.10"
+    wri-json-api-serializer "^1.0.1"
 
 layer-manager@^1.0.4:
   version "1.0.17"

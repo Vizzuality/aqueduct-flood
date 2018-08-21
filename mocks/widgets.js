@@ -1,7 +1,10 @@
+// available widget types: bar, line, multi-line
+
 export const WIDGETS = [
   {
     id: '00f2be42-1ee8-4069-a55a-16a988f2b7a0',
     type: 'bar',
+    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
     data: [
       { "year": 2010, "value": null },
       { "year": 2011, "value": 65.48430961929267 },
@@ -98,6 +101,7 @@ export const WIDGETS = [
   },
   {
     id: '12345-2222-444-1234-23123113221',
+    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
     type: 'line',
     data: [
       {
@@ -469,6 +473,7 @@ export const WIDGETS = [
   {
     id: '98765-2222-2333-1234-988578678',
     type: 'multi-line',
+    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
     data: [
       {
         "year": 2010,

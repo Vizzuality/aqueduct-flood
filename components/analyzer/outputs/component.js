@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { replace } from 'aqueduct-components';
 
 // componets
 import Widget from 'components/widget';
@@ -25,6 +26,7 @@ class AnalyzerOutputs extends PureComponent {
           {WIDGETS.map(widget => (
             <div key={widget.id} className="widget-row">
               <Widget
+                title={replace(widget.title, filters)}
                 params={{ id: widget.id, filters }}
               >
                 {({ data }) => {

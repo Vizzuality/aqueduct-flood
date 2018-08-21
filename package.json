@@ -8,7 +8,7 @@
   "main": "index.js",
   "dependencies": {
     "@zeit/next-sass": "^0.1.2",
-    "aqueduct-components": "^1.0.7",
+    "aqueduct-components": "^1.0.8",
     "autoprefixer": "^9.0.1",
     "babel-core": "^6.26.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -24,6 +24,7 @@
     "http-status": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "jsona": "^1.1.14",
+    "layer-manager": "^1.0.19",
     "lodash": "^4.17.10",
     "mobile-detect": "^1.4.1",
     "morgan": "^1.9.0",

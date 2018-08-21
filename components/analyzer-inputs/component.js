@@ -38,7 +38,8 @@ class AnalyzerInputs extends PureComponent {
       existing_prot: PropTypes.number.isRequired,
       prot_fut: PropTypes.number.isRequired,
       ref_year: PropTypes.number.isRequired,
-      implementationYearRange: PropTypes.array.isRequired,
+      implementation_start: PropTypes.number.isRequired,
+      implementation_end: PropTypes.number.isRequired,
       infrastructure_life: PropTypes.number.isRequired,
       benefits_start: PropTypes.number.isRequired,
       user_urb_cost: PropTypes.number,
@@ -185,10 +186,11 @@ class AnalyzerInputs extends PureComponent {
                 min={IMPLEMENTATION_YEAR_OPTIONS[0]}
                 max={IMPLEMENTATION_YEAR_OPTIONS[1]}
                 theme="dark"
-                defaultValue={filters.implementationYearRange}
+                defaultValue={[filters.implementation_start, filters.implementation_end]}
                 onAfterChange={value => {
                   onChangeFilter({
-                    implementationYearRange: value,
+                    implementation_start: value[0],
+                    implementation_end: value[1],
                     benefits_start: value[0]
                   })
                 }}
@@ -218,8 +220,8 @@ class AnalyzerInputs extends PureComponent {
               className="-bolder"
             >
               <Slider
-                min={filters.implementationYearRange[0]}
-                max={filters.implementationYearRange[1]}
+                min={filters.implementation_start}
+                max={filters.implementation_end}
                 theme="dark"
                 defaultValue={filters.benefits_start}
                 onAfterChange={value => { onChangeFilter({ benefits_start: value }) }}
