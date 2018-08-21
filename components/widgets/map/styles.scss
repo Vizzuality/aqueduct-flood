@@ -1,0 +1,14 @@
+@import 'css/settings';
+
+.c-map-widget {
+  display: flex;
+  height: 360px;
+
+  > .side {
+    flex: 1;
+
+    > .widget-map {
+      min-height: auto;
+    }
+  }
+}

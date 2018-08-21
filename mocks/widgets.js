@@ -1,4 +1,4 @@
-// available widget types: bar, line, multi-line
+// available widget types: bar, line, multi-line, map
 
 export const WIDGETS = [
   {
@@ -469,6 +469,12 @@ export const WIDGETS = [
         "value": 22.704644215016668
       }
     ]
+  },
+  {
+    id: '23321jlof-1ee8-4069-a55a-16a988f2b7a0',
+    type: 'map',
+    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    data: []
   },
   {
     id: '98765-2222-2333-1234-988578678',
