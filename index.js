@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const basicAuth = require('basic-auth');
 
 const next = require('next');
 const routes = require('./routes');
@@ -23,6 +24,23 @@ const handler = routes.getRequestHandler(app, ({ req, res, route, query }) => {
 // Express app creation
 const server = express();
 
+function checkBasicAuth(users) {
+  return function authMiddleware(req, res, nextAction) {
+    const user = basicAuth(req);
+    let authorized = false;
+    if (user && ((user.name === users[0].name && user.pass === users[0].pass))) {
+      authorized = true;
+    }
+
+    if (!authorized) {
+      res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+      return res.sendStatus(401);
+    }
+
+    return nextAction();
+  };
+}
+
 server.use(cookieParser('asdf33g4w4hghjkuil8saef345'));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -35,6 +53,15 @@ server.use(
     cookie: { maxAge: 1800000 },
   }),
 );
+
+// Using basic auth in prod mode
+const { NODE_ENV, USERNAME, PASSWORD } = process.env;
+if (NODE_ENV === 'production' && ((USERNAME && PASSWORD))) {
+  server.use(checkBasicAuth([{
+    name: USERNAME,
+    pass: PASSWORD
+  }]));
+}
 
 // Initializing next app before express server
 app
