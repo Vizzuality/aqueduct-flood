@@ -1,9 +1,9 @@
 const webpack = require('webpack');
-// const path = require('path');
-// const glob = require('glob');
+const withCSS = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
+const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config');
 
-module.exports = withSass({
+module.exports = withSass(withCSS({
   webpack(config) {
     const polyfill = new Promise(resolve => {
       const originalEntry = config.entry;
@@ -17,17 +17,6 @@ module.exports = withSass({
       });
     });
 
-    // config.module.rules.push({
-    //   test: /\.css$/,
-    //   loader: 'style-loader',
-    //   options: {
-    //     includePaths: ['./node_modules']
-    //       .map(d => path.join(__dirname, d))
-    //       .map(g => glob.sync(g))
-    //       .reduce((a, c) => a.concat(c), [])
-    //   }
-    // });
-
     config.plugins.push(new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
         process.env.NODE_ENV || 'development',
@@ -38,6 +27,6 @@ module.exports = withSass({
       ),
     }));
 
-    return polyfill.then(() => config);
+    return polyfill.then(() => commonsChunkConfig(config, /\.(sass|scss|css)$/));
   },
-});
+}));

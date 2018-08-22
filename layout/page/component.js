@@ -1,6 +1,8 @@
 import { PureComponent } from 'react';
 
 // styles
+import 'wri-api-components/dist/bundle.css';
+import 'aqueduct-components/dist/main.css';
 import 'css/index.scss';
 
 class Page extends PureComponent {

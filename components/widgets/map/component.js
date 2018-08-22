@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react';
 // import PropTypes from 'prop-types';
-import {
-  Map,
+import Map, {
   MapControls,
   ZoomControl
-} from 'wri-api-components';
+} from 'wri-api-components/dist/map';
 
 // styles
 import './styles.scss';
