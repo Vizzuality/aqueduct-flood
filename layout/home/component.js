@@ -4,11 +4,10 @@ import {
   Sidebar,
   Tabs
 } from 'aqueduct-components';
-import {
-  Map,
+import Map, {
   MapControls,
   ZoomControl
-} from 'wri-api-components';
+} from 'wri-api-components/dist/map';
 
 // layout
 import Layout from "layout/layout";

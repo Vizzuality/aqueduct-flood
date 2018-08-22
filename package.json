@@ -7,6 +7,7 @@
   "repository": "https://github.com/Vizzuality/aqueduct-flood.git",
   "main": "index.js",
   "dependencies": {
+    "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.1.2",
     "aqueduct-components": "^1.0.8",
     "autoprefixer": "^9.0.1",
@@ -51,8 +52,10 @@
     "redux-thunk": "^2.2.0",
     "redux-tools": "github:vizzuality/redux-tools#3.3.0",
     "sass-flex-mixin": "^1.0.3",
+    "vega": "^4.2.0",
+    "vega-lib": "^4.2.0",
     "webpack": "^3.1.0",
-    "wri-api-components": "2.0.20"
+    "wri-api-components": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
