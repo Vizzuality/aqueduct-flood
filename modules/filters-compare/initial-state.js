@@ -3,14 +3,14 @@ export default {
   location: null,
   // cost-benefit analyzer
   scenario: null,
-  existingProtectionLevel: null,
-  designProtectionLevel: null,
-  targetYearDesignProtectionLevel: null,
+  existing_prot: null,
+  prot_fut: null,
+  ref_year: null,
   implementationStartYear: null,
   implementationEndYear: null,
   infrastructureLifetime: null,
-  benefitStartYear: null,
-  unitCost: null,
-  annualDiscountRate: null,
-  operationCost: null
+  benefits_start: null,
+  user_urb_cost: null,
+  discount_rate: null,
+  om_costs: null
 };

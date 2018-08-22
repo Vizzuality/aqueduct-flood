@@ -12,11 +12,6 @@
     background: palette(sand);
 
     > .overflow-container {
-      height: 100%;
-      overflow-y: hidden;
-    }
-
-    > .overflow-container {
       overflow: hidden;
       height: 100%;
 
@@ -30,12 +25,6 @@
         }
       }
     }
-
-    // > .sidebar {
-
-
-
-    // }
   }
 
   .l-map {

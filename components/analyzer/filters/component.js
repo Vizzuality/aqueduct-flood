@@ -43,7 +43,6 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Select a location"
                   value={filters.location}
                   onChange={opt => setFilter({ location: opt && opt.value })}
-                  isClearable
                 />
               </Field>
             </div>
@@ -81,7 +80,6 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Select a future scenario"
                   value={filters.scenario}
                   onChange={opt => setFilter({ scenario: opt && opt.value })}
-                  isClearable
                 />
               </Field>
             </div>

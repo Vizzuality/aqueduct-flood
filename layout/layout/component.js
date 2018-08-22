@@ -62,7 +62,7 @@ class Layout extends PureComponent {
 
         <Modal
           isOpen={modal.visible}
-          // appElement="#main"
+          appElement=".l-page"
           onRequestClose={() => resetModal()}
           customClass="app-modal"
         >

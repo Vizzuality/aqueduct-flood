@@ -12,13 +12,15 @@ import './styles.scss';
 class Analyzer extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({}).isRequired,
-    setFilter: PropTypes.func.isRequired
+    setFilter: PropTypes.func.isRequired,
+    applyFilters: PropTypes.func.isRequired
   }
 
   render() {
     const {
       filters,
-      setFilter
+      setFilter,
+      applyFilters
     } = this.props;
 
     return (
@@ -28,12 +30,18 @@ class Analyzer extends PureComponent {
         </div>
 
         <div className="l-analyzer-inputs">
-          <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+          <div className="wrapper">
+            <div className="row">
+              <div className="col-xs-12">
+                <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="filters-btn-container">
           <Button
-            onClick={() => console.info('applies filters')}
+            onClick={() => applyFilters(true)}
             theme="light"
             className="-large -bg-light-blue -uppercase -bold"
           >

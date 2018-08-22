@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect, Button } from 'aqueduct-components';
+import { Router } from 'routes';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
@@ -21,6 +22,14 @@ class AnalyzerCompareFilters extends PureComponent {
     setCompareFilter: PropTypes.func.isRequired,
   }
 
+  onClearCompareFilters = () => {
+    const { clearCompareFilters } = this.props;
+
+    clearCompareFilters();
+
+    Router.push('/');
+  }
+
   render() {
     const {
       filters,
@@ -33,9 +42,8 @@ class AnalyzerCompareFilters extends PureComponent {
       <div className="c-analyzer-compare-filters">
         <div className="wrapper">
           <div className="row">
-            {/* filters */}
+            {/* location filters */}
             <div className="col-md-6">
-              {/* location */}
               <Field
                 name="location-filter"
                 label="Select a location"
@@ -51,9 +59,8 @@ class AnalyzerCompareFilters extends PureComponent {
               </Field>
             </div>
             <div className="col-md-6">
+              {/* scenario filters */}
               <div className="clear-comparison-section">
-                {/* scenario */}
-                {/* location */}
                 <Field
                   name="location-compare-filter"
                   label="Select a location"
@@ -67,9 +74,8 @@ class AnalyzerCompareFilters extends PureComponent {
                     onChange={opt => { setCompareFilter({ location: opt && opt.value })}}
                   />
                 </Field>
-
                 <Button
-                  onClick={() => clearCompareFilters()}
+                  onClick={this.onClearCompareFilters}
                   theme="blue"
                   className="-regular -bg-white"
                 >

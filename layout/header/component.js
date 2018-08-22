@@ -9,7 +9,10 @@ import './styles.scss';
 
 const Header = () => (
   <div className="l-header">
-    <AQHeader title="flood">
+    <AQHeader
+      title="flood"
+      app="country-basin-risk-profiles-and-rankings"
+    >
       {APP_NAVIGATION}
     </AQHeader>
   </div>
