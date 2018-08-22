@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import isEqual from 'lodash/isEqual';
 
 // componets
 import Widget from 'components/widget';
@@ -15,8 +16,24 @@ import { WIDGETS } from 'mocks/widgets';
 // styles
 import './styles.scss';
 
-class AnalyzerOutputs extends PureComponent {
-  static propTypes = { filters: PropTypes.object.isRequired }
+class AnalyzerOutputs extends Component {
+  static propTypes = {
+    filters: PropTypes.object.isRequired,
+    filtersStatus: PropTypes.object.isRequired,
+    applyFilters: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { filtersStatus: nextFiltersStatus } = nextProps;
+
+    return nextFiltersStatus.applied;
+  }
+
+  componentDidUpdate() {
+    const { applyFilters } = this.props;
+
+    applyFilters(false);
+  }
 
   render() {
     const { filters } = this.props;

@@ -22,7 +22,7 @@ import {
   UNIT_COST_OPTIONS,
   DISCOUNT_RATE_OPTIONS,
   OPERATION_MAINTENANCE_COST_OPTIONS
-} from './constants';
+} from 'constants/analyzer';
 
 // styles
 import './styles.scss';

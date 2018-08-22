@@ -11,7 +11,7 @@
   padding: #{$space-1 * 3} 0;
   background: palette(sand);
 
-  > .container {
+  .container {
     max-width: $sidebar-width;
     width: 100%;
     height: 100%;
