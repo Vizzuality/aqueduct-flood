@@ -1,8 +1,12 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
-  "width": 400,
+  "autosize":{
+    "type": "fit",
+    "contains": "padding",
+    "resize": true
+  },
   "height": 200,
-
+  "padding": 20,
   "data": [ { "name": "table" } ],
   "scales": [
     {
@@ -53,9 +57,9 @@ export default {
           "fill": [
             {
               "test": "datum.value<0",
-              "value": "red"
+              "value": "#de2239"
             },
-            { "value": "grey" }
+            { "value": "#1c801c" }
           ]
         },
         "update": {

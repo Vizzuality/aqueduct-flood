@@ -1,12 +1,12 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
-  "autosize": {
+  "autosize":{
     "type": "fit",
     "resize": true,
     "contains": "padding"
   },
-  "width": 500,
   "height": 300,
+  "padding": 20,
   "signals": [
     {
       "name": "hover",
@@ -61,7 +61,7 @@ export default {
     {
       "name": "color",
       "type": "ordinal",
-      "range": "category",
+      "range": "multi-line",
       "domain": {
         "data": "table",
         "field": "c"
@@ -71,7 +71,7 @@ export default {
   "axes": [
     {
       "orient": "bottom",
-      "bandPosition": 0.5,
+
       "labelOverlap": "parity",
       "ticks": false,
       "domain": false,
