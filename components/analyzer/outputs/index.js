@@ -8,6 +8,7 @@ export default connect(
   state => ({
     filters: state.filters,
     filtersStatus: state.app.filters,
+    widgets: state.widgets,
   }),
   { applyFilters }
 )(AnalyzerOutputs);

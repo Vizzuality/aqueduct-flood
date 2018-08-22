@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'aqueduct-components';
 
 // components
 import AnalyzerFilters from 'components/analyzer/filters';
-import AnalyzerInputs from 'components/analyzer-inputs';
+import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
+import ApplyFilters from 'components/analyzer/apply-filters';
 
 // styles
 import './styles.scss';
@@ -13,14 +13,12 @@ class Analyzer extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({}).isRequired,
     setFilter: PropTypes.func.isRequired,
-    applyFilters: PropTypes.func.isRequired
   }
 
   render() {
     const {
       filters,
-      setFilter,
-      applyFilters
+      setFilter
     } = this.props;
 
     return (
@@ -39,15 +37,7 @@ class Analyzer extends PureComponent {
           </div>
         </div>
 
-        <div className="filters-btn-container">
-          <Button
-            onClick={() => applyFilters(true)}
-            theme="light"
-            className="-large -bg-light-blue -uppercase -bold"
-          >
-            apply changes
-          </Button>
-        </div>
+        <ApplyFilters />
       </div>
     );
   }

@@ -1,9 +1,3 @@
-import { WIDGETS } from 'mocks/widgets';
+import initalState from 'modules/widgets/initial-state';
 
-export default WIDGETS.map(widget => ({
-  id: widget.id,
-  params: { type: widget.type },
-  data: [],
-  loading: false,
-  error: null
-}));
+export default initalState;

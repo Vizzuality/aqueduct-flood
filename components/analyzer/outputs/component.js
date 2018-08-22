@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
 
 // componets
 import Widget from 'components/widget';
@@ -10,8 +9,6 @@ import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';
 import MapChart from 'components/widgets/map';
 
-// constants
-import { WIDGETS } from 'mocks/widgets';
 
 // styles
 import './styles.scss';
@@ -20,6 +17,7 @@ class AnalyzerOutputs extends Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     filtersStatus: PropTypes.object.isRequired,
+    widgets: PropTypes.array.isRequired,
     applyFilters: PropTypes.func.isRequired
   }
 
@@ -36,27 +34,27 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters } = this.props;
+    const { filters, widgets } = this.props;
 
     return (
       <div className="c-analyzer-outputs">
         <div className="wrapper">
           <div className="container">
-            {WIDGETS.map(widget => (
+            {widgets.map(widget => (
               <div key={widget.id} className="widget-row">
                 <Widget
-                  title={replace(widget.title, filters)}
+                  title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
                   {({ data }) => {
 
-                    if (widget.type === 'bar') return (<BarChart data={{ table: data }} />)
+                    if (widget.params.type === 'bar') return (<BarChart data={{ table: data }} />)
 
-                    if (widget.type === 'line') return (<LineChart data={{ table: data }} />)
+                    if (widget.params.type === 'line') return (<LineChart data={{ table: data }} />)
 
-                    if (widget.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+                    if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
-                    if (widget.type === 'map') return (<MapChart />)
+                    if (widget.params.type === 'map') return (<MapChart />)
 
                     return null;
                   }}

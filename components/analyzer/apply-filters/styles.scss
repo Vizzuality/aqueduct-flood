@@ -1,0 +1,12 @@
+@import 'css/settings';
+
+.c-apply-filters {
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: $space-1 * 4 0;
+  background: rgba(palette(sand), .8);
+}

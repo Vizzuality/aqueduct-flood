@@ -1,21 +1,36 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { replace } from 'aqueduct-components';
 
-// componets
+// components
 import Widget from 'components/widget';
 import WidgetCompare from 'components/widget-compare';
 import BarChart from 'components/widgets/bar-chart';
 import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';
+import MapChart from 'components/widgets/map';
 
 // styles
 import './styles.scss';
 
-class AnalyzerCompareOutputs extends PureComponent {
+class AnalyzerCompareOutputs extends Component {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
-    filtersCompare: PropTypes.object.isRequired
+    filtersCompare: PropTypes.object.isRequired,
+    applyFilters: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { filtersStatus: nextFiltersStatus } = nextProps;
+
+    return nextFiltersStatus.applied;
+  }
+
+  componentDidUpdate() {
+    const { applyFilters } = this.props;
+
+    applyFilters(false);
   }
 
   render() {
@@ -28,6 +43,7 @@ class AnalyzerCompareOutputs extends PureComponent {
             <div key={widget.id} className="row">
               <div className="col-md-6">
                 <Widget
+                  title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
                   {({ data }) => {
@@ -38,12 +54,15 @@ class AnalyzerCompareOutputs extends PureComponent {
 
                     if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
+                    if (widget.params.type === 'map') return (<MapChart />)
+
                     return null;
                   }}
                 </Widget>
               </div>
               <div className="col-md-6">
                 <WidgetCompare
+                  title={replace(widget.params.title, filtersCompare)}
                   params={{ id: widget.id, filtersCompare }}
                 >
                   {({ data }) => {
@@ -53,6 +72,8 @@ class AnalyzerCompareOutputs extends PureComponent {
                     if (widget.params.type === 'line') return (<LineChart data={{ table: data }} />)
 
                     if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+
+                    if (widget.params.type === 'map') return (<MapChart />)
 
                     return null;
                   }}

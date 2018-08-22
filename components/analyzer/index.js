@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { applyFilters } from 'modules/app/actions';
 import { setFilter } from 'modules/filters/actions';
 
 import Analyzer from "./component";
@@ -12,8 +11,5 @@ export default connect(
       ...state.filtersCompare.location && { compareLocation : state.filtersCompare.location }
     }
   }),
-  {
-    setFilter,
-    applyFilters
-  }
+  { setFilter }
 )(Analyzer);
