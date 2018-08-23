@@ -1,12 +1,12 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
   "autosize": {
-    "type": "pad",
+    "type": "fit",
     "resize": true,
     "contains": "padding"
   },
-  "width": 400,
   "height": 200,
+  "padding": 20,
   "signals": [
     {
       "name": "hover",
@@ -81,6 +81,7 @@ export default {
       "name": "lines",
       "type": "line",
       "interactive": false,
+      "range": "multi-line",
       "from": {
         "data": "table"
       },
@@ -102,9 +103,9 @@ export default {
             "scale": "y",
             "value": 0
           },
-          "stroke": {
-            "value": "grey"
-          },
+          // "stroke": {
+          //   "value": "grey"
+          // },
           "opacity": {
             "value": 1
           }
@@ -115,6 +116,7 @@ export default {
       "name": "points",
       "interactive": false,
       "type": "symbol",
+      "range": "multi-line",
       "from": {
         "data": "dots"
       },
@@ -127,9 +129,6 @@ export default {
           "y": {
             "scale": "y",
             "field": "value"
-          },
-          "fill": {
-            "value": "red"
           }
         },
         "update": {
@@ -142,6 +141,7 @@ export default {
     {
       "name": "cell",
       "type": "path",
+      "range": "multi-line",
       "from": {
         "data": "lines"
       },
