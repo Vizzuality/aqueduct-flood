@@ -71,6 +71,7 @@ export default {
     },
     {
       "orient": "left",
+      "format": "~s",
       "grid": true,
       "labelOverlap": "parity",
       "scale": "y"
