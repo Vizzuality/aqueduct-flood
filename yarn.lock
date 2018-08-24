@@ -915,9 +915,9 @@ aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
-aqueduct-components@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.9.tgz#dc8924aad4f1470bae7d1fbd18ad945d5d4b3d06"
+aqueduct-components@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.10.tgz#5464767e34a265187a4a02dd7afc4e9f1c4901d2"
   dependencies:
     babel-plugin-react-css-modules "^3.4.2"
     classnames "^2.2.5"
