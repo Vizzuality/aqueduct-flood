@@ -21,8 +21,6 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
       ...{ estimated_costs: 'null' }
     });
 
-    console.log(widgetParams)
-
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${widgetParams}`, {})

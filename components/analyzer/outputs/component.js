@@ -46,19 +46,17 @@ class AnalyzerOutputs extends Component {
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
-                  {({ data }) => {
+                  {({ data, params }) => {
 
                     if (!data.length) return null;
 
-                    console.log(data)
+                    if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'bar') return (<BarChart data={{ table: data }} />)
+                    if (params.type === 'line') return (<LineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'line') return (<LineChart data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
-
-                    if (widget.params.type === 'map') return (<MapChart />)
+                    if (params.type === 'map') return (<MapChart />)
 
                     return null;
                   }}
