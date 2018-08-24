@@ -1,6 +1,6 @@
 export default {
   // common
-  location: null,
+  geogunit_unique_name: null,
   // cost-benefit analyzer
   scenario: 'Business as usual',
   existing_prot: 50,

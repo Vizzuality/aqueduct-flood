@@ -9,7 +9,7 @@
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.1.2",
-    "aqueduct-components": "^1.0.9",
+    "aqueduct-components": "^1.0.10",
     "autoprefixer": "^9.0.1",
     "babel-core": "^6.26.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -55,7 +55,7 @@
     "vega": "^4.2.0",
     "vega-lib": "^4.2.0",
     "webpack": "^3.1.0",
-    "wri-api-components": "2.1.0"
+    "wri-api-components": "^2.1.7"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

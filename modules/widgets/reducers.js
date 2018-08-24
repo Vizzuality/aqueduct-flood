@@ -1,5 +1,4 @@
 import * as actions from './actions';
-import widget from '../../components/widget';
 
 export default {
   [actions.setWidgetData]: (state, { payload }) => {
@@ -8,6 +7,10 @@ export default {
 
     newState[widgetIndex] = {
       ...newState[widgetIndex],
+      params: {
+        ...newState[widgetIndex].params,
+        ...{ type: payload.type }
+      },
       data: payload.data
     };
 
