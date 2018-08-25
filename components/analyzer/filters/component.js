@@ -77,6 +77,21 @@ class AnalyzerFilters extends PureComponent {
                   onChange={opt => setFilter({ geogunit_unique_name: opt && opt.value })}
                 />
               </Field>
+              {/* future scenearios */}
+              <Field
+                name="future-scenario-filter"
+                label="Select a future scenario"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={SCENARIOS_OPTIONS}
+                  placeholder="Select a future scenario"
+                  value={filters.scenario}
+                  onChange={opt => setFilter({ scenario: opt && opt.value })}
+                />
+              </Field>
+            </div>
+            <div className="col-md-6">
               {/* location – states */}
               <Field
                 name="location-filter"
@@ -92,8 +107,6 @@ class AnalyzerFilters extends PureComponent {
                   isClearable
                 />
               </Field>
-            </div>
-            <div className="col-md-6">
               {/* location compare */}
               <Field
                 name="location-compare-filter"
@@ -114,23 +127,10 @@ class AnalyzerFilters extends PureComponent {
               </Field>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-xs-12 col-md-6">
-              {/* future scenearios */}
-              <Field
-                name="future-scenario-filter"
-                label="Select a future scenario"
-                className="-bigger"
-              >
-                <CustomSelect
-                  options={SCENARIOS_OPTIONS}
-                  placeholder="Select a future scenario"
-                  value={filters.scenario}
-                  onChange={opt => setFilter({ scenario: opt && opt.value })}
-                />
-              </Field>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
