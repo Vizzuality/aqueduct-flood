@@ -9,9 +9,9 @@ import sortBy from 'lodash/sortBy';
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
 // data
-import BASINS_OPTIONS from 'data/basins';
+// import BASINS_OPTIONS from 'data/basins';
 import COUNTRIES_OPTIONS from 'data/countries';
-import CITIES_OPTIONS from 'data/cities';
+// import CITIES_OPTIONS from 'data/cities';
 
 // styles
 import './styles.scss';
@@ -32,13 +32,13 @@ class AnalyzerFilters extends PureComponent {
     const { location } = filters;
 
     const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.label, value: _country.iso
+      label: _country.name, value: _country.uniquename
     }));
 
-    this.locationOptions = sortBy([...BASINS_OPTIONS, ...countryOptions, ...CITIES_OPTIONS], 'label');
-    this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-      _country.iso === location) || {}).state || [])
-      .map(state => ({ label: state.label, value: state.key }));
+    this.locationOptions = sortBy([...countryOptions, 'label']);
+    this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+      _country.uniquename === location) || {}).state || [])
+      .map(state => ({ label: state.name, value: state.uniquename })), 'label');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,9 +46,9 @@ class AnalyzerFilters extends PureComponent {
     const { filters } = this.props;
 
     if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.iso === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === nextFilters.location) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
   }
 
@@ -85,7 +85,7 @@ class AnalyzerFilters extends PureComponent {
               >
                 <CustomSelect
                   options={this.stateOptions}
-                  placeholder="Select a location"
+                  placeholder="Select a state"
                   isDisabled={!this.stateOptions.length}
                   value={filters.state}
                   onChange={opt => setFilter({ state: opt && opt.value })}

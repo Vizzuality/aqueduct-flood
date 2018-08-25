@@ -4,14 +4,15 @@ import { Field, CustomSelect, Button } from 'aqueduct-components';
 import { Router } from 'routes';
 import sortBy from 'lodash/sortBy';
 import isEqual from 'lodash/isEqual';
+import compact from 'lodash/compact';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
 // data
-import BASINS_OPTIONS from 'data/basins';
+// import BASINS_OPTIONS from 'data/basins';
 import COUNTRIES_OPTIONS from 'data/countries';
-import CITIES_OPTIONS from 'data/cities';
+// import CITIES_OPTIONS from 'data/cities';
 
 // styles
 import './styles.scss';
@@ -31,22 +32,26 @@ class AnalyzerCompareFilters extends PureComponent {
   }
 
   componentWillMount() {
+    this.stateOptions = [];
+    this.stateOptionsCompare = [];
     const { filters } = this.props;
     const { location, locationCompare } = filters;
 
     const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.label, value: _country.iso
+      label: _country.name, value: _country.uniquename
     }));
 
-    this.locationOptions = sortBy([...BASINS_OPTIONS, ...countryOptions, ...CITIES_OPTIONS], 'label');
+    this.locationOptions = sortBy([...countryOptions, 'label']);
 
-    this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-      _country.iso === location) || {}).state || [])
-      .map(state => ({ label: state.label, value: state.key }));
+    this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+      _country.uniquename === location) || {}).state || [])
+      .map(state => ({ label: state.name, value: state.uniquename })), 'label');
 
-    this.stateOptionsCompare = ((COUNTRIES_OPTIONS.find(_country =>
-      _country.iso === locationCompare) || {}).state || [])
-      .map(state => ({ label: state.label, value: state.key }));
+    if (location) {
+      this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === locationCompare) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,15 +59,15 @@ class AnalyzerCompareFilters extends PureComponent {
     const { filters } = this.props;
 
     if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.iso === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === nextFilters.location) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
 
     if(!isEqual(filters.locationCompare, nextFilters.locationCompare)) {
-      this.stateOptionsCompare = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.iso === nextFilters.locationCompare) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === nextFilters.locationCompare) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
   }
 
@@ -108,7 +113,7 @@ class AnalyzerCompareFilters extends PureComponent {
               >
                 <CustomSelect
                   options={this.stateOptions}
-                  placeholder="Select a location"
+                  placeholder="Select a state"
                   isDisabled={!this.stateOptions.length}
                   value={filters.state}
                   onChange={opt => setFilter({ state: opt && opt.value })}
@@ -147,7 +152,7 @@ class AnalyzerCompareFilters extends PureComponent {
               >
                 <CustomSelect
                   options={this.stateOptionsCompare}
-                  placeholder="Select a location"
+                  placeholder="Select a state"
                   isDisabled={!this.stateOptionsCompare.length}
                   value={filters.stateCompare}
                   onChange={opt => setCompareFilter({ state: opt && opt.value })}
