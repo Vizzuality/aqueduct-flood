@@ -9,9 +9,9 @@ import isEqual from 'lodash/isEqual';
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
 // data
-import BASINS_OPTIONS from 'data/basins';
+// import BASINS_OPTIONS from 'data/basins';
 import COUNTRIES_OPTIONS from 'data/countries';
-import CITIES_OPTIONS from 'data/cities';
+// import CITIES_OPTIONS from 'data/cities';
 
 // styles
 import './styles.scss';
@@ -38,7 +38,7 @@ class AnalyzerCompareFilters extends PureComponent {
       label: _country.label, value: _country.iso
     }));
 
-    this.locationOptions = sortBy([...BASINS_OPTIONS, ...countryOptions, ...CITIES_OPTIONS], 'label');
+    this.locationOptions = sortBy([...countryOptions, 'label']);
 
     this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
       _country.iso === location) || {}).state || [])
@@ -108,7 +108,7 @@ class AnalyzerCompareFilters extends PureComponent {
               >
                 <CustomSelect
                   options={this.stateOptions}
-                  placeholder="Select a location"
+                  placeholder="Select a state"
                   isDisabled={!this.stateOptions.length}
                   value={filters.state}
                   onChange={opt => setFilter({ state: opt && opt.value })}
@@ -147,7 +147,7 @@ class AnalyzerCompareFilters extends PureComponent {
               >
                 <CustomSelect
                   options={this.stateOptionsCompare}
-                  placeholder="Select a location"
+                  placeholder="Select a state"
                   isDisabled={!this.stateOptionsCompare.length}
                   value={filters.stateCompare}
                   onChange={opt => setCompareFilter({ state: opt && opt.value })}
