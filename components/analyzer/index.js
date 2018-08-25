@@ -6,9 +6,9 @@ import Analyzer from "./component";
 export default connect(
   state => ({
     filters: {
-      ...state.filters.location && { location : state.filters.location },
+      ...state.filters.geogunit_unique_name && { location : state.filters.geogunit_unique_name },
       ...state.filters.scenario && { scenario : state.filters.scenario },
-      ...state.filtersCompare.location && { compareLocation : state.filtersCompare.location }
+      ...state.filtersCompare.geogunit_unique_name && { compareLocation : state.filtersCompare.geogunit_unique_name}
     }
   }),
   { setFilter }

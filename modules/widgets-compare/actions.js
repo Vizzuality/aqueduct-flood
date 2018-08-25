@@ -1,48 +1,48 @@
 import { createAction, createThunkAction } from 'redux-tools';
-import Jsona from 'jsona';
-
-import { WIDGETS } from 'mocks/widgets';
-
-const JSONA = new Jsona();
+import queryString from 'query-string';
 
 export const setWidgetData = createAction('WIDGETS__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS__SET-LOADING');
 export const setError = createAction('WIDGETS__SET-ERROR');
 
 export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =>
-  (dispatch) => {
+  (dispatch, getState) => {
+    const { filtersCompare } = getState();
 
-    // adds default state of the widget in it's not in the store previously
-    // if (!widgets[widgetId]) dispatch(setWidgetInitialStatus({ id: widgetId }));
+    // provisional workflow for map widgets
+    if (widgetId === 'sample_map') {
+      dispatch(setWidgetData({ id: widgetId, data: [], type: 'map' }));
+      return null;
+    }
 
-    // mockup – beginning
+    const widgetParams = queryString.stringify({
+      ...filtersCompare,
+      ...{ user_rur_cost: 'null' },
+      ...{ estimated_costs: 'null' }
+    });
+
     dispatch(setLoading({ id: widgetId, loading: true }));
-    dispatch(setWidgetData({ id: widgetId, data: WIDGETS.find(w => w.id === widgetId).data }));
-    window.setTimeout(() => { dispatch(setLoading({ id: widgetId, loading: false })) }, 1500);
-    // mockup – end
 
-    // dispatch(setLoading({ id: widgetId, loading: true }));
-
-    // fetch(`${process.env.API_URL}/widgets/${widgetId}`, {})
-    //   .then((response) => {
-    //     if (response.ok) return response.json();
-    //     throw response;
-    //   })
-    //   .then((data) => {
-    //     dispatch(setWidgetData({ id: widgetId, data: JSONA.deserialize(data) }));
-    //     dispatch(setLoading({ id: widgetId, loading: false }));
-    //   })
-    //   .catch((err) => {
-    //     dispatch(setLoading({ id: widgetId, loading: false }));
-    //     if (err && typeof err.json === 'function') {
-    //       err.json()
-    //         .then((errs) => {
-    //           dispatch(setError({ id: widgetId, error: errs }));
-    //         });
-    //     } else {
-    //       dispatch(setError({ id: widgetId, error: err }));
-    //     }
-    //   });
+    fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${widgetParams}`, {})
+      .then((response) => {
+        if (response.ok) return response.json();
+        throw response;
+      })
+      .then(({ data, chart_type: type }) => {
+        dispatch(setLoading({ id: widgetId, loading: false }));
+        dispatch(setWidgetData({ id: widgetId, data, type }));
+      })
+      .catch((err) => {
+        dispatch(setLoading({ id: widgetId, loading: false }));
+        if (err && typeof err.json === 'function') {
+          err.json()
+            .then((errs) => {
+              dispatch(setError({ id: widgetId, error: errs }));
+            });
+        } else {
+          dispatch(setError({ id: widgetId, error: err }));
+        }
+      });
 });
 
 export default {

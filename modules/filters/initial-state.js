@@ -1,6 +1,6 @@
 export default {
   // common
-  geogunit_unique_name: null,
+  geogunit_unique_name: 'The Hudson Bay Coast Basin',
   // cost-benefit analyzer
   scenario: 'Business as usual',
   existing_prot: 50,

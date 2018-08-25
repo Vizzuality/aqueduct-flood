@@ -6,6 +6,11 @@ import { Field, CustomSelect } from 'aqueduct-components';
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
+// data
+import BASINS_OPTIONS from 'data/basins';
+// import COUNTRIES_OPTIONS from 'data/countries';
+import CITIES_OPTIONS from 'data/cities';
+
 // styles
 import './styles.scss';
 
@@ -18,6 +23,10 @@ class AnalyzerFilters extends PureComponent {
     }).isRequired,
     setFilter: PropTypes.func.isRequired,
     setCompareFilter: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    this.locationOptions = [...BASINS_OPTIONS, ...CITIES_OPTIONS];
   }
 
   render() {
@@ -39,10 +48,10 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
-                  options={SCENARIOS_OPTIONS}
+                  options={this.locationOptions}
                   placeholder="Select a location"
                   value={filters.location}
-                  onChange={opt => setFilter({ location: opt && opt.value })}
+                  onChange={opt => setFilter({ geogunit_unique_name: opt && opt.value })}
                 />
               </Field>
             </div>
@@ -54,12 +63,12 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
-                  options={SCENARIOS_OPTIONS}
+                  options={this.locationOptions}
                   placeholder="Compare with"
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
                   onChange={(opt) => {
-                    setCompareFilter({ location: opt && opt.value });
+                    setCompareFilter({ geogunit_unique_name: opt && opt.value });
                     if (opt) Router.push('/analyzer-compare');
                   }}
                   isClearable

@@ -46,39 +46,40 @@ class AnalyzerCompareOutputs extends Component {
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
-                  {({ data }) => {
+                  {({ data, params }) => {
 
-                    if (widget.params.type === 'bar') return (<BarChart data={{ table: data }} />)
+                    if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'line') return (<LineChart data={{ table: data }} />)
+                    if (params.type === 'line') return (<LineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'map') return (<MapChart />)
+                    if (params.type === 'map') return (<MapChart />)
 
                     return null;
                   }}
                 </Widget>
               </div>
-              <div className="col-md-6">
-                <WidgetCompare
-                  title={replace(widget.params.title, filtersCompare)}
-                  params={{ id: widget.id, filtersCompare }}
-                >
-                  {({ data }) => {
+              {filtersCompare.geogunit_unique_name &&(
+                <div className="col-md-6">
+                  <WidgetCompare
+                    title={replace(widget.params.title, filtersCompare)}
+                    params={{ id: widget.id, filtersCompare }}
+                  >
+                    {({ data, params }) => {
 
-                    if (widget.params.type === 'bar') return (<BarChart data={{ table: data }} />)
+                      if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'line') return (<LineChart data={{ table: data }} />)
+                      if (params.type === 'line') return (<LineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+                      if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
-                    if (widget.params.type === 'map') return (<MapChart />)
+                      if (params.type === 'map') return (<MapChart />)
 
-                    return null;
-                  }}
-                </WidgetCompare>
-              </div>
+                      return null;
+                    }}
+                  </WidgetCompare>
+                </div>)}
             </div>
           ))}
         </div>
