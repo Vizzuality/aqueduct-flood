@@ -3,27 +3,27 @@
 export const WIDGETS = [
   {
     id: 'net_benefits',
-    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
   },
   {
     id: 'annual_costs',
-    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
   },
   {
     id: 'sample_map',
-    title: 'Map Sample',
+    title: 'inundation Map in {{implementation_start}} width {{existing_prot}}-year protection',
   },
   {
     id: 'impl_cost',
-    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    title: 'annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
   },
   {
     id: 'mainteinance',
-    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    title: 'year-by-year operation & maintenance costs from {{implementation_start}} through {{implementation_end}}',
   },
   {
     id: 'flood_prot',
-    title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+    title: 'year-by-year average flood protection levels from {{implementation_start}} through {{implementation_end}}',
   }
 ];
 
