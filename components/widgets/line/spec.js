@@ -6,7 +6,7 @@ export default {
     "contains": "padding"
   },
   "height": 200,
-  "padding": 20,
+  "padding": 10,
   "signals": [
     {
       "name": "hover",
@@ -67,7 +67,8 @@ export default {
       "domain": false,
       "labelBaseline": "top",
       "offset": 5,
-      "scale": "x"
+      "scale": "x",
+      "title":"years"
     },
     {
       "orient": "left",
@@ -110,6 +111,9 @@ export default {
           "opacity": {
             "value": 1
           }
+        },
+        "update":{
+        "defined":{"signal": "datum.y !== null"}
         }
       }
     },
