@@ -48,8 +48,6 @@ class AnalyzerOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (!data.length) return null;
-
                     if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
 
                     if (params.type === 'line') return (<LineChart data={{ table: data }} />)

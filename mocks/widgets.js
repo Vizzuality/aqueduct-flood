@@ -10,6 +10,10 @@ export const WIDGETS = [
     title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
   },
   {
+    id: 'sample_map',
+    title: 'Map Sample',
+  },
+  {
     id: 'impl_cost',
     title: 'Annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
   },

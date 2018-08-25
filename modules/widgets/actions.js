@@ -11,8 +11,14 @@ export const setError = createAction('WIDGETS__SET-ERROR');
 
 export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =>
   (dispatch, getState) => {
-
     const { filters } = getState();
+
+
+    // provisional workflow for map widgets
+    if (widgetId === 'sample_map') {
+      dispatch(setWidgetData({ id: widgetId, data: [], type: 'map' }));
+      return null;
+    }
 
     const widgetParams = queryString.stringify({
       ...filters,
