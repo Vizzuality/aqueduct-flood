@@ -14,6 +14,10 @@ export const WIDGETS = [
     title: 'inundation Map in {{implementation_start}} width {{existing_prot}}-year protection',
   },
   {
+    id: 'table',
+    title: 'river flood urban damage in {{geogunit_unique_name}}',
+  },
+  {
     id: 'impl_cost',
     title: 'annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
   },
