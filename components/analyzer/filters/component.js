@@ -32,13 +32,13 @@ class AnalyzerFilters extends PureComponent {
     const { location } = filters;
 
     const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.label, value: _country.iso
+      label: _country.label, value: _country.key
     }));
 
     this.locationOptions = sortBy([...countryOptions, 'label']);
-    this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-      _country.iso === location) || {}).state || [])
-      .map(state => ({ label: state.label, value: state.key }));
+    this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+      _country.key === location) || {}).state || [])
+      .map(state => ({ label: state.label, value: state.key })), 'label');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,9 +46,9 @@ class AnalyzerFilters extends PureComponent {
     const { filters } = this.props;
 
     if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.iso === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.key === nextFilters.location) || {}).state || [])
+        .map(state => ({ label: state.label, value: state.key })), 'label');
     }
   }
 

@@ -35,7 +35,7 @@ class AnalyzerInputs extends PureComponent {
 
   static propTypes = {
     filters: PropTypes.shape({
-      existing_prot: PropTypes.number.isRequired,
+      existing_prot: PropTypes.number,
       prot_fut: PropTypes.number.isRequired,
       ref_year: PropTypes.number.isRequired,
       implementation_start: PropTypes.number.isRequired,
@@ -113,22 +113,23 @@ class AnalyzerInputs extends PureComponent {
             </Button>
           </div>
           <div className="selectors-container">
-            <Field
-              name="existing-protection-level"
-              theme="dark"
-              label="Existing Protection Level (Return Period)"
-              className="-bolder"
-            >
-              <Slider
-                min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
-                max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
+            {filters.existing_prot && (
+              <Field
+                name="existing-protection-level"
                 theme="dark"
-                step={null}
-                marks={EXISTING_PROTECTION_LEVEL_MARKS}
-                defaultValue={filters.existing_prot}
-                onAfterChange={this.onChangeExistingProtectionLevel}
-              />
-            </Field>
+                label="Existing Protection Level (Return Period)"
+                className="-bolder"
+              >
+                <Slider
+                  min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
+                  max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
+                  theme="dark"
+                  step={null}
+                  marks={EXISTING_PROTECTION_LEVEL_MARKS}
+                  defaultValue={filters.existing_prot}
+                  onAfterChange={this.onChangeExistingProtectionLevel}
+                />
+              </Field>)}
 
             <Field
               name="design-protection-level"
@@ -241,21 +242,22 @@ class AnalyzerInputs extends PureComponent {
             </Button>
           </div>
           <div className="selectors-container">
-            <Field
-              name="user-urb-cost"
-              theme="dark"
-              label="Unit Cost ($million/meter/kilometer)"
-              className="-bolder"
-            >
-              <Slider
-                min={UNIT_COST_OPTIONS[0]}
-                max={UNIT_COST_OPTIONS[1]}
-                step={0.01}
+            {filters.user_urb_cost && (
+              <Field
+                name="user-urb-cost"
                 theme="dark"
-                defaultValue={filters.user_urb_cost}
-                onAfterChange={value => { onChangeFilter({ user_urb_cost: value }) }}
-              />
-            </Field>
+                label="Unit Cost ($million/meter/kilometer)"
+                className="-bolder"
+              >
+                <Slider
+                  min={UNIT_COST_OPTIONS[0]}
+                  max={UNIT_COST_OPTIONS[1]}
+                  step={0.01}
+                  theme="dark"
+                  defaultValue={filters.user_urb_cost}
+                  onAfterChange={value => { onChangeFilter({ user_urb_cost: value }) }}
+                />
+              </Field>)}
 
             <Field
               name="discount-rate"
