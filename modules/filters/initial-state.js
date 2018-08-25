@@ -1,6 +1,6 @@
 export default {
   // common
-  geogunit_unique_name: 'Spain',
+  geogunit_unique_name: 'Japan',
   // cost-benefit analyzer
   scenario: 'Business as usual',
   existing_prot: null,
