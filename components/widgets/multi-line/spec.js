@@ -6,7 +6,7 @@ export default {
     "contains": "padding"
   },
   "height": 300,
-  "padding": 20,
+  "padding": 10,
   "signals": [
     {
       "name": "hover",
