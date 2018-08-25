@@ -14,8 +14,8 @@ export default {
     labelFontWeight: 300
   },
   axisLeft: {
-    ticks: false,
-    domainWidth: 0
+    ticks: true,
+    domainWidth: 1
   },
   range: {
     "multi-line": [
