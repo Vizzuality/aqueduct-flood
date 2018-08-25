@@ -6,7 +6,7 @@ export default {
     "resize": true
   },
   "height": 200,
-  "padding": 20,
+  "padding": 10,
   "data": [ { "name": "table" } ],
   "scales": [
     {
@@ -34,7 +34,8 @@ export default {
       "domain": false,
       "labelBaseline": "top",
       "offset": 5,
-      "scale": "xscale"
+      "scale": "xscale",
+      "title":"years"
     },
     {
       "orient": "left",
@@ -52,7 +53,7 @@ export default {
       "encode": {
         "enter": {
           "x": { "scale": "xscale", "field": "year" },
-          "width": { "scale": "xscale", "band": 1 },
+          "width": { "scale": "xscale", "band": 0.9 },
           "y": { "scale": "yscale", "field": "value" },
           "y2": { "scale": "yscale", "value": 0 },
           "fill": [
