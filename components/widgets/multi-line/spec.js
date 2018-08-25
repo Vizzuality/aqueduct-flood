@@ -6,7 +6,7 @@ export default {
     "contains": "padding"
   },
   "height": 300,
-  "padding": 20,
+  "padding": 10,
   "signals": [
     {
       "name": "hover",
@@ -71,13 +71,14 @@ export default {
   "axes": [
     {
       "orient": "bottom",
-      "labelOverlap": true,
-      "labelBound": 20,
+      "labelOverlap": "parity",
+      "labelFlush": 5,
       "ticks": false,
       "domain": false,
       "labelBaseline": "top",
       "offset": 5,
-      "scale": "x"
+      "scale": "x",
+      "title":"years"
     },
     {
       "orient": "left",
@@ -122,7 +123,10 @@ export default {
               "strokeWidth": {
                 "value": 2
               }
-            }
+            },
+            "update":{
+            "defined":{"signal": "datum.value !== null"}
+        }
           }
         }
       ]
