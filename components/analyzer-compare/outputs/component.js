@@ -9,6 +9,7 @@ import BarChart from 'components/widgets/bar-chart';
 import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';
 import MapChart from 'components/widgets/map';
+import TableChart from 'components/widgets/table';
 
 // styles
 import './styles.scss';
@@ -56,6 +57,8 @@ class AnalyzerCompareOutputs extends Component {
 
                     if (params.type === 'map') return (<MapChart />)
 
+                    if (params.type === 'table') return (<TableChart data={data} />)
+
                     return null;
                   }}
                 </Widget>
@@ -75,6 +78,8 @@ class AnalyzerCompareOutputs extends Component {
                       if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
 
                       if (params.type === 'map') return (<MapChart />)
+
+                      if (params.type === 'table') return (<TableChart data={data} />)
 
                       return null;
                     }}
