@@ -71,8 +71,8 @@ export default {
   "axes": [
     {
       "orient": "bottom",
-      "labelOverlap": true,
-      "labelBound": 20,
+      "labelOverlap": "parity",
+      "labelFlush": 5,
       "ticks": false,
       "domain": false,
       "labelBaseline": "top",

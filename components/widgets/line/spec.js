@@ -63,6 +63,7 @@ export default {
       "orient": "bottom",
       "bandPosition": 0.5,
       "labelOverlap": "parity",
+      "labelFlush": 5,
       "ticks": false,
       "domain": false,
       "labelBaseline": "top",
