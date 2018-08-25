@@ -21,7 +21,7 @@ export default class MyDocument extends Document {
           <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js" />
           <script src="https://unpkg.com/leaflet-utfgrid/L.UTFGrid-min.js" />
 
-
+          <meta name="viewport" content="width=1024, user-scalable=no" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
           <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
