@@ -21,7 +21,7 @@ class TableChart extends PureComponent {
                 Avoided GDP impacted
               </td>
               {data.map(_row => (
-                <td>
+                <td key={_row.avoidedGdp}>
                   {`${parse(_row.avoidedGdp)} USD`}
                 </td>))
               }
@@ -31,7 +31,7 @@ class TableChart extends PureComponent {
                 Avoided population impacted
               </td>
               {data.map(_row => (
-                <td>
+                <td key={_row.avoidedPop}>
                   {parse(_row.avoidedPop)}
                 </td>))
               }
@@ -41,7 +41,7 @@ class TableChart extends PureComponent {
                 Cost-Benefit Ratio
               </td>
               {data.map(_row => (
-                <td>
+                <td key={_row.bcr}>
                   {parse(_row.bcr)}
                 </td>))
               }
