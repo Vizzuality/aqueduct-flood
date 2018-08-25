@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect, Button } from 'aqueduct-components';
 import { Router } from 'routes';
+import sortBy from 'lodash/sortBy';
+import isEqual from 'lodash/isEqual';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
@@ -29,7 +31,39 @@ class AnalyzerCompareFilters extends PureComponent {
   }
 
   componentWillMount() {
-    this.locationOptions = [...BASINS_OPTIONS, ...CITIES_OPTIONS];
+    const { filters } = this.props;
+    const { location, locationCompare } = filters;
+
+    const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
+      label: _country.label, value: _country.iso
+    }));
+
+    this.locationOptions = sortBy([...BASINS_OPTIONS, ...countryOptions, ...CITIES_OPTIONS], 'label');
+
+    this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
+      _country.iso === location) || {}).state || [])
+      .map(state => ({ label: state.label, value: state.key }));
+
+    this.stateOptionsCompare = ((COUNTRIES_OPTIONS.find(_country =>
+      _country.iso === locationCompare) || {}).state || [])
+      .map(state => ({ label: state.label, value: state.key }));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { filters:nextFilters } = nextProps;
+    const { filters } = this.props;
+
+    if(!isEqual(filters.location, nextFilters.location)) {
+      this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
+        _country.iso === nextFilters.location) || {}).state || [])
+        .map(state => ({ label: state.label, value: state.key }));
+    }
+
+    if(!isEqual(filters.locationCompare, nextFilters.locationCompare)) {
+      this.stateOptionsCompare = ((COUNTRIES_OPTIONS.find(_country =>
+        _country.iso === nextFilters.locationCompare) || {}).state || [])
+        .map(state => ({ label: state.label, value: state.key }));
+    }
   }
 
   onClearCompareFilters = () => {
@@ -66,9 +100,23 @@ class AnalyzerCompareFilters extends PureComponent {
                   isClearable
                 />
               </Field>
+              {/* location – states */}
+              <Field
+                name="location-filter"
+                label="Select a state"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={this.stateOptions}
+                  placeholder="Select a location"
+                  isDisabled={!this.stateOptions.length}
+                  value={filters.state}
+                  onChange={opt => setFilter({ state: opt && opt.value })}
+                  isClearable
+                />
+              </Field>
             </div>
             <div className="col-md-6">
-              {/* scenario filters */}
               <div className="clear-comparison-section">
                 <Field
                   name="location-compare-filter"
@@ -91,6 +139,21 @@ class AnalyzerCompareFilters extends PureComponent {
                   Clear comparison
                 </Button>
               </div>
+              {/* location – states */}
+              <Field
+                name="location-filter"
+                label="Select a state"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={this.stateOptionsCompare}
+                  placeholder="Select a location"
+                  isDisabled={!this.stateOptionsCompare.length}
+                  value={filters.stateCompare}
+                  onChange={opt => setCompareFilter({ state: opt && opt.value })}
+                  isClearable
+                />
+              </Field>
             </div>
           </div>
           {/* compare filters */}

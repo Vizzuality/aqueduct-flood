@@ -8,6 +8,7 @@ export default connect(
   state => ({
     filters: {
       ...state.filters.geogunit_unique_name && { location : state.filters.geogunit_unique_name },
+      ...state.filters.state && { state : state.filters.state },
       ...state.filters.scenario && { scenario : state.filters.scenario },
       ...state.filtersCompare.geogunit_unique_name && { compareLocation : state.filtersCompare.geogunit_unique_name }
     }
