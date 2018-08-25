@@ -38,19 +38,19 @@ class AnalyzerCompareFilters extends PureComponent {
     const { location, locationCompare } = filters;
 
     const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.label, value: _country.key
+      label: _country.name, value: _country.uniquename
     }));
 
     this.locationOptions = sortBy([...countryOptions, 'label']);
 
     this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-      _country.key === location) || {}).state || [])
-      .map(state => ({ label: state.label, value: state.key })), 'label');
+      _country.uniquename === location) || {}).state || [])
+      .map(state => ({ label: state.name, value: state.uniquename })), 'label');
 
     if (location) {
       this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-        _country.key === locationCompare) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key })), 'label');
+        _country.uniquename === locationCompare) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
   }
 
@@ -59,15 +59,15 @@ class AnalyzerCompareFilters extends PureComponent {
     const { filters } = this.props;
 
     if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.key === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === nextFilters.location) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
 
     if(!isEqual(filters.locationCompare, nextFilters.locationCompare)) {
-      this.stateOptionsCompare = ((COUNTRIES_OPTIONS.find(_country =>
-        _country.key === nextFilters.locationCompare) || {}).state || [])
-        .map(state => ({ label: state.label, value: state.key }));
+      this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
+        _country.uniquename === nextFilters.locationCompare) || {}).state || [])
+        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
     }
   }
 
