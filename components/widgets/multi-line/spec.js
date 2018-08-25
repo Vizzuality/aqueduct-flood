@@ -77,7 +77,8 @@ export default {
       "domain": false,
       "labelBaseline": "top",
       "offset": 5,
-      "scale": "x"
+      "scale": "x",
+      "title":"years"
     },
     {
       "orient": "left",
@@ -122,7 +123,10 @@ export default {
               "strokeWidth": {
                 "value": 2
               }
-            }
+            },
+            "update":{
+            "defined":{"signal": "datum.value !== null"}
+        }
           }
         }
       ]
