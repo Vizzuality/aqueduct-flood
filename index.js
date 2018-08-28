@@ -6,6 +6,7 @@ const basicAuth = require('basic-auth');
 
 const next = require('next');
 const routes = require('./routes');
+const locationsApi = require('./api/locations');
 
 // Load environment variables from .env file if present
 require('dotenv').load();
@@ -67,6 +68,8 @@ if (NODE_ENV === 'production' && ((USERNAME && PASSWORD))) {
 app
   .prepare()
   .then(() => {
+    server.get('/api/locations', locationsApi.getByQuery);
+
     server.use(handler);
 
     server.listen(port, err => {
