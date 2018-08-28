@@ -2,7 +2,10 @@ const locationData = require('../data/countries.json');
 const citiesData = require('../data/cities.json');
 const basinsData = require('../data/basins.json');
 
-const valueMatch = (value, query) => value.toLowerCase().indexOf(query.toLowerCase()) >= 0;
+const valueMatch = (value, query) => {
+  const expr = new RegExp(query, 'i');
+  return value.match(expr);
+};
 
 const getByQuery = (req, res) => {
   const { query } = req;
