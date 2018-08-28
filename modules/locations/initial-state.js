@@ -1,5 +1,6 @@
 export default {
-  list: [],
-  loading: true,
-  error: null
+  list: {
+    countries: [{ name: 'Japan', uniquename: 'Japan'}],
+  },
+  listCompare: {}
 };

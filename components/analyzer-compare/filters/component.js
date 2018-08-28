@@ -2,17 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect, Button } from 'aqueduct-components';
 import { Router } from 'routes';
-import sortBy from 'lodash/sortBy';
-import isEqual from 'lodash/isEqual';
-import compact from 'lodash/compact';
+import debounce from 'lodash/debounce';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
-
-// data
-// import BASINS_OPTIONS from 'data/basins';
-import COUNTRIES_OPTIONS from 'data/countries';
-// import CITIES_OPTIONS from 'data/cities';
 
 // styles
 import './styles.scss';
@@ -28,60 +21,40 @@ class AnalyzerCompareFilters extends PureComponent {
     }).isRequired,
     setFilter: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired,
+    locations: PropTypes.array.isRequired,
+    locationsCompare: PropTypes.array.isRequired,
     setCompareFilter: PropTypes.func.isRequired,
-  }
-
-  componentWillMount() {
-    this.stateOptions = [];
-    this.stateOptionsCompare = [];
-    const { filters } = this.props;
-    const { location, locationCompare } = filters;
-
-    const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.name, value: _country.uniquename
-    }));
-
-    this.locationOptions = sortBy([...countryOptions, 'label']);
-
-    this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-      _country.uniquename === location) || {}).state || [])
-      .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-
-    if (location) {
-      this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-        _country.uniquename === locationCompare) || {}).state || [])
-        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { filters:nextFilters } = nextProps;
-    const { filters } = this.props;
-
-    if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-        _country.uniquename === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-    }
-
-    if(!isEqual(filters.locationCompare, nextFilters.locationCompare)) {
-      this.stateOptionsCompare = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-        _country.uniquename === nextFilters.locationCompare) || {}).state || [])
-        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-    }
+    getLocations: PropTypes.func.isRequired,
+    getCompareLocations: PropTypes.func.isRequired,
+    setCompareLocations: PropTypes.func.isRequired
   }
 
   onClearCompareFilters = () => {
-    const { clearCompareFilters } = this.props;
+    const { clearCompareFilters, setCompareLocations } = this.props;
 
     clearCompareFilters();
+    setCompareLocations([]);
 
     Router.push('/');
   }
 
+  onSearch = debounce((value) => {
+    const { getLocations } = this.props;
+
+    if (value && value.length > 2 ) getLocations(value);
+  }, 150)
+
+  onSearchCompare = debounce((value) => {
+    const { getCompareLocations } = this.props;
+
+    if (value && value.length > 2 ) getCompareLocations(value);
+  }, 150)
+
   render() {
     const {
       filters,
+      locations,
+      locationsCompare,
       setFilter,
       setCompareFilter
     } = this.props;
@@ -98,25 +71,12 @@ class AnalyzerCompareFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
-                  options={this.locationOptions}
+                  grouped
+                  options={locations}
                   placeholder="Select a location"
                   value={filters.location}
+                  onInputChange={this.onSearch}
                   onChange={opt => { setFilter({ geogunit_unique_name: opt && opt.value })}}
-                  isClearable
-                />
-              </Field>
-              {/* location – states */}
-              <Field
-                name="location-filter"
-                label="Select a state"
-                className="-bigger"
-              >
-                <CustomSelect
-                  options={this.stateOptions}
-                  placeholder="Select a state"
-                  isDisabled={!this.stateOptions.length}
-                  value={filters.state}
-                  onChange={opt => setFilter({ state: opt && opt.value })}
                   isClearable
                 />
               </Field>
@@ -129,10 +89,12 @@ class AnalyzerCompareFilters extends PureComponent {
                   className="-bigger"
                 >
                   <CustomSelect
-                    options={this.locationOptions}
-                    placeholder="Select a location"
+                    grouped
+                    options={locationsCompare}
+                    placeholder="Compare with..."
                     isDisabled={!filters.location}
                     value={filters.locationCompare}
+                    onInputChange={this.onSearchCompare}
                     onChange={opt => { setCompareFilter({ geogunit_unique_name: opt && opt.value })}}
                   />
                 </Field>
@@ -144,21 +106,6 @@ class AnalyzerCompareFilters extends PureComponent {
                   Clear comparison
                 </Button>
               </div>
-              {/* location – states */}
-              <Field
-                name="location-filter"
-                label="Select a state"
-                className="-bigger"
-              >
-                <CustomSelect
-                  options={this.stateOptionsCompare}
-                  placeholder="Select a state"
-                  isDisabled={!this.stateOptionsCompare.length}
-                  value={filters.stateCompare}
-                  onChange={opt => setCompareFilter({ state: opt && opt.value })}
-                  isClearable
-                />
-              </Field>
             </div>
           </div>
           {/* compare filters */}
