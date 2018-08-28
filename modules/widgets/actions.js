@@ -16,7 +16,7 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
       return null;
     }
 
-    const { state, ...restFilters} = filters;
+    const { state, locations, ...restFilters} = filters;
 
     const widgetParams = queryString.stringify({
       ...restFilters,

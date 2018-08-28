@@ -2,16 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Router } from 'routes';
 import { Field, CustomSelect } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
-import sortBy from 'lodash/sortBy';
+import debounce from 'lodash/debounce';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
-
-// data
-// import BASINS_OPTIONS from 'data/basins';
-import COUNTRIES_OPTIONS from 'data/countries';
-// import CITIES_OPTIONS from 'data/cities';
 
 // styles
 import './styles.scss';
@@ -23,40 +17,33 @@ class AnalyzerFilters extends PureComponent {
       scenario: PropTypes.string,
       locationCompare: PropTypes.string
     }).isRequired,
+    locations: PropTypes.array.isRequired,
+    locationsCompare: PropTypes.array.isRequired,
     setFilter: PropTypes.func.isRequired,
-    setCompareFilter: PropTypes.func.isRequired
+    setCompareFilter: PropTypes.func.isRequired,
+    getLocations: PropTypes.func.isRequired,
+    getCompareLocations: PropTypes.func.isRequired
   }
 
-  componentWillMount() {
-    const { filters } = this.props;
-    const { location } = filters;
+  onSearch = debounce((value) => {
+    const { getLocations } = this.props;
 
-    const countryOptions = COUNTRIES_OPTIONS.map(_country => ({
-      label: _country.name, value: _country.uniquename
-    }));
+    if (value && value.length > 2 ) getLocations(value);
+  }, 150)
 
-    this.locationOptions = sortBy([...countryOptions, 'label']);
-    this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-      _country.uniquename === location) || {}).state || [])
-      .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-  }
+  onSearchCompare = debounce((value) => {
+    const { getCompareLocations } = this.props;
 
-  componentWillReceiveProps(nextProps) {
-    const { filters:nextFilters } = nextProps;
-    const { filters } = this.props;
-
-    if(!isEqual(filters.location, nextFilters.location)) {
-      this.stateOptions = sortBy(((COUNTRIES_OPTIONS.find(_country =>
-        _country.uniquename === nextFilters.location) || {}).state || [])
-        .map(state => ({ label: state.name, value: state.uniquename })), 'label');
-    }
-  }
+    if (value && value.length > 2 ) getCompareLocations(value);
+  }, 150)
 
   render() {
     const {
       filters,
+      locations,
+      locationsCompare,
       setFilter,
-      setCompareFilter
+      setCompareFilter,
     } = this.props;
 
     return (
@@ -71,13 +58,15 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
-                  options={this.locationOptions}
+                  grouped
+                  options={locations}
                   placeholder="Select a location"
                   value={filters.location}
+                  onInputChange={this.onSearch}
                   onChange={opt => setFilter({ geogunit_unique_name: opt && opt.value })}
                 />
               </Field>
-              {/* future scenearios */}
+              {/* future scenarios */}
               <Field
                 name="future-scenario-filter"
                 label="Select a future scenario"
@@ -92,21 +81,6 @@ class AnalyzerFilters extends PureComponent {
               </Field>
             </div>
             <div className="col-md-6">
-              {/* location – states */}
-              <Field
-                name="location-filter"
-                label="Select a state"
-                className="-bigger"
-              >
-                <CustomSelect
-                  options={this.stateOptions}
-                  placeholder="Select a state"
-                  isDisabled={!this.stateOptions.length}
-                  value={filters.state}
-                  onChange={opt => setFilter({ state: opt && opt.value })}
-                  isClearable
-                />
-              </Field>
               {/* location compare */}
               <Field
                 name="location-compare-filter"
@@ -114,10 +88,12 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
-                  options={this.locationOptions}
-                  placeholder="Compare with"
+                  grouped
+                  options={locationsCompare}
+                  placeholder="Compare with..."
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
+                  onInputChange={this.onSearchCompare}
                   onChange={(opt) => {
                     setCompareFilter({ geogunit_unique_name: opt && opt.value });
                     if (opt) Router.push('/analyzer-compare');
@@ -127,10 +103,6 @@ class AnalyzerFilters extends PureComponent {
               </Field>
             </div>
           </div>
-          {/* <div className="row">
-            <div className="col-xs-12 col-md-6">
-            </div>
-          </div> */}
         </div>
       </div>
     );

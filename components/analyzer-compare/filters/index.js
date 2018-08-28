@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
 import { setFilter } from 'modules/filters/actions';
 import { setCompareFilter, clearCompareFilters } from 'modules/filters-compare/actions';
+import { getLocations, getCompareLocations, setCompareLocations } from 'modules/locations/actions';
+
+// selectors
+import { parseLocations, parseCompareLocations } from 'components/analyzer/filters/selectors';
 
 import AnalyzerCompareFilters from "./component";
 
@@ -13,11 +17,16 @@ export default connect(
       locationCompare: state.filtersCompare.geogunit_unique_name,
       ...state.filtersCompare.state && { stateCompare : state.filtersCompare.state },
       ...state.filtersCompare.scenario && { scenarioCompare: state.filtersCompare.scenario },
-    }
+    },
+    locations: parseLocations(state),
+    locationsCompare: parseCompareLocations(state)
   }),
   {
     setFilter,
     setCompareFilter,
-    clearCompareFilters
+    clearCompareFilters,
+    getLocations,
+    getCompareLocations,
+    setCompareLocations
   }
 )(AnalyzerCompareFilters);
