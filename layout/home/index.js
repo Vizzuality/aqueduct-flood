@@ -6,7 +6,8 @@ import Home from "./component";
 export default connect(
   state => ({
     sidebar: state.app.sidebar,
-    tab: state.app.tab
+    tab: state.app.tab,
+    filters: state.filters
   }),
   {
     setSidebarVisibility,

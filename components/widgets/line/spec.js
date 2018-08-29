@@ -76,7 +76,8 @@ export default {
       "format": "~s",
       "grid": true,
       "labelOverlap": "parity",
-      "scale": "y"
+      "scale": "y",
+      "title":"bla bla bls"
     }
   ],
   "marks": [
@@ -89,32 +90,21 @@ export default {
         "data": "table"
       },
       "encode": {
-        "enter": {
+        "update": {
           "x": {
             "scale": "x",
             "field": "year"
           },
-          "width": {
-            "scale": "x",
-            "band": 1
-          },
+
           "y": {
             "scale": "y",
             "field": "value"
           },
-          "y2": {
-            "scale": "y",
-            "value": 0
-          },
-          // "stroke": {
-          //   "value": "grey"
-          // },
+
           "opacity": {
             "value": 1
-          }
-        },
-        "update":{
-        "defined":{"signal": "datum.y !== null"}
+          },
+          "defined":{"signal": "datum.value !== null"}
         }
       }
     },

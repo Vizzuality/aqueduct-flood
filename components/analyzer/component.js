@@ -13,13 +13,20 @@ class Analyzer extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({}).isRequired,
     setFilter: PropTypes.func.isRequired,
+    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired
   }
 
   render() {
     const {
       filters,
+      input,
       setFilter
     } = this.props;
+    const { loading } = input;
+
+    const loadingStyles = {
+      ...loading && { overflowY: 'hidden' }
+    };
 
     return (
       <div className="c-analyzer">
@@ -27,7 +34,7 @@ class Analyzer extends PureComponent {
           <AnalyzerFilters />
         </div>
 
-        <div className="l-analyzer-inputs">
+        <div className="l-analyzer-inputs" style={loadingStyles}>
           <div className="wrapper">
             <div className="row">
               <div className="col-xs-12">
@@ -36,7 +43,6 @@ class Analyzer extends PureComponent {
             </div>
           </div>
         </div>
-
         <ApplyFilters />
       </div>
     );

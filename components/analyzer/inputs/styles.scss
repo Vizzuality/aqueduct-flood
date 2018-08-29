@@ -1,6 +1,7 @@
 @import 'css/settings';
 
 .c-analyzer-inputs {
+  position: relative;
   flex: 1;
   padding: $space-1 * 6 0;
   background: palette(sand);

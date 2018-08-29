@@ -6,8 +6,11 @@ import {
   Field,
   CustomSelect,
   Range,
-  Slider
+  Slider,
+  Spinner
 } from 'aqueduct-components';
+import debounce from 'lodash/debounce';
+import isEqual from 'lodash/isEqual';
 
 // components
 import SectionHeader from 'components/ui/section-header';
@@ -15,7 +18,6 @@ import SectionHeader from 'components/ui/section-header';
 // constants
 import {
   DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS,
-  EXISTING_PROTECTION_LEVEL_MARKS,
   EXISTING_PROTECTION_LEVEL_OPTIONS,
   IMPLEMENTATION_YEAR_OPTIONS,
   INFRASTRUCTURE_LIFE_TIME_OPTIONS,
@@ -36,7 +38,7 @@ class AnalyzerInputs extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({
       existing_prot: PropTypes.number,
-      prot_fut: PropTypes.number.isRequired,
+      prot_fut: PropTypes.number,
       ref_year: PropTypes.number.isRequired,
       implementation_start: PropTypes.number.isRequired,
       implementation_end: PropTypes.number.isRequired,
@@ -46,60 +48,100 @@ class AnalyzerInputs extends PureComponent {
       discount_rate: PropTypes.number.isRequired,
       om_costs: PropTypes.number.isRequired
     }).isRequired,
+    inputState: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
     onChangeFilter: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
+    getCountryDefaults: PropTypes.func.isRequired,
+    setInput: PropTypes.func.isRequired
   };
 
-  componentWillMount() {
-    const { filters } = this.props;
-    const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === filters.existing_prot);
+  constructor(props) {
+    super(props);
+
+    const { filters } = props;
+    const { existing_prot: existingProt } = filters;
+    const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === existingProt);
     const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
       indexExistingProtection : indexExistingProtection + 1;
 
     this.designProtectionOptions = EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex);
-    this.designProtectionMarks = {};
+    this.designProtectionMarks = {}
+    this.designProtectionOptions.forEach(opt => { this.designProtectionMarks[opt] = opt; });
 
-    this.designProtectionOptions.forEach(opt => {
-      this.designProtectionMarks[opt] = opt;
-    });
+    this.state = { existingProtValue: existingProt };
+  }
+
+  componentWillMount() {
+    const { getCountryDefaults, setInput } = this.props;
+
+    getCountryDefaults()
+      .then(() => { setInput({ loading: false }) })
   }
 
   componentWillReceiveProps(nextProps) {
-    const { existing_prot: nextExistingProt } = nextProps.filters;
+    const {
+      existing_prot: nextExistingProt,
+      prot_fut: nextProtFut
+    } = nextProps.filters;
     const { filters } = this.props;
-    const { existing_prot: existingProt } = filters;
+    const { existing_prot: existingProt, prot_fut: protFut } = filters;
+    const existingProtChanged = !isEqual(existingProt, nextExistingProt);
+    const protFutChanged = !isEqual(protFut, nextProtFut);
 
-    if (existingProt !== nextExistingProt) {
+    if (existingProtChanged) {
       const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === nextExistingProt);
       const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
         indexExistingProtection : indexExistingProtection + 1;
 
       this.designProtectionOptions = EXISTING_PROTECTION_LEVEL_OPTIONS.slice(nextIndex);
       this.designProtectionMarks = {};
+      this.designProtectionOptions.forEach(opt => { this.designProtectionMarks[opt] = opt; });
 
-      this.designProtectionOptions.forEach(opt => {
-        this.designProtectionMarks[opt] = opt;
+      this.setState({
+        existingProtValue: nextExistingProt,
+        protFut: AnalyzerInputs.getProtFutValue(nextExistingProt)
       });
+    }
+
+    if (protFutChanged && !existingProtChanged) {
+      this.setState({ protFut: nextProtFut });
     }
   }
 
-  onChangeExistingProtectionLevel = (value) => {
+  onChangeExistingProtectionLevel = debounce((value) => {
     const { onChangeFilter } = this.props;
-
-    const indexValue = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === value);
 
     onChangeFilter({
       existing_prot: value,
-      prot_fut: indexValue + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
-        EXISTING_PROTECTION_LEVEL_OPTIONS[indexValue] : EXISTING_PROTECTION_LEVEL_OPTIONS[indexValue + 1]
+      prot_fut: AnalyzerInputs.getProtFutValue(value)
     });
+  }, 300);
+
+  static getProtFutValue = (existingProt) => {
+    let result = 0;
+    let found = false;
+
+    EXISTING_PROTECTION_LEVEL_OPTIONS.forEach((value, index) => {
+      const nextLevel = EXISTING_PROTECTION_LEVEL_OPTIONS[index + 1] ?
+        EXISTING_PROTECTION_LEVEL_OPTIONS[index + 1] : EXISTING_PROTECTION_LEVEL_OPTIONS[index]
+
+      if ((existingProt >= value && existingProt <= nextLevel) && !found) {
+        result = nextLevel
+        found = true;
+      }
+    })
+
+    return result;
   }
 
   render() {
-    const { filters, onChangeFilter, setModal } = this.props;
+    const { filters, inputState, onChangeFilter, setModal } = this.props;
+    const { loading } = inputState;
+    const { existingProtValue, protFut } = this.state;
 
     return (
       <div className="c-analyzer-inputs">
+        {loading && <Spinner />}
         <SectionHeader title="input table" />
         <section>
           <div className="category">
@@ -113,23 +155,23 @@ class AnalyzerInputs extends PureComponent {
             </Button>
           </div>
           <div className="selectors-container">
-            {filters.existing_prot && (
-              <Field
-                name="existing-protection-level"
+            {/* existing protection level */}
+            <Field
+              name="existing-protection-level"
+              theme="dark"
+              label="Existing Protection Level (Return Period)"
+              className="-bolder"
+            >
+              <Slider
+                min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
+                max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
                 theme="dark"
-                label="Existing Protection Level (Return Period)"
-                className="-bolder"
-              >
-                <Slider
-                  min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
-                  max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
-                  theme="dark"
-                  step={null}
-                  marks={EXISTING_PROTECTION_LEVEL_MARKS}
-                  defaultValue={filters.existing_prot}
-                  onAfterChange={this.onChangeExistingProtectionLevel}
-                />
-              </Field>)}
+                value={existingProtValue}
+                onChange={(value) => this.setState({ existingProtValue: value })}
+                defaultValue={existingProtValue}
+                onAfterChange={this.onChangeExistingProtectionLevel}
+              />
+            </Field>
 
             <Field
               name="design-protection-level"
@@ -144,7 +186,9 @@ class AnalyzerInputs extends PureComponent {
                 theme="dark"
                 step={null}
                 marks={this.designProtectionMarks}
-                defaultValue={filters.prot_fut}
+                value={protFut}
+                onChange={(value) => this.setState({ protFut: value })}
+                defaultValue={AnalyzerInputs.getProtFutValue(existingProtValue)}
                 onAfterChange={value => { onChangeFilter({ prot_fut: value }) }}
               />
             </Field>
@@ -242,22 +286,22 @@ class AnalyzerInputs extends PureComponent {
             </Button>
           </div>
           <div className="selectors-container">
-            {filters.user_urb_cost && (
-              <Field
-                name="user-urb-cost"
+            <Field
+              name="user-urb-cost"
+              theme="dark"
+              label="Unit Cost ($million/meter/kilometer)"
+              className="-bolder"
+            >
+              <Slider
+                min={UNIT_COST_OPTIONS[0]}
+                max={UNIT_COST_OPTIONS[1]}
+                step={0.01}
                 theme="dark"
-                label="Unit Cost ($million/meter/kilometer)"
-                className="-bolder"
-              >
-                <Slider
-                  min={UNIT_COST_OPTIONS[0]}
-                  max={UNIT_COST_OPTIONS[1]}
-                  step={0.01}
-                  theme="dark"
-                  defaultValue={filters.user_urb_cost}
-                  onAfterChange={value => { onChangeFilter({ user_urb_cost: value }) }}
-                />
-              </Field>)}
+                value={filters.estimated_costs}
+                defaultValue={filters.estimated_costs}
+                onAfterChange={value => { onChangeFilter({ estimated_costs: value }) }}
+              />
+            </Field>
 
             <Field
               name="discount-rate"

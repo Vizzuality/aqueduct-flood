@@ -26,6 +26,7 @@ class Home extends PureComponent {
   static propTypes = {
     sidebar: PropTypes.bool.isRequired,
     tab: PropTypes.string.isRequired,
+    filters: PropTypes.object.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired
   }
@@ -35,10 +36,13 @@ class Home extends PureComponent {
       sidebar,
       tab,
       setSidebarVisibility,
-      setTab
+      setTab,
+      filters
     } = this.props;
 
     const isAnalyzerTab = tab === 'cost-benefit-analyzer';
+    const { existing_prot: existingProt, prot_fut: protFut } = filters;
+    const analyzerTabIsReady = !!existingProt && !!protFut;
 
     return (
       <Layout title="Homepage" description="Aqueduct Flood description">
@@ -58,7 +62,7 @@ class Home extends PureComponent {
             </div>
           </Sidebar>
 
-          {isAnalyzerTab && <AnalyzerOutputs />}
+          {isAnalyzerTab && analyzerTabIsReady && <AnalyzerOutputs />}
 
           {!isAnalyzerTab && (
             <Map customClass="l-map">

@@ -1,7 +1,14 @@
 import { connect } from 'react-redux';
 import { setFilter } from 'modules/filters/actions';
 import { setCompareFilter, clearCompareFilters } from 'modules/filters-compare/actions';
-import { getLocations, getCompareLocations, setCompareLocations } from 'modules/locations/actions';
+import {
+  getLocations,
+  getCompareLocations,
+  setCompareLocations,
+  getCountryDefaults,
+  getCompareCountryDefaults
+} from 'modules/locations/actions';
+import { setInput, setInputCompare } from 'modules/app/actions';
 
 // selectors
 import { parseLocations, parseCompareLocations } from 'components/analyzer/filters/selectors';
@@ -27,6 +34,10 @@ export default connect(
     clearCompareFilters,
     getLocations,
     getCompareLocations,
-    setCompareLocations
+    setCompareLocations,
+    getCountryDefaults,
+    getCompareCountryDefaults,
+    setInput,
+    setInputCompare
   }
 )(AnalyzerCompareFilters);

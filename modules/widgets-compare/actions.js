@@ -1,6 +1,5 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
-import { setCompareFilter } from 'modules/filters-compare/actions';
 
 export const setWidgetData = createAction('WIDGETS__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS__SET-LOADING');
@@ -21,10 +20,8 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
     const widgetParams = queryString.stringify({
       ...restFilters,
       ...{ geogunit_unique_name: state || filtersCompare.geogunit_unique_name  },
-      ...{ existing_prot: filtersCompare.existing_prot || 'null' },
       ...{ user_urb_cost: filtersCompare.user_urb_cost || 'null' },
-      ...{ user_rur_cost: 'null' },
-      ...{ estimated_costs: 'null' }
+      ...{ user_rur_cost: 'null' }
     });
 
     dispatch(setLoading({ id: widgetId, loading: true }));
@@ -34,14 +31,8 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
         if (response.ok) return response.json();
         throw response;
       })
-      .then(({ data, meta, chart_type: type }) => {
-        const { startingProtection, om } = meta;
-
+      .then(({ data, chart_type: type }) => {
         dispatch(setLoading({ id: widgetId, loading: false }));
-        dispatch(setCompareFilter({
-          existing_prot: startingProtection,
-          user_urb_cost: om,
-        }))
         dispatch(setWidgetData({ id: widgetId, data, type }));
       })
       .catch((err) => {

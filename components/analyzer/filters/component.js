@@ -22,7 +22,10 @@ class AnalyzerFilters extends PureComponent {
     setFilter: PropTypes.func.isRequired,
     setCompareFilter: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
-    getCompareLocations: PropTypes.func.isRequired
+    getCompareLocations: PropTypes.func.isRequired,
+    getCountryDefaults: PropTypes.func.isRequired,
+    setInput: PropTypes.func.isRequired,
+    setInputCompare: PropTypes.func.isRequired
   }
 
   onSearch = debounce((value) => {
@@ -31,11 +34,33 @@ class AnalyzerFilters extends PureComponent {
     if (value && value.length > 2 ) getLocations(value);
   }, 150)
 
+  onChangeLocation = (opt) => {
+    const { setFilter, filters, setInput, getCountryDefaults } = this.props;
+    const { location } = filters;
+
+    if ((opt && opt.value) === location) return;
+
+    setInput({ loading: true })
+    setFilter({ geogunit_unique_name: opt && opt.value });
+
+    getCountryDefaults()
+      .then(() => { setInput({ loading: false }) })
+  }
+
   onSearchCompare = debounce((value) => {
     const { getCompareLocations } = this.props;
 
     if (value && value.length > 2 ) getCompareLocations(value);
   }, 150)
+
+  onChangeLocationCompare = (opt) => {
+    const { setInputCompare, setCompareFilter } = this.props;
+
+    setInputCompare({ loading: true })
+    setCompareFilter({ geogunit_unique_name: opt && opt.value });
+
+    if (opt) Router.push('/analyzer-compare');
+  }
 
   render() {
     const {
@@ -43,7 +68,7 @@ class AnalyzerFilters extends PureComponent {
       locations,
       locationsCompare,
       setFilter,
-      setCompareFilter,
+      setCompareFilter
     } = this.props;
 
     return (
@@ -63,7 +88,7 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Select a location"
                   value={filters.location}
                   onInputChange={this.onSearch}
-                  onChange={opt => setFilter({ geogunit_unique_name: opt && opt.value })}
+                  onChange={this.onChangeLocation}
                 />
               </Field>
               {/* future scenarios */}
@@ -94,11 +119,7 @@ class AnalyzerFilters extends PureComponent {
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
                   onInputChange={this.onSearchCompare}
-                  onChange={(opt) => {
-                    setCompareFilter({ geogunit_unique_name: opt && opt.value });
-                    if (opt) Router.push('/analyzer-compare');
-                  }}
-                  isClearable
+                  onChange={this.onChangeLocationCompare}
                 />
               </Field>
             </div>
