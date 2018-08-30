@@ -34,15 +34,9 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
         if (response.ok) return response.json();
         throw response;
       })
-      .then(({ data, meta, chart_type: type }) => {
-        const { startingProtection, om } = meta;
-
+      .then(({ data, chart_type: type, meta }) => {
         dispatch(setLoading({ id: widgetId, loading: false }));
-        dispatch(setCompareFilter({
-          existing_prot: startingProtection,
-          user_urb_cost: om,
-        }))
-        dispatch(setWidgetData({ id: widgetId, data, type }));
+        dispatch(setWidgetData({ id: widgetId, data, type, meta }));
       })
       .catch((err) => {
         dispatch(setLoading({ id: widgetId, loading: false }));

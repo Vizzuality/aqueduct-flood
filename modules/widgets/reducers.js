@@ -9,7 +9,8 @@ export default {
       ...newState[widgetIndex],
       params: {
         ...newState[widgetIndex].params,
-        ...{ type: payload.type }
+        ...{ type: payload.type },
+        ...payload.meta
       },
       data: payload.data
     };
