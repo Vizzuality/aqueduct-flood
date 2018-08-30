@@ -49,11 +49,11 @@ class AnalyzerCompareOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
+                    if (params.type === 'bar') return (<BarChart params={params} data={{ table: data }} />)
 
-                    if (params.type === 'line') return (<LineChart data={{ table: data }} />)
+                    if (params.type === 'line') return (<LineChart params={params} data={{ table: data }} />)
 
-                    if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<MultiLineChart params={params} data={{ table: data }} />)
 
                     if (params.type === 'map') return (<MapChart />)
 
