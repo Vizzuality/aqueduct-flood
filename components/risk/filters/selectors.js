@@ -1,35 +1,37 @@
 import { createSelector } from 'reselect';
 
-const locations = state => state.locations.list;
-const locationsCompare = state => state.locations.listCompare;
+// selectors
+import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
 
-const parser = (_locations) =>
-[
-  {
-    label: 'Basins',
-    options: _locations.basins || []
-  },
-   {
-    label: 'Countries',
-    options: (_locations.countries || []).map(_country => ({
-      label: _country.name,
-      value: _country.uniquename
-    }))
-  },
-  {
-    label: 'States',
-    options: (_locations.states || []).map(_states => ({
-      label: _states.name,
-      value: _states.uniquename
-    }))
-  },
-   {
-    label: 'Cities',
-    options: _locations.cities || []
-  }
-];
+// constants
+import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
-export const parseLocations = createSelector([locations], parser)
-export const parseCompareLocations = createSelector([locationsCompare], parser)
+const advancedSettings = state => state.filters.risk.advanced_settings;
+const floodType = state => state.filters.risk.flood;
 
-export default { parseLocations, parseCompareLocations };
+export const getFilteredLocations = createSelector([parseLocations, floodType],
+  (_locations, _floodType) => {
+
+  if (_floodType === 'Coastal') return _locations.filter(locationGroup => locationGroup.label !== 'Basins');
+
+  return _locations;
+});
+
+export const getFilteredCompareLocations = createSelector([parseCompareLocations, floodType],
+  (_locations, _floodType) => {
+
+  if (_floodType === 'Coastal') return _locations.filter(locationGroup => locationGroup.label !== 'Basins');
+
+  return _locations;
+});
+
+export const getScenarios = createSelector(
+  [advancedSettings],
+  (_advancedSettings) => _advancedSettings ? SCENARIOS_OPTIONS : [SCENARIOS_OPTIONS[0]]
+);
+
+export default {
+  getFilteredLocations,
+  getFilteredCompareLocations,
+  getScenarios
+};

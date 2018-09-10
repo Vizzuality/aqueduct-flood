@@ -1,14 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-
-
 // components
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
 import AnalyzerCompareInputs from 'components/analyzer-compare/analyzer-inputs';
 import AnalyzerCompareOutputs from 'components/analyzer-compare/outputs';
 import AnalyzerCompareFilters from 'components/analyzer-compare/filters';
-import ApplyFilters from 'components/analyzer/apply-filters';
+import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';

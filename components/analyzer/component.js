@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // components
 import AnalyzerFilters from 'components/analyzer/filters';
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
-import ApplyFilters from 'components/analyzer/apply-filters';
+import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';
@@ -12,15 +12,15 @@ import './styles.scss';
 class Analyzer extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({}).isRequired,
-    setFilter: PropTypes.func.isRequired,
-    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired
+    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
+    setCostFilter: PropTypes.func.isRequired
   }
 
   render() {
     const {
       filters,
       input,
-      setFilter
+      setCostFilter
     } = this.props;
     const { loading } = input;
 
@@ -38,7 +38,7 @@ class Analyzer extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-xs-12">
-                <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+                <AnalyzerInputs onChangeFilter={setCostFilter} filters={filters} />
               </div>
             </div>
           </div>

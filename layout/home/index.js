@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { setSidebarVisibility, setTab } from 'modules/app/actions';
+import { setWidgets } from 'modules/widgets/actions';
 
 import Home from "./component";
 
@@ -11,6 +12,7 @@ export default connect(
   }),
   {
     setSidebarVisibility,
-    setTab
+    setTab,
+    setWidgets
   }
 )(Home);

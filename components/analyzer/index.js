@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { setFilter } from 'modules/filters/actions';
+import { setCostFilter } from 'modules/filters/actions';
 
 import Analyzer from "./component";
 
 export default connect(
   state => ({
     filters: {
-      ...state.filters.geogunit_unique_name && { location : state.filters.geogunit_unique_name },
-      ...state.filters.scenario && { scenario : state.filters.scenario },
-      ...state.filtersCompare.geogunit_unique_name && { compareLocation : state.filtersCompare.geogunit_unique_name}
+      ...state.filters.common.geogunit_unique_name && { location : state.filters.common.geogunit_unique_name },
+      ...state.filters.common.scenario && { scenario : state.filters.common.scenario },
+      ...state.filtersCompare.common.geogunit_unique_name && { compareLocation : state.filtersCompare.common.geogunit_unique_name}
     },
     input: state.app.input
   }),
-  { setFilter }
+  { setCostFilter }
 )(Analyzer);

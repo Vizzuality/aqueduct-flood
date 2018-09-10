@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-import AnalyzerFilters from 'components/risk/filters';
+import RiskFilters from 'components/risk/filters';
 // import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
-// import ApplyFilters from 'components/analyzer/apply-filters';
+import RiskOutputs from 'components/risk/outputs';
+import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';
@@ -12,15 +13,15 @@ import './styles.scss';
 class Risk extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({}).isRequired,
-    setFilter: PropTypes.func.isRequired,
-    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired
+    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
+    setRiskFilter: PropTypes.func.isRequired
   }
 
   render() {
     const {
       filters,
       input,
-      setFilter
+      setRiskFilter
     } = this.props;
     const { loading } = input;
 
@@ -31,19 +32,20 @@ class Risk extends PureComponent {
     return (
       <div className="c-risk">
         <div className="l-filters">
-          <AnalyzerFilters />
+          <RiskFilters />
         </div>
 
-        {/* <div className="l-risk-inputs" style={loadingStyles}>
-          <div className="wrapper">
+        <div className="l-risk-inputs" style={loadingStyles}>
+          {/* <div className="wrapper">
             <div className="row">
               <div className="col-xs-12">
-                <AnalyzerInputs onChangeFilter={setFilter} filters={filters} />
+                <AnalyzerInputs onChangeFilter={setRiskFilter} filters={filters} />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-        <ApplyFilters /> */}
+        <RiskOutputs />
+        <ApplyFilters />
       </div>
     );
   }

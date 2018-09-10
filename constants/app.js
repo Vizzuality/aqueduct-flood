@@ -1,17 +1,7 @@
 export const APP_TABS = [
-  { label: 'Risk', value: 'risk', default: true },
+  { label: 'Risk', value: 'risk' },
   { label: 'Hazard', value: 'hazard' },
-  { label: 'Cost-benefit Analyzer', value: 'cost-benefit-analyzer' }
+  { label: 'Cost-benefit Analyzer', value: 'cba',  default: true }
 ];
 
-export const APP_ENDPOINTS = {
-  'cost-benefit-analyzer': 'cba',
-  risk: 'risk',
-  hazard: 'harzard'
-}
-
-
-export default {
-  APP_TABS,
-  APP_ENDPOINTS
-};
+export default { APP_TABS };

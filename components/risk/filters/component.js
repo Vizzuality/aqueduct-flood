@@ -22,8 +22,16 @@ class AnalyzerFilters extends PureComponent {
     }).isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
-    setFilter: PropTypes.func.isRequired,
-    setCompareFilter: PropTypes.func.isRequired,
+    scenarios: PropTypes.arrayOf(PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]).isRequired
+    })).isRequired,
+    setCommonFilter: PropTypes.func.isRequired,
+    setRiskFilter: PropTypes.func.isRequired,
+    setCommonCompareFilter: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
     getCompareLocations: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
@@ -38,15 +46,15 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocation = (opt) => {
-    const { setFilter, filters, setInput, getCountryDefaults } = this.props;
+    const { setCommonFilter, filters, setInput, getCountryDefaults } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
-    setFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCountryDefaults()
+    getCountryDefaults(setCommonFilter)
       .then(() => { setInput({ loading: false }) })
   }
 
@@ -57,12 +65,21 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocationCompare = (opt) => {
-    const { setInputCompare, setCompareFilter } = this.props;
+    const { setInputCompare, setCommonCompareFilter } = this.props;
 
     setInputCompare({ loading: true })
-    setCompareFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
     if (opt) Router.push('/analyzer-compare');
+  }
+
+  onCheckAdvancedSettings = ({ checked }) => {
+    const { setRiskFilter, scenarios } = this.props;
+
+    setRiskFilter({
+      advanced_settings: checked,
+      ...!checked && { scenario: scenarios[0].value }
+    });
   }
 
   render() {
@@ -70,13 +87,25 @@ class AnalyzerFilters extends PureComponent {
       filters,
       locations,
       locationsCompare,
-      setFilter
+      scenarios,
+      setRiskFilter
     } = this.props;
-    const isCoastal = filters.flood === 'Coastal';
 
     return (
       <div className="c-analyzer-filters">
         <div className="wrapper">
+          <div className="row end-xs">
+            <div className="col-md-6">
+              <Checkbox
+                label="Show Advanced Settings"
+                name="advanced_settings"
+                value="advanced_settings"
+                theme="light"
+                checked={filters.advanced_settings}
+                onChange={this.onCheckAdvancedSettings}
+              />
+            </div>
+          </div>
           <div className="row">
             <div className="col-md-6">
               {/* location */}
@@ -94,19 +123,6 @@ class AnalyzerFilters extends PureComponent {
                   onChange={this.onChangeLocation}
                 />
               </Field>
-              {/* future scenarios */}
-              {/* <Field
-                name="future-scenario-filter"
-                label="Select a future scenario"
-                className="-bigger"
-              >
-                <CustomSelect
-                  options={SCENARIOS_OPTIONS}
-                  placeholder="Select a future scenario"
-                  value={filters.scenario}
-                  onChange={opt => setFilter({ scenario: opt && opt.value })}
-                />
-              </Field> */}
             </div>
             <div className="col-md-6">
               {/* location compare */}
@@ -128,6 +144,24 @@ class AnalyzerFilters extends PureComponent {
           </div>
           <div className="row">
             <div className="col-md-6">
+              {/* future scenarios */}
+              <Field
+                name="future-scenario-filter"
+                label="Select a future scenario"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={scenarios}
+                  isDisabled={!filters.advanced_settings}
+                  placeholder="Select a future scenario"
+                  value={filters.scenario}
+                  onChange={opt => setRiskFilter({ scenario: opt && opt.value })}
+                />
+              </Field>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
               {/* flood type */}
               <Field
                 name="flood-type-filter"
@@ -138,7 +172,7 @@ class AnalyzerFilters extends PureComponent {
                   options={FLOOD_TYPE_OPTIONS}
                   placeholder="Select a flood type..."
                   value={filters.flood}
-                  onChange={opt => setFilter({ flood: opt && opt.value })}
+                  onChange={opt => setRiskFilter({ flood: opt && opt.value })}
                 />
               </Field>
             </div>
@@ -153,7 +187,7 @@ class AnalyzerFilters extends PureComponent {
                   options={EXPOSURE_OPTIONS}
                   placeholder="Select a risk indicator..."
                   value={filters.exposure}
-                  onChange={opt => setFilter({ exposure: opt && opt.value })}
+                  onChange={opt => setRiskFilter({ exposure: opt && opt.value })}
                 />
               </Field>
             </div>
@@ -167,7 +201,7 @@ class AnalyzerFilters extends PureComponent {
                 theme="light"
                 // disabled={!isCoastal}
                 defaultChecked
-                onChange={({ checked }) => setFilter({ sub_scenario: checked })}
+                onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
               />
             </div>
           </div>

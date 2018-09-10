@@ -72,9 +72,9 @@ class AnalyzerInputs extends PureComponent {
   }
 
   componentWillMount() {
-    const { getCountryDefaults, setInput } = this.props;
+    const { getCountryDefaults, onChangeFilter, setInput } = this.props;
 
-    getCountryDefaults()
+    getCountryDefaults(onChangeFilter)
       .then(() => { setInput({ loading: false }) })
   }
 
