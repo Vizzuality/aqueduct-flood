@@ -1,6 +1,7 @@
 @import 'css/settings';
 
 .c-apply-filters {
+  z-index: 1000;
   position: fixed;
   bottom: 0;
   display: flex;

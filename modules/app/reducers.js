@@ -18,5 +18,7 @@ export default {
       ...payload
     }
   }),
-  [actions.resetModal]: state => ({ ...state, modal: initialState.modal })
+  [actions.resetModal]: state => ({ ...state, modal: initialState.modal }),
+  [actions.setInput]: (state, { payload }) => ({ ...state, input: { ...state.input, ...payload} }),
+  [actions.setInputCompare]: (state, { payload }) => ({ ...state, inputCompare: { ...state.inputCompare, ...payload} })
 };

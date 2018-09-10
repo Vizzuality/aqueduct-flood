@@ -5,5 +5,7 @@ export default {
   modal: {
     visible: false,
     options: {}
-  }
+  },
+  input: { loading: true },
+  inputCompare: { loading: false }
 };
