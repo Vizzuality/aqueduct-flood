@@ -1,8 +1,12 @@
 export default {
   // common
   geogunit_unique_name: 'Japan',
-  // cost-benefit analyzer
   scenario: 'Business as usual',
+  // risk
+  flood: 'Riverine',
+  exposure: 'urban_damage_v2',
+  sub_scenario: false,
+  // cost-benefit analyzer
   existing_prot: null,
   prot_fut: null,
   ref_year: 2050,

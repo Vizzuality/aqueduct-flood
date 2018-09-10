@@ -13,6 +13,7 @@ import Map, {
 import Layout from "layout/layout";
 
 // components
+import Risk from 'components/risk';
 import Analyzer from 'components/analyzer';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 
@@ -41,6 +42,7 @@ class Home extends PureComponent {
     } = this.props;
 
     const isAnalyzerTab = tab === 'cost-benefit-analyzer';
+    const isRiskTab = tab === 'risk';
     const { existing_prot: existingProt, prot_fut: protFut } = filters;
     const analyzerTabIsReady = !!existingProt && !!protFut;
 
@@ -59,6 +61,7 @@ class Home extends PureComponent {
                 customClass="l-tabs"
               />
               {isAnalyzerTab && <Analyzer />}
+              {isRiskTab && <Risk />}
             </div>
           </Sidebar>
 

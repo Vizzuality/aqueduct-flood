@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Router } from 'routes';
-import { Field, CustomSelect } from 'aqueduct-components';
+import { Field, CustomSelect, Checkbox } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
 
 // constants
-import { SCENARIOS_OPTIONS } from 'constants/analyzer';
+import {
+  FLOOD_TYPE_OPTIONS,
+  EXPOSURE_OPTIONS
+} from 'constants/risk';
 
 // styles
 import './styles.scss';
@@ -69,6 +72,7 @@ class AnalyzerFilters extends PureComponent {
       locationsCompare,
       setFilter
     } = this.props;
+    const isCoastal = filters.flood === 'Coastal';
 
     return (
       <div className="c-analyzer-filters">
@@ -91,7 +95,7 @@ class AnalyzerFilters extends PureComponent {
                 />
               </Field>
               {/* future scenarios */}
-              <Field
+              {/* <Field
                 name="future-scenario-filter"
                 label="Select a future scenario"
                 className="-bigger"
@@ -102,7 +106,7 @@ class AnalyzerFilters extends PureComponent {
                   value={filters.scenario}
                   onChange={opt => setFilter({ scenario: opt && opt.value })}
                 />
-              </Field>
+              </Field> */}
             </div>
             <div className="col-md-6">
               {/* location compare */}
@@ -117,10 +121,54 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Compare with..."
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
-                  onInputChange={this.onSearchCompare}
                   onChange={this.onChangeLocationCompare}
                 />
               </Field>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              {/* flood type */}
+              <Field
+                name="flood-type-filter"
+                label="Flood Type"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={FLOOD_TYPE_OPTIONS}
+                  placeholder="Select a flood type..."
+                  value={filters.flood}
+                  onChange={opt => setFilter({ flood: opt && opt.value })}
+                />
+              </Field>
+            </div>
+            <div className="col-md-6">
+              {/* exposure */}
+              <Field
+                name="risk-indicator-filter"
+                label="Risk Indicator"
+                className="-bigger"
+              >
+                <CustomSelect
+                  options={EXPOSURE_OPTIONS}
+                  placeholder="Select a risk indicator..."
+                  value={filters.exposure}
+                  onChange={opt => setFilter({ exposure: opt && opt.value })}
+                />
+              </Field>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <Checkbox
+                label="Subsidence"
+                name="sub_scenario"
+                value="sub_scenario"
+                theme="light"
+                // disabled={!isCoastal}
+                defaultChecked
+                onChange={({ checked }) => setFilter({ sub_scenario: checked })}
+              />
             </div>
           </div>
         </div>

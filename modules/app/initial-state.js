@@ -1,5 +1,5 @@
 export default {
-  tab: 'cost-benefit-analyzer',
+  tab: 'risk',
   sidebar: true,
   filters: { applied: false },
   modal: {
