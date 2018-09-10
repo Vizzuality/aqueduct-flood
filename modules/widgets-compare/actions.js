@@ -19,7 +19,8 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
 
     const widgetParams = queryString.stringify({
       ...restFilters,
-      ...{ geogunit_unique_name: state || filtersCompare.geogunit_unique_name  },
+      ...{ discount_rate: filtersCompare.discount_rate / 100 },
+      ...{ om_costs: filtersCompare.om_costs / 100 },
       ...{ user_urb_cost: filtersCompare.user_urb_cost || 'null' },
       ...{ user_rur_cost: 'null' }
     });
