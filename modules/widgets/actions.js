@@ -31,9 +31,9 @@ export const getWidgetData = createThunkAction('WIDGETS__GET-DATA', (widgetId) =
         if (response.ok) return response.json();
         throw response;
       })
-      .then(({ data, chart_type: type }) => {
+      .then(({ data, chart_type: type, meta }) => {
         dispatch(setLoading({ id: widgetId, loading: false }));
-        dispatch(setWidgetData({ id: widgetId, data, type }));
+        dispatch(setWidgetData({ id: widgetId, data, type, meta }));
       })
       .catch((err) => {
         dispatch(setLoading({ id: widgetId, loading: false }));
