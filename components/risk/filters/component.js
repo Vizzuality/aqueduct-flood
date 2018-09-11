@@ -90,6 +90,7 @@ class AnalyzerFilters extends PureComponent {
       scenarios,
       setRiskFilter
     } = this.props;
+    const isCoastal = filters.flood === 'Coastal';
 
     return (
       <div className="c-analyzer-filters">
@@ -199,7 +200,7 @@ class AnalyzerFilters extends PureComponent {
                 name="sub_scenario"
                 value="sub_scenario"
                 theme="light"
-                // disabled={!isCoastal}
+                disabled={!isCoastal}
                 defaultChecked={filters.sub_scenario}
                 onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
               />

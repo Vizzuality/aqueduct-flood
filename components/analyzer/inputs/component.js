@@ -160,7 +160,7 @@ class AnalyzerInputs extends PureComponent {
               name="existing-protection-level"
               theme="dark"
               label="Existing Protection Level (Return Period)"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
@@ -177,7 +177,7 @@ class AnalyzerInputs extends PureComponent {
               name="design-protection-level"
               theme="dark"
               label="Design Protection Level (Return Period)"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={this.designProtectionOptions[0]}
@@ -225,7 +225,7 @@ class AnalyzerInputs extends PureComponent {
               name="implementation-year"
               theme="dark"
               label="Implementation Range"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Range
                 min={IMPLEMENTATION_YEAR_OPTIONS[0]}
@@ -247,7 +247,7 @@ class AnalyzerInputs extends PureComponent {
               name="infrastructure-life-time"
               theme="dark"
               label="Infrastructure Life Time"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={INFRASTRUCTURE_LIFE_TIME_OPTIONS[0]}
@@ -262,7 +262,7 @@ class AnalyzerInputs extends PureComponent {
               name="benefit-start-year"
               theme="dark"
               label="Benefit Start Year"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={filters.implementation_start}
@@ -290,7 +290,7 @@ class AnalyzerInputs extends PureComponent {
               name="user-urb-cost"
               theme="dark"
               label="Unit Cost ($million/meter/kilometer)"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={UNIT_COST_OPTIONS[0]}
@@ -307,7 +307,7 @@ class AnalyzerInputs extends PureComponent {
               name="discount-rate"
               theme="dark"
               label="Annual Discount Rate (%)"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={DISCOUNT_RATE_OPTIONS[0]}
@@ -323,7 +323,7 @@ class AnalyzerInputs extends PureComponent {
               name="operation-maintenance-cost"
               theme="dark"
               label="Operation & Maintenance Cost (%)"
-              className="-bolder"
+              className="-higher-margin-top -bolder"
             >
               <Slider
                 min={OPERATION_MAINTENANCE_COST_OPTIONS[0]}

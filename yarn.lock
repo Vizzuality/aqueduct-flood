@@ -884,9 +884,9 @@ aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
 
-aqueduct-components@^1.0.12:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.12.tgz#2166a931decb9211cd165d5f3536fc64d7a18fd5"
+aqueduct-components@^1.0.14:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.14.tgz#2f7206c094cf5da454a2b88c03058c6acf820e36"
   dependencies:
     classnames "^2.2.5"
     clipboard "^2.0.1"
