@@ -1,4 +1,4 @@
-import { WIDGETS } from 'mocks/widgets';
+import { WIDGETS } from 'data/widgets';
 
 // actions
 import * as actions from './actions';

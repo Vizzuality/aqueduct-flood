@@ -1,4 +1,4 @@
-import { WIDGETS } from 'mocks/widgets';
+import { WIDGETS } from 'data/widgets';
 import initialState from 'modules/app/initial-state';
 
 export default WIDGETS[initialState.tab].map(widget => ({
