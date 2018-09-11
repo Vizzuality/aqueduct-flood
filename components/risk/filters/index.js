@@ -15,12 +15,13 @@ import AnalyzerFilters from "./component";
 export default connect(
   state => ({
     filters: {
-      location : state.filters.common.geogunit_unique_name,
-      scenario : state.filters.risk.scenario,
-      advanced_settings : state.filters.risk.advanced_settings,
-      flood : state.filters.risk.flood,
-      exposure : state.filters.risk.exposure,
-      compareLocation : state.filtersCompare.common.geogunit_unique_name
+      location: state.filters.common.geogunit_unique_name,
+      scenario: state.filters.risk.scenario,
+      advanced_settings: state.filters.risk.advanced_settings,
+      flood: state.filters.risk.flood,
+      exposure: state.filters.risk.exposure,
+      sub_scenario: state.filters.risk.sub_scenario,
+      compareLocation: state.filtersCompare.common.geogunit_unique_name
     },
     locations: getFilteredLocations(state),
     locationsCompare: getFilteredCompareLocations(state),

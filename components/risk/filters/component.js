@@ -101,7 +101,7 @@ class AnalyzerFilters extends PureComponent {
                 name="advanced_settings"
                 value="advanced_settings"
                 theme="light"
-                checked={filters.advanced_settings}
+                defaultChecked={filters.advanced_settings}
                 onChange={this.onCheckAdvancedSettings}
               />
             </div>
@@ -200,7 +200,7 @@ class AnalyzerFilters extends PureComponent {
                 value="sub_scenario"
                 theme="light"
                 // disabled={!isCoastal}
-                defaultChecked
+                defaultChecked={filters.sub_scenario}
                 onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
               />
             </div>
