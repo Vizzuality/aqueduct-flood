@@ -59,7 +59,10 @@ class AnalyzerInputs extends PureComponent {
     super(props);
 
     const { filters } = props;
-    const { existing_prot: existingProt } = filters;
+    const {
+      existing_prot: existingProt,
+      estimated_costs
+    } = filters;
     const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === existingProt);
     const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
       indexExistingProtection : indexExistingProtection + 1;
@@ -68,7 +71,10 @@ class AnalyzerInputs extends PureComponent {
     this.designProtectionMarks = {}
     this.designProtectionOptions.forEach(opt => { this.designProtectionMarks[opt] = opt; });
 
-    this.state = { existingProtValue: existingProt };
+    this.state = {
+      existingProtValue: existingProt,
+      estimatedCosts: estimated_costs
+    };
   }
 
   componentWillMount() {
@@ -81,7 +87,8 @@ class AnalyzerInputs extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const {
       existing_prot: nextExistingProt,
-      prot_fut: nextProtFut
+      prot_fut: nextProtFut,
+      estimated_costs: nextEstimatedCosts
     } = nextProps.filters;
     const { filters } = this.props;
     const { existing_prot: existingProt, prot_fut: protFut } = filters;
@@ -99,7 +106,8 @@ class AnalyzerInputs extends PureComponent {
 
       this.setState({
         existingProtValue: nextExistingProt,
-        protFut: AnalyzerInputs.getProtFutValue(nextExistingProt)
+        protFut: AnalyzerInputs.getProtFutValue(nextExistingProt),
+        estimatedCosts: nextEstimatedCosts
       });
     }
 
@@ -137,7 +145,7 @@ class AnalyzerInputs extends PureComponent {
   render() {
     const { filters, inputState, onChangeFilter, setModal } = this.props;
     const { loading } = inputState;
-    const { existingProtValue, protFut } = this.state;
+    const { existingProtValue, protFut, estimatedCosts } = this.state;
 
     return (
       <div className="c-analyzer-inputs">
@@ -297,8 +305,9 @@ class AnalyzerInputs extends PureComponent {
                 max={UNIT_COST_OPTIONS[1]}
                 step={0.01}
                 theme="dark"
-                value={filters.estimated_costs}
-                defaultValue={filters.estimated_costs}
+                value={estimatedCosts}
+                defaultValue={estimatedCosts}
+                onChange={(value) => this.setState({ estimatedCosts: value })}
                 onAfterChange={value => { onChangeFilter({ estimated_costs: value }) }}
               />
             </Field>
