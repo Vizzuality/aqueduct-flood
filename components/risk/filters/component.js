@@ -150,6 +150,7 @@ class AnalyzerFilters extends PureComponent {
                 name="future-scenario-filter"
                 label="Select a future scenario"
                 className="-bigger"
+                disabled={!filters.advanced_settings}
               >
                 <CustomSelect
                   options={scenarios}
