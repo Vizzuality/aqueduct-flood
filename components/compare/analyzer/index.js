@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import AnalyzerCompare from "./component";
 
 export default connect(
-  state => ({ filtersCompare: state.filtersCompare.common }),
+  state => ({
+    filters: state.filters.common,
+    filtersCompare: state.filtersCompare.common
+  }),
   null,
 )(AnalyzerCompare);

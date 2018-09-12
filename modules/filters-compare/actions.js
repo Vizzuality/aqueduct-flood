@@ -11,5 +11,5 @@ export default {
   setRiskCompareFilter,
   setHazardCompareFilter,
   setCostCompareFilter,
-  clearCompareFilters
+  clearCompareFilters,
 };

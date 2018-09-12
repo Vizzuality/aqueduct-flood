@@ -6,7 +6,8 @@ import { Tabs } from 'aqueduct-components';
 import Layout from "layout/layout";
 
 // components
-import AnalyzerCompare from 'components/analyzer-compare';
+import RiskCompare from 'components/compare/risk';
+import AnalyzerCompare from 'components/compare/analyzer';
 
 // constants
 import { APP_TABS } from 'constants/app';
@@ -14,15 +15,18 @@ import { APP_TABS } from 'constants/app';
 // styles
 import './styles.scss';
 
-class AnalyzerComparePage extends PureComponent {
-  static propTypes = { setTab: PropTypes.func.isRequired }
+class ComparePage extends PureComponent {
+  static propTypes = {
+    tab: PropTypes.string.isRequired,
+    setTab: PropTypes.func.isRequired
+  }
 
   render() {
-    const { setTab } = this.props;
+    const { setTab, tab } = this.props;
 
     return (
-      <Layout title="Cost-benefit Analyzer Compare" description="Aqueduct Flood description">
-        <div className="l-analyzer-compare">
+      <Layout title="Compare" description="Aqueduct Flood description">
+        <div className="l-compare">
           <div className="l-tabs">
             <div className="wrapper">
               <Tabs
@@ -31,11 +35,13 @@ class AnalyzerComparePage extends PureComponent {
               />
             </div>
           </div>
-          <AnalyzerCompare />
+          {tab === 'risk' && <RiskCompare />}
+          {tab === 'hazard' && <AnalyzerCompare />}
+          {tab === 'cba' && <AnalyzerCompare />}
         </div>
       </Layout>
     );
   }
 }
 
-export default AnalyzerComparePage;
+export default ComparePage;

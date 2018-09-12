@@ -3,19 +3,23 @@ import PropTypes from 'prop-types';
 
 // components
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
-import AnalyzerCompareInputs from 'components/analyzer-compare/analyzer-inputs';
-import AnalyzerCompareOutputs from 'components/analyzer-compare/outputs';
-import AnalyzerCompareFilters from 'components/analyzer-compare/filters';
+import AnalyzerCompareInputs from 'components/compare/analyzer/analyzer-inputs';
+import AnalyzerCompareOutputs from 'components/compare/analyzer/outputs';
+import AnalyzerCompareFilters from 'components/compare/analyzer/filters';
 import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';
 
 class AnalyzerCompare extends PureComponent {
-  static propTypes = { filtersCompare: PropTypes.object.isRequired }
+  static propTypes = {
+    filters: PropTypes.object.isRequired,
+    filtersCompare: PropTypes.object.isRequired
+  }
 
   render() {
-    const { filtersCompare } = this.props;
+    const { filters, filtersCompare } = this.props;
+    const { geogunit_unique_name: location } = filters;
     const { geogunit_unique_name: locationCompare } = filtersCompare;
 
     return (
@@ -31,14 +35,14 @@ class AnalyzerCompare extends PureComponent {
                 <AnalyzerInputs />
               </div>
               <div className="col-md-6">
-                {locationCompare && <AnalyzerCompareInputs />}
+                {location || locationCompare && <AnalyzerCompareInputs />}
               </div>
             </div>
           </div>
         </div>
 
         <div className="analyzer-compare-outputs">
-          <AnalyzerCompareOutputs />
+          {!!location && <AnalyzerCompareOutputs />}
         </div>
 
         <ApplyFilters />
