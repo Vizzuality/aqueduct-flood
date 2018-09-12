@@ -138,6 +138,7 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Compare with..."
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
+                  onInputChange={this.onSearchCompare}
                   onChange={this.onChangeLocationCompare}
                 />
               </Field>
