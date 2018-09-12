@@ -11,7 +11,7 @@
           "css": "./css",
           "utils": "./utils",
           "constants": "./constants",
-          "mocks": "./mocks"
+          "data": "./data"
         },
         "cwd": "babelrc"
       }
