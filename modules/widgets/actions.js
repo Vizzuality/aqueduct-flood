@@ -62,10 +62,11 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
     }
 
     const { common, risk } = filters;
+    const { advanced_settings: advancedSettings, ...restRiskFilters } = risk;
 
     const widgetParams = queryString.stringify({
       ...common,
-      ...risk
+      ...restRiskFilters
     });
 
     dispatch(setLoading({ id: widgetId, loading: true }));
