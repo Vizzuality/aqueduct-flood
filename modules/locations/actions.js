@@ -1,16 +1,11 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
 
-// actions
-import { setFilter } from 'modules/filters/actions';
-import { setCompareFilter } from 'modules/filters-compare/actions';
-
 export const setLocations = createAction('LOCATIONS__SET-LOCATIONS');
 export const setCompareLocations = createAction('LOCATIONS__SET-COMPARE-LOCATIONS');
 
 export const getLocations = createThunkAction('LOCATIONS__GET-LOCATIONS', value =>
   (dispatch) => {
-
     const queryParams = queryString.stringify({ q: value });
 
     dispatch(setLocations([]));
@@ -37,7 +32,6 @@ export const getLocations = createThunkAction('LOCATIONS__GET-LOCATIONS', value 
 
 export const getCompareLocations = createThunkAction('LOCATIONS__GET-COMPARE-LOCATIONS', value =>
   (dispatch) => {
-
     const queryParams = queryString.stringify({ q: value });
 
     dispatch(setCompareLocations([]));
@@ -62,13 +56,13 @@ export const getCompareLocations = createThunkAction('LOCATIONS__GET-COMPARE-LOC
     })
   })
 
-export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', () =>
+export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', (setFilter) =>
   (dispatch, getState) => {
     const { filters } = getState();
     const {
       geogunit_unique_name,
       scenario
-    } = filters;
+    } = filters.common;
 
     const queryParams = queryString.stringify({
       geogunit_unique_name,
@@ -82,7 +76,7 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
       })
       .then(({ data }) => {
         const defaults = data[0] || {};
-        dispatch(setFilter({ ...defaults }));
+        setFilter({ ...defaults });
       })
       .catch((err) => {
         if (err && typeof err.json === 'function') {
@@ -96,14 +90,13 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
     })
   })
 
-export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', () =>
+export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', (setCompareFilter) =>
   (dispatch, getState) => {
-
     const { filtersCompare } = getState();
     const {
       geogunit_unique_name,
       scenario
-    } = filtersCompare;
+    } = filtersCompare.common;
 
     const queryParams = queryString.stringify({
       geogunit_unique_name,
@@ -117,7 +110,7 @@ export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPA
       })
       .then(({ data }) => {
         const defaults = data[0] || {};
-        dispatch(setCompareFilter({ ...defaults }));
+        setCompareFilter({ ...defaults });
       })
       .catch((err) => {
         if (err && typeof err.json === 'function') {

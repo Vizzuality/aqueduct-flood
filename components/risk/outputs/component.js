@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
 // componets
-import Widget from 'components/analyzer/widget';
+import Widget from 'components/risk/widget';
 import BarChart from 'components/widgets/bar-chart';
 import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';
@@ -37,7 +37,7 @@ class AnalyzerOutputs extends Component {
     const { filters, widgets } = this.props;
 
     return (
-      <div className="c-analyzer-outputs">
+      <div className="c-risk-outputs">
         <div className="wrapper">
           <div className="container">
             {widgets.map(widget => (

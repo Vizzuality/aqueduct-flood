@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
 // components
-import Widget from 'components/widget';
-import WidgetCompare from 'components/widget-compare';
+import Widget from 'components/analyzer/widget';
+import WidgetCompare from 'components/analyzer-compare/widget';
 import BarChart from 'components/widgets/bar-chart';
 import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';

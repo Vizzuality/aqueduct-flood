@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
-import { setFilter } from 'modules/filters/actions';
-import { setCompareFilter } from 'modules/filters-compare/actions';
 
+// component
 import AnalyzerCompare from "./component";
 
 export default connect(
-  state => ({ filtersCompare: state.filtersCompare }),
-  {
-    setFilter,
-    setCompareFilter
-  },
+  state => ({ filtersCompare: state.filtersCompare.common }),
+  null,
 )(AnalyzerCompare);

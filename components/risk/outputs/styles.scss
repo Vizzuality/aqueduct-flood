@@ -1,0 +1,12 @@
+@import 'css/settings';
+
+.c-risk-outputs {
+  overflow: auto;
+  height: 100%;
+  background: palette(sand);
+
+  .container {
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -19,11 +19,11 @@ class AnalyzerCompareFilters extends PureComponent {
       locationCompare: PropTypes.string,
       scenarioCompare: PropTypes.string
     }).isRequired,
-    setFilter: PropTypes.func.isRequired,
-    clearCompareFilters: PropTypes.func.isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
-    setCompareFilter: PropTypes.func.isRequired,
+    setCommonFilter: PropTypes.func.isRequired,
+    setCommonCompareFilter: PropTypes.func.isRequired,
+    clearCompareFilters: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
     getCompareLocations: PropTypes.func.isRequired,
     setCompareLocations: PropTypes.func.isRequired,
@@ -43,28 +43,28 @@ class AnalyzerCompareFilters extends PureComponent {
   }
 
   onChangeLocation = (opt) => {
-    const { setFilter, filters, setInput, getCountryDefaults } = this.props;
+    const { filters, setInput, setCommonFilter, getCountryDefaults } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
-    setFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCountryDefaults()
+    getCountryDefaults(setCommonFilter)
       .then(() => { setInput({ loading: false }) })
   }
 
   onChangeLocationCompare = (opt) => {
-    const { setCompareFilter, filters, setInputCompare, getCompareCountryDefaults } = this.props;
+    const { setCommonCompareFilter, filters, setInputCompare, getCompareCountryDefaults } = this.props;
     const { locationCompare } = filters;
 
     if ((opt && opt.value) === locationCompare) return;
 
     setInputCompare({ loading: true })
-    setCompareFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCompareCountryDefaults()
+    getCompareCountryDefaults(setCommonCompareFilter)
       .then(() => { setInputCompare({ loading: false }) })
   }
 
@@ -85,8 +85,8 @@ class AnalyzerCompareFilters extends PureComponent {
       filters,
       locations,
       locationsCompare,
-      setFilter,
-      setCompareFilter
+      setCommonCompareFilter,
+      setCommonFilter
     } = this.props;
 
     return (
@@ -150,7 +150,7 @@ class AnalyzerCompareFilters extends PureComponent {
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a scenario"
                   value={filters.scenario}
-                  onChange={opt => { setFilter({ scenario: opt && opt.value })}}
+                  onChange={opt => { setCommonFilter({ scenario: opt && opt.value })}}
                 />
               </Field>
             </div>
@@ -166,7 +166,7 @@ class AnalyzerCompareFilters extends PureComponent {
                   placeholder="Select a scenario"
                   isDisabled={!filters.locationCompare}
                   value={filters.scenarioCompare}
-                  onChange={opt => { setCompareFilter({ scenario: opt && opt.value })}}
+                  onChange={opt => { setCommonCompareFilter({ scenario: opt && opt.value })}}
                 />
               </Field>
             </div>

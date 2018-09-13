@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Widget } from 'aqueduct-components';
 
 // actions
-import { getWidgetData } from 'modules/widgets/actions';
+import { getWidgetCostData } from 'modules/widgets/actions';
 
 export default connect(
   (state, { params }) => {
@@ -16,6 +16,6 @@ export default connect(
       widget: widgets.find(widget => widget.id === id)
     };
   },
-  { getWidgetData }
+  { getWidgetData: getWidgetCostData }
 )(Widget);
 

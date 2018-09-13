@@ -13,6 +13,7 @@ import Map, {
 import Layout from "layout/layout";
 
 // components
+import Risk from 'components/risk';
 import Analyzer from 'components/analyzer';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 
@@ -28,20 +29,28 @@ class Home extends PureComponent {
     tab: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
-    setTab: PropTypes.func.isRequired
+    setTab: PropTypes.func.isRequired,
+    setWidgets: PropTypes.func.isRequired
+  }
+
+  onChangeTab = ({ value }) => {
+    const { setTab, setWidgets } = this.props;
+
+    setTab(value);
+    setWidgets({ nextTab: value });
   }
 
   render() {
     const {
       sidebar,
       tab,
-      setSidebarVisibility,
-      setTab,
-      filters
+      filters,
+      setSidebarVisibility
     } = this.props;
 
-    const isAnalyzerTab = tab === 'cost-benefit-analyzer';
-    const { existing_prot: existingProt, prot_fut: protFut } = filters;
+    const isAnalyzerTab = tab === 'cba';
+    const isRiskTab = tab === 'risk';
+    const { existing_prot: existingProt, prot_fut: protFut } = filters.cba;
     const analyzerTabIsReady = !!existingProt && !!protFut;
 
     return (
@@ -55,10 +64,11 @@ class Home extends PureComponent {
             <div className="overflow-container">
               <Tabs
                 tabs={APP_TABS}
-                onChange={({ value }) => setTab(value)}
+                onChange={this.onChangeTab}
                 customClass="l-tabs"
               />
               {isAnalyzerTab && <Analyzer />}
+              {isRiskTab && <Risk />}
             </div>
           </Sidebar>
 

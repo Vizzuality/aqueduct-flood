@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+
 const locations = state => state.locations.list;
 const locationsCompare = state => state.locations.listCompare;
 
@@ -29,7 +30,10 @@ const parser = (_locations) =>
   }
 ];
 
-export const parseLocations = createSelector([locations], parser)
-export const parseCompareLocations = createSelector([locationsCompare], parser)
+export const parseLocations = createSelector([locations], parser);
+export const parseCompareLocations = createSelector([locationsCompare], parser);
 
-export default { parseLocations, parseCompareLocations };
+export default {
+  parseLocations,
+  parseCompareLocations
+};

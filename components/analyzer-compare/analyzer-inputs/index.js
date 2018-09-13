@@ -2,19 +2,19 @@ import { connect } from 'react-redux';
 
 // actions
 import { setModal, setInputCompare } from 'modules/app/actions';
-import { setCompareFilter } from 'modules/filters-compare/actions';
+import { setCostCompareFilter } from 'modules/filters-compare/actions';
 import { getCompareCountryDefaults } from 'modules/locations/actions';
 
 import InputsAnalyzerCompare from 'components/analyzer/inputs';
 
 export default connect(
   state => ({
-    filters: state.filtersCompare,
+    filters: state.filtersCompare.cba,
     inputState: state.app.inputCompare
   }),
   {
     setModal,
-    onChangeFilter: setCompareFilter,
+    onChangeFilter: setCostCompareFilter,
     getCountryDefaults: getCompareCountryDefaults,
     setInput: setInputCompare
   }

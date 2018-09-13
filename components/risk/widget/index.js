@@ -2,20 +2,20 @@ import { connect } from 'react-redux';
 import { Widget } from 'aqueduct-components';
 
 // actions
-import { getWidgetData } from 'modules/widgets-compare/actions';
+import { getWidgetRiskData } from 'modules/widgets/actions';
 
 export default connect(
   (state, { params }) => {
-    const { widgetsCompare } = state;
+    const { widgets } = state;
 
     // widget id
     const { id } = params;
 
     return {
       params,
-      widget: widgetsCompare.find(widget => widget.id === id)
+      widget: widgets.find(widget => widget.id === id)
     };
   },
-  { getWidgetData }
+  { getWidgetData: getWidgetRiskData }
 )(Widget);
 

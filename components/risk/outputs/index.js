@@ -6,10 +6,9 @@ import AnalyzerOutputs from './component';
 
 export default connect(
   state => ({
-    widgets: state.widgets,
+    filters: { ...state.filters.common, ...state.filters.risk },
     filtersStatus: state.app.filters,
-    filters: { ...state.filters.common, ...state.filters.cba },
-    filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.cba }
+    widgets: state.widgets,
   }),
   { applyFilters }
 )(AnalyzerOutputs);

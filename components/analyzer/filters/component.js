@@ -19,8 +19,9 @@ class AnalyzerFilters extends PureComponent {
     }).isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
-    setFilter: PropTypes.func.isRequired,
-    setCompareFilter: PropTypes.func.isRequired,
+    setCommonFilter: PropTypes.func.isRequired,
+    setCostFilter: PropTypes.func.isRequired,
+    setCommonCompareFilter: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
     getCompareLocations: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
@@ -35,15 +36,15 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocation = (opt) => {
-    const { setFilter, filters, setInput, getCountryDefaults } = this.props;
+    const { setCommonFilter, setCostFilter, filters, setInput, getCountryDefaults } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
-    setFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCountryDefaults()
+    getCountryDefaults(setCostFilter)
       .then(() => { setInput({ loading: false }) })
   }
 
@@ -54,10 +55,10 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocationCompare = (opt) => {
-    const { setInputCompare, setCompareFilter } = this.props;
+    const { setInputCompare, setCommonCompareFilter } = this.props;
 
     setInputCompare({ loading: true })
-    setCompareFilter({ geogunit_unique_name: opt && opt.value });
+    setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
     if (opt) Router.push('/analyzer-compare');
   }
@@ -67,8 +68,7 @@ class AnalyzerFilters extends PureComponent {
       filters,
       locations,
       locationsCompare,
-      setFilter,
-      setCompareFilter
+      setCommonFilter
     } = this.props;
 
     return (
@@ -101,7 +101,7 @@ class AnalyzerFilters extends PureComponent {
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a future scenario"
                   value={filters.scenario}
-                  onChange={opt => setFilter({ scenario: opt && opt.value })}
+                  onChange={opt => setCommonFilter({ scenario: opt && opt.value })}
                 />
               </Field>
             </div>
