@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { setTab } from 'modules/app/actions';
-import AnalyzerCompare from "./component";
+
+import Compare from "./component";
 
 export default connect(
-  () => ({}),
+  state => ({ tab: state.app.tab }),
   { setTab }
-)(AnalyzerCompare);
+)(Compare);

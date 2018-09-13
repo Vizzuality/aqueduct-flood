@@ -1,0 +1,17 @@
+@import 'css/settings';
+
+.c-risk-compare {
+
+  .risk-compare-inputs,
+  .risk-compare-outputs {
+    background: palette(sand);
+  }
+
+  .risk-compare-inputs {
+    padding: #{$space-1 * 4} 0 0;
+  }
+
+  .risk-compare-outputs {
+    padding: 0 0 #{$space-1 * 15};
+  }
+}

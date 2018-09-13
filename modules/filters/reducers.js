@@ -30,5 +30,12 @@ export default {
       ...payload
     }
   }),
-  [actions.clearFilters]: state => ({ ...state, ...initialState })
+  [actions.clearFilters]: state => ({
+    ...state,
+    ...initialState,
+    common: {
+      ...initialState.common,
+      geogunit_unique_name: null
+    }
+  })
 };

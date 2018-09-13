@@ -129,5 +129,6 @@ export default {
   setCompareLocations,
   getLocations,
   getCompareLocations,
-  getCountryDefaults
+  getCountryDefaults,
+  getCompareCountryDefaults
 };

@@ -4,7 +4,7 @@ import { replace } from 'aqueduct-components';
 
 // components
 import Widget from 'components/analyzer/widget';
-import WidgetCompare from 'components/analyzer-compare/widget';
+import WidgetCompare from 'components/compare/risk/widget';
 import BarChart from 'components/widgets/bar-chart';
 import LineChart from 'components/widgets/line';
 import MultiLineChart from 'components/widgets/multi-line';
@@ -14,7 +14,7 @@ import TableChart from 'components/widgets/table';
 // styles
 import './styles.scss';
 
-class AnalyzerCompareOutputs extends Component {
+class RiskCompareOutputs extends Component {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
@@ -93,4 +93,4 @@ class AnalyzerCompareOutputs extends Component {
   }
 }
 
-export default AnalyzerCompareOutputs;
+export default RiskCompareOutputs;

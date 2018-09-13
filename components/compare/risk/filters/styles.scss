@@ -1,0 +1,18 @@
+@import 'css/settings';
+
+.c-risk-filters {
+  padding: $space-1 * 6 0;
+  background: palette(blue);
+
+  .clear-comparison-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .aq__c-field {
+    &:not(:first-child) {
+      margin: $space-1 * 3 0 0;
+    }
+  }
+}

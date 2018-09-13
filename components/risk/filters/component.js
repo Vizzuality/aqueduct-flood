@@ -70,7 +70,7 @@ class AnalyzerFilters extends PureComponent {
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    if (opt) Router.push('/analyzer-compare');
+    if (opt) Router.push('/compare');
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
@@ -138,6 +138,7 @@ class AnalyzerFilters extends PureComponent {
                   placeholder="Compare with..."
                   isDisabled={!filters.location}
                   value={filters.compareLocation}
+                  onInputChange={this.onSearchCompare}
                   onChange={this.onChangeLocationCompare}
                 />
               </Field>

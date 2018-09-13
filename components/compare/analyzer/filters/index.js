@@ -1,6 +1,10 @@
 import { connect } from 'react-redux';
-import { setCommonFilter } from 'modules/filters/actions';
-import { setCommonCompareFilter, clearCompareFilters } from 'modules/filters-compare/actions';
+import { setCommonFilter, setCostFilter } from 'modules/filters/actions';
+import {
+  setCommonCompareFilter,
+  setCostCompareFilter,
+  clearCompareFilters
+} from 'modules/filters-compare/actions';
 import {
   getLocations,
   getCompareLocations,
@@ -11,7 +15,7 @@ import {
 import { setInput, setInputCompare } from 'modules/app/actions';
 
 // selectors
-import { parseLocations, parseCompareLocations } from 'components/analyzer/filters/selectors';
+import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
 
 import AnalyzerCompareFilters from "./component";
 
@@ -28,7 +32,9 @@ export default connect(
   }),
   {
     setCommonFilter,
+    setCostFilter,
     setCommonCompareFilter,
+    setCostCompareFilter,
     clearCompareFilters,
     getLocations,
     getCompareLocations,

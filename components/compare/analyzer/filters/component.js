@@ -22,7 +22,9 @@ class AnalyzerCompareFilters extends PureComponent {
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
+    setCostFilter: PropTypes.func.isRequired,
     setCommonCompareFilter: PropTypes.func.isRequired,
+    setCostCompareFilter: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired,
     getLocations: PropTypes.func.isRequired,
     getCompareLocations: PropTypes.func.isRequired,
@@ -43,7 +45,13 @@ class AnalyzerCompareFilters extends PureComponent {
   }
 
   onChangeLocation = (opt) => {
-    const { filters, setInput, setCommonFilter, getCountryDefaults } = this.props;
+    const {
+      filters,
+      setInput,
+      setCommonFilter,
+      setCostFilter,
+      getCountryDefaults
+    } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
@@ -51,12 +59,18 @@ class AnalyzerCompareFilters extends PureComponent {
     setInput({ loading: true })
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCountryDefaults(setCommonFilter)
+    getCountryDefaults(setCostFilter)
       .then(() => { setInput({ loading: false }) })
   }
 
   onChangeLocationCompare = (opt) => {
-    const { setCommonCompareFilter, filters, setInputCompare, getCompareCountryDefaults } = this.props;
+    const {
+      setCommonCompareFilter,
+      setCostCompareFilter,
+      filters,
+      setInputCompare,
+      getCompareCountryDefaults
+    } = this.props;
     const { locationCompare } = filters;
 
     if ((opt && opt.value) === locationCompare) return;
@@ -64,7 +78,7 @@ class AnalyzerCompareFilters extends PureComponent {
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCompareCountryDefaults(setCommonCompareFilter)
+    getCompareCountryDefaults(setCostCompareFilter)
       .then(() => { setInputCompare({ loading: false }) })
   }
 
