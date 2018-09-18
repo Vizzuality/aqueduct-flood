@@ -17,6 +17,7 @@ import './styles.scss';
 class RiskCompareOutputs extends Component {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
+    filtersStatus: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     applyFilters: PropTypes.func.isRequired
@@ -35,12 +36,14 @@ class RiskCompareOutputs extends Component {
   }
 
   render() {
-    const { widgets, filters, filtersCompare } = this.props;
+    const { widgets, filters,  filtersCompare } = this.props;
+    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const widgetsReadyToDisplay = location && existingProt;
 
     return (
       <div className="c-analyzer-compare-outputs">
         <div className="wrapper">
-          {widgets.map(widget => (
+          {widgetsReadyToDisplay && widgets.map(widget => (
             <div key={widget.id} className="row">
               <div className="col-md-6">
                 <Widget

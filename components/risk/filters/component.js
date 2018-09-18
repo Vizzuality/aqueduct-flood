@@ -36,7 +36,8 @@ class AnalyzerFilters extends PureComponent {
     getCompareLocations: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
     setInput: PropTypes.func.isRequired,
-    setInputCompare: PropTypes.func.isRequired
+    setInputCompare: PropTypes.func.isRequired,
+    setWidgets: PropTypes.func.isRequired
   }
 
   onSearch = debounce((value) => {
@@ -74,7 +75,9 @@ class AnalyzerFilters extends PureComponent {
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
-    const { setRiskFilter, scenarios } = this.props;
+    const { setRiskFilter, setWidgets, scenarios } = this.props;
+
+    if (checked) setWidgets({ nextTab: 'advanced_risk' });
 
     setRiskFilter({
       advanced_settings: checked,

@@ -30,14 +30,16 @@ class Home extends PureComponent {
     filters: PropTypes.object.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
-    setWidgets: PropTypes.func.isRequired
+    setWidgets: PropTypes.func.isRequired,
+    clearInput: PropTypes.func.isRequired
   }
 
   onChangeTab = ({ value }) => {
-    const { setTab, setWidgets } = this.props;
+    const { setTab, setWidgets, clearInput } = this.props;
 
     setTab(value);
     setWidgets({ nextTab: value });
+    clearInput();
   }
 
   render() {

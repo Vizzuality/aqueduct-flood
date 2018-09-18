@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // components
-// import InputsRiskCompare from 'components/compare/risk/inputs';
+import RiskInputs from 'components/risk/risk-inputs';
+import RiskCompareInputs from 'components/compare/risk/inputs';
 import RiskCompareOutputs from 'components/compare/risk/outputs';
 import RiskCompareFilters from 'components/compare/risk/filters';
 import ApplyFilters from 'components/apply-filters';
@@ -13,16 +14,7 @@ import './styles.scss';
 class RiskCompare extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
-    filtersCompare: PropTypes.object.isRequired,
-    clearFilters: PropTypes.func.isRequired,
-    clearCompareFilters: PropTypes.func.isRequired
-  }
-
-  componentWillUnmount() {
-    const { clearFilters, clearCompareFilters }= this.props;
-
-    clearFilters();
-    clearCompareFilters();
+    filtersCompare: PropTypes.object.isRequired
   }
 
   render() {
@@ -40,10 +32,10 @@ class RiskCompare extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-md-6">
-                {/* <AnalyzerInputs /> */}
+                {location && <RiskInputs />}
               </div>
               <div className="col-md-6">
-                {/* {locationCompare && <InputsRiskCompare />} */}
+                {locationCompare && <RiskCompareInputs />}
               </div>
             </div>
           </div>

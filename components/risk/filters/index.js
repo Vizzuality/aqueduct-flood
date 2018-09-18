@@ -5,6 +5,7 @@ import { setCommonFilter, setRiskFilter } from 'modules/filters/actions';
 import { setCommonCompareFilter } from 'modules/filters-compare/actions';
 import { getLocations, getCompareLocations, getCountryDefaults } from 'modules/locations/actions';
 import { setInput, setInputCompare } from 'modules/app/actions';
+import { setWidgets } from 'modules/widgets/actions';
 
 // selectors
 import { getFilteredLocations, getFilteredCompareLocations, getScenarios } from './selectors';
@@ -35,6 +36,7 @@ export default connect(
     getCompareLocations,
     getCountryDefaults,
     setInput,
-    setInputCompare
+    setInputCompare,
+    setWidgets
   }
 )(AnalyzerFilters);

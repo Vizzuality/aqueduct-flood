@@ -6,8 +6,8 @@ export const EXPOSURE_OPTIONS = [
 ];
 
 export const FLOOD_TYPE_OPTIONS = [
-  { label: 'Coastal', value: 'Coastal' },
-  { label: 'Riverine', value: 'Riverine', default: true }
+  { label: 'Coastal', value: 'coastal' },
+  { label: 'Riverine', value: 'riverine', default: true }
 ]
 
 export default {

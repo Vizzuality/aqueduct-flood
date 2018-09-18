@@ -29,13 +29,6 @@ class RiskFilters extends PureComponent {
         PropTypes.number
       ]).isRequired
     })).isRequired,
-    scenariosCompare: PropTypes.arrayOf(PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number
-      ]).isRequired
-    })).isRequired,
     filtersCompare: PropTypes.object.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
     setRiskFilter: PropTypes.func.isRequired,
@@ -48,7 +41,19 @@ class RiskFilters extends PureComponent {
     getCompareCountryDefaults: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired,
     setInput: PropTypes.func.isRequired,
-    setInputCompare: PropTypes.func.isRequired
+    setInputCompare: PropTypes.func.isRequired,
+    setWidgets: PropTypes.func.isRequired,
+    setWidgetsCompare: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    const { filters, getCompareCountryDefaults, setRiskCompareFilter, setInputCompare } = this.props;
+    const { locationCompare } = filters;
+
+    if (locationCompare) {
+      getCompareCountryDefaults(setRiskCompareFilter)
+        .then(() => { setInputCompare({ loading: false }) })
+    }
   }
 
   onSearch = debounce((value) => {
@@ -96,21 +101,28 @@ class RiskFilters extends PureComponent {
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
-    const { setRiskFilter, scenarios } = this.props;
+    const {
+      setWidgets,
+      setWidgetsCompare,
+      setRiskFilter,
+      setRiskCompareFilter,
+      scenarios
+    } = this.props;
+
+    if (checked)  {
+      setWidgets({ nextTab: 'advanced_risk' });
+      setWidgetsCompare({ nextTab: 'advanced_risk' });
+    } else {
+      setWidgets({ nextTab: 'risk' });
+      setWidgetsCompare({ nextTab: 'risk' });
+    }
 
     setRiskFilter({
       advanced_settings: checked,
       ...!checked && { scenario: scenarios[0].value }
     });
-  }
 
-  onCheckAdvancedSettingsCompare = ({ checked }) => {
-    const { setRiskCompareFilter, scenariosCompare } = this.props;
-
-    setRiskCompareFilter({
-      advanced_settings: checked,
-      ...!checked && { scenario: scenariosCompare[0].value }
-    });
+    setRiskCompareFilter({ ...!checked && { scenario: scenarios[0].value } })
   }
 
   onClearCompareFilters = () => {
@@ -129,7 +141,6 @@ class RiskFilters extends PureComponent {
       locations,
       locationsCompare,
       scenarios,
-      scenariosCompare,
       setRiskFilter,
       setRiskCompareFilter
     } = this.props;
@@ -153,14 +164,6 @@ class RiskFilters extends PureComponent {
             </div>
             <div className="col-md-6">
               <div className="clear-comparison-section">
-                <Checkbox
-                  label="Show Advanced Settings"
-                  name="advanced_settings_compare"
-                  value="advanced_settings_compare"
-                  theme="light"
-                  defaultChecked={filtersCompare.advanced_settings}
-                  onChange={this.onCheckAdvancedSettingsCompare}
-                />
                 <Button
                   onClick={this.onClearCompareFilters}
                   theme="blue"
@@ -230,11 +233,11 @@ class RiskFilters extends PureComponent {
                 name="future-scenario-filter-compare"
                 label="Select a future scenario"
                 className="-bigger"
-                disabled={!filtersCompare.advanced_settings}
+                disabled={!filters.advanced_settings}
               >
                 <CustomSelect
-                  options={scenariosCompare}
-                  isDisabled={!filtersCompare.advanced_settings}
+                  options={scenarios}
+                  isDisabled={!filters.advanced_settings}
                   placeholder="Select a future scenario"
                   value={filtersCompare.scenario}
                   onChange={opt => setRiskCompareFilter({ scenario: opt && opt.value })}

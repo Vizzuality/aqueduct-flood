@@ -9,8 +9,9 @@ export default {
   // risk
   risk: {
     scenario: 'Business as usual',
-    flood: 'Riverine',
+    flood: 'riverine',
     exposure: 'urban_damage_v2',
+    existing_prot: null,
     sub_scenario: false,
     advanced_settings: false,
   },

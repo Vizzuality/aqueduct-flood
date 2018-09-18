@@ -6,7 +6,9 @@ export const applyFilters = createAction('APP__APPLY-FILTERS');
 export const setModal = createAction('APP__SET-MODAL');
 export const resetModal = createAction('APP__RESET-MODAL');
 export const setInput = createAction('APP__SET-INPUT');
+export const clearInput = createAction('APP__CLEAR-INPUT');
 export const setInputCompare = createAction('APP__SET-INPUT-COMPARE');
+export const clearInputCompare = createAction('APP__CLEAR-INPUT-COMPARE');
 
 
 export default {
@@ -16,5 +18,7 @@ export default {
   setModal,
   resetModal,
   setInput,
-  setInputCompare
+  clearInput,
+  setInputCompare,
+  clearInputCompare
 };

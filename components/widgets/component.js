@@ -8,7 +8,7 @@ import { updateSpec } from 'utils/widget';
 
 import THEME from 'components/widgets/theme';
 
-class BarChart extends PureComponent {
+class Chart extends PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
     spec: PropTypes.object.isRequired,
@@ -37,4 +37,4 @@ class BarChart extends PureComponent {
   }
 }
 
-export default BarChart;
+export default Chart;
