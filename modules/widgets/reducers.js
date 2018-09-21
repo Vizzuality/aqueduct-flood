@@ -7,6 +7,17 @@ export default {
   [actions.setWidgets]: (state, { payload }) => {
     const { nextTab } = payload;
 
+    if (nextTab === 'advanced_risk') {
+
+      return [...state, ...WIDGETS[nextTab]].map(widget => ({
+        id: widget.id,
+        params: widget.params || ({ title: widget.title }),
+        data: widget.data || [],
+        loading: false,
+        error: null
+      }));
+    }
+
     return WIDGETS[nextTab].map(widget => ({
       id: widget.id,
       params: { title: widget.title },

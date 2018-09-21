@@ -54,7 +54,7 @@ class RiskCompareOutputs extends Component {
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
-                  {({ data, params }) => {
+                  {({ data, params = {} }) => {
 
                     if (params.type === 'table') return (<TableChart data={data} />)
 
@@ -77,7 +77,7 @@ class RiskCompareOutputs extends Component {
                     title={replace(widget.params.title, filtersCompare)}
                     params={{ id: widget.id, filtersCompare }}
                   >
-                    {({ data, params }) => {
+                    {({ data, params = {} }) => {
 
                       if (params.type === 'table') return (<TableChart data={data} />)
 
