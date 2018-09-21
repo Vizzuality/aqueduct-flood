@@ -27,6 +27,7 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
       ...{ user_rur_cost: 'null' }
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${widgetParams}`, {})
@@ -42,11 +43,11 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
@@ -62,13 +63,19 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
     }
 
     const { common, risk } = filters;
-    const { advanced_settings: advancedSettings, ...restRiskFilters } = risk;
+    const {
+      advanced_settings: advancedSettings,
+      estimated_costs: estimatedCosts,
+      prot_fut: protFut,
+      ...restRiskFilters
+    } = risk;
 
     const widgetParams = queryString.stringify({
       ...common,
       ...restRiskFilters
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/risk/widget/${widgetId}?${widgetParams}`, {})
@@ -84,11 +91,11 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
@@ -110,6 +117,7 @@ export const getWidgetHazardData = createThunkAction('WIDGETS__GET-HAZARD-DATA',
       ...hazard
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/hazard/widget/${widgetId}?${widgetParams}`, {})
@@ -125,19 +133,21 @@ export const getWidgetHazardData = createThunkAction('WIDGETS__GET-HAZARD-DATA',
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
 
 export default {
+  setWidgets,
   setWidgetData,
   setLoading,
   setError,
+
   getWidgetCostData,
   getWidgetRiskData,
   getWidgetHazardData

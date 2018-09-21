@@ -5,11 +5,14 @@ import { replace } from 'aqueduct-components';
 // components
 import Widget from 'components/analyzer/widget';
 import WidgetCompare from 'components/compare/analyzer/widget';
-import BarChart from 'components/widgets/bar-chart';
-import LineChart from 'components/widgets/line';
-import MultiLineChart from 'components/widgets/multi-line';
+import Chart from 'components/widgets';
 import MapChart from 'components/widgets/map';
-import TableChart from 'components/widgets/table';
+import TableChart from 'components/widgets/table/cba';
+
+// specs
+import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
+import LineSpec from 'components/widgets/specs/cba/line';
+import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
 // styles
 import './styles.scss';
@@ -17,6 +20,7 @@ import './styles.scss';
 class AnalyzerCompareOutputs extends Component {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
+    filtersStatus: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     applyFilters: PropTypes.func.isRequired
@@ -36,11 +40,13 @@ class AnalyzerCompareOutputs extends Component {
 
   render() {
     const { widgets, filters, filtersCompare } = this.props;
+    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const widgetsReadyToDisplay = location && existingProt;
 
     return (
       <div className="c-analyzer-compare-outputs">
         <div className="wrapper">
-          {widgets.map(widget => (
+          {widgetsReadyToDisplay && widgets.map(widget => (
             <div key={widget.id} className="row">
               <div className="col-md-6">
                 <Widget
@@ -49,11 +55,11 @@ class AnalyzerCompareOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<BarChart params={params} data={{ table: data }} />)
+                    if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'line') return (<LineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'multi-line') return (<MultiLineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
 
                     if (params.type === 'map') return (<MapChart />)
 
@@ -71,11 +77,11 @@ class AnalyzerCompareOutputs extends Component {
                   >
                     {({ data, params }) => {
 
-                      if (params.type === 'bar') return (<BarChart data={{ table: data }} />)
+                      if (params.type === 'bar') return (<Chart spec={BarChartSpec} data={{ table: data }} />)
 
-                      if (params.type === 'line') return (<LineChart data={{ table: data }} />)
+                      if (params.type === 'line') return (<Chart spec={LineSpec} data={{ table: data }} />)
 
-                      if (params.type === 'multi-line') return (<MultiLineChart data={{ table: data }} />)
+                      if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} data={{ table: data }} />)
 
                       if (params.type === 'map') return (<MapChart />)
 

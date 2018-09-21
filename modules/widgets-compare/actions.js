@@ -1,7 +1,7 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
 
-export const setWidgets = createAction('WIDGETS-COMPARE__SET-WIDGETS');
+export const setWidgetsCompare = createAction('WIDGETS-COMPARE__SET-WIDGETS');
 export const setWidgetData = createAction('WIDGETS-COMPARE__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS-COMPARE__SET-LOADING');
 export const setError = createAction('WIDGETS-COMPARE__SET-ERROR');
@@ -27,6 +27,7 @@ export const getWidgetCostData = createThunkAction('WIDGETS-COMPARE__GET-CBA-DAT
       ...{ user_rur_cost: 'null' }
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${widgetParams}`, {})
@@ -42,11 +43,11 @@ export const getWidgetCostData = createThunkAction('WIDGETS-COMPARE__GET-CBA-DAT
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
@@ -62,13 +63,19 @@ export const getWidgetRiskData = createThunkAction('WIDGETS-COMPARE__GET-RISK-DA
     }
 
     const { common, risk } = filtersCompare;
-    const { advanced_settings: advancedSettings, ...restRiskFilters } = risk;
+    const {
+      advanced_settings: advancedSettings,
+      estimated_costs: estimatedCosts,
+      prot_fut: protFut,
+      ...restRiskFilters
+    } = risk;
 
     const widgetParams = queryString.stringify({
       ...common,
       ...restRiskFilters
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/risk/widget/${widgetId}?${widgetParams}`, {})
@@ -84,11 +91,11 @@ export const getWidgetRiskData = createThunkAction('WIDGETS-COMPARE__GET-RISK-DA
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
@@ -110,6 +117,7 @@ export const getWidgetHazardData = createThunkAction('WIDGETS-COMPARE__GET-HAZAR
       ...hazard
     });
 
+    dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
     fetch(`${process.env.API_URL}/hazard/widget/${widgetId}?${widgetParams}`, {})
@@ -125,19 +133,21 @@ export const getWidgetHazardData = createThunkAction('WIDGETS-COMPARE__GET-HAZAR
         dispatch(setLoading({ id: widgetId, loading: false }));
         if (err && typeof err.json === 'function') {
           err.json()
-            .then((errs) => {
-              dispatch(setError({ id: widgetId, error: errs }));
+            .then(({ errors }) => {
+              dispatch(setError({ id: widgetId, error: errors }));
             });
         } else {
-          dispatch(setError({ id: widgetId, error: err }));
+          dispatch(setError({ id: widgetId, error: err.errors }));
         }
       });
 });
 
 export default {
+  setWidgetsCompare,
   setWidgetData,
   setLoading,
   setError,
+
   getWidgetCostData,
   getWidgetRiskData,
   getWidgetHazardData

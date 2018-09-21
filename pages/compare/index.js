@@ -6,11 +6,11 @@ import Page from "layout/page";
 // Redux
 import withRedux from "next-redux-wrapper";
 import initStore from "store";
-import AnalyzerCompare from "layout/compare";
+import CompareLayout from "layout/compare";
 
 class Compare extends Page {
   render() {
-    return <AnalyzerCompare />;
+    return <CompareLayout />;
   }
 }
 

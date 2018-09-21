@@ -32,17 +32,17 @@ class AnalyzerCompare extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-md-6">
-                <AnalyzerInputs />
+                {location && <AnalyzerInputs />}
               </div>
               <div className="col-md-6">
-                {location || locationCompare && <AnalyzerCompareInputs />}
+                {locationCompare && <AnalyzerCompareInputs />}
               </div>
             </div>
           </div>
         </div>
 
         <div className="analyzer-compare-outputs">
-          {!!location && <AnalyzerCompareOutputs />}
+          <AnalyzerCompareOutputs />
         </div>
 
         <ApplyFilters />

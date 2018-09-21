@@ -7,25 +7,27 @@ import isEqual from 'lodash/isEqual';
 import { updateSpec } from 'utils/widget';
 
 import THEME from 'components/widgets/theme';
-import SPEC from './spec';
 
-class BarChart extends PureComponent {
+class Chart extends PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
+    spec: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired
   }
 
   componentWillMount() {
-    const { params } = this.props;
-    this.spec = updateSpec(SPEC, params)
+    const { spec, params } = this.props;
+    this.spec = updateSpec(spec, params)
+
+    console.log(this.spec)
   }
 
   componentWillReceiveProps(nextProps) {
-    const { params } = this.props;
+    const { spec, params } = this.props;
     const { params: nextParams } = nextProps;
     const paramsChanged = !isEqual(params, nextParams);
 
-    if (paramsChanged) this.spec = updateSpec(SPEC, nextParams)
+    if (paramsChanged) this.spec = updateSpec(spec, nextParams)
   }
 
   render() {
@@ -37,4 +39,4 @@ class BarChart extends PureComponent {
   }
 }
 
-export default BarChart;
+export default Chart;

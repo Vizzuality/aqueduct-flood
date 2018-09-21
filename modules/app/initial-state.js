@@ -1,5 +1,5 @@
 export default {
-  tab: 'cba',
+  tab: 'risk',
   sidebar: true,
   filters: { applied: false },
   modal: {

@@ -35,6 +35,16 @@ class AnalyzerCompareFilters extends PureComponent {
     getCompareCountryDefaults: PropTypes.func.isRequired
   }
 
+  componentWillMount() {
+    const { filters, getCompareCountryDefaults, setCostCompareFilter, setInputCompare } = this.props;
+    const { locationCompare } = filters;
+
+    if (locationCompare) {
+      getCompareCountryDefaults(setCostCompareFilter)
+        .then(() => { setInputCompare({ loading: false }) })
+    }
+  }
+
   onClearCompareFilters = () => {
     const { clearCompareFilters, setCompareLocations } = this.props;
 

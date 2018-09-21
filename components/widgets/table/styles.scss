@@ -2,12 +2,20 @@
 
 .c-table-widget {
   padding: 10px;
+  overflow: auto;
 
   > table {
     width: 100%;
     min-height: 180px;
     max-height: 200px;
-    overflow: auto;
+
+    thead {
+      tr {
+        td {
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
 
     tr {
       td {

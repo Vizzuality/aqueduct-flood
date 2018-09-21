@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
-// componets
+// components
 import Widget from 'components/analyzer/widget';
-import BarChart from 'components/widgets/bar-chart';
-import LineChart from 'components/widgets/line';
-import MultiLineChart from 'components/widgets/multi-line';
+import Chart from 'components/widgets';
 import MapChart from 'components/widgets/map';
-import TableChart from 'components/widgets/table';
+import TableChart from 'components/widgets/table/cba';
+
+// specs
+import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
+import LineSpec from 'components/widgets/specs/cba/line';
+import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
 // styles
 import './styles.scss';
@@ -48,11 +51,11 @@ class AnalyzerOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<BarChart params={params} data={{ table: data }} />)
+                    if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'line') return (<LineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'multi-line') return (<MultiLineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
 
                     if (params.type === 'map') return (<MapChart />)
 

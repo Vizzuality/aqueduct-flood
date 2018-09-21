@@ -1,18 +1,32 @@
+const RISK_WIDGETS = [
+  {
+    id: 'table',
+    title: 'flood damage'
+  },
+  {
+    id: 'annual_flood',
+    title: 'Annual expected urban damage'
+  },
+  {
+    id: 'flood_drivers',
+    title: 'Annual damage and impact drivers'
+  }
+];
+
+const ADVANCED_RISK_WIDGETS = [
+  {
+    id: 'benchmark',
+    title: 'Benchmarking flood damage against others'
+  },
+  {
+    id: 'lp_curve',
+    title: 'probability of food damage to urban in {{geogunit_unique_name}}, {{existing_prot}}'
+  }
+];
+
 export const WIDGETS = {
-  risk: [
-    {
-      id: 'widget_risk_1',
-      title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
-    },
-    {
-      id: 'widget_risk_2',
-      title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
-    },
-    {
-      id: 'widget_risk_3',
-      title: 'inundation Map in {{implementation_start}} width {{existing_prot}}-year protection',
-    }
-  ],
+  risk: RISK_WIDGETS,
+  advanced_risk: [...RISK_WIDGETS, ...ADVANCED_RISK_WIDGETS ],
   hazard: [],
   'cba': [
     {
