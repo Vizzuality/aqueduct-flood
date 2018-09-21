@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
-// components
-import Widget from 'components/analyzer/widget';
-import WidgetCompare from 'components/compare/risk/widget';
-import BarChart from 'components/widgets/bar-chart';
-import LineChart from 'components/widgets/line';
-import MultiLineChart from 'components/widgets/multi-line';
+// componets
+import Widget from 'components/risk/widget';
+import Chart from 'components/widgets';
+// import BarChart from 'components/widgets/bar-chart';
+// import LineChart from 'components/widgets/line';
+// import MultiLineChart from 'components/widgets/multi-line';
 import MapChart from 'components/widgets/map';
 import TableChart from 'components/widgets/table';
+
+// specs
+// import AnnualDamageImpactDriversSpec from 'components/widgets/specs/risk/annual-damage-and-impact-drivers';
+// import AnnualExpectedUrbanDamageByCountryInteractiveSpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country-interactive';
+// import AnnualExpectedUrbanDamageByCountrySpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country';
+// import AnnualExpectedUrbanDamageSpec from 'components/widgets/specs/risk/annual-expected-urban-damage';
+// import ProbabilityFloodDamgeUrbanSpec from 'components/widgets/specs/risk/probability-of-flood-damage-to-urban';
 
 // styles
 import './styles.scss';
@@ -52,11 +59,11 @@ class RiskCompareOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<BarChart params={params} data={{ table: data }} />)
+                    if (params.type === 'bar') return (<Chart params={params} data={{ table: data }} />)
 
-                    if (params.type === 'line') return (<LineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'line') return (<Chart params={params} data={{ table: data }} />)
 
-                    if (params.type === 'multi-line') return (<MultiLineChart params={params} data={{ table: data }} />)
+                    if (params.type === 'multi-line') return (<Chart params={params} data={{ table: data }} />)
 
                     if (params.type === 'map') return (<MapChart />)
 

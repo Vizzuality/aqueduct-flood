@@ -5,18 +5,14 @@ import { replace } from 'aqueduct-components';
 // componets
 import Widget from 'components/risk/widget';
 import Chart from 'components/widgets';
-// import BarChart from 'components/widgets/bar-chart';
-// import LineChart from 'components/widgets/line';
-// import MultiLineChart from 'components/widgets/multi-line';
-import MapChart from 'components/widgets/map';
-import TableChart from 'components/widgets/table';
+import TableChart from 'components/widgets/table/risk';
 
 // specs
-// import AnnualDamageImpactDriversSpec from 'components/widgets/specs/risk/annual-damage-and-impact-drivers';
-// import AnnualExpectedUrbanDamageByCountryInteractiveSpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country-interactive';
-// import AnnualExpectedUrbanDamageByCountrySpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country';
-// import AnnualExpectedUrbanDamageSpec from 'components/widgets/specs/risk/annual-expected-urban-damage';
-// import ProablityFloodDamgeUrbanSpec from 'components/widgets/specs/risk/probability-of-flood-damage-to-urban';
+import AnnualExpectedUrbanDamageByCountrySpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country';
+import AnnualExpectedUrbanDamageSpec from 'components/widgets/specs/risk/annual-expected-urban-damage';
+import ProbabilityFloodDamgeUrbanSpec from 'components/widgets/specs/risk/probability-of-flood-damage-to-urban';
+import AnnualDamageImpactDriversSpec from 'components/widgets/specs/risk/annual-damage-and-impact-drivers';
+import AnnualExpectedUrbanDamageByCountryInteractiveSpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country-interactive';
 
 // styles
 import './styles.scss';
@@ -43,12 +39,14 @@ class AnalyzerOutputs extends Component {
 
   render() {
     const { filters, widgets } = this.props;
+    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const widgetsReadyToDisplay = location && existingProt;
 
     return (
       <div className="c-risk-outputs">
         <div className="wrapper">
           <div className="container">
-            {widgets.map(widget => (
+            {widgetsReadyToDisplay && widgets.map(widget => (
               <div key={widget.id} className="widget-row">
                 <Widget
                   title={replace(widget.params.title, filters)}
@@ -56,15 +54,15 @@ class AnalyzerOutputs extends Component {
                 >
                   {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<Chart params={params} data={{ table: data }} />)
-
-                    if (params.type === 'line') return (<Chart params={params} data={{ table: data }} />)
-
-                    if (params.type === 'multi-line') return (<Chart params={params} data={{ table: data }} />)
-
-                    if (params.type === 'map') return (<MapChart />)
-
                     if (params.type === 'table') return (<TableChart data={data} />)
+
+                    if (params.type === 'annual_flood') return (<Chart spec={AnnualDamageImpactDriversSpec} params={params} data={{ table: data }} />)
+
+                    if (params.type === 'benchmark') return (<Chart spec={AnnualExpectedUrbanDamageByCountrySpec} params={params} data={{ table: data }} />)
+
+                    if (params.type === 'flood_drivers') return (<Chart spec={AnnualExpectedUrbanDamageSpec} params={params} data={{ table: data }} />)
+
+                    if (params.type === 'lp_curve') return (<Chart spec={ProbabilityFloodDamgeUrbanSpec} params={params} data={{ table: data }} />)
 
                     return null;
                   }}

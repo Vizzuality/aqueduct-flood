@@ -7,7 +7,7 @@ import Widget from 'components/analyzer/widget';
 import WidgetCompare from 'components/compare/analyzer/widget';
 import Chart from 'components/widgets';
 import MapChart from 'components/widgets/map';
-import TableChart from 'components/widgets/table';
+import TableChart from 'components/widgets/table/cba';
 
 // specs
 import BarChartSpec from 'components/widgets/specs/cba/bar-chart';

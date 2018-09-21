@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { format } from 'd3-format';
 
 // styles
-import './styles.scss';
+import '../styles.scss';
 
-class TableChart extends PureComponent {
+class CBATableChart extends PureComponent {
   static propTypes = { data: PropTypes.array.isRequired }
 
   render() {
@@ -53,4 +53,4 @@ class TableChart extends PureComponent {
   }
 }
 
-export default TableChart;
+export default CBATableChart;

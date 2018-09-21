@@ -1,26 +1,26 @@
 const RISK_WIDGETS = [
   {
     id: 'table',
-    title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
+    title: 'flood damage'
   },
   {
     id: 'annual_flood',
-    title: 'Annual expected urban damage',
+    title: 'Annual expected urban damage'
   },
   {
     id: 'flood_drivers',
-    title: 'Annual damage and impact drivers',
+    title: 'Annual damage and impact drivers'
   }
 ];
 
 const ADVANCED_RISK_WIDGETS = [
   {
     id: 'benchmark',
-    title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
+    title: 'Benchmarking flood damage against others'
   },
   {
     id: 'lp_curve',
-    title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
+    title: 'probability of food damage to urban in {{geogunit_unique_name}}, {{existing_prot}}'
   }
 ];
 
