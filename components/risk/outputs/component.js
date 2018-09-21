@@ -9,9 +9,9 @@ import TableChart from 'components/widgets/table/risk';
 
 // specs
 import AnnualFloodSpec from 'components/widgets/specs/risk/annual_flood';
-import FloodDriversSpec from 'components/widgets/specs/risk/flood_drivers';
+import BenchmarkSpec from 'components/widgets/specs/risk/benchmark';
 // specs – advanced
-import BenchmarkSpec from 'components/widgets/specs/risk/advanced/benchmark';
+import FloodDriversSpec from 'components/widgets/specs/risk/advanced/flood_drivers';
 import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
 // styles
