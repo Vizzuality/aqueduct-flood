@@ -18,8 +18,6 @@ class Chart extends PureComponent {
   componentWillMount() {
     const { spec, params } = this.props;
     this.spec = updateSpec(spec, params)
-
-    console.log(this.spec)
   }
 
   componentWillReceiveProps(nextProps) {

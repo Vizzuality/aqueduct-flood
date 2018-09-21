@@ -9,14 +9,15 @@ export const WIDGETS = {
       title: 'Annual expected urban damage'
     },
     {
-      id: 'flood_drivers',
-      title: 'Annual damage and impact drivers'
+      id: 'benchmark',
+      title: 'Benchmarking flood damage against others'
     }
+
   ],
   advanced_risk: [
     {
-      id: 'benchmark',
-      title: 'Benchmarking flood damage against others'
+      id: 'flood_drivers',
+      title: 'Annual damage and impact drivers'
     },
     {
       id: 'lp_curve',
