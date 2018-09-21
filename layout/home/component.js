@@ -16,6 +16,7 @@ import Layout from "layout/layout";
 import Risk from 'components/risk';
 import Analyzer from 'components/analyzer';
 import AnalyzerOutputs from 'components/analyzer/outputs';
+import RiskOutputs from 'components/risk/outputs';
 
 // constants
 import { APP_TABS } from 'constants/app';
@@ -53,7 +54,9 @@ class Home extends PureComponent {
     const isAnalyzerTab = tab === 'cba';
     const isRiskTab = tab === 'risk';
     const { existing_prot: existingProt, prot_fut: protFut } = filters.cba;
-    const analyzerTabIsReady = !!existingProt && !!protFut;
+    const { existing_prot: existingProtRisk } = filters.risk;
+    const AnalyzertabReady = !!existingProt && !!protFut;
+    const RiskTabReady = !!existingProtRisk;
 
     return (
       <Layout title="Homepage" description="Aqueduct Flood description">
@@ -74,9 +77,10 @@ class Home extends PureComponent {
             </div>
           </Sidebar>
 
-          {isAnalyzerTab && analyzerTabIsReady && <AnalyzerOutputs />}
+          {isAnalyzerTab && AnalyzertabReady && <AnalyzerOutputs />}
+          {isRiskTab && RiskTabReady && <RiskOutputs />}
 
-          {!isAnalyzerTab && (
+          {(!isAnalyzerTab && !isRiskTab) && (
             <Map customClass="l-map">
               {(map) => (
                 <MapControls>

@@ -39,14 +39,12 @@ class AnalyzerOutputs extends Component {
 
   render() {
     const { filters, widgets } = this.props;
-    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
-    const widgetsReadyToDisplay = location && existingProt;
 
     return (
       <div className="c-risk-outputs">
         <div className="wrapper">
           <div className="container">
-            {widgetsReadyToDisplay && widgets.map(widget => (
+            {widgets.map(widget => (
               <div key={widget.id} className="widget-row">
                 <Widget
                   title={replace(widget.params.title, filters)}

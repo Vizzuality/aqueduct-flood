@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // components
 import RiskFilters from 'components/risk/filters';
 import RiskInputs from 'components/risk/risk-inputs';
-import RiskOutputs from 'components/risk/outputs';
 import ApplyFilters from 'components/apply-filters';
 
 // styles
@@ -38,7 +37,6 @@ class Risk extends PureComponent {
             </div>
           </div>
         </div>
-        <RiskOutputs />
         <ApplyFilters />
       </div>
     );
