@@ -70,8 +70,14 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
       ...restRiskFilters
     } = risk;
 
+    const {
+      estimated_costs: estimatedCostsCommon,
+      prot_fut: protFutCommon,
+      ...restCommonParams
+    } = common;
+
     const widgetParams = queryString.stringify({
-      ...common,
+      ...restCommonParams,
       ...restRiskFilters
     });
 
