@@ -43,8 +43,8 @@ class RiskTableChart extends PureComponent {
               <td>
                 Annual Expected Urban Damage
               </td>
-              {data.map(_row => (
-                <td key={_row.Annual_Damage_Avg}>
+              {data.map((_row, i) => (
+                <td key={`${_row.Annual_Damage_Avg}-2010-${i}`}>
                   {parse(_row.Annual_Damage_Avg)}
                 </td>))
               }
@@ -53,8 +53,8 @@ class RiskTableChart extends PureComponent {
               <td>
                 Urban Asset Value
               </td>
-              {data.map(_row => (
-                <td key={_row.Asset_Value}>
+              {data.map((_row, i) => (
+                <td key={`${_row.Asset_Value}-2030-${i}`}>
                   {parse(_row.Asset_Value)}
                 </td>))
               }
@@ -63,8 +63,8 @@ class RiskTableChart extends PureComponent {
               <td>
                 % Annual Expected Urban Damage
               </td>
-              {data.map(_row => (
-                <td key={_row.Percent_Damage_Avg}>
+              {data.map((_row, i) => (
+                <td key={`${_row.Percent_Damage_Avg}-2050-${i}`}>
                   {percentageFormat(_row.Percent_Damage_Avg)}
                 </td>))
               }
@@ -73,8 +73,8 @@ class RiskTableChart extends PureComponent {
               <td>
               Estimated Flood Protection Level
               </td>
-              {data.map(_row => (
-                <td key={_row.Flood_Protection}>
+              {data.map((_row, i) => (
+                <td key={`${_row.Flood_Protection}-2080-${i}`}>
                   {parse(_row.Flood_Protection)}
                 </td>))
               }

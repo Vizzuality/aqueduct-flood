@@ -7,6 +7,38 @@ export default {
   },
   "height": 200,
   "padding": 10,
+  "data": [
+    {
+      "name": "table",
+      "values": [
+        { "year": "2010", "variable": "Damage", "value": 0, "type": "Total", "percentage": [] },
+        { "year": "2010", "variable": "Impact Driver", "value": 0, "type": "Socioeconomic", "percentage": [] },
+        { "year": "2010", "variable": "Impact Driver", "value": 0, "type": "Climate", "percentage": [] },
+        { "year": "2010", "variable": "Impact Driver", "value": 0, "type": "baseline", "percentage": [] },
+        { "year": "2030", "variable": "Damage", "value": 8, "type": "Total", "percentage": [] },
+        { "year": "2030", "variable": "Impact Driver", "value": 6, "type": "Socioeconomic", "percentage": 75 },
+        { "year": "2030", "variable": "Impact Driver", "value": 2, "type": "Climate", "percentage": 25 },
+        { "year": "2030", "variable": "Impact Driver", "value": 0, "type": "baseline", "percentage": [] },
+        { "year": "2050", "variable": "Damage", "value": 35, "type": "Total", "percentage": [] },
+        { "year": "2050", "variable": "Impact Driver", "value": 30, "type": "Socioeconomic", "percentage": 85.7 },
+        { "year": "2050", "variable": "Impact Driver", "value": 5, "type": "Climate", "percentage": 14.3 },
+        { "year": "2050", "variable": "Impact Driver", "value": 0, "type": "baseline", "percentage": [] },
+        { "year": "2080", "variable": "Damage", "value": 60, "type": "Total", "percentage": [] },
+        { "year": "2080", "variable": "Impact Driver", "value": 40, "type": "Socioeconomic", "percentage": 66.7 },
+        { "year": "2080", "variable": "Impact Driver", "value": 20, "type": "Climate", "percentage": 33.3 },
+        { "year": "2080", "variable": "Impact Driver", "value": 0, "type": "baseline", "percentage": [] }
+      ],
+      "transform": [
+        {
+          "type": "stack",
+          "groupby": ["year", "variable"],
+          "sort": { "field": "type" },
+          "field": "value"
+        }
+      ]
+    }
+  ],
+
   "scales": [
     {
       "name": "xscale",

@@ -8,11 +8,11 @@ import Chart from 'components/widgets';
 import TableChart from 'components/widgets/table/risk';
 
 // specs
-import AnnualExpectedUrbanDamageByCountrySpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country';
-import AnnualExpectedUrbanDamageSpec from 'components/widgets/specs/risk/annual-expected-urban-damage';
-import ProbabilityFloodDamgeUrbanSpec from 'components/widgets/specs/risk/probability-of-flood-damage-to-urban';
-import AnnualDamageImpactDriversSpec from 'components/widgets/specs/risk/annual-damage-and-impact-drivers';
-import AnnualExpectedUrbanDamageByCountryInteractiveSpec from 'components/widgets/specs/risk/annual-expected-urban-damage-by-country-interactive';
+import AnnualFloodSpec from 'components/widgets/specs/risk/annual_flood';
+import FloodDriversSpec from 'components/widgets/specs/risk/flood_drivers';
+// specs – advanced
+import BenchmarkSpec from 'components/widgets/specs/risk/advanced/benchmark';
+import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
 // styles
 import './styles.scss';
@@ -56,13 +56,13 @@ class AnalyzerOutputs extends Component {
 
                     if (params.type === 'table') return (<TableChart data={data} />)
 
-                    if (params.type === 'annual_flood') return (<Chart spec={AnnualDamageImpactDriversSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'annual_flood') return (<Chart spec={AnnualFloodSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'benchmark') return (<Chart spec={AnnualExpectedUrbanDamageByCountrySpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'flood_drivers') return (<Chart spec={FloodDriversSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'flood_drivers') return (<Chart spec={AnnualExpectedUrbanDamageSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'benchmark') return (<Chart spec={BenchmarkSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'lp_curve') return (<Chart spec={ProbabilityFloodDamgeUrbanSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'lp_curve') return (<Chart spec={LPCurveSpec} params={params} data={{ table: data }} />)
 
                     return null;
                   }}
