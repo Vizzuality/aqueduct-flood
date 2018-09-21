@@ -1,7 +1,6 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
-  "width": 400,
-  "height": 250,
+  "height": 200,
   "autosize": {
     "type": "fit",
     "resize": true,
