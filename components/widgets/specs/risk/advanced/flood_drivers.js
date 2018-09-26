@@ -4,9 +4,7 @@ export default {
     "resize": true,
     "contains": "padding"
   },
-  "height": 200,
-  
-
+  "height": 250,
   "data": [
     {
       "name": "table",
@@ -14,10 +12,11 @@ export default {
         
     ],
       "transform": [
-        {"type": "fold", "fields": ["Annual_Damage_Avg", "Sub_Driver", "Soc_Driver"]},
+        {"type": "fold", "fields": ["Annual_Damage_Avg", "CC_Driver_Avg", "Soc_Driver"]},
+        {"type": "formula", "as": "type", "expr": "if(datum.key=='Annual_Damage_Avg','Damage','Impact driver')"},
         {
           "type": "stack",
-          "groupby": ["index", "key"],
+          "groupby": ["index", "type"],
           "sort": {"field": "key"},
           "field": "value"
         }
@@ -55,7 +54,6 @@ export default {
     {
       "orient": "top", 
       "scale": "xscale", 
-      "domain": false, 
       "ticks": false, 
       "offset": 20, 
       "labelFontWeight": "bold", 
@@ -63,7 +61,8 @@ export default {
     },
     {
       "orient": "bottom", 
-      "scale": "xscale", 
+      "scale": "xscale",
+      "grid": false, 
       "domain": false, 
       "ticks": false, 
       "labels":false, 
@@ -73,20 +72,18 @@ export default {
     {
       "orient": "left", 
       "scale": "yscale", 
-      "domain": false, 
       "ticks": false, 
       "grid":true, 
-      "format":"s",
-      "offset": 10, 
+      "format":"s", 
       "tickCount": 5, 
       "title": "Annual Urban Damage ($)"}
   ],
 
   "legends": [
     {
-      "title": "Variable",
       "fill": "color",
-      "orient": "right",
+      "orient": "bottom",
+      "direction":"horizontal",
       "encode": {
         "symbols": {
           "update": {
@@ -94,6 +91,11 @@ export default {
             "opacity": {"value": 1},
             "shape": {"value": "square"}
           }
+        },
+        "labels":{
+          "update": {
+          "text": {"signal": "if(datum.label=='Annual_Damage_Avg', 'Total', if(datum.label=='Soc_Driver', 'Socioeconomic', 'Climate'))"},
+        }
         }
       }
     }
@@ -125,14 +127,15 @@ export default {
         {
           "name": "pos",
           "type": "band",
-          "domain": {"data": "facet", "field": "key"},
+          "domain": {"data": "facet", "field": "type"},
           "range": "width",
           "padding": 0.1
         }
       ],
 
       "axes": [
-        {"orient": "top", "scale": "pos", "domain": false, "ticks": false, "grid": true, "offset": 0}
+        {"orient": "top", "scale": "pos", "domain": false,
+        "labelOverlap":"parity", "ticks": true, "labelAlign":"center" }
       ],
 
       "marks": [
@@ -142,29 +145,22 @@ export default {
           "type": "rect",
           "encode": {
             "enter": {
-              "x": {"scale": "pos", "field": "key"},
+              "x": {"scale": "pos", "field": "type"},
               "width": {"scale": "pos", "band": 1},
               "y": {"scale": "yscale", "field": "y0"},
               "y2": {"scale": "yscale", "field": "y1"},
               "fill": {"scale": "color", "field": "key"}
-            }
-          }
-        },
-        {
-          "type": "text",
-          "from": {"data": "bars"},
-          "encode": {
-            "enter": {
-              "y": {"field": "y", "offset": 8},
-              "x": {"field": "x", "offset": 5},
-              "fill": {"value": "#000"},
-              "fontWeight": {"value": "bold"},
-              "align": {"value": "top"},
-              "baseline": {"value": "middle"},
-              "text": {"field": "datum.percentage"}
-            }
+            },
+            "update": {"opacity":{
+              "value":1
+            }},
+            "hover": {"opacity":{
+              "value":0.5
+            }}
           }
         }
+          
+        
       ]
     }
   ]

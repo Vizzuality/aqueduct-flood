@@ -55,7 +55,6 @@ export default {
       "name": "x",
       "type": "linear",
       "range": "width",
-      "padding": 20,
       "domain": {
         "data": "table",
         "field": "x"
@@ -66,7 +65,6 @@ export default {
       "type": "linear",
       "range": "height",
       "nice": true,
-      
       "zero": false,
       "domain": {
         "data": "table",
@@ -99,31 +97,22 @@ export default {
     {
       "orient": "bottom",
       "scale": "x",
-      "domain": false,
       "ticks": true,
-      "grid": false,
-      "offset": 6,
-      "tickCount": 4,
-      "title": "Probability of event occurring",
-      "titleFontSize":10
+      "tickCount": 6,
+      "title": "Probability of event occurring"
     },
     {
       "orient": "left",
       "scale": "y",
-      "domain": false,
       "ticks": false,
+      "tickCount": 5,
       "format": "~s",
-      "grid": true,
-      "offset": 6,
-      "tickCount": 6,
-      "title": "Damage ($ millions)",
-      "titleFontSize":10
+      "title": "Damage ($ millions)"
     }
   ],
   "legends": [
     {
       "title": "Models",
-      "titleFontSize":10,
       "fill": "color",
       "direction": "vertical",
       "orient": "right",
@@ -167,9 +156,6 @@ export default {
               "stroke": {
                 "scale": "color",
                 "field": "c"
-              },
-              "strokeWidth": {
-                "value": 1
               }
             }
           }
@@ -204,14 +190,17 @@ export default {
               "fill": {
                 "scale": "color",
                 "field": "c"
-              },
-              "size": {
-                "value": 20
               }
               
             },
-            "update": {"opacity": {"value": 0.5}},
-            "hover":{"opacity": {"value": 1}}
+            "update": {"opacity": {"value": 0.5},
+              "size": {
+                "value": 65
+              }},
+            "hover":{"opacity": {"value": 1},
+              "size": {
+                "value": 85
+              }}
           }
         }
       ]

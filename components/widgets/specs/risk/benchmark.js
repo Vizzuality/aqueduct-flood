@@ -22,12 +22,12 @@ export default {
     },
     {
       "name": "calc",
-      "value": "tot",
+      "value": "Total",
       "bind": {
         "input": "radio",
         "options": [
-          "tot",
-          "perc"
+          "Total",
+          "Percentage"
         ]
       }
     }
@@ -39,7 +39,7 @@ export default {
       "transform": [
       
       {"type": "filter", "expr": "datum.year == Year"},
-      {"type": "filter", "expr": "datum.type == calc"}
+      {"type": "filter", "expr": "if(calc=='Percentage',datum.type =='per',datum.type =='tot')"}
     ]
     }
   ],
@@ -68,25 +68,19 @@ export default {
   "axes": [
     {
       "scale": "x",
-      "grid": true,
-      "domain": false,
       "orient": "top",
-      "ticks": false,
+      "ticks": true,
       "format":"s",
-      "offset": 6,
       "tickCount": 10,
       "title": "Annual Expected Urban Damage ($ billions)"
     },
     {
       "scale": "y",
-      "grid": true,
-      "domain": false,
       "orient": "left",
       "ticks": false,
-      "offset": 6,
       "titlePadding": 5,
       "tickCount": 5,
-      "title": "protection level"
+      "title": "Protection standard"
     }
   ],
 
@@ -100,16 +94,33 @@ export default {
           "x": {"scale": "x", "field": "value"},
           "y": {"scale": "y", "field": "prot"},
           "shape": {"value": "circle"},
-          "width": {"value": 2},
-          "opacity": {"value": 1},
+          "size": {"value": 65},
+          "opacity": [
+              {
+                "test": "datum.id !=='Bangladesh'",
+                "value": 0.3
+              },
+              {"value": 0.8}
+            ],
+          "zindex":[
+              {
+                "test": "datum.id !=='Bangladesh'",
+                "value": 1
+              },
+              {"value": 2}
+            ],
           "fill": [
-  {
-    "test": "datum.id !=='Bangladesh'",
-    "value": "grey"
-  },
-  {"value": "red"}
-]
-        }
+              {
+                "test": "datum.id !=='Bangladesh'",
+                "value": "grey"
+              },
+              {"value": "red"}
+            ]
+        },
+         "hover": {
+            "opacity": {"value": 1},
+            "size": {"value": 85},
+         }
       }
     }
   ]

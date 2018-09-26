@@ -6,13 +6,6 @@ export default {
     "contains": "padding"
   },
   "height": 200,
-
-  "config": {
-    "range": {
-      "category": ["#5079a5","#ef8e3b","#dd565c","#79b7b2","#5da052","#ecc853","#ad7aa1","#ef9ba7","#9b7461","#bab0ac"],
-      "symbol":["square","circle"]
-      }
-  },
   "data": [
     {
       "name": "table",
@@ -42,13 +35,14 @@ export default {
       "name": "yscale_amout",
       "domain": {"data": "table", "field": "Annual_Damage_Avg"},
       "nice": true,
+      "zero": true,
       "range": "height"
     },
     {
       "name": "yscale_per",
       "domain": {"data": "table", "field": "Percent_Damage_Avg"},
       "nice": true,
-      "zero": false,
+      "zero": true,
       "range": "height"
     },
     {
@@ -67,13 +61,13 @@ export default {
   ],
 
   "axes": [
-    { "orient": "bottom", "scale": "xscale", "domain": false, "ticks": false, "offset": 6},
-    { "orient": "left", "scale": "yscale_amout", "domain": false, "ticks": false,"format":"s", "grid": true, "tickCount": 5, "offset": 6},
-    { "orient": "right", "scale": "yscale_per", "domain": false, "ticks": false, "tickCount": 8, "offset": 6,
+    { "orient": "bottom", "scale": "xscale"},
+    { "orient": "left", "scale": "yscale_amout", "format":"s", "tickCount": 5},
+    { "orient": "right", "scale": "yscale_per", "tickCount": 5,
       "encode":{
         "labels":{
           "update":{
-            "text":{"signal": "format(datum.value, '.1f') + '%'"}
+            "text":{"signal": "format(datum.value, '.2f') + '%'"}
           }
         }
       }
@@ -86,7 +80,6 @@ export default {
       "shape":"typeSymbol",
       "direction": "horizontal",
       "orient": "bottom",
-      "offset": 20,
       "columnPadding":20,
       "labelLimit": 1000,
       "encode": {
@@ -112,10 +105,10 @@ export default {
           "y2": {"scale": "yscale_amout", "value": 0}
         },
         "update": {
-          "fill": {"value": "#5079a5"}
+          "opacity": {"value": 1}
         },
         "hover": {
-          "fill": {"value": "#79b7b2"}
+          "opacity": {"value": 0.5}
         }
       }
     },
@@ -126,13 +119,15 @@ export default {
         "enter": {
           "x": {"scale": "xscale", "field": "index", "band":0.5},
           "y": {"scale": "yscale_per", "field": "Percent_Damage_Avg"},
-          "size": {"value": 40}
+          "fill":{"value":"#ef8e3b"}
         },
         "update": {
-          "fill": {"value": "#ef8e3b"}
+          "opacity": {"value": 0.8},
+          "size": {"value": 65}
         },
         "hover": {
-          "fill": {"value": "#dd565c"}
+          "opacity": {"value": 1},
+          "size": {"value": 85}
         }
       }
     }
