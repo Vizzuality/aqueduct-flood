@@ -5,7 +5,7 @@ export default {
     "contains": "padding",
     "resize": true
   },
-  "height": 200,
+  "height": 250,
   "padding": 10,
   "data": [ { "name": "table" } ],
   "scales": [
@@ -31,17 +31,15 @@ export default {
       "bandPosition": 0.5,
       "labelOverlap": "parity",
       "labelFlush": 5,
-      "ticks": false,
-      "domain": false,
       "labelBaseline": "top",
       "offset": 5,
+      "ticks": false,
       "scale": "xscale",
       "title":"years"
     },
     {
       "orient": "left",
       "format": "~s",
-      "grid": true,
       "labelOverlap": "parity",
       "scale": "yscale"
     }
@@ -62,7 +60,7 @@ export default {
               "test": "datum.value<0",
               "value": "#de2239"
             },
-            { "value": "#1c801c" }
+            { "value": "#2B9D4C" }
           ]
         },
         "update": {

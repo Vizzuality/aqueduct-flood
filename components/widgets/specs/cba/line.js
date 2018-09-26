@@ -5,7 +5,7 @@ export default {
     "resize": true,
     "contains": "padding"
   },
-  "height": 200,
+  "height": 250,
   "padding": 10,
   "signals": [
     {
@@ -69,7 +69,7 @@ export default {
       "labelBaseline": "top",
       "offset": 5,
       "scale": "x",
-      "title":"years"
+      "title":"Years"
     },
     {
       "orient": "left",
