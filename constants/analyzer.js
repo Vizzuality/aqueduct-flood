@@ -1,7 +1,7 @@
 export const SCENARIOS_OPTIONS = [
-  { label: 'Business as usual', value: 'Business as usual' },
-  { label: 'Optimistic', value: 'Optimistic' },
-  { label: 'Pessimistic', value: 'Pessimistic' }
+  { label: 'Business as usual', value: 'business as usual' },
+  { label: 'Optimistic', value: 'optimistic' },
+  { label: 'Pessimistic', value: 'pessimistic' }
 ];
 
 export const DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS = [

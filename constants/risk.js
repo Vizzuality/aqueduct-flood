@@ -1,8 +1,8 @@
 
 export const EXPOSURE_OPTIONS = [
   { label: 'Urban Damage', value: 'urban_damage_v2', default: true },
-  { label: 'Affected Population', value: 'POPexp' },
-  { label: 'Affected GDP', value: 'GDPexp' }
+  { label: 'Affected Population', value: 'popexp' },
+  { label: 'Affected GDP', value: 'gdpexp' }
 ];
 
 export const FLOOD_TYPE_OPTIONS = [
