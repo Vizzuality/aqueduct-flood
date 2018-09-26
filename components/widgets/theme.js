@@ -23,6 +23,10 @@ export default {
     grid:true,
     ticks: false
   },
+   axisRight: {
+    grid:false,
+    ticks: false
+  },
   legend:{
     labelPadding: 10,
     titleFont:'Roboto',
