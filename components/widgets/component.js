@@ -17,22 +17,26 @@ class Chart extends PureComponent {
 
   componentWillMount() {
     const { spec, params } = this.props;
-    this.spec = updateSpec(spec, params)
+
+    this.setState({ spec: updateSpec(Object.assign({}, spec), params) });
   }
 
   componentWillReceiveProps(nextProps) {
-    const { spec, params } = this.props;
-    const { params: nextParams } = nextProps;
+    const { params } = this.props;
+    const { spec: nextSpec, params: nextParams } = nextProps;
     const paramsChanged = !isEqual(params, nextParams);
 
-    if (paramsChanged) this.spec = updateSpec(spec, nextParams)
+    if (paramsChanged) {
+      this.setState({ spec: updateSpec(Object.assign({}, nextSpec), nextParams) })
+    }
   }
 
   render() {
     const { data } = this.props;
+    const { spec } = this.state;
 
     return (
-      <VegaChart spec={this.spec} theme={THEME} data={data} />
+      <VegaChart spec={spec} theme={THEME} data={data} />
     );
   }
 }

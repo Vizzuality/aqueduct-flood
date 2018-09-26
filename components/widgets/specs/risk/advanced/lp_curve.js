@@ -7,7 +7,7 @@ export default {
   },
   "signals": [
     {
-      "name": "Year",
+      "name": "year_curve_signal",
       "value": "2030",
       "bind": {
         "input": "radio",
@@ -25,14 +25,14 @@ export default {
       "name": "table",
       "values": [],
       "transform": [
-        
+
         {"type": "formula", "as": "x", "expr": "(1/datum.x)*100"},
         {
   "type": "collect",
   "sort": { "field": ["c", "x"],
     "order": ["descending", "ascending"]}
 },
-        {"type": "filter", "expr": "datum.year === Year"}
+        {"type": "filter", "expr": "datum.year === year_curve_signal"}
 
       ]
     },{
@@ -191,7 +191,7 @@ export default {
                 "scale": "color",
                 "field": "c"
               }
-              
+
             },
             "update": {"opacity": {"value": 0.5},
               "size": {

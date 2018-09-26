@@ -37,7 +37,7 @@ export default {
       "name": "table",
       "values": [],
       "transform": [
-      
+
       {"type": "filter", "expr": "datum.year == Year"},
       {"type": "filter", "expr": "if(calc=='Percentage',datum.type =='per',datum.type =='tot')"}
     ]
@@ -97,21 +97,21 @@ export default {
           "size": {"value": 65},
           "opacity": [
               {
-                "test": "datum.id !=='Bangladesh'",
+                "test": "datum.id !=='{{geogunit_name}}'",
                 "value": 0.3
               },
               {"value": 0.8}
             ],
           "zindex":[
               {
-                "test": "datum.id !=='Bangladesh'",
+                "test": "datum.id !=='{{geogunit_name}}'",
                 "value": 1
               },
               {"value": 2}
             ],
           "fill": [
               {
-                "test": "datum.id !=='Bangladesh'",
+                "test": "datum.id !=='{{geogunit_name}}'",
                 "value": "grey"
               },
               {"value": "red"}

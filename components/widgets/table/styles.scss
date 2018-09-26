@@ -27,8 +27,14 @@
         }
       }
 
-      &:nth-child(odd) {
-        background: palette(blue, lightest);
+
+    }
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background: palette(blue, lightest);
+        }
       }
     }
   }

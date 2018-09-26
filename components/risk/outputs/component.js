@@ -17,6 +17,7 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 // styles
 import './styles.scss';
 
+
 class AnalyzerOutputs extends Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
