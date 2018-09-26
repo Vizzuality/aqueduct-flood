@@ -10,7 +10,6 @@ import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 // styles
 import './styles.scss';
 
-
 class AnalyzerCompareFilters extends PureComponent {
   static propTypes = {
     filters: PropTypes.shape({
@@ -125,6 +124,7 @@ class AnalyzerCompareFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="location"
                   grouped
                   options={locations}
                   placeholder="Select a location"
@@ -143,6 +143,7 @@ class AnalyzerCompareFilters extends PureComponent {
                   className="-bigger"
                 >
                   <CustomSelect
+                    instanceId="location-compare"
                     grouped
                     options={locationsCompare}
                     placeholder="Compare with..."
@@ -171,6 +172,7 @@ class AnalyzerCompareFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="scenario"
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a scenario"
                   value={filters.scenario}
@@ -186,6 +188,7 @@ class AnalyzerCompareFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="scenario-compare"
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a scenario"
                   isDisabled={!filters.locationCompare}

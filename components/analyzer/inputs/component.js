@@ -61,7 +61,7 @@ class AnalyzerInputs extends PureComponent {
     const { filters } = props;
     const {
       existing_prot: existingProt,
-      estimated_costs
+      estimated_costs: estimatedCosts
     } = filters;
     const indexExistingProtection = EXISTING_PROTECTION_LEVEL_OPTIONS.findIndex(opt => opt === existingProt);
     const nextIndex = indexExistingProtection + 1 >= EXISTING_PROTECTION_LEVEL_OPTIONS.length ?
@@ -73,7 +73,7 @@ class AnalyzerInputs extends PureComponent {
 
     this.state = {
       existingProtValue: existingProt,
-      estimatedCosts: estimated_costs
+      estimatedCosts
     };
   }
 
@@ -211,6 +211,7 @@ class AnalyzerInputs extends PureComponent {
               className="-inline -bolder"
             >
               <CustomSelect
+                instanceId="year"
                 options={DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS}
                 placeholder="Select a year"
                 theme="dark"
@@ -314,7 +315,6 @@ class AnalyzerInputs extends PureComponent {
                 onAfterChange={value => { onChangeFilter({ estimated_costs: value }) }}
               />
             </Field>
-
             <Field
               name="discount-rate"
               theme="dark"
@@ -330,7 +330,6 @@ class AnalyzerInputs extends PureComponent {
                 onAfterChange={value => { onChangeFilter({ discount_rate: value }) }}
               />
             </Field>
-
             <Field
               name="operation-maintenance-cost"
               theme="dark"
