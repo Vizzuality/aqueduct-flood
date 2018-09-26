@@ -83,6 +83,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="location"
                   grouped
                   options={locations}
                   placeholder="Select a location"
@@ -98,6 +99,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="scenario"
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a future scenario"
                   value={filters.scenario}
@@ -113,6 +115,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="location-compare"
                   grouped
                   options={locationsCompare}
                   placeholder="Compare with..."

@@ -119,6 +119,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="location"
                   grouped
                   options={locations}
                   placeholder="Select a location"
@@ -136,6 +137,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="location-compare"
                   grouped
                   options={locationsCompare}
                   placeholder="Compare with..."
@@ -157,6 +159,7 @@ class AnalyzerFilters extends PureComponent {
                 disabled={!filters.advanced_settings}
               >
                 <CustomSelect
+                  instanceId="scenario"
                   options={scenarios}
                   isDisabled={!filters.advanced_settings}
                   placeholder="Select a future scenario"
@@ -175,6 +178,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="flood"
                   options={FLOOD_TYPE_OPTIONS}
                   placeholder="Select a flood type..."
                   value={filters.flood}
@@ -190,6 +194,7 @@ class AnalyzerFilters extends PureComponent {
                 className="-bigger"
               >
                 <CustomSelect
+                  instanceId="indicator"
                   options={EXPOSURE_OPTIONS}
                   placeholder="Select a risk indicator..."
                   value={filters.exposure}
