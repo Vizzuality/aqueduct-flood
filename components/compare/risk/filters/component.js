@@ -48,9 +48,9 @@ class RiskFilters extends PureComponent {
 
   componentWillMount() {
     const { filters, getCompareCountryDefaults, setRiskCompareFilter, setInputCompare } = this.props;
-    const { locationCompare } = filters;
+    const { compareLocation } = filters;
 
-    if (locationCompare) {
+    if (compareLocation) {
       getCompareCountryDefaults(setRiskCompareFilter)
         .then(() => { setInputCompare({ loading: false }) })
     }
@@ -145,7 +145,7 @@ class RiskFilters extends PureComponent {
       setRiskCompareFilter
     } = this.props;
     const isCoastal = filters.flood === 'Coastal';
-    const isCoastalCompare = filtersCompare.flood === 'Coastal';
+    const isCoastalCompare = filtersCompare.flood === 'coastal';
 
     return (
       <div className="c-risk-filters">

@@ -13,8 +13,16 @@ import './styles.scss';
 
 class RiskCompare extends PureComponent {
   static propTypes = {
+    tab: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
-    filtersCompare: PropTypes.object.isRequired
+    filtersCompare: PropTypes.object.isRequired,
+    setWidgetsCompare: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    const { tab, setWidgetsCompare } = this.props;
+
+    setWidgetsCompare({ nextTab: tab });
   }
 
   render() {
@@ -42,7 +50,7 @@ class RiskCompare extends PureComponent {
         </div>
 
         <div className="risk-compare-outputs">
-          {location && <RiskCompareOutputs />}
+          <RiskCompareOutputs />
         </div>
 
         <ApplyFilters />

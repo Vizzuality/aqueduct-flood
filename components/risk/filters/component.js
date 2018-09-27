@@ -93,7 +93,7 @@ class AnalyzerFilters extends PureComponent {
       scenarios,
       setRiskFilter
     } = this.props;
-    const isCoastal = filters.flood === 'Coastal';
+    const isCoastal = filters.flood === 'coastal';
 
     return (
       <div className="c-analyzer-filters">

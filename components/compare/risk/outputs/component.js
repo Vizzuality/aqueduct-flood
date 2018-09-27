@@ -42,7 +42,9 @@ class RiskCompareOutputs extends Component {
   render() {
     const { widgets, filters,  filtersCompare } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
+    const widgetsCompareReadyToDisplay = !!locationCompare && !!existingProtCompare;
 
     return (
       <div className="c-analyzer-compare-outputs">
@@ -71,7 +73,7 @@ class RiskCompareOutputs extends Component {
                   }}
                 </Widget>
               </div>
-              {filtersCompare.geogunit_unique_name &&(
+              {widgetsCompareReadyToDisplay && (
                 <div className="col-md-6">
                   <WidgetCompare
                     title={replace(widget.params.title, filtersCompare)}

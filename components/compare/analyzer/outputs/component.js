@@ -41,7 +41,9 @@ class AnalyzerCompareOutputs extends Component {
   render() {
     const { widgets, filters, filtersCompare } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
+    const widgetsCompareReadyToDisplay = locationCompare && existingProtCompare;
 
     return (
       <div className="c-analyzer-compare-outputs">
@@ -53,7 +55,7 @@ class AnalyzerCompareOutputs extends Component {
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
-                  {({ data, params }) => {
+                  {({ data, params = {} }) => {
 
                     if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 
@@ -69,13 +71,13 @@ class AnalyzerCompareOutputs extends Component {
                   }}
                 </Widget>
               </div>
-              {filtersCompare.geogunit_unique_name &&(
+              {widgetsCompareReadyToDisplay && (
                 <div className="col-md-6">
                   <WidgetCompare
                     title={replace(widget.params.title, filtersCompare)}
                     params={{ id: widget.id, filtersCompare }}
                   >
-                    {({ data, params }) => {
+                    {({ data, params = {} }) => {
 
                       if (params.type === 'bar') return (<Chart spec={BarChartSpec} data={{ table: data }} />)
 
