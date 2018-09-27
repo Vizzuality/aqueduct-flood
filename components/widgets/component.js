@@ -6,7 +6,11 @@ import isEqual from 'lodash/isEqual';
 // utils
 import { updateSpec } from 'utils/widget';
 
+// theme
 import THEME from 'components/widgets/theme';
+
+// styles
+import './styles.scss';
 
 class Chart extends PureComponent {
   static propTypes = {
@@ -36,7 +40,12 @@ class Chart extends PureComponent {
     const { spec } = this.state;
 
     return (
-      <VegaChart spec={spec} theme={THEME} data={data} />
+      <VegaChart
+        className="c-widget"
+        spec={spec}
+        theme={THEME}
+        data={data}
+      />
     );
   }
 }
