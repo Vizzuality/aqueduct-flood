@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import {
   Sidebar,
   Tabs
@@ -15,6 +16,7 @@ import Layout from "layout/layout";
 // components
 import Risk from 'components/risk';
 import Analyzer from 'components/analyzer';
+import Hazard from 'components/hazard';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 import RiskOutputs from 'components/risk/outputs';
 
@@ -53,10 +55,16 @@ class Home extends PureComponent {
 
     const isAnalyzerTab = tab === 'cba';
     const isRiskTab = tab === 'risk';
+    const isHazardTab = tab === 'hazard';
     const { existing_prot: existingProt, prot_fut: protFut } = filters.cba;
     const { existing_prot: existingProtRisk } = filters.risk;
     const AnalyzertabReady = !!existingProt && !!protFut;
     const RiskTabReady = !!existingProtRisk;
+
+    const sidebarClass = classnames(
+      'l-sidebar',
+      { '-hazard-tab': isHazardTab }
+    );
 
     return (
       <Layout title="Homepage" description="Aqueduct Flood description">
@@ -64,7 +72,7 @@ class Home extends PureComponent {
           <Sidebar
             visible={sidebar}
             onToggle={nextVisible => { setSidebarVisibility(nextVisible)}}
-            customClass="l-sidebar"
+            customClass={sidebarClass}
           >
             <div className="overflow-container">
               <Tabs
@@ -74,11 +82,13 @@ class Home extends PureComponent {
               />
               {isAnalyzerTab && <Analyzer />}
               {isRiskTab && <Risk />}
+              {isHazardTab && <Hazard />}
             </div>
           </Sidebar>
 
           {isAnalyzerTab && AnalyzertabReady && <AnalyzerOutputs />}
           {isRiskTab && RiskTabReady && <RiskOutputs />}
+
 
           {(!isAnalyzerTab && !isRiskTab) && (
             <Map customClass="l-map">

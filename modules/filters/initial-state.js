@@ -5,7 +5,13 @@ export default {
     scenario: 'business as usual'
   },
   // hazard
-  hazard: {},
+  hazard: {
+    year: 2010,
+    flood: 'riverine',
+    scenario: 'business as usual',
+    projection_model: 'gf',
+    sub_scenario: false
+  },
   // risk
   risk: {
     scenario: 'business as usual',
