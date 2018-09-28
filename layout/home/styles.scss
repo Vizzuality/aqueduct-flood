@@ -25,6 +25,15 @@
         }
       }
     }
+
+    &.-hazard-tab {
+      height: auto;
+      background: none;
+
+      > .overflow-container {
+        overflow: visible;
+      }
+    }
   }
 
   .l-map {
