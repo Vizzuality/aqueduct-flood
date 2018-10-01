@@ -3,6 +3,7 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { Icons as AQIcons }  from 'aqueduct-components';
 
 // layout components
+import { Icons as WRIIcons } from 'wri-api-components';
 import Icons from 'components/ui/icons';
 
 export default class MyDocument extends Document {
@@ -27,6 +28,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           {/* icons */}
+          <WRIIcons />
           <AQIcons />
           <Icons />
 
