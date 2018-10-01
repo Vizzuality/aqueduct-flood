@@ -5,10 +5,6 @@ import {
   Sidebar,
   Tabs
 } from 'aqueduct-components';
-import Map, {
-  MapControls,
-  ZoomControl
-} from 'wri-api-components/dist/map';
 
 // layout
 import Layout from "layout/layout";
@@ -17,6 +13,7 @@ import Layout from "layout/layout";
 import Risk from 'components/risk';
 import Analyzer from 'components/analyzer';
 import Hazard from 'components/hazard';
+import HazardMap from 'components/hazard/map';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 import RiskOutputs from 'components/risk/outputs';
 
@@ -34,15 +31,22 @@ class Home extends PureComponent {
     setSidebarVisibility: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
-    clearInput: PropTypes.func.isRequired
+    clearInput: PropTypes.func.isRequired,
+    clearLayers: PropTypes.func.isRequired
   }
 
   onChangeTab = ({ value }) => {
-    const { setTab, setWidgets, clearInput } = this.props;
+    const {
+      setTab,
+      setWidgets,
+      clearInput,
+      clearLayers
+    } = this.props;
 
     setTab(value);
     setWidgets({ nextTab: value });
     clearInput();
+    clearLayers();
   }
 
   render() {
@@ -88,16 +92,7 @@ class Home extends PureComponent {
 
           {isAnalyzerTab && AnalyzertabReady && <AnalyzerOutputs />}
           {isRiskTab && RiskTabReady && <RiskOutputs />}
-
-
-          {(!isAnalyzerTab && !isRiskTab) && (
-            <Map customClass="l-map">
-              {(map) => (
-                <MapControls>
-                  <ZoomControl map={map} />
-                </MapControls>
-              )}
-            </Map>)}
+          {(!isAnalyzerTab && !isRiskTab) && <HazardMap />}
 
         </section>
       </Layout>

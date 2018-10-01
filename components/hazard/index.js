@@ -1,3 +1,12 @@
-import Hazard from "./component";
+import { connect } from 'react-redux';
 
-export default Hazard;
+// actions
+import { fetchLayers } from 'modules/layers/actions';
+
+// component
+import Hazard from './component';
+
+export default connect(
+  state => ({ filters: state.filters }),
+  { fetchLayers }
+)(Hazard);

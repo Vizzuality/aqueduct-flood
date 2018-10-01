@@ -1,3 +1,5 @@
+export const FETCH_DATASET_ID = 'c53a195f-d5f0-4acc-b1be-b773420a6606';
+
 export const YEAR_OPTIONS = [
   { label: 'Baseline', value: 2010, selected: true },
   { label: '2030', value: 2030, selected: false },
@@ -20,6 +22,7 @@ export const COASTAL_PROJECTION_MODEL_OPTIONS = [
 ];
 
 export default {
+  FETCH_DATASET_ID,
   YEAR_OPTIONS,
   RIVERINE_PROJECTION_MODEL_OPTIONS,
   COASTAL_PROJECTION_MODEL_OPTIONS
