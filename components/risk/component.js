@@ -10,7 +10,17 @@ import ApplyFilters from 'components/apply-filters';
 import './styles.scss';
 
 class Risk extends PureComponent {
-  static propTypes = { input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired }
+  static propTypes = {
+    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
+    advancedSettings: PropTypes.bool.isRequired,
+    setWidgets: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    const { setWidgets, advancedSettings } = this.props;
+
+    if (advancedSettings) setWidgets({ nextTab: 'advanced_risk' });
+  }
 
   render() {
     const {

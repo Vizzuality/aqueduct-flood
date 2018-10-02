@@ -6,6 +6,6 @@ export default {
     visible: false,
     options: {}
   },
-  input: { loading: true },
+  input: { loading: false },
   inputCompare: { loading: false }
 };

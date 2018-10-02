@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
@@ -17,25 +17,10 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 // styles
 import './styles.scss';
 
-
-class AnalyzerOutputs extends Component {
+class AnalyzerOutputs extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
-    filtersStatus: PropTypes.object.isRequired,
-    widgets: PropTypes.array.isRequired,
-    applyFilters: PropTypes.func.isRequired
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const { filtersStatus: nextFiltersStatus } = nextProps;
-
-    return nextFiltersStatus.applied;
-  }
-
-  componentDidUpdate() {
-    const { applyFilters } = this.props;
-
-    applyFilters(false);
+    widgets: PropTypes.array.isRequired
   }
 
   render() {
@@ -51,7 +36,7 @@ class AnalyzerOutputs extends Component {
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
                 >
-                  {({ data, params }) => {
+                  {({ data, params = {} }) => {
 
                     if (params.type === 'table') return (<TableChart data={data} />)
 

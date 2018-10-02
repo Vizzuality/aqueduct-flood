@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import Router from 'next/router';
 import classnames from 'classnames';
-import {
-  Sidebar,
-  Tabs
-} from 'aqueduct-components';
+import { Sidebar, Tabs } from 'aqueduct-components';
+import isEqual from 'lodash/isEqual';
+import { Base64 } from 'js-base64';
 
 // layout
 import Layout from "layout/layout";
@@ -17,22 +17,49 @@ import HazardMap from 'components/hazard/map';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 import RiskOutputs from 'components/risk/outputs';
 
-// constants
-import { APP_TABS } from 'constants/app';
-
 // styles
 import './styles.scss';
 
 class Home extends PureComponent {
   static propTypes = {
+    routes: PropTypes.object.isRequired,
     sidebar: PropTypes.bool.isRequired,
     tab: PropTypes.string.isRequired,
+    tabs: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
+    setRoutes: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
     clearInput: PropTypes.func.isRequired,
     clearLayers: PropTypes.func.isRequired
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { routes, filters, tab, setRoutes } = this.props;
+    const { routes: nextRoutes, filters: nextFilters, tab: nextTab } = nextProps;
+    const tabChanged = tab !== nextTab;
+    const routesChanged = !isEqual(routes, nextRoutes);
+    const filtersChanged = !isEqual(filters, nextFilters);
+
+    if (filtersChanged || tabChanged) {
+      setRoutes({
+        query: {
+          ...routes.query,
+          p: { ...nextFilters },
+          tab: nextTab
+        }
+      });
+    }
+
+    if (routesChanged) {
+      Router.replaceRoute('home',
+        {
+          tab: nextTab,
+          p: Base64.encode(JSON.stringify(nextFilters))
+        },
+        { shallow: true });
+    }
   }
 
   onChangeTab = ({ value }) => {
@@ -53,6 +80,7 @@ class Home extends PureComponent {
     const {
       sidebar,
       tab,
+      tabs,
       filters,
       setSidebarVisibility
     } = this.props;
@@ -80,7 +108,7 @@ class Home extends PureComponent {
           >
             <div className="overflow-container">
               <Tabs
-                tabs={APP_TABS}
+                tabs={tabs}
                 onChange={this.onChangeTab}
                 customClass="l-tabs"
               />

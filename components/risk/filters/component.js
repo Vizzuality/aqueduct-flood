@@ -77,7 +77,9 @@ class AnalyzerFilters extends PureComponent {
   onCheckAdvancedSettings = ({ checked }) => {
     const { setRiskFilter, setWidgets, scenarios } = this.props;
 
-    if (checked) setWidgets({ nextTab: 'advanced_risk' });
+    // if (checked) setWidgets({ nextTab: 'advanced_risk' });
+
+    setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
 
     setRiskFilter({
       advanced_settings: checked,

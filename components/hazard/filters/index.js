@@ -5,8 +5,12 @@ import { setHazardFilter } from 'modules/filters/actions';
 
 // component
 import HazardFilters from "./component";
+import { updatedTimeline } from './selectors';
 
 export default connect(
-  state => ({ filters: { ...state.filters.hazard } }),
+  state => ({
+    years: updatedTimeline(state),
+    filters: { ...state.filters.hazard }
+  }),
   { setHazardFilter }
 )(HazardFilters);

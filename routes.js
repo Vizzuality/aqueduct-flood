@@ -4,7 +4,7 @@ const nextRoutes = require('next-routes');
 const routes = nextRoutes();
 
 // ========================= APP ROUTES =====================
-routes.add('home', '/', 'home');
+routes.add('home', '/:tab?', 'home');
 routes.add('compare', '/compare', 'compare');
 
 module.exports = routes;
