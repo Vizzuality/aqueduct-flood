@@ -109,20 +109,18 @@ class RiskFilters extends PureComponent {
       scenarios
     } = this.props;
 
-    if (checked)  {
-      setWidgets({ nextTab: 'advanced_risk' });
-      setWidgetsCompare({ nextTab: 'advanced_risk' });
-    } else {
-      setWidgets({ nextTab: 'risk' });
-      setWidgetsCompare({ nextTab: 'risk' });
-    }
+    setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
+    setWidgetsCompare({ nextTab: checked ? 'advanced_risk' : 'risk' });
 
     setRiskFilter({
       advanced_settings: checked,
       ...!checked && { scenario: scenarios[0].value }
     });
 
-    setRiskCompareFilter({ ...!checked && { scenario: scenarios[0].value } })
+    setRiskCompareFilter({
+      advanced_settings: checked,
+      ...!checked && { scenario: scenarios[0].value }
+    })
   }
 
   onClearCompareFilters = () => {

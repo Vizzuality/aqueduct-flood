@@ -12,11 +12,3 @@ export default {
   list,
   listCompare: list
 };
-
-
-// export default {
-//   list: {
-//     countries: [{ name: 'Japan', uniquename: 'Japan'}],
-//   },
-//   listCompare: {}
-// };
