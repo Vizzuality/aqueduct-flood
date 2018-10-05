@@ -46,13 +46,10 @@ class RiskInputs extends PureComponent {
   }
 
   componentWillMount() {
-    const { filters, getCountryDefaults, onChangeFilter, setInput } = this.props;
-    const { geogunit_unique_name: location } = filters;
+    const { getCountryDefaults, onChangeFilter, setInput } = this.props;
 
-    if (location) {
-      getCountryDefaults(onChangeFilter)
-        .then(() => { setInput({ loading: false }) })
-    }
+    getCountryDefaults(onChangeFilter)
+      .then(() => { setInput({ loading: false }) })
   }
 
   componentWillReceiveProps(nextProps) {

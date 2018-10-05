@@ -1,11 +1,11 @@
-import { PureComponent } from 'react';
+import { Component } from 'react';
 
 // styles
 import 'wri-api-components/dist/bundle.css';
 import 'aqueduct-components/dist/main.css';
 import 'css/index.scss';
 
-class Page extends PureComponent {
+class Page extends Component {
   static async getInitialProps({
     asPath,
     pathname,

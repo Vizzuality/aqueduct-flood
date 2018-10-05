@@ -5,25 +5,24 @@ import * as actions from './actions';
 
 export default {
   [actions.setWidgetsCompare]: (state, { payload }) => {
-    const { nextTab } = payload;
+    const { nextTab, advancedSettings } = payload;
 
-    if (nextTab === 'advanced_risk') {
-
-      return [...state, ...WIDGETS[nextTab]].map(widget => ({
+    if (nextTab === 'risk' && advancedSettings) {
+      return [...WIDGETS.risk, ...WIDGETS.advanced_risk].map(widget => ({
         id: widget.id,
         params: widget.params || ({ title: widget.title }),
         data: widget.data || [],
-        loading: false,
-        error: null
+        loading: widget.loading || false,
+        error: widget.error || null
       }));
     }
 
-    return WIDGETS[nextTab].map(widget => ({
+    return [...WIDGETS[nextTab]].map(widget => ({
       id: widget.id,
-      params: { title: widget.title },
-      data: [],
-      loading: false,
-      error: null
+      params: widget.params || ({ title: widget.title }),
+      data: widget.data || [],
+      loading: widget.loading || false,
+      error: widget.error || null
     }));
   },
   [actions.setWidgetData]: (state, { payload }) => {

@@ -4,7 +4,6 @@ import { Field, Timeline, CustomSelect, Checkbox } from 'aqueduct-components';
 
 // constants
 import {
-  YEAR_OPTIONS,
   RIVERINE_PROJECTION_MODEL_OPTIONS,
   COASTAL_PROJECTION_MODEL_OPTIONS
 } from 'constants/hazard';
@@ -16,6 +15,7 @@ import './styles.scss';
 
 class HazardFilters extends PureComponent {
   static propTypes = {
+    years: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
     setHazardFilter: PropTypes.func.isRequired
   }
@@ -45,6 +45,7 @@ class HazardFilters extends PureComponent {
 
   render() {
     const {
+      years,
       filters,
       setHazardFilter
     } = this.props;
@@ -66,7 +67,7 @@ class HazardFilters extends PureComponent {
                 customClass="field-timeline"
               >
                 <Timeline
-                  items={YEAR_OPTIONS}
+                  items={years}
                   onChange={this.onChangeYear}
                 />
               </Field>

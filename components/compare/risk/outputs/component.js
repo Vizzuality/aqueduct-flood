@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
@@ -18,25 +18,11 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 // styles
 import './styles.scss';
 
-class RiskCompareOutputs extends Component {
+class RiskCompareOutputs extends PureComponent {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
-    filtersStatus: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
-    applyFilters: PropTypes.func.isRequired
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const { filtersStatus: nextFiltersStatus } = nextProps;
-
-    return nextFiltersStatus.applied;
-  }
-
-  componentDidUpdate() {
-    const { applyFilters } = this.props;
-
-    applyFilters(false);
   }
 
   render() {

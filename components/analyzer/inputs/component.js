@@ -79,9 +79,10 @@ class AnalyzerInputs extends PureComponent {
 
   componentWillMount() {
     const { filters, getCountryDefaults, onChangeFilter, setInput } = this.props;
-    const { geogunit_unique_name: location } = filters;
+    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
 
-    if (location) {
+    if (location && !existingProt) {
+      setInput({ loading: true })
       getCountryDefaults(onChangeFilter)
         .then(() => { setInput({ loading: false }) })
     }

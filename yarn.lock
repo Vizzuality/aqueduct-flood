@@ -1005,10 +1005,10 @@ aproba@^1.0.3, aproba@^1.1.1:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
 
-aqueduct-components@^1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.17.tgz#d0877fb4ffcc7ad06f9262c9617886f3535c3163"
-  integrity sha512-8a3/hMiv+5Li5E3y6jtCwvOv2xsTaU+Zzkc4DIBr7bVbNCvE7gj0eM2dpfuAaHpitL0Xi0dbH6ifRcD6nnK3fg==
+aqueduct-components@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/aqueduct-components/-/aqueduct-components-1.0.18.tgz#e2a79fb373d7a859ec34cce0ce7b771032cda8bb"
+  integrity sha512-eB61Vn6kDMwtkK3yYT6YwxCSSGRNdxvY/v5moXi35rgWQXaHM/71+8/TLpZ43rS8+jL5OsDNpTMwYsvXwF/OPw==
   dependencies:
     classnames "^2.2.5"
     clipboard "^2.0.1"
@@ -5020,6 +5020,11 @@ js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.8"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.8.tgz#57a9b130888f956834aa40c5b165ba59c758f033"
   integrity sha512-hm2nYpDrwoO/OzBhdcqs/XGT6XjSuSSCVEpia+Kl2J6x4CYt5hISlVL/AYU1khoDXv0AQVgxtdJySb9gjAn56Q==
+
+js-base64@^2.4.9:
+  version "2.4.9"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
+  integrity sha512-xcinL3AuDJk7VSzsHgb9DvvIXayBbadtMZ4HFPx8rUszbW1MuNMlwYVC4zzCZ6e1sqZpnNS5ZFYOhXqA39T7LQ==
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"

@@ -8,22 +8,21 @@ export default {
     const { nextTab } = payload;
 
     if (nextTab === 'advanced_risk') {
-
-      return [...state, ...WIDGETS[nextTab]].map(widget => ({
+      return [...WIDGETS.risk, ...WIDGETS[nextTab]].map(widget => ({
         id: widget.id,
         params: widget.params || ({ title: widget.title }),
         data: widget.data || [],
-        loading: false,
-        error: null
+        loading: widget.loading || false,
+        error: widget.error || null
       }));
     }
 
-    return WIDGETS[nextTab].map(widget => ({
+    return [...WIDGETS[nextTab]].map(widget => ({
       id: widget.id,
-      params: { title: widget.title },
-      data: [],
-      loading: false,
-      error: null
+      params: widget.params || ({ title: widget.title }),
+      data: widget.data || [],
+      loading: widget.loading || false,
+      error: widget.error || null
     }));
   },
   [actions.setWidgetData]: (state, { payload }) => {

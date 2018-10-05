@@ -8,9 +8,9 @@ import RiskCompare from "./component";
 
 export default connect(
   state => ({
-    tab: state.app.tab,
     filters: { ...state.filters.common, ...state.filters.risk },
-    filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.risk }
+    filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.risk },
+    advancedSettings: state.filtersCompare.risk.advanced_settings
   }),
   { setWidgetsCompare },
 )(RiskCompare);

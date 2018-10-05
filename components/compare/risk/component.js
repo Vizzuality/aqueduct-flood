@@ -13,16 +13,19 @@ import './styles.scss';
 
 class RiskCompare extends PureComponent {
   static propTypes = {
-    tab: PropTypes.string.isRequired,
+    advancedSettings: PropTypes.bool.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     setWidgetsCompare: PropTypes.func.isRequired
   }
 
   componentWillMount() {
-    const { tab, setWidgetsCompare } = this.props;
+    const { setWidgetsCompare, advancedSettings } = this.props;
 
-    setWidgetsCompare({ nextTab: tab });
+    setWidgetsCompare({
+      nextTab: 'risk',
+      advancedSettings
+    });
   }
 
   render() {
