@@ -21,23 +21,9 @@ import './styles.scss';
 class RiskCompareOutputs extends PureComponent {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
-    // filtersStatus: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
-    // applyFilters: PropTypes.func.isRequired
   }
-
-  // shouldComponentUpdate(nextProps) {
-  //   const { filtersStatus: nextFiltersStatus } = nextProps;
-
-  //   return nextFiltersStatus.applied;
-  // }
-
-  // componentDidUpdate() {
-  //   const { applyFilters } = this.props;
-
-  //   applyFilters(false);
-  // }
 
   render() {
     const { widgets, filters,  filtersCompare } = this.props;
