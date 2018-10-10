@@ -25,6 +25,18 @@ export default {
       error: widget.error || null
     }));
   },
+  [actions.setEmbedWidget]: (state, { payload }) => {
+    const { nextTab, id } = payload;
+
+    const embedWidget = WIDGETS[nextTab].find(_w => _w.id === id );
+    return [{
+      id: embedWidget.id,
+      params: embedWidget.params || ({ title: embedWidget.title }),
+      data: embedWidget.data || [],
+      loading: embedWidget.loading || false,
+      error: embedWidget.error || null
+    }];
+  },
   [actions.setWidgetData]: (state, { payload }) => {
     const widgetIndex = state.findIndex(w => w.id === payload.id);
     const newState = [...state];

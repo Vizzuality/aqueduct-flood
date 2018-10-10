@@ -7,4 +7,7 @@ const routes = nextRoutes();
 routes.add('home', '/:tab?', 'home');
 routes.add('compare', '/compare/:tab?', 'compare');
 
+// embed
+routes.add('widget-embed', '/embed/:tab/widget/:id', 'widget-embed');
+
 module.exports = routes;

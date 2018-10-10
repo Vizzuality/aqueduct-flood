@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -19,6 +20,7 @@ import './styles.scss';
 class AnalyzerOutputs extends Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
+    originalFormatFilters: PropTypes.object.isRequired,
     filtersStatus: PropTypes.object.isRequired,
     widgets: PropTypes.array.isRequired,
     applyFilters: PropTypes.func.isRequired
@@ -36,6 +38,12 @@ class AnalyzerOutputs extends Component {
     applyFilters(false);
   }
 
+  onShareWidget = ({ id }) => {
+    const { originalFormatFilters } = this.props;
+
+    console.log(`/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`)
+  }
+
   render() {
     const { filters, widgets } = this.props;
 
@@ -48,6 +56,7 @@ class AnalyzerOutputs extends Component {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
+                  onShareWidget={() => this.onShareWidget(widget)}
                 >
                   {({ data, params }) => {
 
