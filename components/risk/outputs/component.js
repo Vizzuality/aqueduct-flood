@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import { Base64 } from 'js-base64';
 
-// componets
+// components
 import Widget from 'components/risk/widget';
 import Chart from 'components/widgets';
 import TableChart from 'components/widgets/table/risk';
@@ -20,7 +21,15 @@ import './styles.scss';
 class AnalyzerOutputs extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
+    originalFormatFilters: PropTypes.object.isRequired,
     widgets: PropTypes.array.isRequired
+  }
+
+  onShareWidget = ({ id }) => {
+    const { originalFormatFilters } = this.props;
+    const isAdvancedRisk = originalFormatFilters.advanced_settings;
+
+    console.log(`/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`)
   }
 
   render() {
@@ -35,6 +44,7 @@ class AnalyzerOutputs extends PureComponent {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
+                  onShareWidget={() => this.onShareWidget(widget)}
                 >
                   {({ data, params = {} }) => {
 

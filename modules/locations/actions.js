@@ -77,6 +77,8 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
       .then(({ data }) => {
         const defaults = data[0] || {};
         setFilter({ ...defaults });
+
+        return { ...defaults };
       })
       .catch((err) => {
         if (err && typeof err.json === 'function') {

@@ -2,6 +2,7 @@ import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
 
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
+export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
 export const setWidgetData = createAction('WIDGETS__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS__SET-LOADING');
 export const setError = createAction('WIDGETS__SET-ERROR');
@@ -150,6 +151,7 @@ export const getWidgetHazardData = createThunkAction('WIDGETS__GET-HAZARD-DATA',
 
 export default {
   setWidgets,
+  setEmbedWidget,
   setWidgetData,
   setLoading,
   setError,
