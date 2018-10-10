@@ -5,10 +5,10 @@ import { Field, Timeline, CustomSelect, Checkbox } from 'aqueduct-components';
 // constants
 import {
   RIVERINE_PROJECTION_MODEL_OPTIONS,
-  COASTAL_PROJECTION_MODEL_OPTIONS
+  COASTAL_PROJECTION_MODEL_OPTIONS,
+  FLOOD_TYPES_OPTIONS,
+  SCENARIOS_OPTIONS
 } from 'constants/hazard';
-import { FLOOD_TYPE_OPTIONS } from 'constants/risk';
-import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
 // styles
 import './styles.scss';
@@ -25,13 +25,13 @@ class HazardFilters extends PureComponent {
 
     setHazardFilter({
       year: value,
-      ...value === 2010 && { scenario: 'business as usual' }
+      ...value === 2010 && { scenario: 'historical' }
     });
   }
 
   onChangeFlood = (opt) => {
     const { setHazardFilter } = this.props;
-    const isRiverine = opt && opt.value === 'riverine';
+    const isRiverine = opt && opt.value === 'inunriver';
 
     const projectionModelOptions = isRiverine ?
       RIVERINE_PROJECTION_MODEL_OPTIONS : COASTAL_PROJECTION_MODEL_OPTIONS;
@@ -49,7 +49,7 @@ class HazardFilters extends PureComponent {
       filters,
       setHazardFilter
     } = this.props;
-    const isCoastal = filters.flood === 'coastal';
+    const isCoastal = filters.flood === 'inuncoast';
     const isBaseline = filters.year === 2010;
     const modelProjectionOptions = isCoastal ?
       COASTAL_PROJECTION_MODEL_OPTIONS : RIVERINE_PROJECTION_MODEL_OPTIONS;
@@ -83,7 +83,7 @@ class HazardFilters extends PureComponent {
               >
                 <CustomSelect
                   instanceId="hazard-flood"
-                  options={FLOOD_TYPE_OPTIONS}
+                  options={FLOOD_TYPES_OPTIONS}
                   placeholder="Select a flood type..."
                   value={filters.flood}
                   onChange={this.onChangeFlood}
