@@ -1,8 +1,5 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
-import { Base64 } from 'js-base64';
-import { Router } from 'routes';
 import {
   Map,
   MapControls,
@@ -25,33 +22,18 @@ class HazardMap extends PureComponent {
     activeLayers: PropTypes.array.isRequired,
     // used by legend
     layers: PropTypes.array.isRequired,
-    filters: PropTypes.object.isRequired,
+    mapOptions: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     setActiveLayer: PropTypes.func.isRequired,
-    deleteActiveLayer: PropTypes.func.isRequired
+    deleteActiveLayer: PropTypes.func.isRequired,
+    setMapOptions: PropTypes.func.isRequired
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { activeLayers } = this.props;
-    const {
-      activeLayers: nextActiveLayers,
-      filters: nextFilters
-    } = nextProps;
-
-    const layersChanged = !isEqual(activeLayers, nextActiveLayers);
-
-
-    if (layersChanged) {
-      Router.replaceRoute('home',
-        {
-          tab: 'hazard',
-          p: Base64.encode(JSON.stringify({
-            ...nextFilters,
-            activeLayers: nextActiveLayers.map(_layer => _layer.id)
-          }))
-        },
-        { shallow: true });
-    }
+  componentWillMount() {
+    this.mapEvents = {
+      zoomend: this.setMapBounds,
+      dragend: this.setMapBounds
+    };
   }
 
   onClickLayer = (checked, layer) => {
@@ -60,15 +42,36 @@ class HazardMap extends PureComponent {
     return checked ? setActiveLayer(layer.id) : deleteActiveLayer(layer.id)
   }
 
+  setMapBounds = (e, map) => {
+    const { setMapOptions } = this.props;
+
+    const bounds = map.getBounds();
+    const north = bounds.getNorth();
+    const south = bounds.getSouth();
+    const east = bounds.getEast();
+    const west = bounds.getWest();
+
+    setMapOptions({
+      bounds: { bbox: [west, north, east, south] }
+    });
+  }
+
   render () {
-    const { activeLayers, layers, loading } = this.props;
+    const {
+      mapOptions,
+      activeLayers,
+      layers,
+      loading
+    } = this.props;
+    const { bounds } = mapOptions;
 
     return (
       <div className="l-hazard-map">
         {loading && <Spinner />}
         <Map
           mapOptions={{}}
-          events={{}}
+          bounds={bounds}
+          events={this.mapEvents}
         >
           {(map) => (
             <Fragment>

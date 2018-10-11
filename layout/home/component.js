@@ -27,6 +27,7 @@ class Home extends PureComponent {
     tab: PropTypes.string.isRequired,
     tabs: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
+    mapOptions: PropTypes.object.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
     setRoutes: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
@@ -36,17 +37,36 @@ class Home extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { routes, filters, tab, setRoutes } = this.props;
-    const { routes: nextRoutes, filters: nextFilters, tab: nextTab } = nextProps;
+    const {
+      routes,
+      filters,
+      activeLayers,
+      mapOptions,
+      tab,
+      setRoutes
+    } = this.props;
+    const {
+      routes: nextRoutes,
+      filters: nextFilters,
+      activeLayers: nextActiveLayers,
+      mapOptions: nextMapOptions,
+      tab: nextTab
+    } = nextProps;
     const tabChanged = tab !== nextTab;
     const routesChanged = !isEqual(routes, nextRoutes);
+    const mapOptionsChanged = !isEqual(mapOptions, nextMapOptions);
     const filtersChanged = !isEqual(filters, nextFilters);
+    const activeLayersChanged = !isEqual(activeLayers, nextActiveLayers);
 
-    if (filtersChanged || tabChanged) {
+    if (filtersChanged || mapOptionsChanged || activeLayersChanged || tabChanged) {
       setRoutes({
         query: {
           ...routes.query,
-          p: { ...nextFilters },
+          p: {
+            ...nextFilters,
+            activeLayers: nextActiveLayers.map(_layer => _layer.id),
+            map: { ...nextMapOptions }
+          },
           tab: nextTab
         }
       });
@@ -56,7 +76,11 @@ class Home extends PureComponent {
       Router.replaceRoute('home',
         {
           tab: nextTab,
-          p: Base64.encode(JSON.stringify(nextFilters))
+          p: Base64.encode(JSON.stringify({
+            ...nextFilters,
+            activeLayers: nextActiveLayers.map(_layer => _layer.id),
+            map: { ...nextMapOptions }
+          }))
         },
         { shallow: true });
     }
