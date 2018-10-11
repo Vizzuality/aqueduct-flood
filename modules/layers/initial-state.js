@@ -1,6 +1,6 @@
 export default {
   list: [],
-  activeLayer: null,
+  activeLayers: [],
   loading: true,
   error: null
 };

@@ -17,7 +17,8 @@ class HazardFilters extends PureComponent {
   static propTypes = {
     years: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
-    setHazardFilter: PropTypes.func.isRequired
+    setHazardFilter: PropTypes.func.isRequired,
+    resetActiveLayers: PropTypes.func.isRequired
   }
 
   onChangeYear = ({ value }) => {
@@ -30,7 +31,7 @@ class HazardFilters extends PureComponent {
   }
 
   onChangeFlood = (opt) => {
-    const { setHazardFilter } = this.props;
+    const { setHazardFilter, resetActiveLayers } = this.props;
     const isRiverine = opt && opt.value === 'inunriver';
 
     const projectionModelOptions = isRiverine ?
@@ -41,6 +42,8 @@ class HazardFilters extends PureComponent {
       ...isRiverine && { sub_scenario: false },
       projection_model: projectionModelOptions.find(_opt => _opt.default).value
     });
+
+    resetActiveLayers();
   }
 
   render() {

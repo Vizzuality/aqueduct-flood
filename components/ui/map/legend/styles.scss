@@ -1,0 +1,15 @@
+@import 'css/settings';
+
+.c-hazard-legend {
+  padding: $space-1 * 2;
+
+  > .layer-list {
+
+    >.layer-list-item {
+
+      &:not(:first-child) {
+        margin: $space-1 0 0 0;
+      }
+    }
+  }
+}

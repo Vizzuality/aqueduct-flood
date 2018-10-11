@@ -1,35 +1,39 @@
 import { createSelector } from 'reselect';
-import sortBy from 'lodash/sortBy';
 
-import { FETCH_DATASET_ID } from 'constants/hazard'
+// mockup
+import HAZARD_LAYERS_MOCKUP from 'data/hazard-layers';
 
 const layers = state => state.layers.list;
-const activeLayer = state => state.layers.activeLayer;
+const getActiveLayer = state => state.layers.activeLayers;
+const getFloodFilter = state => state.filters.hazard.flood;
 
 export const updatedLayers = createSelector(
-  [layers, activeLayer],
-  (_layers, _activeLayer) =>_layers.map(_l => ({
-      ..._l,
-      ..._l.id === _activeLayer && { active: true }
-    }))
+  [layers, getActiveLayer, getFloodFilter],
+  (_layers, _activeLayers, floodFilter) => {
+    const layerIds = HAZARD_LAYERS_MOCKUP[floodFilter];
+
+    return _layers
+      .filter(_layer => layerIds.includes(_layer.id))
+      .map((_l) => ({
+        ..._l,
+        ..._activeLayers.includes(_l.id) && { active: true }
+      }))
+      .sort((a, b) => {
+        if (a.name === b.name) return 0;
+
+        if (a.name > b.name) return 1;
+
+        return -1;
+      });
+  }
 );
 
-export const sortedUpdatedLayers = createSelector(
+export const getActiveLayers = createSelector(
   [updatedLayers],
-  _layers => sortBy(_layers, l => l.active)
-);
-
-export const getLayerGroups = createSelector(
-  [updatedLayers],
-  (_layers) => [{
-    dataset: FETCH_DATASET_ID,
-    visibility: true,
-    layers: _layers
-  }]
+  (_updatedLayers) => _updatedLayers.filter(_layer => _layer.active)
 );
 
 export default {
   updatedLayers,
-  sortedUpdatedLayers,
-  getLayerGroups
+  getActiveLayers
 };
