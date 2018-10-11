@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 // actions
 import { setActiveLayer, deleteActiveLayer } from 'modules/layers/actions';
+import { setMapOptions } from 'modules/map/actions';
 
 // selectors
 import {
@@ -16,11 +17,12 @@ export default connect(
   state => ({
     activeLayers: getActiveLayers(state),
     layers: updatedLayers(state),
-    filters: state.filters,
+    mapOptions: state.map,
     loading: state.layers.loading
   }),
   {
     setActiveLayer,
-    deleteActiveLayer
+    deleteActiveLayer,
+    setMapOptions
   }
 )(HazardMap);

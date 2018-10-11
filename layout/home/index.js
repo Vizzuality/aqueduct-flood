@@ -4,7 +4,8 @@ import { setRoutes } from 'modules/routes/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import { clearLayers } from 'modules/layers/actions';
 
-// selector
+// selectors
+import { getActiveLayers } from 'components/hazard/map/selectors';
 import { updatedTabs } from './selectors';
 
 // component
@@ -16,7 +17,9 @@ export default connect(
     sidebar: state.app.sidebar,
     tab: state.app.tab,
     tabs: updatedTabs(state),
-    filters: state.filters
+    filters: state.filters,
+    mapOptions: state.map,
+    activeLayers: getActiveLayers(state)
   }),
   {
     setSidebarVisibility,
