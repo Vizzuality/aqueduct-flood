@@ -15,8 +15,11 @@ class MapChart extends PureComponent {
         <div className="side">
           <Map customClass="widget-map">
             {(map) => (
-              <MapControls>
-                <ZoomControl map={map} />
+              <MapControls customClass="map-controls">
+                <ZoomControl
+                  customClass="zoom-controls"
+                  map={map}
+                />
               </MapControls>
             )}
           </Map>
@@ -24,8 +27,11 @@ class MapChart extends PureComponent {
         <div className="side">
           <Map customClass="widget-map">
             {(map) => (
-              <MapControls>
-                <ZoomControl map={map} />
+              <MapControls customClass="map-controls">
+                <ZoomControl
+                  customClass="zoom-controls"
+                  map={map}
+                />
               </MapControls>
             )}
           </Map>

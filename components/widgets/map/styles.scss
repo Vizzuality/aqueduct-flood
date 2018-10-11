@@ -9,6 +9,35 @@
 
     > .widget-map {
       min-height: auto;
+
+      .map-controls {
+        top: $space-1;
+        right: $space-1;
+
+        .zoom-controls {
+          > button {
+            width: 24px;
+            height: 24px;
+            transition: background-color linear $animation-time;
+
+            &:hover {
+              background: palette(gray, lightest)
+            }
+
+            &:not(:first-child) {
+              border-top: 1px solid palette(gray);
+            }
+
+            &:disabled {
+              cursor: default;
+
+              &:hover {
+                background: inherit;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

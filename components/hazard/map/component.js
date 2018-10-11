@@ -83,8 +83,11 @@ class HazardMap extends PureComponent {
                 ))}
               </LayerManager>
 
-              <MapControls>
-                <ZoomControl map={map} />
+              <MapControls customClass="map-controls">
+                <ZoomControl
+                  map={map}
+                  customClass="zoom-controls"
+                />
               </MapControls>
 
               {layers.length && (
