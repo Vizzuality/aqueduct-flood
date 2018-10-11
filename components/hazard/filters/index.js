@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 // acctions
 import { setHazardFilter } from 'modules/filters/actions';
+import { resetActiveLayers } from 'modules/layers/actions';
 
 // component
 import HazardFilters from "./component";
@@ -12,5 +13,8 @@ export default connect(
     years: updatedTimeline(state),
     filters: { ...state.filters.hazard }
   }),
-  { setHazardFilter }
+  {
+    setHazardFilter,
+    resetActiveLayers
+  }
 )(HazardFilters);

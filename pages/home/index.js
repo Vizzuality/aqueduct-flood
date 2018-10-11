@@ -19,6 +19,7 @@ import {
   setHazardFilter,
   setCostFilter
 } from 'modules/filters/actions';
+import { setActiveLayer } from "modules/layers/actions";
 
 class HomePage extends Page {
   static async getInitialProps(context) {
@@ -39,12 +40,15 @@ class HomePage extends Page {
 
     if (query.p) {
       const filters = JSON.parse(Base64.decode(decodeURIComponent(query.p)));
-      const { common, risk, hazard, cba } = filters;
+      const { common, risk, hazard, cba, activeLayers } = filters;
 
       store.dispatch(setCommonFilter(common));
       store.dispatch(setRiskFilter(risk));
       store.dispatch(setHazardFilter(hazard));
       store.dispatch(setCostFilter(cba));
+
+      // don't like this too much... Review later
+      activeLayers.map(_layerId => store.dispatch(setActiveLayer(_layerId)));
     }
 
     return { ...props };

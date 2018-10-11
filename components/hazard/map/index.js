@@ -1,19 +1,26 @@
 import { connect } from 'react-redux';
 
 // actions
-import { setActiveLayer } from 'modules/layers/actions';
+import { setActiveLayer, deleteActiveLayer } from 'modules/layers/actions';
 
 // selectors
-import { sortedUpdatedLayers, getLayerGroups } from './selectors';
+import {
+  updatedLayers,
+  getActiveLayers
+} from './selectors';
 
 // component
 import HazardMap from './component';
 
 export default connect(
   state => ({
-    layers: sortedUpdatedLayers(state),
-    layerGroups: getLayerGroups(state),
+    activeLayers: getActiveLayers(state),
+    layers: updatedLayers(state),
+    filters: state.filters,
     loading: state.layers.loading
   }),
-  { setActiveLayer }
+  {
+    setActiveLayer,
+    deleteActiveLayer
+  }
 )(HazardMap);

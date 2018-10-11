@@ -7,9 +7,9 @@ export default {
   // hazard
   hazard: {
     year: 2010,
-    flood: 'riverine',
-    scenario: 'business as usual',
-    projection_model: 'gf',
+    flood: 'inunriver',
+    scenario: 'historical',
+    projection_model: '0000GFDL-ESM2M',
     sub_scenario: false
   },
   // risk

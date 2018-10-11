@@ -7,6 +7,8 @@ import { FETCH_DATASET_ID } from 'constants/hazard';
 
 export const setLayers = createAction('LAYERS__SET-LAYERS');
 export const setActiveLayer = createAction('LAYERS__SET-ACTIVE-LAYER');
+export const deleteActiveLayer = createAction('LAYERS__DELETE-ACTIVE-LAYER');
+export const resetActiveLayers = createAction('LAYERS__RESET-ACTIVE-LAYERS');
 export const setLoading = createAction('LAYERS__SET-LOADING');
 export const setError = createAction('LAYERS__SET-ERRORS');
 export const clearLayers = createAction('LAYERS__CLEAR-LAYERS');
@@ -27,8 +29,6 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-LAYERS', () =>
       .then(response => WRISerializer(response))
       .then(({ layer }) => {
         dispatch(setLoading(false));
-
-        if (layer[0]) dispatch(setActiveLayer(layer[0].id))
         dispatch(setLayers(layer));
       })
       .catch((err) => {
@@ -48,6 +48,8 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-LAYERS', () =>
 export default {
   setLayers,
   setActiveLayer,
+  deleteActiveLayer,
+  resetActiveLayers,
   setLoading,
   setError,
   clearLayers,
