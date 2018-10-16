@@ -22,6 +22,7 @@ import {
 import { setActiveLayer } from "modules/layers/actions";
 import { setMapOptions } from "modules/map/actions";
 import { setReturnPeriod } from 'components/ui/map/legend/actions';
+import { fetchCache } from "modules/cba-cache/actions";
 
 class HomePage extends Page {
   static async getInitialProps(context) {
@@ -61,6 +62,8 @@ class HomePage extends Page {
 
       if (activeLayers) store.dispatch(setActiveLayer(activeLayers));
     }
+
+    if (queryTab === 'cba') store.dispatch(fetchCache());
 
     return { ...props };
   }

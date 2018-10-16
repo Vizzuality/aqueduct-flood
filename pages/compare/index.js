@@ -26,6 +26,7 @@ import {
   setHazardCompareFilter,
   setCostCompareFilter,
 } from 'modules/filters-compare/actions';
+import { fetchCache } from 'modules/cba-cache/actions';
 
 
 class Compare extends Page {
@@ -77,6 +78,8 @@ class Compare extends Page {
         advancedSettings: params.filtersCompare.risk ? params.filtersCompare.risk.advanced_settings : false
       }));
     }
+
+    if (queryTab === 'cba') store.dispatch(fetchCache());
 
     return { ...props };
   }

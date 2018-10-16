@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { replace } from 'aqueduct-components';
+import { replace, Spinner } from 'aqueduct-components';
 import { Base64 } from 'js-base64';
+import isEqual from 'lodash/isEqual';
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -22,10 +23,15 @@ class AnalyzerOutputs extends Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
+    cbaCache: PropTypes.shape({
+      ready: PropTypes.bool.isRequired,
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
     filtersStatus: PropTypes.object.isRequired,
     widgets: PropTypes.array.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
+    fetchCache: PropTypes.func.isRequired
   }
 
   shouldComponentUpdate(nextProps) {
@@ -60,13 +66,15 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters, widgets } = this.props;
+    const { filters, widgets, cbaCache } = this.props;
+    const { ready, loading } = cbaCache;
 
     return (
       <div className="c-analyzer-outputs">
         <div className="wrapper">
           <div className="container">
-            {widgets.map(widget => (
+            {loading && <Spinner className="-transparent" />}
+            {ready && widgets.map(widget => (
               <div key={widget.id} className="widget-row">
                 {widget.id === 'inundation_map' ? (
                   <WidgetMap

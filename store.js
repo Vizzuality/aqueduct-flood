@@ -17,6 +17,7 @@ import * as widgetsModule from 'modules/widgets';
 import * as widgetsCompareModule from 'modules/widgets-compare';
 import * as filtersModule from 'modules/filters';
 import * as filtersCompareModule from 'modules/filters-compare';
+import * as cbaCacheCompareModule from 'modules/cba-cache';
 
 const reducer = combineReducers({
   // Global
@@ -31,7 +32,8 @@ const reducer = combineReducers({
   widgets: handleModule(widgetsModule),
   widgetsCompare: handleModule(widgetsCompareModule),
   filters: handleModule(filtersModule),
-  filtersCompare: handleModule(filtersCompareModule)
+  filtersCompare: handleModule(filtersCompareModule),
+  cbaCache: handleModule(cbaCacheCompareModule)
 });
 
 const initStore = (initialState = {}) => createStore(

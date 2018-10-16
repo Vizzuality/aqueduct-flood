@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 // actions
 import { applyFilters, setModal } from 'modules/app/actions';
+import { fetchCache } from 'modules/cba-cache/actions';
 
 // component
 import AnalyzerOutputs from './component';
@@ -12,9 +13,11 @@ export default connect(
     originalFormatFilters: state.filters,
     filtersStatus: state.app.filters,
     widgets: state.widgets,
+    cbaCache: state.cbaCache
   }),
   {
     applyFilters,
-    setModal
+    setModal,
+    fetchCache
   }
 )(AnalyzerOutputs);

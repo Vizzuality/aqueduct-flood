@@ -13,7 +13,8 @@ export default connect(
     filters: { ...state.filters.common, ...state.filters.cba },
     filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.cba },
     originalFormatFilters: state.filters,
-    originalFormatCompareFilters: state.filtersCompare
+    originalFormatCompareFilters: state.filtersCompare,
+    cbaCache: state.cbaCache
   }),
   {
     applyFilters,

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { replace } from 'aqueduct-components';
 import { Base64 } from 'js-base64';
+=======
+import { replace, Spinner } from 'aqueduct-components';
+>>>>>>> Adds CBA cache
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -28,7 +32,9 @@ class AnalyzerCompareOutputs extends Component {
     applyFilters: PropTypes.func.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
     originalFormatCompareFilters: PropTypes.object.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
+    cbaCache: PropTypes.object.isRequired,
+    applyFilters: PropTypes.func.isRequired
   }
 
   shouldComponentUpdate(nextProps) {
@@ -63,15 +69,18 @@ class AnalyzerCompareOutputs extends Component {
   }
 
   render() {
-    const { widgets, filters, filtersCompare } = this.props;
+    const { widgets, filters, filtersCompare, cbaCache } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
-    const widgetsReadyToDisplay = location && existingProt;
-    const widgetsCompareReadyToDisplay = locationCompare && existingProtCompare;
+    const { ready, loading } = cbaCache;
+    const widgetsReadyToDisplay = location && existingProt && ready;
+    const widgetsCompareReadyToDisplay = locationCompare && existingProtCompare && ready;
+
 
     return (
       <div className="c-analyzer-compare-outputs">
         <div className="wrapper">
+          {loading && <Spinner className="-transparent" />}
           {widgetsReadyToDisplay && widgets.map(widget => (
             <div key={widget.id} className="row">
               <div className="col-md-6">
