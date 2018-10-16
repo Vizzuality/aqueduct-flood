@@ -7,7 +7,7 @@ export const getUniqueVocabulary = (filters = {}) => {
 
   const isPerc = ['5.0', '50.0'].includes(model);
 
-  return `${flood}_${year}_${scenario}_${isPerc ? 'perc': 'None'}_${subsidience}_${model}`;
+  return `${flood}_${year === '1980.0' ? 'None' : year}_${scenario}_${isPerc ? 'perc': 'None'}_${subsidience}_${model}`;
 }
 
 export default { getUniqueVocabulary};
