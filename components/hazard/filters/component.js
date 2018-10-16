@@ -26,7 +26,7 @@ class HazardFilters extends PureComponent {
 
     setHazardFilter({
       year: value,
-      ...value === 'None' && { scenario: 'historical' }
+      ...value === '1980.0' && { scenario: 'historical' }
     });
   }
 
@@ -39,7 +39,7 @@ class HazardFilters extends PureComponent {
 
     setHazardFilter({
       flood: opt && opt.value,
-      ...isRiverine && { sub_scenario: false },
+      sub_scenario: !isRiverine,
       projection_model: projectionModelOptions.find(_opt => _opt.default).value
     });
 
@@ -53,7 +53,7 @@ class HazardFilters extends PureComponent {
       setHazardFilter
     } = this.props;
     const isCoastal = filters.flood === 'inuncoast';
-    const isBaseline = filters.year === 'None';
+    const isBaseline = filters.year === '1980.0';
     const modelProjectionOptions = isCoastal ?
       COASTAL_PROJECTION_MODEL_OPTIONS : RIVERINE_PROJECTION_MODEL_OPTIONS;
 
@@ -114,10 +114,12 @@ class HazardFilters extends PureComponent {
               <Field
                 name="hazard-projection-model"
                 label="Projection Model"
+                disabled={isBaseline}
                 className="-bigger"
               >
                 <CustomSelect
                   instanceId="hazard-projection-model"
+                  isDisabled={isBaseline}
                   options={modelProjectionOptions}
                   placeholder="Select a projection model"
                   value={filters.projection_model}

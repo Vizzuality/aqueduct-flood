@@ -57,7 +57,6 @@ class HomePage extends Page {
       store.dispatch(setMapOptions({ ...map }))
 
       // don't like this too much... Review later
-      console.log(activeLayers)
       if(activeLayers) store.dispatch(setActiveLayer(activeLayers));
     }
 

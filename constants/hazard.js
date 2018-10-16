@@ -2,7 +2,7 @@
 export const FETCH_DATASET_ID = 'e1b4cd78-cef0-41e9-be02-2d94010114b3';
 
 export const YEAR_OPTIONS = [
-  { label: 'Baseline', value: 'None', selected: true },
+  { label: 'Baseline', value: '1980.0', selected: true },
   { label: '2030', value: '2030.0', selected: false },
   { label: '2050', value: '2050.0', selected: false },
   { label: '2080', value: '2080.0', selected: false }
