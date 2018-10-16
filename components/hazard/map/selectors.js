@@ -1,19 +1,12 @@
 import { createSelector } from 'reselect';
 
-// mockup
-import HAZARD_LAYERS_MOCKUP from 'data/hazard-layers';
-
 const layers = state => state.layers.list;
 const getActiveLayer = state => state.layers.activeLayers;
-const getFloodFilter = state => state.filters.hazard.flood;
 
 export const updatedLayers = createSelector(
-  [layers, getActiveLayer, getFloodFilter],
-  (_layers, _activeLayers, floodFilter) => {
-    const layerIds = HAZARD_LAYERS_MOCKUP[floodFilter];
-
-    return _layers
-      .filter(_layer => layerIds.includes(_layer.id))
+  [layers, getActiveLayer],
+  (_layers, _activeLayers) =>
+    _layers
       .map((_l) => ({
         ..._l,
         ..._activeLayers.includes(_l.id) && { active: true }
@@ -24,9 +17,8 @@ export const updatedLayers = createSelector(
         if (a.name > b.name) return 1;
 
         return -1;
-      });
-  }
-);
+      })
+    );
 
 export const getActiveLayers = createSelector(
   [updatedLayers],

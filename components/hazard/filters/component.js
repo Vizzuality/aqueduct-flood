@@ -26,7 +26,7 @@ class HazardFilters extends PureComponent {
 
     setHazardFilter({
       year: value,
-      ...value === 2010 && { scenario: 'historical' }
+      ...value === 'None' && { scenario: 'historical' }
     });
   }
 
@@ -53,7 +53,7 @@ class HazardFilters extends PureComponent {
       setHazardFilter
     } = this.props;
     const isCoastal = filters.flood === 'inuncoast';
-    const isBaseline = filters.year === 2010;
+    const isBaseline = filters.year === 'None';
     const modelProjectionOptions = isCoastal ?
       COASTAL_PROJECTION_MODEL_OPTIONS : RIVERINE_PROJECTION_MODEL_OPTIONS;
 

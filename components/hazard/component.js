@@ -11,6 +11,7 @@ import './styles.scss';
 class Hazard extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
+    setActiveLayer: PropTypes.func.isRequired,
     fetchLayers: PropTypes.func.isRequired
   }
 
@@ -21,11 +22,14 @@ class Hazard extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { filters, fetchLayers } = this.props;
+    const { filters, fetchLayers, setActiveLayer } = this.props;
     const { filters: nextFilters } = nextProps;
     const hazardFiltersChanged = !isEqual(filters.hazard, nextFilters.hazard);
 
-    if (hazardFiltersChanged) fetchLayers();
+    if (hazardFiltersChanged)  {
+      setActiveLayer([]);
+      fetchLayers();
+    }
   }
 
   render() {

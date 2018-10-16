@@ -37,9 +37,13 @@ class HazardMap extends PureComponent {
   }
 
   onClickLayer = (checked, layer) => {
-    const { setActiveLayer, deleteActiveLayer } = this.props;
+    const { setActiveLayer, activeLayers } = this.props
 
-    return checked ? setActiveLayer(layer.id) : deleteActiveLayer(layer.id)
+    if (checked) {
+      setActiveLayer([...activeLayers.map(_l => _l.id), ...[layer.id]]);
+    } else {
+      setActiveLayer(activeLayers.filter(_layer => _layer.id !== layer.id).map(_l => _l.id))
+    }
   }
 
   setMapBounds = (e, map) => {
