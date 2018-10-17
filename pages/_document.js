@@ -28,9 +28,9 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           {/* icons */}
-          <WRIIcons />
-          <AQIcons />
           <Icons />
+          <AQIcons />
+          <WRIIcons />
 
           {/* Main */}
           <Main />
