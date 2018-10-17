@@ -5,10 +5,7 @@ import { setActiveLayer, deleteActiveLayer } from 'modules/layers/actions';
 import { setMapOptions } from 'modules/map/actions';
 
 // selectors
-import {
-  updatedLayers,
-  getActiveLayers
-} from './selectors';
+import { updatedLayers, getActiveLayers } from 'modules/layers/selectors';
 
 // component
 import HazardMap from './component';

@@ -3,12 +3,41 @@
 .c-hazard-legend {
   padding: $space-1 * 2;
 
-  > .layer-list {
+  > .container {
+    position: relative;
 
-    >.layer-list-item {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: $space-1 * 2;
+      background: linear-gradient(to bottom, rgba(palette(white), 1), rgba(palette(white), 0));
+      z-index: 2;
+    }
 
-      &:not(:first-child) {
-        margin: $space-1 0 0 0;
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: $space-1 * 2;
+      background: linear-gradient(to top, rgba(palette(white), 1), rgba(palette(white), 0));
+    }
+
+    > .layer-list {
+      overflow: auto;
+      max-height: 115px;
+      padding: $space-1* 2 0;
+      margin: $space-1 * 2 0 0 0;
+
+      > .layer-list-item {
+
+        &:not(:first-child) {
+          margin: $space-1 0 0 0;
+        }
       }
     }
   }

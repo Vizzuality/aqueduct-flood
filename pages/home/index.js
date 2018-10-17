@@ -21,6 +21,7 @@ import {
 } from 'modules/filters/actions';
 import { setActiveLayer } from "modules/layers/actions";
 import { setMapOptions } from "modules/map/actions";
+import { setReturnPeriod } from 'components/ui/map/legend/actions';
 
 class HomePage extends Page {
   static async getInitialProps(context) {
@@ -56,8 +57,9 @@ class HomePage extends Page {
       store.dispatch(setCostFilter(cba));
       store.dispatch(setMapOptions({ ...map }))
 
-      // don't like this too much... Review later
-      if(activeLayers) store.dispatch(setActiveLayer(activeLayers));
+      if (map.returnPeriod) store.dispatch(setReturnPeriod(map.returnPeriod));
+
+      if (activeLayers) store.dispatch(setActiveLayer(activeLayers));
     }
 
     return { ...props };

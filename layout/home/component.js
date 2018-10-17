@@ -28,6 +28,8 @@ class Home extends PureComponent {
     tabs: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
     mapOptions: PropTypes.object.isRequired,
+    hazardLegend: PropTypes.object.isRequired,
+    activeLayers: PropTypes.array.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
     setRoutes: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
@@ -43,6 +45,7 @@ class Home extends PureComponent {
       activeLayers,
       mapOptions,
       tab,
+      hazardLegend,
       setRoutes
     } = this.props;
     const {
@@ -50,6 +53,7 @@ class Home extends PureComponent {
       filters: nextFilters,
       activeLayers: nextActiveLayers,
       mapOptions: nextMapOptions,
+      hazardLegend: nextHazardLegend,
       tab: nextTab
     } = nextProps;
     const tabChanged = tab !== nextTab;
@@ -57,15 +61,19 @@ class Home extends PureComponent {
     const mapOptionsChanged = !isEqual(mapOptions, nextMapOptions);
     const filtersChanged = !isEqual(filters, nextFilters);
     const activeLayersChanged = !isEqual(activeLayers, nextActiveLayers);
+    const hazardLegendChanged = !isEqual(hazardLegend, nextHazardLegend);
 
-    if (filtersChanged || mapOptionsChanged || activeLayersChanged || tabChanged) {
+    if (filtersChanged || mapOptionsChanged || activeLayersChanged || tabChanged || hazardLegendChanged) {
       setRoutes({
         query: {
           ...routes.query,
           p: {
             ...nextFilters,
             activeLayers: nextActiveLayers.map(_layer => _layer.id),
-            map: { ...nextMapOptions }
+            map: {
+              ...nextMapOptions,
+              ...nextHazardLegend
+            }
           },
           tab: nextTab
         }
@@ -79,7 +87,10 @@ class Home extends PureComponent {
           p: Base64.encode(JSON.stringify({
             ...nextFilters,
             activeLayers: nextActiveLayers.map(_layer => _layer.id),
-            map: { ...nextMapOptions }
+            map: {
+              ...nextMapOptions,
+              ...nextHazardLegend
+            }
           }))
         },
         { shallow: true });

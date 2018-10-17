@@ -5,7 +5,7 @@ import { setWidgets } from 'modules/widgets/actions';
 import { clearLayers } from 'modules/layers/actions';
 
 // selectors
-import { getActiveLayers } from 'components/hazard/map/selectors';
+import { getActiveLayers } from 'modules/layers/selectors';
 import { updatedTabs } from './selectors';
 
 // component
@@ -19,7 +19,8 @@ export default connect(
     tabs: updatedTabs(state),
     filters: state.filters,
     mapOptions: state.map,
-    activeLayers: getActiveLayers(state)
+    activeLayers: getActiveLayers(state),
+    hazardLegend: state.hazardLegend,
   }),
   {
     setSidebarVisibility,

@@ -102,10 +102,7 @@ class HazardMap extends PureComponent {
                   maxWidth={500}
                   maxHeight={300}
                 >
-                  <HazardLegend
-                    layers={layers}
-                    onClickLayer={this.onClickLayer}
-                  />
+                  <HazardLegend onClickLayer={this.onClickLayer} />
                 </Legend>)}
             </Fragment>
           )}
