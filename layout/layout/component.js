@@ -9,11 +9,13 @@ import { Router } from 'routes';
 
 import { Modal } from 'aqueduct-components';
 
-// Components
+// components
 import LoadingBar from 'react-redux-loading-bar';
 import Head from 'layout/head';
 import Header from 'layout/header';
+// components – modals
 import ModalInfo from 'components/ui/modals/modal-info';
+import ModalShareWidget from 'components/ui/modals/modal-share-widget';
 
 class Layout extends PureComponent {
   static propTypes = {
@@ -67,6 +69,7 @@ class Layout extends PureComponent {
           customClass="app-modal"
         >
           {modalOptions.type === 'info' && <ModalInfo options={modalOptions} />}
+          {modalOptions.type === 'widget-share' && <ModalShareWidget options={modalOptions} />}
         </Modal>
       </div>
     );

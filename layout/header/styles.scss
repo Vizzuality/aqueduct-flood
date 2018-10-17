@@ -1,11 +1,15 @@
 @import 'css/settings';
 
 .l-header {
-  padding: 0 0 0 $padding-md;
+  padding: 0 $padding-md;
 
   .aq__list {
     .aq__c-icon {
       fill: palette(sand);
     }
+  }
+
+  &.-embed {
+    padding: 0;
   }
 }

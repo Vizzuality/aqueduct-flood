@@ -23,7 +23,8 @@ class AnalyzerOutputs extends Component {
     originalFormatFilters: PropTypes.object.isRequired,
     filtersStatus: PropTypes.object.isRequired,
     widgets: PropTypes.array.isRequired,
-    applyFilters: PropTypes.func.isRequired
+    applyFilters: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
   }
 
   shouldComponentUpdate(nextProps) {
@@ -38,10 +39,23 @@ class AnalyzerOutputs extends Component {
     applyFilters(false);
   }
 
-  onShareWidget = ({ id }) => {
+  onShareWidget = (widget) => {
+    const { setModal } = this.props;
+
+    setModal(({
+      visible: true,
+      options: {
+        type: 'widget-share',
+        widget,
+        embedURL: this.getEmbedURL(widget)
+      }
+    }));
+  }
+
+  getEmbedURL = ({ id }) => {
     const { originalFormatFilters } = this.props;
 
-    console.log(`/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`)
+    return `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
   }
 
   render() {

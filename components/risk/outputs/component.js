@@ -22,14 +22,28 @@ class AnalyzerOutputs extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
-    widgets: PropTypes.array.isRequired
+    widgets: PropTypes.array.isRequired,
+    setModal: PropTypes.func.isRequired
   }
 
-  onShareWidget = ({ id }) => {
+  onShareWidget = (widget) => {
+    const { setModal } = this.props;
+
+    setModal(({
+      visible: true,
+      options: {
+        type: 'widget-share',
+        widget,
+        embedURL: this.getEmbedURL(widget)
+      }
+    }));
+  }
+
+  getEmbedURL = ({ id }) => {
     const { originalFormatFilters } = this.props;
     const isAdvancedRisk = originalFormatFilters.advanced_settings;
 
-    console.log(`/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`)
+    return `/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
   }
 
   render() {

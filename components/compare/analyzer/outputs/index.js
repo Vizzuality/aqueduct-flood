@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { applyFilters } from 'modules/app/actions';
+
+// actions
+import { applyFilters, setModal } from 'modules/app/actions';
 
 // component
 import AnalyzerOutputs from './component';
@@ -9,7 +11,12 @@ export default connect(
     widgets: state.widgets,
     filtersStatus: state.app.filters,
     filters: { ...state.filters.common, ...state.filters.cba },
-    filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.cba }
+    filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.cba },
+    originalFormatFilters: state.filters,
+    originalFormatCompareFilters: state.filtersCompare
   }),
-  { applyFilters }
+  {
+    applyFilters,
+    setModal
+  }
 )(AnalyzerOutputs);

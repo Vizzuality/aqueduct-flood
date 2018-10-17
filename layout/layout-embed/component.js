@@ -36,7 +36,10 @@ class LayoutEmbed extends PureComponent {
           title={title}
           description={description}
         />
-        <Header embed />
+        <Header
+          className="-embed"
+          embed
+        />
         <div className="embed-content">
           {children}
         </div>
