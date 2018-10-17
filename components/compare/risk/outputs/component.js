@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import { Base64 } from 'js-base64';
 
 // componets
 import Widget from 'components/risk/widget';
@@ -23,6 +24,29 @@ class RiskCompareOutputs extends PureComponent {
     widgets: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
+    originalFormatFilters: PropTypes.object.isRequired,
+    originalFormatCompareFilters: PropTypes.object.isRequired,
+    setModal: PropTypes.func.isRequired
+  }
+
+  onShareWidget = (widget, compare = false) => {
+    const { setModal } = this.props;
+
+    setModal(({
+      visible: true,
+      options: {
+        type: 'widget-share',
+        widget,
+        embedURL: this.getEmbedURL(widget, compare)
+      }
+    }));
+  }
+
+  getEmbedURL = ({ id }, compare) => {
+    const { originalFormatFilters, originalFormatCompareFilters } = this.props;
+    const isAdvancedRisk = originalFormatFilters.risk.advanced_settings;
+
+    return `/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(compare ? originalFormatCompareFilters : originalFormatFilters))}`;
   }
 
   render() {
@@ -41,6 +65,7 @@ class RiskCompareOutputs extends PureComponent {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
+                  onShareWidget={() => this.onShareWidget(widget)}
                 >
                   {({ data, params = {} }) => {
 
@@ -64,6 +89,7 @@ class RiskCompareOutputs extends PureComponent {
                   <WidgetCompare
                     title={replace(widget.params.title, filtersCompare)}
                     params={{ id: widget.id, filtersCompare }}
+                    onShareWidget={() => this.onShareWidget(widget, true)}
                   >
                     {({ data, params = {} }) => {
 

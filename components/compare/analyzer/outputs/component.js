@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -23,7 +24,10 @@ class AnalyzerCompareOutputs extends Component {
     filtersStatus: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
-    applyFilters: PropTypes.func.isRequired
+    applyFilters: PropTypes.func.isRequired,
+    originalFormatFilters: PropTypes.object.isRequired,
+    originalFormatCompareFilters: PropTypes.object.isRequired,
+    setModal: PropTypes.func.isRequired
   }
 
   shouldComponentUpdate(nextProps) {
@@ -36,6 +40,25 @@ class AnalyzerCompareOutputs extends Component {
     const { applyFilters } = this.props;
 
     applyFilters(false);
+  }
+
+  onShareWidget = (widget, compare = false) => {
+    const { setModal } = this.props;
+
+    setModal(({
+      visible: true,
+      options: {
+        type: 'widget-share',
+        widget,
+        embedURL: this.getEmbedURL(widget, compare)
+      }
+    }));
+  }
+
+  getEmbedURL = ({ id }, compare) => {
+    const { originalFormatFilters, originalFormatCompareFilters } = this.props;
+
+    return `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(compare ? originalFormatCompareFilters : originalFormatFilters))}`;
   }
 
   render() {
@@ -54,6 +77,7 @@ class AnalyzerCompareOutputs extends Component {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
+                  onShareWidget={() => this.onShareWidget(widget)}
                 >
                   {({ data, params = {} }) => {
 
@@ -76,6 +100,7 @@ class AnalyzerCompareOutputs extends Component {
                   <WidgetCompare
                     title={replace(widget.params.title, filtersCompare)}
                     params={{ id: widget.id, filtersCompare }}
+                    onShareWidget={() => this.onShareWidget(widget, true)}
                   >
                     {({ data, params = {} }) => {
 

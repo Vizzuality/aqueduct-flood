@@ -1,0 +1,25 @@
+@import 'css/settings';
+
+.c-modal-share-widget {
+
+  > .url-sharer {
+    display: flex;
+    justify-content: flex-end;
+
+    input {
+      flex: 1;
+      padding: 0 $space-1 * 2 0 0;
+      border-bottom: 1px solid palette(blue, secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    button {
+      min-width: 182px;
+    }
+  }
+
+  > .container {
+    margin: $space-1 * 2 0 0;
+  }
+}

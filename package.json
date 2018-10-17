@@ -9,7 +9,7 @@
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.1.2",
-    "aqueduct-components": "^1.0.19",
+    "aqueduct-components": "^1.0.21",
     "autoprefixer": "^9.0.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-plugin-module-resolver": "^3.1.1",
@@ -25,6 +25,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "http-status": "^1.2.0",
+    "iframe-resizer": "^3.6.2",
     "isomorphic-fetch": "^2.2.1",
     "js-base64": "^2.4.9",
     "jsona": "^1.1.14",
@@ -47,6 +48,7 @@
     "react-dom-factories": "1.0.2",
     "react-form": "^3.5.5",
     "react-ga": "2.2.0",
+    "react-iframe-resizer-super": "^0.2.0",
     "react-redux": "^5.0.7",
     "react-redux-loading-bar": "^4.0.5",
     "react-render-html": "^0.6.0",
@@ -61,7 +63,7 @@
     "vega": "^4.2.0",
     "vega-lib": "^4.2.0",
     "webpack": "^3.1.0",
-    "wri-api-components": "^2.2.8",
+    "wri-api-components": "^2.2.11",
     "wri-json-api-serializer": "^1.0.1"
   },
   "devDependencies": {
