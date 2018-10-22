@@ -1,5 +1,5 @@
 export default {
-  tab: 'risk',
+  tab: 'hazard',
   sidebar: true,
   filters: { applied: false },
   modal: {
