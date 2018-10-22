@@ -154,9 +154,8 @@ class RiskFilters extends PureComponent {
               <Checkbox
                 label="Show Advanced Settings"
                 name="advanced_settings"
-                value="advanced_settings"
                 theme="light"
-                defaultChecked={filters.advanced_settings}
+                checked={filters.advanced_settings}
                 onChange={this.onCheckAdvancedSettings}
               />
             </div>
@@ -324,10 +323,9 @@ class RiskFilters extends PureComponent {
               <Checkbox
                 label="Subsidence"
                 name="sub_scenario"
-                value="sub_scenario"
                 theme="light"
                 disabled={!isCoastal}
-                defaultChecked={filters.sub_scenario}
+                checked={filters.sub_scenario}
                 onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
               />
             </div>
@@ -335,10 +333,9 @@ class RiskFilters extends PureComponent {
               <Checkbox
                 label="Subsidence"
                 name="sub_scenario-compare"
-                value="sub_scenario-compare"
                 theme="light"
                 disabled={!isCoastalCompare}
-                defaultChecked={filtersCompare.sub_scenario}
+                checked={filtersCompare.sub_scenario}
                 onChange={({ checked }) => setRiskCompareFilter({ sub_scenario: checked })}
               />
             </div>

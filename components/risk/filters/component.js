@@ -85,6 +85,15 @@ class AnalyzerFilters extends PureComponent {
     });
   }
 
+  onChangeFlood = ({ value }) => {
+    const { setRiskFilter } = this.props;
+
+    setRiskFilter({
+      flood: value,
+      ...value === 'riverine' && { sub_scenario: false }
+    });
+  }
+
   render() {
     const {
       filters,
@@ -103,9 +112,8 @@ class AnalyzerFilters extends PureComponent {
               <Checkbox
                 label="Show Advanced Settings"
                 name="advanced_settings"
-                value="advanced_settings"
                 theme="light"
-                defaultChecked={filters.advanced_settings}
+                checked={filters.advanced_settings}
                 onChange={this.onCheckAdvancedSettings}
               />
             </div>
@@ -182,7 +190,7 @@ class AnalyzerFilters extends PureComponent {
                   options={FLOOD_TYPE_OPTIONS}
                   placeholder="Select a flood type..."
                   value={filters.flood}
-                  onChange={opt => setRiskFilter({ flood: opt && opt.value })}
+                  onChange={this.onChangeFlood}
                 />
               </Field>
             </div>
@@ -208,10 +216,9 @@ class AnalyzerFilters extends PureComponent {
               <Checkbox
                 label="Subsidence"
                 name="sub_scenario"
-                value="sub_scenario"
                 theme="light"
                 disabled={!isCoastal}
-                defaultChecked={filters.sub_scenario}
+                checked={filters.sub_scenario}
                 onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
               />
             </div>

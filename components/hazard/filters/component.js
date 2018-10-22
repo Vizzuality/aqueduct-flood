@@ -133,10 +133,9 @@ class HazardFilters extends PureComponent {
               <Checkbox
                 label="Subsidence"
                 name="hazard-sub_scenario"
-                value="sub_scenario"
                 theme="light"
                 disabled={!isCoastal}
-                defaultChecked={filters.sub_scenario}
+                checked={filters.sub_scenario}
                 onChange={({ checked }) => setHazardFilter({ sub_scenario: checked })}
               />
             </div>
