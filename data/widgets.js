@@ -35,7 +35,8 @@ export const WIDGETS = {
       title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
     },
     {
-      id: 'sample_map',
+      id: 'inundation_map',
+      type: 'side-map',
       title: 'inundation Map in {{implementation_start}} width {{existing_prot}}-year protection',
     },
     {
