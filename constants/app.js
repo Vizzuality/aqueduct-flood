@@ -1,6 +1,6 @@
 export const APP_TABS = [
-  { label: 'Risk', value: 'risk', default: true },
-  { label: 'Hazard', value: 'hazard' },
+  { label: 'Hazard', value: 'hazard', default: true },
+  { label: 'Risk', value: 'risk' },
   { label: 'Cost-benefit Analyzer', value: 'cba' }
 ];
 
