@@ -10,7 +10,11 @@ export default {
     if (nextTab === 'risk' && advancedSettings) {
       return [...WIDGETS.risk, ...WIDGETS.advanced_risk].map(widget => ({
         id: widget.id,
-        params: widget.params || ({ title: widget.title }),
+        params: widget.params || ({
+          title: widget.title,
+          description: widget.description,
+          sources: widget.sources
+        }),
         data: widget.data || [],
         loading: widget.loading || false,
         error: widget.error || null

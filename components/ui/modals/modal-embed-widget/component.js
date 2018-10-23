@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { Button } from 'aqueduct-components';
 import ReactIframeResizer from 'react-iframe-resizer-super';
 
-// constants
-import { SHARE_TABS } from './constants';
-
 // styles
 import './styles.scss';
 
-class ModalShareWidget extends PureComponent {
+class ModalEmbedWidget extends PureComponent {
   static propTypes = {
     options: PropTypes.object
   }
@@ -18,8 +15,7 @@ class ModalShareWidget extends PureComponent {
 
   state = {
     width: 0,
-    height: 0,
-    tab: 'share'
+    height: 0
   }
 
   onCopy = () => {
@@ -50,13 +46,7 @@ class ModalShareWidget extends PureComponent {
     const iframeUrl = `<iframe src="${shareableUrl}" width="${width}" height="${height}" frameBorder="0" />`;
 
     return (
-      <div className="c-modal-share-widget">
-        {/* <Tabs
-          tabs={SHARE_TABS}
-          onChange={this.onChangeTab}
-          customClass="l-tabs"
-        /> */}
-
+      <div className="c-modal-embed-widget">
         <div className="url-sharer">
           <input
             readOnly
@@ -75,8 +65,6 @@ class ModalShareWidget extends PureComponent {
         </div>
 
         <div className="container">
-
-          {/* {tab === 'embed' && ( */}
           <ReactIframeResizer
             title="widget-preview"
             src={embedURL}
@@ -99,4 +87,4 @@ class ModalShareWidget extends PureComponent {
   }
 }
 
-export default ModalShareWidget;
+export default ModalEmbedWidget;
