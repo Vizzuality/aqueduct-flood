@@ -1,15 +1,11 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
-import WRISerializer from 'wri-json-api-serializer';
 
-// actions
-import { fetchLayer } from 'modules/layers/actions';
+// helpers
+import { fecthSideMap } from 'modules/layers/helpers';
 
 // utils
 import { getUniqueVocabulary } from 'utils/cba';
-
-// constants
-import { FETCH_DATASET_ID } from 'constants/hazard';
 
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
 export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
@@ -56,25 +52,6 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
         }
       });
 });
-
-export const fecthSideMap = (queryParams) =>
-  new Promise ((resolve) => {
-    fetch(`${process.env.WRI_API_URL}/v1/dataset/${FETCH_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
-      .then((response) => {
-        if (response.ok) return response.json();
-        throw response;
-      })
-      .then(response => WRISerializer(response))
-      .then((data = []) => {
-        const layerIds = ((data[0] || {}).resources || []).map(_layer => _layer.id);
-        const promises = layerIds.map(_layerId => fetchLayer(_layerId));
-
-        Promise.all(promises)
-          .then((_layers => {
-            resolve(_layers)
-          }));
-      });
-  })
 
 export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA', (widgetId) =>
   (dispatch, getState) => {
