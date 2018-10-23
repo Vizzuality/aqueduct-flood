@@ -4,8 +4,8 @@ const nextRoutes = require('next-routes');
 const routes = nextRoutes();
 
 // ========================= APP ROUTES =====================
-routes.add('home', '/:tab?', 'home');
 routes.add('compare', '/compare/:tab?', 'compare');
+routes.add('home', '/:tab?', 'home');
 
 // embed
 routes.add('widget-embed', '/embed/:tab/widget/:id', 'widget-embed');

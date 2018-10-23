@@ -1,6 +1,12 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
 
+// helpers
+import { fecthSideMap } from 'modules/layers/helpers';
+
+// utils
+import { getUniqueVocabulary } from 'utils/cba';
+
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
 export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
 export const setWidgetData = createAction('WIDGETS__SET-WIDGET-DATA');
@@ -10,12 +16,6 @@ export const setError = createAction('WIDGETS__SET-ERROR');
 export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (widgetId) =>
   (dispatch, getState) => {
     const { filters } = getState();
-
-    // provisional workflow for map widgets
-    if (widgetId === 'sample_map') {
-      dispatch(setWidgetData({ id: widgetId, data: [], type: 'map' }));
-      return null;
-    }
 
     const { common, cba } = filters;
 
@@ -53,15 +53,46 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
       });
 });
 
+export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA', (widgetId) =>
+  (dispatch, getState) => {
+    const { filters } = getState();
+    const { common } = filters;
+    const { scenario } = common;
+
+    const leftVocabulary = getUniqueVocabulary({
+      year: '1980.0',
+      scenario
+    });
+
+    const rightVocabulary = getUniqueVocabulary({
+      year: '2080',
+      scenario
+    }, true);
+
+    const leftQueryParams = queryString.stringify({ aqueductfloods: leftVocabulary });
+    const rightQueryParams = queryString.stringify({ aqueductfloods: rightVocabulary });
+    const lefSidefetch = fecthSideMap(leftQueryParams);
+    const rightSidefetch = fecthSideMap(rightQueryParams);
+
+    dispatch(setError({ id: widgetId, error: null }));
+    dispatch(setLoading({ id: widgetId, loading: true }));
+
+    Promise.all([lefSidefetch, rightSidefetch])
+      .then((_layers) => {
+        dispatch(setWidgetData({
+          id: widgetId,
+          data: {
+            left: _layers[0],
+            right: _layers[1]
+          }
+        }));
+        dispatch(setLoading({ id: widgetId, loading: false }));
+      })
+  });
+
 export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (widgetId) =>
   (dispatch, getState) => {
     const { filters } = getState();
-
-    // provisional workflow for map widgets
-    if (widgetId === 'sample_map') {
-      dispatch(setWidgetData({ id: widgetId, data: [], type: 'map' }));
-      return null;
-    }
 
     const { common, risk } = filters;
     const {
@@ -115,5 +146,6 @@ export default {
   setError,
 
   getWidgetCostData,
+  getWidgetMapData,
   getWidgetRiskData
 };

@@ -1,38 +1,58 @@
-import React, { PureComponent } from 'react';
-// import PropTypes from 'prop-types';
+import React, { PureComponent, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Map, {
   MapControls,
   ZoomControl
 } from 'wri-api-components/dist/map';
+import { LayerManager } from 'layer-manager/dist/react';
+import { PluginLeaflet } from 'layer-manager';
 
 // styles
 import './styles.scss';
 
 class MapChart extends PureComponent {
+  static propTypes = { data: PropTypes.object.isRequired }
+
   render() {
+    const { data } = this.props;
+
     return (
       <div className="c-map-widget">
         <div className="side">
           <Map customClass="widget-map">
             {(map) => (
-              <MapControls customClass="map-controls">
-                <ZoomControl
-                  customClass="zoom-controls"
+              <Fragment>
+                <LayerManager
                   map={map}
+                  plugin={PluginLeaflet}
+                  layersSpec={data.left}
                 />
-              </MapControls>
+                <MapControls customClass="map-controls">
+                  <ZoomControl
+                    customClass="zoom-controls"
+                    map={map}
+                  />
+                </MapControls>
+              </Fragment>
             )}
           </Map>
         </div>
         <div className="side">
           <Map customClass="widget-map">
             {(map) => (
-              <MapControls customClass="map-controls">
-                <ZoomControl
-                  customClass="zoom-controls"
+              <Fragment>
+                <LayerManager
                   map={map}
+                  plugin={PluginLeaflet}
+                  layersSpec={data.right}
                 />
-              </MapControls>
+                <MapControls customClass="map-controls">
+                  <ZoomControl
+                    customClass="zoom-controls"
+                    map={map}
+                  />
+                </MapControls>
+              </Fragment>
             )}
           </Map>
         </div>

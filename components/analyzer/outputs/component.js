@@ -5,6 +5,7 @@ import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/analyzer/widget';
+import WidgetMap from 'components/analyzer/widget-map';
 import Chart from 'components/widgets';
 import MapChart from 'components/widgets/map';
 import TableChart from 'components/widgets/table/cba';
@@ -67,26 +68,35 @@ class AnalyzerOutputs extends Component {
           <div className="container">
             {widgets.map(widget => (
               <div key={widget.id} className="widget-row">
-                <Widget
-                  title={replace(widget.params.title, filters)}
-                  params={{ id: widget.id, filters }}
-                  onShareWidget={() => this.onShareWidget(widget)}
-                >
-                  {({ data, params }) => {
+                {widget.id === 'inundation_map' ? (
+                  <WidgetMap
+                    title={replace(widget.params.title, filters)}
+                    params={{ id: widget.id, filters }}
+                    onShareWidget={() => this.onShareWidget(widget)}
+                  >
+                    {({ data, params }) => (<MapChart data={data} params={params} />)}
+                  </WidgetMap>) : (
+                    <Widget
+                      title={replace(widget.params.title, filters)}
+                      params={{ id: widget.id, filters }}
+                      onShareWidget={() => this.onShareWidget(widget)}
+                    >
+                      {({ data, params }) => {
 
-                    if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
+                        if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
+                        if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
+                        if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
 
-                    if (params.type === 'map') return (<MapChart />)
+                        if (params.type === 'map') return (<MapChart />)
 
-                    if (params.type === 'table') return (<TableChart data={data} />)
+                        if (params.type === 'table') return (<TableChart data={data} />)
 
-                    return null;
-                  }}
-                </Widget>
+                        return null;
+                      }}
+                    </Widget>
+                  )}
               </div>
             ))}
           </div>
