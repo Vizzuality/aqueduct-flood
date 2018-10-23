@@ -1,9 +1,4 @@
 export default {
-  autosize: {
-    "type": "pad",
-    "resize": true,
-    "contains": "padding"
-  },
   background: null,
   padding: 20,
   render: { retina: true },
@@ -38,15 +33,21 @@ export default {
     labelFontWeight: 300
   },
   symbol: {
-    fill: 'steelblue',
+    fill: '#2955B3',
     size: 65
   },
+  rect: {
+    fill: '#2955B3'
+  },
+  line: {
+    stroke: '#2955B3'
+  },
   range: {
-    "category": ["#5079a5", "#ef8e3b", "#dd565c", "#79b7b2", "#5da052", "#ecc853", "#ad7aa1", "#ef9ba7", "#9b7461", "#bab0ac"],
+    "category": ["#2955B3", "#ef8e3b", "#dd565c", "#3A9FDD", "#5da052", "#000000", "#ad7aa1", "#ef9ba7", "#9b7461", "#bab0ac"],
     "symbol": ["square", "circle"],
     "multi-line": [
-      "#5079a5",
-      "#ecc853"
+      "#2955B3",
+      "#ef8e3b"
     ]
   }
 };
