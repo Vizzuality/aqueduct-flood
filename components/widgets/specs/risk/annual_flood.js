@@ -5,11 +5,19 @@ export default {
     "resize": true,
     "contains": "padding"
   },
-  "height": 200,
+  "signals": [
+    {
+      "name": "error", "value": false,
+      "bind": {"name":"Error bars","input": "checkbox"}
+    }
+  ],
+  "height": 250,
+
   "data": [
     {
       "name": "table",
       "values": [
+    
     ]
     },
     {
@@ -27,23 +35,21 @@ export default {
       "type": "band",
       "domain": {"data": "table", "field": "index"},
       "range": "width",
-      "paddingInner": 0.7,
-      "paddingOuter": 0.3,
+      "paddingInner": 0.3,
+      "paddingOuter": 0.1,
       "round": true
     },
     {
       "name": "yscale_amout",
+      "type": "linear",
       "domain": {"data": "table", "field": "Annual_Damage_Avg"},
-      "nice": true,
-      "zero": true,
-      "range": "height"
+      "range": "height", "round": true,"nice":true, "zero": true
     },
     {
       "name": "yscale_per",
-      "domain": {"data": "table", "field": "Percent_Damage_Avg"},
-      "nice": true,
-      "zero": true,
-      "range": "height"
+      "type": "linear",
+      "domain": {"data": "table", "field": "Percent_Damage_Max"},
+      "range": "height", "round": true, "nice":true, "zero": true
     },
     {
       "name": "color",
@@ -62,12 +68,25 @@ export default {
 
   "axes": [
     { "orient": "bottom", "scale": "xscale"},
-    { "orient": "left", "scale": "yscale_amout", "format":"s", "tickCount": 5},
+    { "orient": "left", "scale": "yscale_amout", "tickCount": 5,
+    "labelOverlap": false,
+      "title":"Annual Urban Damage",
+      
+      "encode":{
+          "labels":{
+            "update":{
+              "text":{"signal": "'$'+format(datum.value/1e6, '.0f') + 'M'"}
+            }
+          }
+        }
+    },
     { "orient": "right", "scale": "yscale_per", "tickCount": 5,
+    "labelOverlap": false,
+      "title":"% Annual Urban Damage",
       "encode":{
         "labels":{
           "update":{
-            "text":{"signal": "format(datum.value, '.2f') + '%'"}
+            "text":{"signal": "format(datum.value, '.3f') + '%'"}
           }
         }
       }
@@ -108,7 +127,8 @@ export default {
           "opacity": {"value": 1}
         },
         "hover": {
-          "opacity": {"value": 0.5}
+          "opacity": {"value": 0.5},
+          "tooltip":{"signal": "{'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg/1e6, '.0f')+'M' }"}
         }
       }
     },
@@ -124,11 +144,28 @@ export default {
         "update": {
           "opacity": {"value": 0.8},
           "size": {"value": 65}
+          
         },
         "hover": {
           "opacity": {"value": 1},
-          "size": {"value": 85}
+          "size": {"value": 65, "mult":2},
+          "tooltip":{"signal": "{'Year': datum.index, 'Max': format(datum.Percent_Damage_Max, '.2f')+'%' , 'Avg': format(datum.Percent_Damage_Avg, '.2f')+'%' , 'Min':format(datum.Percent_Damage_Min, '.2f')+'%' }"}
         }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "index", "band":0.5},
+          "fill":{"value":"#ef8e3b"},
+          "width": {"value": 2},
+          "y": {"scale": "yscale_per", "field": "Percent_Damage_Min"},
+          "y2": {"scale": "yscale_per", "field": "Percent_Damage_Max"},
+          "opacity": {"value": 0}
+        },
+        "update":{"opacity": {"signal": "error===true?1:0"}}
       }
     }
   ]

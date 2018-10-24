@@ -46,7 +46,7 @@ export default {
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "table", "field": "key"},
-      "range": {"scheme": "category10"}
+      "range": "category"
     }
   ],
 
@@ -156,7 +156,8 @@ export default {
             }},
             "hover": {"opacity":{
               "value":0.5
-            }}
+            },
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1/1e9, '.2f')+' B'}"}}
           }
         }
           
