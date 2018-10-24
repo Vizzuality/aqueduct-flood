@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactIframeResizer from 'react-iframe-resizer-super';
 
@@ -15,19 +15,17 @@ class ModalInfoWidget extends PureComponent {
   render() {
     const { options } = this.props;
     const { widget, embedURL } = options;
-    const { title, params } = widget;
-    const { description, sources } = params;
+    const { params } = widget;
+    const { title, description, sources } = params;
 
     return (
       <div className="c-modal-info-widget">
-        <div className="info-header">
-          <div className="info-titles">
-            <span className="info-title">
-              {title}
-            </span>
-          </div>
+        <div className="widget-header">
+          <h2 className="widget-title">
+            {title}
+          </h2>
         </div>
-        <div className="info-content">
+        <div className="widget-content">
           <div className="row">
             <div className="col-xs-12 col-md-8">
               <div className="info-widget">
@@ -49,7 +47,7 @@ class ModalInfoWidget extends PureComponent {
               </div>
             </div>
             <div className="col-xs-12 col-md-4">
-              <div className="info-description">
+              <div className="widget-info">
                 <dl>
                   <dt>
                     Description:
@@ -60,17 +58,21 @@ class ModalInfoWidget extends PureComponent {
                   <dt>
                     Sources:
                   </dt>
-                  <dd>
+                  <dd className="sources">
                     {(sources || []).map((_source, index) => (
-                      <a
-                        key={_source.url}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        href={_source.url}
-                      >
-                        {_source.title}
+                      <Fragment>
+                        <a
+                          key={_source.url}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          href={_source.url}
+                        >
+                          {_source.title}
+
+                        </a>
                         {(index !== sources.length - 1) && ', '}
-                      </a>))}
+                      </Fragment>
+                      ))}
                     {!(sources || []).length && 'not available'}
                   </dd>
                 </dl>

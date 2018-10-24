@@ -41,46 +41,59 @@ class ModalEmbedWidget extends PureComponent {
   render() {
     const { options } = this.props;
     const { width, height, copied } = this.state;
-    const { embedURL } = options;
+    const { embedURL, widget } = options;
+    const { params } = widget;
+    const { title } = params;
     const shareableUrl  = `${window.location.origin}${embedURL}`;
     const iframeUrl = `<iframe src="${shareableUrl}" width="${width}" height="${height}" frameBorder="0" />`;
 
     return (
       <div className="c-modal-embed-widget">
-        <div className="url-sharer">
-          <input
-            readOnly
-            value={iframeUrl}
-            id="url-share"
-            name="url-share"
-            ref={(n) => { this.input = n; }}
-          />
-          <Button
-            onClick={this.onCopy}
-            theme="light"
-            className="-large -bg-light-blue -uppercase -bold"
-          >
-            {copied ? 'Copied' : 'Get embed code'}
-          </Button>
-        </div>
+        <div className="row">
+          <div className="col-xs-12 col-md-8">
+            <h2>
+              {title}
+            </h2>
+            <div className="container">
+              <ReactIframeResizer
+                title="widget-preview"
+                src={embedURL}
+                frameBorder={0}
+                style={{
+                  width: '100%',
+                  minHeight: 350
+                }}
+                iframeResizerOptions={{
+                  checkOrigin: false,
+                  log: false,
+                  resizedCallback: ({ height: h, width: w }) => {
+                    this.setState({ height: `${h}px`, width: `${w}px` });
+                  }
+                }}
+              />
+            </div>
 
-        <div className="container">
-          <ReactIframeResizer
-            title="widget-preview"
-            src={embedURL}
-            frameBorder={0}
-            style={{
-              width: '100%',
-              minHeight: 350
-            }}
-            iframeResizerOptions={{
-              checkOrigin: false,
-              log: false,
-              resizedCallback: ({ height: h, width: w }) => {
-                this.setState({ height: `${h}px`, width: `${w}px` });
-              }
-            }}
-          />
+          </div>
+          <div className="col-xs-12 col-md-4">
+            <div className="url-container">
+              <textarea
+                readOnly
+                value={iframeUrl}
+                id="url-share"
+                name="url-share"
+                className="url-code"
+                ref={(n) => { this.input = n; }}
+              />
+
+              <Button
+                onClick={this.onCopy}
+                theme="light"
+                className="-large -bg-light-blue -uppercase -bold"
+              >
+                {copied ? 'Copied' : 'Get embed code'}
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     );

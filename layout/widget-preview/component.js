@@ -27,9 +27,6 @@ import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
 import LineSpec from 'components/widgets/specs/cba/line';
 import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
-// styles
-import './styles.scss';
-
 class EmbedWidget extends PureComponent {
   static propTypes = {
     tab: PropTypes.string.isRequired,
@@ -45,14 +42,9 @@ class EmbedWidget extends PureComponent {
     return (
       <LayoutPreview
         title={widgetTitle}
-        description="Aqueduct Flood description"
+        description={`${widgetTitle} | Aqueduct Flood`}
       >
-        <section className="l-embed-widget">
-          <div className="widget-title">
-            <h2>
-              {widgetTitle}
-            </h2>
-          </div>
+        <section className="l-preview-widget">
           <Widget
             params={{ id: widget.id, filters }}
             hideWidgetOptions
