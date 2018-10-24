@@ -15,7 +15,8 @@ import Head from 'layout/head';
 import Header from 'layout/header';
 // components – modals
 import ModalInfo from 'components/ui/modals/modal-info';
-import ModalShareWidget from 'components/ui/modals/modal-share-widget';
+import ModalEmbedWidget from 'components/ui/modals/modal-embed-widget';
+import ModalInfoWidget from 'components/ui/modals/modal-info-widget';
 
 class Layout extends PureComponent {
   static propTypes = {
@@ -69,7 +70,8 @@ class Layout extends PureComponent {
           customClass="app-modal"
         >
           {modalOptions.type === 'info' && <ModalInfo options={modalOptions} />}
-          {modalOptions.type === 'widget-share' && <ModalShareWidget options={modalOptions} />}
+          {modalOptions.type === 'widget-share' && <ModalEmbedWidget options={modalOptions} />}
+          {modalOptions.type === 'widget-info' && <ModalInfoWidget options={modalOptions} />}
         </Modal>
       </div>
     );

@@ -6,7 +6,12 @@ export const WIDGETS = {
     },
     {
       id: 'annual_flood',
-      title: 'Annual expected urban damage'
+      title: 'Annual expected urban damage',
+      description: 'Annual flood description',
+      sources: [
+        { title: 'source 1', url: 'http://source1.com/'},
+        { title: 'source 2', url: 'http://source2.com/'}
+      ]
     },
     {
       id: 'benchmark',

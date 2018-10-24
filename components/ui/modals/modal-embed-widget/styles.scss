@@ -1,6 +1,6 @@
 @import 'css/settings';
 
-.c-modal-share-widget {
+.c-modal-embed-widget {
 
   > .url-sharer {
     display: flex;
@@ -21,5 +21,22 @@
 
   > .container {
     margin: $space-1 * 2 0 0;
+  }
+
+  .url-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+
+    > .url-code {
+      height: 100%;
+      margin: 0 0 $space-1 * 2 0;
+      border: 0;
+      font-size: inherit;
+
+      resize: none;
+      outline: none;
+    }
   }
 }

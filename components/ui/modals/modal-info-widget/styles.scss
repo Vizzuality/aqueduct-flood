@@ -1,0 +1,46 @@
+@import 'css/settings';
+
+.c-modal-info-widget {
+
+  > .widget-header {
+    padding: $space-1 * 2 0;
+
+    > .widget-title {
+      color: $color-text-1;
+      font-weight: $font-weight-semi-bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  }
+
+  > .widget-content {
+    .widget-info {
+      > dl {
+        font-size: 15px;
+        color: $color-text-1;
+
+        dt {
+          display: inline-block;
+          margin: 0 $space-1 0 0;
+          font-weight: $font-weight-semi-bold;
+
+          &:not(:first-child) {
+            margin: $space-1 * 2 0 0 0;
+          }
+        }
+
+        dd {
+          &.sources {
+            color: $color-primary;
+
+            > a {
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

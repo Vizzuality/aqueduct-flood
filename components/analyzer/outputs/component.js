@@ -40,23 +40,44 @@ class AnalyzerOutputs extends Component {
     applyFilters(false);
   }
 
-  onShareWidget = (widget) => {
+  onMoreInfo = (widget) => {
     const { setModal } = this.props;
 
     setModal(({
       visible: true,
       options: {
-        type: 'widget-share',
+        type: 'widget-info',
         widget,
-        embedURL: this.getEmbedURL(widget)
+        embedURL: this.getPreviewUrl(widget)
       }
     }));
+  }
+
+  onDownloadWidget = (option, widget) => {
+    const { setModal } = this.props;
+
+    if (option === 'embed') {
+      setModal(({
+        visible: true,
+        options: {
+          type: 'widget-share',
+          widget,
+          embedURL: this.getEmbedURL(widget)
+        }
+      }));
+    }
   }
 
   getEmbedURL = ({ id }) => {
     const { originalFormatFilters } = this.props;
 
     return `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
+  }
+
+  getPreviewUrl = ({ id }) => {
+    const { originalFormatFilters } = this.props;
+
+    return `/preview/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
   }
 
   render() {
@@ -72,14 +93,14 @@ class AnalyzerOutputs extends Component {
                   <WidgetMap
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
-                    onShareWidget={() => this.onShareWidget(widget)}
                   >
                     {({ data, params }) => (<MapChart data={data} params={params} />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}
                       params={{ id: widget.id, filters }}
-                      onShareWidget={() => this.onShareWidget(widget)}
+                      onMoreInfo={() => this.onMoreInfo(widget)}
+                      onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                     >
                       {({ data, params }) => {
 

@@ -26,17 +26,32 @@ class AnalyzerOutputs extends PureComponent {
     setModal: PropTypes.func.isRequired
   }
 
-  onShareWidget = (widget) => {
+  onMoreInfo = (widget) => {
     const { setModal } = this.props;
 
     setModal(({
       visible: true,
       options: {
-        type: 'widget-share',
+        type: 'widget-info',
         widget,
-        embedURL: this.getEmbedURL(widget)
+        embedURL: this.getPreviewUrl(widget)
       }
     }));
+  }
+
+  onDownloadWidget = (option, widget) => {
+    const { setModal } = this.props;
+
+    if (option === 'embed') {
+      setModal(({
+        visible: true,
+        options: {
+          type: 'widget-share',
+          widget,
+          embedURL: this.getEmbedURL(widget)
+        }
+      }));
+    }
   }
 
   getEmbedURL = ({ id }) => {
@@ -44,6 +59,13 @@ class AnalyzerOutputs extends PureComponent {
     const isAdvancedRisk = originalFormatFilters.advanced_settings;
 
     return `/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
+  }
+
+  getPreviewUrl = ({ id }) => {
+    const { originalFormatFilters } = this.props;
+    const isAdvancedRisk = originalFormatFilters.advanced_settings;
+
+    return `/preview/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
   }
 
   render() {
@@ -58,7 +80,8 @@ class AnalyzerOutputs extends PureComponent {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
-                  onShareWidget={() => this.onShareWidget(widget)}
+                  onMoreInfo={() => this.onMoreInfo(widget)}
+                  onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                 >
                   {({ data, params = {} }) => {
 
