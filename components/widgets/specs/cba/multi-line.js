@@ -216,7 +216,8 @@ export default {
           "opacity": {
             "value": 0
           }
-        }
+        },
+        "hover":{"tooltip":{"signal": "{'Year': hover.datum.year, 'Value': '$'+format(hover.datum.value/1e6, '.3f')+'M'}"}}
       }
     }
   ],

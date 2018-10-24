@@ -155,9 +155,9 @@ export default {
               "value":1
             }},
             "hover": {"opacity":{
-              "value":0.5,
-              "tooltip":{"signal": "{'Year': datum.index, 'Value': format(datum.y1, '.2f')+'%'}"}
-            }}
+              "value":0.5
+            },
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1/1e9, '.2f')+' B'}"}}
           }
         }
           

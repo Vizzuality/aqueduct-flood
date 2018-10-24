@@ -69,7 +69,8 @@ export default {
 
         },
         "hover": {
-          "opacity": { "value": 0.5 }
+          "opacity": { "value": 0.5 },
+          "tooltip":{"signal": "{'Year': datum.year, 'Value': '$'+format(datum.value/1e6, '.3f')+'M'}"}
         }
       }
     }

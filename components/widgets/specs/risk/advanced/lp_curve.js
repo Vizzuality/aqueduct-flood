@@ -318,7 +318,7 @@ export default {
                 "value":0
               }},
             "hover":{
-              "tooltip":{"signal": "{'Probability %': datum.x, 'gf': format(datum.gf/1e6,'.0f') + 'M','ha':format(datum.ha/1e6,'.0f') + 'M','ip':format(datum.ip/1e6,'.0f') + 'M','mi':format(datum.mi/1e6,'.0f') + 'M','nr':format(datum.nr/1e6,'.0f') + 'M','average': format(datum.mean_y/1e6,'.0f') + 'M'}"},
+              "tooltip":{"signal": "{'Probability %': datum.x, 'GFDL-ESM2M': format(datum.gf/1e6,'.0f') + 'M','HadGEM2-ES':format(datum.ha/1e6,'.0f') + 'M','IPSL-CM5A-LR':format(datum.ip/1e6,'.0f') + 'M','MIROC-ESM-CHEM':format(datum.mi/1e6,'.0f') + 'M','NorESM1-M':format(datum.nr/1e6,'.0f') + 'M','Average': format(datum.mean_y/1e6,'.0f') + 'M'}"},
               "opacity":{
                 "value":0
               }

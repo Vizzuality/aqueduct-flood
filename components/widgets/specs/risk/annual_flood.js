@@ -160,7 +160,7 @@ export default {
         "enter": {
           "x": {"scale": "xscale", "field": "index", "band":0.5},
           "fill":{"value":"#ef8e3b"},
-          "width": {"value": 1},
+          "width": {"value": 2},
           "y": {"scale": "yscale_per", "field": "Percent_Damage_Min"},
           "y2": {"scale": "yscale_per", "field": "Percent_Damage_Max"},
           "opacity": {"value": 0}
