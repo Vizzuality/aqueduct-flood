@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
-import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -14,6 +13,13 @@ import TableChart from 'components/widgets/table/cba';
 import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
 import LineSpec from 'components/widgets/specs/cba/line';
 import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
+
+// utils
+import {
+  getCbaEmbedURL,
+  getCbaPreviewURL,
+  generateCbaDownloadURL
+} from 'utils/share';
 
 // styles
 import './styles.scss';
@@ -41,20 +47,20 @@ class AnalyzerOutputs extends Component {
   }
 
   onMoreInfo = (widget) => {
-    const { setModal } = this.props;
+    const { setModal, originalFormatFilters } = this.props;
 
     setModal(({
       visible: true,
       options: {
         type: 'widget-info',
         widget,
-        embedURL: this.getPreviewUrl(widget)
+        embedURL: getCbaPreviewURL(widget, originalFormatFilters)
       }
     }));
   }
 
   onDownloadWidget = (option, widget) => {
-    const { setModal } = this.props;
+    const { setModal, originalFormatFilters } = this.props;
 
     if (option === 'embed') {
       setModal(({
@@ -62,22 +68,12 @@ class AnalyzerOutputs extends Component {
         options: {
           type: 'widget-share',
           widget,
-          embedURL: this.getEmbedURL(widget)
+          embedURL: getCbaEmbedURL(widget, originalFormatFilters)
         }
       }));
     }
-  }
 
-  getEmbedURL = ({ id }) => {
-    const { originalFormatFilters } = this.props;
-
-    return `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
-  }
-
-  getPreviewUrl = ({ id }) => {
-    const { originalFormatFilters } = this.props;
-
-    return `/preview/cba/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
+    if (['json', 'csv'].includes(option)) generateCbaDownloadURL(widget, originalFormatFilters, option);
   }
 
   render() {

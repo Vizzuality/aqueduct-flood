@@ -16,6 +16,9 @@ import BenchmarkSpec from 'components/widgets/specs/risk/benchmark';
 import FloodDriversSpec from 'components/widgets/specs/risk/advanced/flood_drivers';
 import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
+// utils
+import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
+
 // styles
 import './styles.scss';
 
@@ -29,17 +32,35 @@ class RiskCompareOutputs extends PureComponent {
     setModal: PropTypes.func.isRequired
   }
 
-  onShareWidget = (widget, compare = false) => {
+  onMoreInfo = (widget, filters) => {
     const { setModal } = this.props;
 
     setModal(({
       visible: true,
       options: {
-        type: 'widget-share',
+        type: 'widget-info',
         widget,
-        embedURL: this.getEmbedURL(widget, compare)
+        embedURL: getRiskPreviewURL(widget, filters)
       }
     }));
+  }
+
+  onDownloadWidget = (option, widget, filters) => {
+    const { setModal } = this.props;
+
+    if (option === 'embed') {
+      setModal(({
+        visible: true,
+        options: {
+          type: 'widget-share',
+          widget,
+          embedURL: getRiskEmbedURL(widget, filters)
+        }
+      }));
+    }
+
+    console.log(filters)
+    if (option === 'json') generateRiskDownloadURL(widget, filters);
   }
 
   getEmbedURL = ({ id }, compare) => {
@@ -50,7 +71,7 @@ class RiskCompareOutputs extends PureComponent {
   }
 
   render() {
-    const { widgets, filters,  filtersCompare } = this.props;
+    const { widgets, filters,  filtersCompare, originalFormatFilters, originalFormatCompareFilters } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
@@ -65,7 +86,8 @@ class RiskCompareOutputs extends PureComponent {
                 <Widget
                   title={replace(widget.params.title, filters)}
                   params={{ id: widget.id, filters }}
-                  onShareWidget={() => this.onShareWidget(widget)}
+                  onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}
+                  onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatFilters)}
                 >
                   {({ data, params = {} }) => {
 
@@ -90,6 +112,8 @@ class RiskCompareOutputs extends PureComponent {
                     title={replace(widget.params.title, filtersCompare)}
                     params={{ id: widget.id, filtersCompare }}
                     onShareWidget={() => this.onShareWidget(widget, true)}
+                    onMoreInfo={() => this.onMoreInfo(widget, originalFormatCompareFilters)}
+                    onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatCompareFilters)}
                   >
                     {({ data, params = {} }) => {
 

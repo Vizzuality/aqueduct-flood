@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
-import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/analyzer/widget';
@@ -15,6 +14,14 @@ import TableChart from 'components/widgets/table/cba';
 import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
 import LineSpec from 'components/widgets/specs/cba/line';
 import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
+
+// utils
+import {
+  getCbaEmbedURL,
+  getCbaPreviewURL,
+  generateCbaDownloadURL
+} from 'utils/share';
+
 
 // styles
 import './styles.scss';
@@ -43,27 +50,38 @@ class AnalyzerCompareOutputs extends Component {
     applyFilters(false);
   }
 
-  onShareWidget = (widget, compare = false) => {
+  onMoreInfo = (widget, filters) => {
     const { setModal } = this.props;
 
     setModal(({
       visible: true,
       options: {
-        type: 'widget-share',
+        type: 'widget-info',
         widget,
-        embedURL: this.getEmbedURL(widget, compare)
+        embedURL: getCbaPreviewURL(widget, filters)
       }
     }));
   }
 
-  getEmbedURL = ({ id }, compare) => {
-    const { originalFormatFilters, originalFormatCompareFilters } = this.props;
+  onDownloadWidget = (option, widget, filters) => {
+    const { setModal } = this.props;
 
-    return `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(compare ? originalFormatCompareFilters : originalFormatFilters))}`;
+    if (option === 'embed') {
+      setModal(({
+        visible: true,
+        options: {
+          type: 'widget-share',
+          widget,
+          embedURL: getCbaEmbedURL(widget, filters)
+        }
+      }));
+    }
+
+    if (['json', 'csv'].includes(option)) generateCbaDownloadURL(widget, filters, option);
   }
 
   render() {
-    const { widgets, filters, filtersCompare } = this.props;
+    const { widgets, filters, filtersCompare, originalFormatFilters, originalFormatCompareFilters } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
@@ -86,7 +104,8 @@ class AnalyzerCompareOutputs extends Component {
                     <Widget
                       title={replace(widget.params.title, filters)}
                       params={{ id: widget.id, filters }}
-                      onShareWidget={() => this.onShareWidget(widget)}
+                      onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}
+                      onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatFilters)}
                     >
                       {({ data, params }) => {
 
@@ -119,7 +138,8 @@ class AnalyzerCompareOutputs extends Component {
                       <WidgetCompare
                         title={replace(widget.params.title, filtersCompare)}
                         params={{ id: widget.id, filtersCompare }}
-                        onShareWidget={() => this.onShareWidget(widget)}
+                        onMoreInfo={() => this.onMoreInfo(widget, originalFormatCompareFilters)}
+                        onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatCompareFilters)}
                       >
                         {({ data, params }) => {
 

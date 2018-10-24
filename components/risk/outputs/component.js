@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
-import { Base64 } from 'js-base64';
 
 // components
 import Widget from 'components/risk/widget';
@@ -15,6 +14,9 @@ import BenchmarkSpec from 'components/widgets/specs/risk/benchmark';
 import FloodDriversSpec from 'components/widgets/specs/risk/advanced/flood_drivers';
 import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
+// utils
+import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
+
 // styles
 import './styles.scss';
 
@@ -27,20 +29,20 @@ class AnalyzerOutputs extends PureComponent {
   }
 
   onMoreInfo = (widget) => {
-    const { setModal } = this.props;
+    const { setModal, originalFormatFilters } = this.props;
 
     setModal(({
       visible: true,
       options: {
         type: 'widget-info',
         widget,
-        embedURL: this.getPreviewUrl(widget)
+        embedURL: getRiskPreviewURL(widget, originalFormatFilters)
       }
     }));
   }
 
   onDownloadWidget = (option, widget) => {
-    const { setModal } = this.props;
+    const { setModal, originalFormatFilters } = this.props;
 
     if (option === 'embed') {
       setModal(({
@@ -48,24 +50,12 @@ class AnalyzerOutputs extends PureComponent {
         options: {
           type: 'widget-share',
           widget,
-          embedURL: this.getEmbedURL(widget)
+          embedURL: getRiskEmbedURL(widget, originalFormatFilters)
         }
       }));
     }
-  }
 
-  getEmbedURL = ({ id }) => {
-    const { originalFormatFilters } = this.props;
-    const isAdvancedRisk = originalFormatFilters.advanced_settings;
-
-    return `/embed/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
-  }
-
-  getPreviewUrl = ({ id }) => {
-    const { originalFormatFilters } = this.props;
-    const isAdvancedRisk = originalFormatFilters.advanced_settings;
-
-    return `/preview/${isAdvancedRisk ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(originalFormatFilters))}`;
+    if (['json', 'csv'].includes(option)) generateRiskDownloadURL(widget, originalFormatFilters, option);
   }
 
   render() {
