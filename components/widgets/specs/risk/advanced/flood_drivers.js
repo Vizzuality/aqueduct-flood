@@ -158,22 +158,22 @@ export default {
             "hover": {"opacity":{
               "value":0.5
             },
-            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1, '~s')}"}}
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1, '~s')}"}
           }
-        },
-        {
+          }
+        } 
+        
+      ]
+    },
+    {
       "type": "rule",
       "encode": {
-        "enter": {
+        "update": {
           "y": {"scale": "yscale", "value": 0},
           "x": {"value": 0},
           "x2": {"signal": "width"}
         }
       }
-    }
-          
-        
-      ]
     }
   ]
 };
