@@ -8,10 +8,10 @@ export default {
   "signals": [
     {
       "name": "error", "value": false,
-      "bind": {"name":"Error bars","input": "checkbox"}
+      "bind": {"name":"Error bars", "input": "checkbox"}
     }
   ],
-  "height": 250,
+  "height": 220,
 
   "data": [
     {
@@ -23,7 +23,7 @@ export default {
     {
       "name": "info",
       "values": [
-        {"text": "Annual Expected Urban Damage ($ million)"}, 
+        {"text": "Annual Expected Urban Damage (US $)"}, 
         {"text": "% Annual Expected Urban Damage"}
       ]
     }
@@ -43,13 +43,13 @@ export default {
       "name": "yscale_amout",
       "type": "linear",
       "domain": {"data": "table", "field": "Annual_Damage_Avg"},
-      "range": "height", "round": true,"nice":true, "zero": true
+      "range": "height", "zero": true, "nice": true
     },
     {
       "name": "yscale_per",
       "type": "linear",
-      "domain": {"data": "table", "field": "Percent_Damage_Max"},
-      "range": "height", "round": true, "nice":true, "zero": true
+      "domain": {"fields":[{"data": "table", "field": "Percent_Damage_Avg"},{"data": "table", "field": "Percent_Damage_Max"}]},
+      "range": "height", "zero": true, "nice": true
     },
     {
       "name": "color",
@@ -69,19 +69,17 @@ export default {
   "axes": [
     { "orient": "bottom", "scale": "xscale"},
     { "orient": "left", "scale": "yscale_amout", "tickCount": 5,
-    "labelOverlap": false,
       "title":"Annual Urban Damage",
       
       "encode":{
           "labels":{
             "update":{
-              "text":{"signal": "'$'+format(datum.value/1e6, '.0f') + 'M'"}
+              "text":{"signal": "'$ '+format(datum.value, '~s')"}
             }
           }
         }
     },
     { "orient": "right", "scale": "yscale_per", "tickCount": 5,
-    "labelOverlap": false,
       "title":"% Annual Urban Damage",
       "encode":{
         "labels":{
@@ -128,7 +126,7 @@ export default {
         },
         "hover": {
           "opacity": {"value": 0.5},
-          "tooltip":{"signal": "{'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg/1e6, '.0f')+'M' }"}
+          "tooltip":{"signal": "{'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg, '~s')}"}
         }
       }
     },
@@ -149,7 +147,7 @@ export default {
         "hover": {
           "opacity": {"value": 1},
           "size": {"value": 65, "mult":2},
-          "tooltip":{"signal": "{'Year': datum.index, 'Max': format(datum.Percent_Damage_Max, '.2f')+'%' , 'Avg': format(datum.Percent_Damage_Avg, '.2f')+'%' , 'Min':format(datum.Percent_Damage_Min, '.2f')+'%' }"}
+          "tooltip":{"signal": "{'Year': datum.index, 'Max': format(datum.Percent_Damage_Max, '.3f')+'%' , 'Avg': format(datum.Percent_Damage_Avg, '.3f')+'%' , 'Min':format(datum.Percent_Damage_Min, '.3f')+'%' }"}
         }
       }
     },

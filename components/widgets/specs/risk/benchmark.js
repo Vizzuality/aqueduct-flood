@@ -216,16 +216,16 @@ export default {
       "orient": "top",
       "ticks": true,
       "tickCount": 10,
-      "title": "Annual Expected Urban Damage (US Billion $)",
+      "title": "Annual Expected Urban Damage (US $)",
       "encode": {
       "labels": {
         "update": {
-          "text": {"signal": "if(calc=='Percentage', datum.value+'%', '$'+format(datum.value/1e9,'~s'))"}
+          "text": {"signal": "if(calc=='Percentage', datum.value+'%', '$'+format(datum.value,'~s'))"}
         }
       },
       "title": {
         "update": {
-          "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage (%)', 'Annual Expected Urban Damage (US Billion $)')"}
+          "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage (%)', 'Annual Expected Urban Damage (US $)')"}
         }
       }
     }
@@ -277,7 +277,7 @@ export default {
         
             "opacity": {"value": 1},
             "size": {"signal": "size", "mult": 2},
-               "tooltip":{"signal": "{'Country': datum.id, 'Protection standart': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value/1e9, '.2f')+'B')}"}
+               "tooltip":{"signal": "{'Country': datum.id, 'Protection standart': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value, '~s'))}"}
          }
       }
     }

@@ -76,7 +76,7 @@ export default {
       "grid":true, 
       "format":"s", 
       "tickCount": 5, 
-      "title": "Annual Urban Damage ($)"}
+      "title": "Annual Urban Damage (US $)"}
   ],
 
   "legends": [
@@ -139,6 +139,7 @@ export default {
       ],
 
       "marks": [
+
         {
           "name": "bars",
           "from": {"data": "facet"},
@@ -157,12 +158,22 @@ export default {
             "hover": {"opacity":{
               "value":0.5
             },
-            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1/1e9, '.2f')+' B'}"}}
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1, '~s')}"}
           }
-        }
-          
+          }
+        } 
         
       ]
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "update": {
+          "y": {"scale": "yscale", "value": 0},
+          "x": {"value": 0},
+          "x2": {"signal": "width"}
+        }
+      }
     }
   ]
 };
