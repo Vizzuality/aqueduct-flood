@@ -208,7 +208,7 @@ export default {
       "encode": {
         "update": {
           "fill": {
-            "value": "red"
+            "value": "#A40004"
           },
           "path": {
             "field": "path"
@@ -217,7 +217,7 @@ export default {
             "value": 0
           }
         },
-        "hover":{"tooltip":{"signal": "{'Year': hover.datum.year, 'Value': '$'+format(hover.datum.value/1e6, '.3f')+'M'}"}}
+        "hover":{"tooltip":{"signal": "{'Year': hover.datum.year, 'Value': '$'+format(hover.datum.value, 's')}"}}
       }
     }
   ],

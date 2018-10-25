@@ -171,11 +171,11 @@ export default {
       "scale": "y",
       "ticks": false,
       "tickCount": 5,
-      "title": "Damage ($ Billions)",
+      "title": "Damage ($)",
       "encode":{
           "labels":{
             "update":{
-              "text":{"signal": "'$'+format(datum.value/1e9, '.0f') + ' B'"}
+              "text":{"signal": "'$'+format(datum.value, '.0s')"}
             }
           }
         }
@@ -318,7 +318,7 @@ export default {
                 "value":0
               }},
             "hover":{
-              "tooltip":{"signal": "{'Probability %': datum.x, 'GFDL-ESM2M': format(datum.gf/1e6,'.0f') + 'M','HadGEM2-ES':format(datum.ha/1e6,'.0f') + 'M','IPSL-CM5A-LR':format(datum.ip/1e6,'.0f') + 'M','MIROC-ESM-CHEM':format(datum.mi/1e6,'.0f') + 'M','NorESM1-M':format(datum.nr/1e6,'.0f') + 'M','Average': format(datum.mean_y/1e6,'.0f') + 'M'}"},
+              "tooltip":{"signal": "{'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')}"},
               "opacity":{
                 "value":0
               }

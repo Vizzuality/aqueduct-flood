@@ -26,12 +26,37 @@ export default {
   "data": [
     { "name": "table" },
     {
+      "name": "hide",
+      "source": "table",
+      "transform": [
+        {
+          "type": "window",
+          "ops": ["lead", "lag"],
+          "fields": ["value", "value"],
+          "as": ["lead", "lag"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.value===null"
+        },
+        {
+          "type":"formula",
+          "expr": "datum.lag!==null? datum.lag : datum.lead",
+          "as":"val"
+        },
+        {
+          "type": "filter",
+          "expr": "datum.val!==null"
+        }
+      ]
+    },
+    {
       "name": "dots",
       "source": "table",
       "transform": [
         {
           "type": "filter",
-          "expr": "hover && hover.datum.year === datum.year"
+          "expr": "hover && hover.datum.year === datum.year && hover.datum.value!==null"
         }
       ]
     }
@@ -100,11 +125,39 @@ export default {
             "scale": "y",
             "field": "value"
           },
-
+          "strokeCap":{"value":"square"},
           "opacity": {
             "value": 1
           },
           "defined":{"signal": "datum.value !== null"}
+        }
+      }
+    },{
+      "name": "hides",
+      "type": "line",
+      "interactive": false,
+      "range": "multi-line",
+      "from": {
+        "data": "hide"
+      },
+      "encode": {
+        "update": {
+          "x": {
+            "scale": "x",
+            "field": "year"
+          },
+
+          "y": {
+            "scale": "y",
+            "field": "val"
+          },
+          "strokeCap":{"value":"square"},
+          "strokeDash":{
+            "value":[2,5]
+          },
+          "opacity": {
+            "value": 1
+          }
         }
       }
     },

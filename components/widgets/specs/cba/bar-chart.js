@@ -52,15 +52,15 @@ export default {
       "encode": {
         "enter": {
           "x": { "scale": "xscale", "field": "year" },
-          "width": { "scale": "xscale", "band": 0.9 },
+          "width": { "scale": "xscale", "band": 0.8 },
           "y": { "scale": "yscale", "field": "value" },
           "y2": { "scale": "yscale", "value": 0 },
           "fill": [
             {
               "test": "datum.value<0",
-              "value": "#de2239"
+              "value": "#A40004"
             },
-            { "value": "#2B9D4C" }
+            { "value": "#116B5A" }
           ]
         },
         "update": {
@@ -70,7 +70,7 @@ export default {
         },
         "hover": {
           "opacity": { "value": 0.5 },
-          "tooltip":{"signal": "{'Year': datum.year, 'Value': '$'+format(datum.value/1e6, '.3f')+'M'}"}
+          "tooltip":{"signal": "{'Year': datum.year, 'Value': '$'+format(datum.value, 's')}"}
         }
       }
     }
