@@ -25,6 +25,7 @@ class Risk extends PureComponent {
   render() {
     const {
       input,
+      advancedSettings
     } = this.props;
     const { loading } = input;
 
@@ -38,15 +39,16 @@ class Risk extends PureComponent {
           <RiskFilters />
         </div>
 
-        <div className="l-risk-inputs" style={loadingStyles}>
-          <div className="wrapper">
-            <div className="row">
-              <div className="col-xs-12">
-                <RiskInputs />
+        {advancedSettings && (
+          <div className="l-risk-inputs" style={loadingStyles}>
+            <div className="wrapper">
+              <div className="row">
+                <div className="col-xs-12">
+                  <RiskInputs />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </div>)}
         <ApplyFilters />
       </div>
     );

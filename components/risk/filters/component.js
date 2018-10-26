@@ -103,21 +103,11 @@ class AnalyzerFilters extends PureComponent {
       setRiskFilter
     } = this.props;
     const isCoastal = filters.flood === 'coastal';
+    const { advanced_settings: advancedSettings } = filters;
 
     return (
       <div className="c-analyzer-filters">
         <div className="wrapper">
-          <div className="row end-xs">
-            <div className="col-md-6">
-              <Checkbox
-                label="Show Advanced Settings"
-                name="advanced_settings"
-                theme="light"
-                checked={filters.advanced_settings}
-                onChange={this.onCheckAdvancedSettings}
-              />
-            </div>
-          </div>
           <div className="row">
             <div className="col-md-6">
               {/* location */}
@@ -157,26 +147,26 @@ class AnalyzerFilters extends PureComponent {
               </Field>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-6">
-              {/* future scenarios */}
-              <Field
-                name="future-scenario-filter"
-                label="Select a future scenario"
-                className="-bigger"
-                disabled={!filters.advanced_settings}
-              >
-                <CustomSelect
-                  instanceId="scenario"
-                  options={scenarios}
-                  isDisabled={!filters.advanced_settings}
-                  placeholder="Select a future scenario"
-                  value={filters.scenario}
-                  onChange={opt => setRiskFilter({ scenario: opt && opt.value })}
-                />
-              </Field>
-            </div>
-          </div>
+          {advancedSettings && (
+            <div className="row">
+              <div className="col-md-6">
+                {/* future scenarios */}
+                <Field
+                  name="future-scenario-filter"
+                  label="Select a future scenario"
+                  className="-bigger"
+                  disabled={!filters.advanced_settings}
+                >
+                  <CustomSelect
+                    instanceId="scenario"
+                    options={scenarios}
+                    placeholder="Select a future scenario"
+                    value={filters.scenario}
+                    onChange={opt => setRiskFilter({ scenario: opt && opt.value })}
+                  />
+                </Field>
+              </div>
+            </div>)}
           <div className="row">
             <div className="col-md-6">
               {/* flood type */}
@@ -211,15 +201,24 @@ class AnalyzerFilters extends PureComponent {
               </Field>
             </div>
           </div>
-          <div className="row">
+          <div className="row between-md">
+            <div className="col-md-6">
+              {isCoastal && (
+                <Checkbox
+                  label="Subsidence"
+                  name="sub_scenario"
+                  theme="light"
+                  checked={filters.sub_scenario}
+                  onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
+                />)}
+            </div>
             <div className="col-md-6">
               <Checkbox
-                label="Subsidence"
-                name="sub_scenario"
+                label="Show Advanced Settings"
+                name="advanced_settings"
                 theme="light"
-                disabled={!isCoastal}
-                checked={filters.sub_scenario}
-                onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
+                checked={filters.advanced_settings}
+                onChange={this.onCheckAdvancedSettings}
               />
             </div>
           </div>
