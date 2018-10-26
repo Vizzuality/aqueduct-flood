@@ -71,7 +71,13 @@ class AnalyzerCompareOutputs extends Component {
         visible: true,
         options: {
           type: 'widget-share',
-          widget,
+          widget: {
+            ...widget,
+            params: {
+              ...widget.params,
+              title: replace(widget.params.title, { ...filters.common, ...filters.cba })
+            }
+          },
           embedURL: getCbaEmbedURL(widget, filters)
         }
       }));

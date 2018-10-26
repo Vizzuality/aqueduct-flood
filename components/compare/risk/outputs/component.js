@@ -53,13 +53,18 @@ class RiskCompareOutputs extends PureComponent {
         visible: true,
         options: {
           type: 'widget-share',
-          widget,
+          widget: {
+            ...widget,
+            params: {
+              ...widget.params,
+              title: replace(widget.params.title, { ...filters.common, ...filters.risk })
+            }
+          },
           embedURL: getRiskEmbedURL(widget, filters)
         }
       }));
     }
 
-    console.log(filters)
     if (option === 'json') generateRiskDownloadURL(widget, filters);
   }
 
@@ -72,9 +77,9 @@ class RiskCompareOutputs extends PureComponent {
 
   render() {
     const { widgets, filters,  filtersCompare, originalFormatFilters, originalFormatCompareFilters } = this.props;
-    const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
+    const { geogunit_unique_name: location } = filters;
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
-    const widgetsReadyToDisplay = location && existingProt;
+    const widgetsReadyToDisplay = location;
     const widgetsCompareReadyToDisplay = !!locationCompare && !!existingProtCompare;
 
     return (

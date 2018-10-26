@@ -60,14 +60,24 @@ class AnalyzerOutputs extends Component {
   }
 
   onDownloadWidget = (option, widget) => {
-    const { setModal, originalFormatFilters } = this.props;
+    const {
+      setModal,
+      originalFormatFilters,
+      filters
+    } = this.props;
 
     if (option === 'embed') {
       setModal(({
         visible: true,
         options: {
           type: 'widget-share',
-          widget,
+          widget: {
+            ...widget,
+            params: {
+              ...widget.params,
+              title: replace(widget.params.title, filters)
+            }
+          },
           embedURL: getCbaEmbedURL(widget, originalFormatFilters)
         }
       }));
