@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { formatSpecifier, precisionFixed, format  } from 'd3-format';
+import {
+  formatSpecifier,
+  precisionFixed,
+  precisionRound,
+  format
+} from 'd3-format';
 
 // styles
 import '../styles.scss';
@@ -15,8 +20,8 @@ class RiskTableChart extends PureComponent {
     s.precision = precisionFixed(0.01, 1.01);
     const parse = format(s);
 
-    const p = Math.max(0, precisionFixed(0.01, 1.01));
-    const percentageFormat = format(`.${p}%`);
+    const p = precisionRound(0.01, 1.01);
+    const round = format(`.${p}r`);
 
     return (
       <div className="c-table-widget">
@@ -65,7 +70,7 @@ class RiskTableChart extends PureComponent {
               </td>
               {data.map((_row, i) => (
                 <td key={`${_row.Percent_Damage_Avg}-2050-${i}`}>
-                  {percentageFormat(_row.Percent_Damage_Avg)}
+                  {`${round(_row.Percent_Damage_Avg)}%`}
                 </td>))
               }
             </tr>
