@@ -29,13 +29,23 @@ class AnalyzerOutputs extends PureComponent {
   }
 
   onMoreInfo = (widget) => {
-    const { setModal, originalFormatFilters } = this.props;
+    const {
+      setModal,
+      originalFormatFilters,
+      filters
+    } = this.props;
 
     setModal(({
       visible: true,
       options: {
         type: 'widget-info',
-        widget,
+        widget: {
+          ...widget,
+          params: {
+            ...widget.params,
+            title: replace(widget.params.title, filters)
+          }
+        },
         embedURL: getRiskPreviewURL(widget, originalFormatFilters)
       }
     }));
@@ -48,7 +58,6 @@ class AnalyzerOutputs extends PureComponent {
       filters
     } = this.props;
 
-    console.log(replace(widget.params.title, filters))
 
     if (option === 'embed') {
       setModal(({

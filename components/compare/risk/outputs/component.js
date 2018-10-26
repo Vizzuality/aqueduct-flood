@@ -39,7 +39,13 @@ class RiskCompareOutputs extends PureComponent {
       visible: true,
       options: {
         type: 'widget-info',
-        widget,
+        widget: {
+          ...widget,
+          params: {
+            ...widget.params,
+            title: replace(widget.params.title, { ...filters.common, ...filters.risk })
+          }
+        },
         embedURL: getRiskPreviewURL(widget, filters)
       }
     }));

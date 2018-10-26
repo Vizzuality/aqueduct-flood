@@ -47,13 +47,23 @@ class AnalyzerOutputs extends Component {
   }
 
   onMoreInfo = (widget) => {
-    const { setModal, originalFormatFilters } = this.props;
+    const {
+      setModal,
+      originalFormatFilters,
+      filters
+    } = this.props;
 
     setModal(({
       visible: true,
       options: {
         type: 'widget-info',
-        widget,
+        widget: {
+          ...widget,
+          params: {
+            ...widget.params,
+            title: replace(widget.params.title, filters)
+          }
+        },
         embedURL: getCbaPreviewURL(widget, originalFormatFilters)
       }
     }));
