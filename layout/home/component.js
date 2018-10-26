@@ -124,9 +124,7 @@ class Home extends PureComponent {
     const isRiskTab = tab === 'risk';
     const isHazardTab = tab === 'hazard';
     const { existing_prot: existingProt, prot_fut: protFut } = filters.cba;
-    const { existing_prot: existingProtRisk } = filters.risk;
     const AnalyzertabReady = !!existingProt && !!protFut;
-    const RiskTabReady = !!existingProtRisk;
 
     const sidebarClass = classnames(
       'l-sidebar',
@@ -154,7 +152,7 @@ class Home extends PureComponent {
           </Sidebar>
 
           {isAnalyzerTab && AnalyzertabReady && <AnalyzerOutputs />}
-          {isRiskTab && RiskTabReady && <RiskOutputs />}
+          {isRiskTab && <RiskOutputs />}
           {(!isAnalyzerTab && !isRiskTab) && <HazardMap />}
 
         </section>

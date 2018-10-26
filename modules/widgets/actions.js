@@ -110,7 +110,10 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
 
     const widgetParams = queryString.stringify({
       ...restCommonParams,
-      ...restRiskFilters
+      ...{
+        ...restRiskFilters,
+        existing_prot: restRiskFilters.existing_prot || 'null'
+      }
     });
 
     dispatch(setError({ id: widgetId, error: null }));
