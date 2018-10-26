@@ -63,7 +63,7 @@
     "vega": "^4.2.0",
     "vega-lib": "^4.2.0",
     "webpack": "^3.1.0",
-    "wri-api-components": "^2.2.11",
+    "wri-api-components": "^2.3.1",
     "wri-json-api-serializer": "^1.0.1"
   },
   "devDependencies": {
