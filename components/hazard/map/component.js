@@ -11,7 +11,7 @@ import { PluginLeaflet } from 'layer-manager';
 import { Spinner } from 'aqueduct-components';
 
 // components
-import HazardLegend from 'components/ui/map/legend';
+import HazardLegend from './legend';
 
 // styles
 import './styles.scss';
@@ -19,7 +19,7 @@ import './styles.scss';
 class HazardMap extends PureComponent {
   static propTypes = {
     // used by layerManager
-    activeLayers: PropTypes.array.isRequired,
+    // activeLayers: PropTypes.array.isRequired,
     // used by legend
     layers: PropTypes.array.isRequired,
     mapOptions: PropTypes.object.isRequired,
@@ -34,16 +34,6 @@ class HazardMap extends PureComponent {
       zoomend: this.setMapBounds,
       dragend: this.setMapBounds
     };
-  }
-
-  onClickLayer = (checked, layer) => {
-    const { setActiveLayer, activeLayers } = this.props
-
-    if (checked) {
-      setActiveLayer([...activeLayers.map(_l => _l.id), ...[layer.id]]);
-    } else {
-      setActiveLayer(activeLayers.filter(_layer => _layer.id !== layer.id).map(_l => _l.id))
-    }
   }
 
   setMapBounds = (e, map) => {
@@ -63,7 +53,6 @@ class HazardMap extends PureComponent {
   render () {
     const {
       mapOptions,
-      activeLayers,
       layers,
       loading
     } = this.props;
@@ -81,7 +70,7 @@ class HazardMap extends PureComponent {
           {(map) => (
             <Fragment>
               <LayerManager map={map} plugin={PluginLeaflet}>
-                {layerManager => activeLayers.map((l, i) => (
+                {layerManager => layers.map((l, i) => (
                   <Layer
                     layerManager={layerManager}
                     key={l.id}
@@ -103,7 +92,7 @@ class HazardMap extends PureComponent {
                   maxWidth={500}
                   maxHeight={300}
                 >
-                  <HazardLegend onClickLayer={this.onClickLayer} />
+                  <HazardLegend />
                 </Legend>)}
             </Fragment>
           )}

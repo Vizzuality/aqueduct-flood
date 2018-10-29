@@ -5,7 +5,7 @@ import { Widget } from 'aqueduct-components';
 import { getWidgetMapData } from 'modules/widgets/actions';
 
 export default connect(
-  (state, { params }) => {
+  (state, { params, filters }) => {
     const { widgets } = state;
 
     // widget id
@@ -13,6 +13,7 @@ export default connect(
 
     return {
       params,
+      filters,
       widget: widgets.find(widget => widget.id === id)
     };
   },

@@ -20,7 +20,7 @@ import {
 } from 'modules/filters/actions';
 import { setActiveLayer } from "modules/layers/actions";
 import { setMapOptions } from "modules/map/actions";
-import { setReturnPeriod } from 'components/ui/map/legend/actions';
+import { setReturnPeriod } from 'components/hazard/map/legend/actions';
 
 class HomePage extends Page {
   static async getInitialProps(context) {

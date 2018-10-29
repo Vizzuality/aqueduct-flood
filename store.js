@@ -10,7 +10,7 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 import * as appModule from 'modules/app';
 import * as locationsModule from 'modules/locations';
 import * as mapModule from 'modules/map';
-import * as hazardLegendModule from 'components/ui/map/legend';
+import * as hazardLegendModule from 'components/hazard/map/legend';
 import * as layersModule from 'modules/layers';
 import * as widgetsModule from 'modules/widgets';
 import * as widgetsCompareModule from 'modules/widgets-compare';
