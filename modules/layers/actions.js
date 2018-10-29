@@ -6,7 +6,7 @@ import * as queryString from 'query-string';
 import { getUniqueVocabulary } from 'utils/hazard';
 
 // constants
-import { FETCH_DATASET_ID } from 'constants/hazard';
+import { FETCH_HAZARD_DATASET_ID } from 'constants/hazard';
 
 export const setLayers = createAction('LAYERS__SET-LAYERS');
 export const setActiveLayer = createAction('LAYERS__SET-ACTIVE-LAYER');
@@ -16,15 +16,16 @@ export const setLoading = createAction('LAYERS__SET-LOADING');
 export const setError = createAction('LAYERS__SET-ERRORS');
 export const clearLayers = createAction('LAYERS__CLEAR-LAYERS');
 
-export const fetchLayer = (layerId) =>
-  fetch(`${process.env.WRI_API_URL}/v1/dataset/${FETCH_DATASET_ID}/layer/${layerId}`, {})
+export const fetchLayer = (layerId, datasetId) => {
+  return fetch(`${process.env.WRI_API_URL}/v1/dataset/${datasetId}/layer/${layerId}`, {})
     .then((response) => {
       if (response.ok) return response.json();
       throw response;
     })
     .then(response => WRISerializer(response))
+}
 
-export const fetchLayers = createThunkAction('LAYERS__FETCH-LAYERS', () =>
+export const fetchLayers = createThunkAction('LAYERS__FETCH-HAZARD-LAYERS', () =>
   (dispatch, getState) => {
     const { filters, layers } = getState();
     const { hazard: hazardFilters } = filters;
@@ -35,7 +36,7 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-LAYERS', () =>
 
     dispatch(setLoading(true));
 
-    return fetch(`${process.env.WRI_API_URL}/v1/dataset/${FETCH_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
+    return fetch(`${process.env.WRI_API_URL}/v1/dataset/${FETCH_HAZARD_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;
@@ -43,7 +44,7 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-LAYERS', () =>
       .then(response => WRISerializer(response))
       .then((data = []) => {
         const layerIds = ((data[0] || {}).resources || []).map(_layer => _layer.id);
-        const promises = layerIds.map(_layerId => fetchLayer(_layerId));
+        const promises = layerIds.map(_layerId => fetchLayer(_layerId, FETCH_HAZARD_DATASET_ID));
 
         Promise.all(promises)
           .then((_layers => {

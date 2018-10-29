@@ -1,3 +1,5 @@
+export const FETCH_CBA_DATASET_ID = 'e1b4cd78-cef0-41e9-be02-2d94010114b3';
+
 export const SCENARIOS_OPTIONS = [
   { label: 'Business as usual', value: 'business as usual' },
   { label: 'Optimistic', value: 'optimistic' },
@@ -24,6 +26,7 @@ export const DISCOUNT_RATE_OPTIONS = [0, 100];
 export const OPERATION_MAINTENANCE_COST_OPTIONS = [0, 100];
 
 export default {
+  FETCH_CBA_DATASET_ID,
   SCENARIOS_OPTIONS,
   DESIGN_PROTECTION_LEVEL_YEAR_OPTIONS,
   EXISTING_PROTECTION_LEVEL_OPTIONS,
