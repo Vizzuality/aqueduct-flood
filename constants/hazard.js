@@ -1,5 +1,4 @@
-// export const FETCH_DATASET_ID = 'c53a195f-d5f0-4acc-b1be-b773420a6606';
-export const FETCH_DATASET_ID = 'e1b4cd78-cef0-41e9-be02-2d94010114b3';
+export const FETCH_HAZARD_DATASET_ID = 'e1b4cd78-cef0-41e9-be02-2d94010114b3';
 
 export const YEAR_OPTIONS = [
   { label: 'Baseline', value: '1980.0', selected: true },
@@ -34,7 +33,7 @@ export const COASTAL_PROJECTION_MODEL_OPTIONS = [
 ];
 
 export default {
-  FETCH_DATASET_ID,
+  FETCH_HAZARD_DATASET_ID,
   YEAR_OPTIONS,
   FLOOD_TYPES_OPTIONS,
   SCENARIOS_OPTIONS,
