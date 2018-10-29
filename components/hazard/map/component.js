@@ -76,6 +76,7 @@ class HazardMap extends PureComponent {
           mapOptions={{}}
           bounds={bounds}
           events={this.mapEvents}
+          basemap={{ url: process.env.BASEMAP_URL }}
         >
           {(map) => (
             <Fragment>

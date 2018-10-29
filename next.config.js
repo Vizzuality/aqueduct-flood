@@ -22,6 +22,7 @@ module.exports = withSass(withCSS({
       'process.env.API_URL': JSON.stringify(process.env.API_URL),
       'process.env.WRI_API_URL': JSON.stringify(process.env.WRI_API_URL),
       'process.env.GOOGLE_ANALYTICS': JSON.stringify(process.env.GOOGLE_ANALYTICS),
+      'process.env.BASEMAP_URL': JSON.stringify(process.env.BASEMAP_URL)
     }));
 
     return polyfill.then(() => commonsChunkConfig(config, /\.(sass|scss|css)$/));
