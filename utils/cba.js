@@ -12,11 +12,12 @@ export const getUniqueVocabulary = (filters = {}, right = false) => {
   return `inunriver_${year}_${scenarioToSend}_${model}_None_None`;
 }
 
-export const calculateClosesPeriodRange = (returnPeriod) =>
+export const calculateClosestPeriodRange = (returnPeriod) =>
   EXISTING_PROTECTION_LEVEL_OPTIONS.reduce((prev, curr) =>
-  returnPeriod > prev ? curr : prev)
+    (returnPeriod >= prev && returnPeriod <= curr) ? prev: curr);
+
 
 export default {
   getUniqueVocabulary,
-  calculateClosesPeriodRange
+  calculateClosestPeriodRange
 };
