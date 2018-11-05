@@ -3,11 +3,16 @@ export const getUniqueVocabulary = (filters = {}) => {
   const { year, flood, scenario, projection_model: model, sub_scenario: subScenario } = filters;
   const subsidience = subScenario ? 'wtsub' : 'nosub';
 
-  if (flood === 'inunriver') return `${flood}_${year}_${scenario}_${model}_None_None`;
+  const _scenario = year === '2010.0' ? 'historical' : scenario;
 
-  const isPerc = ['5.0', '50.0'].includes(model);
+  if (flood === 'inunriver') {
 
-  return `${flood}_${year === '1980.0' ? 'None' : year}_${scenario}_${isPerc ? 'perc': 'None'}_${subsidience}_${model}`;
+    const _model = year === '2010.0' ? '000000000WATCH' : model;
+
+    return `hazards_${flood}_${year}_${_scenario}_${_model}_None_None`;
+  }
+
+  return `hazards_${flood}_${year}_${_scenario}_perc_${subsidience}_${model}`;
 }
 
 export default { getUniqueVocabulary};
