@@ -6,10 +6,10 @@ export default {
   },
   // hazard
   hazard: {
-    year: '1980.0',
+    year: '2010.0',
     flood: 'inuncoast',
-    scenario: 'historical',
-    projection_model: 'None',
+    scenario: 'rcp8p5',
+    projection_model: '95.0',
     sub_scenario: true
   },
   // risk

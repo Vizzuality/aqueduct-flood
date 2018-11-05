@@ -1,7 +1,7 @@
-export const FETCH_HAZARD_DATASET_ID = 'e1b4cd78-cef0-41e9-be02-2d94010114b3';
+export const FETCH_HAZARD_DATASET_ID = 'ae684dd2-14fb-4c8b-ba58-c3ed7b450ff8';
 
 export const YEAR_OPTIONS = [
-  { label: 'Baseline', value: '1980.0', selected: true },
+  { label: 'Baseline', value: '2010.0', selected: true },
   { label: '2030', value: '2030.0', selected: false },
   { label: '2050', value: '2050.0', selected: false },
   { label: '2080', value: '2080.0', selected: false }
@@ -9,13 +9,12 @@ export const YEAR_OPTIONS = [
 
 export const FLOOD_TYPES_OPTIONS = [
   { label: 'Coastal', value: 'inuncoast', default: true },
-  { label: 'Riverine', value: 'inunriver' },
+  { label: 'Riverine', value: 'inunriver' }
 ];
 
 export const SCENARIOS_OPTIONS = [
-  { label: 'Business as usual', value: 'historical', default: true },
-  { label: 'Optimistic', value: 'rcp4p5' },
-  { label: 'Pessimistic', value: 'rcp8p5' }
+  { label: 'Business as usual / Pessimistic', value: 'rcp8p5', default: true },
+  { label: 'Optimistic', value: 'rcp4p5' }
 ];
 
 export const RIVERINE_PROJECTION_MODEL_OPTIONS = [
@@ -27,9 +26,9 @@ export const RIVERINE_PROJECTION_MODEL_OPTIONS = [
 ];
 
 export const COASTAL_PROJECTION_MODEL_OPTIONS = [
-  { label: 'Sea level rise scenario (low)', value: 'None' },
-  { label: 'Sea level rise scenario (medium)', value: '5.0' },
-  { label: 'Sea level rise scenario (high)', value: '50.0', default: true }
+  { label: 'Sea level rise scenario (low)', value: '5.0' },
+  { label: 'Sea level rise scenario (medium)', value: '50.0' },
+  { label: 'Sea level rise scenario (high)', value: '95.0', default: true }
 ];
 
 export default {
