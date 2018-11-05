@@ -15,4 +15,4 @@ export const getUniqueVocabulary = (filters = {}) => {
   return `hazards_${flood}_${year}_${_scenario}_perc_${subsidience}_${model}`;
 }
 
-export default { getUniqueVocabulary};
+export default { getUniqueVocabulary };

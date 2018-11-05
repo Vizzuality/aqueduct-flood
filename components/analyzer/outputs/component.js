@@ -110,7 +110,7 @@ class AnalyzerOutputs extends Component {
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
                   >
-                    {({ data, params }) => (<MapChart data={data} params={params} />)}
+                    {({ params }) => (<MapChart params={params} />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}
@@ -125,8 +125,6 @@ class AnalyzerOutputs extends Component {
                         if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
 
                         if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
-
-                        if (params.type === 'map') return (<MapChart />)
 
                         if (params.type === 'table') return (<TableChart data={data} />)
 

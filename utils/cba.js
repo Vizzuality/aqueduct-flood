@@ -5,11 +5,10 @@ export const getUniqueVocabulary = (filters = {}, right = false) => {
   const { year, scenario } = filters;
 
   const scenarioIndex = SCENARIOS_OPTIONS.findIndex(_scenario => _scenario.value === scenario);
-
-  const scenarioToSend = HAZARD_SCENARIO_OPTIONS[scenarioIndex].value;
+  const scenarioToSend = !right ? 'historical' : HAZARD_SCENARIO_OPTIONS[scenarioIndex].value;
   const model = right ? '0000GFDL-ESM2M' : '000000000WATCH';
 
-  return `inunriver_${year}_${scenarioToSend}_${model}_None_None`;
+  return `cba_inunriver_${year}_${scenarioToSend}_${model}_None_None`;
 }
 
 export const calculateClosestPeriodRange = (returnPeriod) =>

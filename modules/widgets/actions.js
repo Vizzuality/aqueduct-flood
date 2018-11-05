@@ -56,16 +56,17 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
 export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA', (widgetId) =>
   (dispatch, getState) => {
     const { filters } = getState();
-    const { common } = filters;
+    const { common, cba } = filters;
     const { scenario } = common;
+    const { ref_year: refYear } = cba;
 
     const leftVocabulary = getUniqueVocabulary({
-      year: '1980.0',
-      scenario
+      year: '2010.0',
+      scenario: 'historical'
     });
 
     const rightVocabulary = getUniqueVocabulary({
-      year: '2080',
+      year: `${refYear}.0`,
       scenario
     }, true);
 
@@ -81,9 +82,11 @@ export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA'
       .then((_layers) => {
         dispatch(setWidgetData({
           id: widgetId,
-          data: {
-            left: _layers[0],
-            right: _layers[1]
+          ... {
+            data: {
+              left: [..._layers[0]],
+              right: [..._layers[1]]
+            }
           }
         }));
         dispatch(setLoading({ id: widgetId, loading: false }));

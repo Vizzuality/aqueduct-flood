@@ -3,7 +3,18 @@ import { createSelector } from 'reselect';
 // utils
 import { calculateClosestPeriodRange } from 'utils/cba';
 
-const getLayers = (state, _layers) => _layers;
+const getLayers = (state) => {
+  const { widgets } = state;
+  const widget = widgets.find(_widget => _widget.id === 'inundation_map');
+
+  return widget.data;
+};
+const getCompareLayers = (state) => {
+  const { widgetsCompare } = state;
+  const widget = widgetsCompare.find(_widget => _widget.id === 'inundation_map');
+
+  return widget.data;
+};
 const getReturnPeriod = state => state.filters.cba.existing_prot;
 const getFutureReturnPeriod = state => state.filters.cba.prot_fut;
 const getReturnPeriodCompare = state => state.filtersCompare.cba.existing_prot;
@@ -11,7 +22,8 @@ const getFutureReturnPeriodCompare = state => state.filtersCompare.cba.prot_fut;
 
 export const getLeftLayers = createSelector(
   [getLayers, getReturnPeriod],
-  (_layers = [], _returnPeriod) => {
+  (data = {}, _returnPeriod) => {
+    const { left: _layers = [] } = data;
     if (!_layers.length) return _layers;
     const closestPeriodRange = calculateClosestPeriodRange(_returnPeriod);
     const indexCurrentPeriod = _layers.findIndex(_layer => _layer.slug.includes(closestPeriodRange));
@@ -27,7 +39,8 @@ export const getLeftLayers = createSelector(
 
 export const getRightLayers = createSelector(
   [getLayers, getFutureReturnPeriod],
-  (_layers = [], _returnPeriod) => {
+  (data = {}, _returnPeriod) => {
+    const { right: _layers = [] } = data;
     if (!_layers.length) return _layers;
 
     const indexCurrentPeriod = _layers.findIndex(_layer => _layer.slug.includes(_returnPeriod));
@@ -42,8 +55,9 @@ export const getRightLayers = createSelector(
 );
 
 export const getLeftLayersCompare = createSelector(
-  [getLayers, getReturnPeriodCompare],
-  (_layers = [], _returnPeriod) => {
+  [getCompareLayers, getReturnPeriodCompare],
+  (data = {}, _returnPeriod) => {
+    const { left: _layers = [] } = data;
     if (!_layers.length) return _layers;
     const closestPeriodRange = calculateClosestPeriodRange(_returnPeriod);
     const indexCurrentPeriod = _layers.findIndex(_layer => _layer.slug.includes(closestPeriodRange));
@@ -58,8 +72,9 @@ export const getLeftLayersCompare = createSelector(
 );
 
 export const getRightLayersCompare = createSelector(
-  [getLayers, getFutureReturnPeriodCompare],
-  (_layers = [], _returnPeriod) => {
+  [getCompareLayers, getFutureReturnPeriodCompare],
+  (data = {}, _returnPeriod) => {
+    const { left: _layers = [] } = data;
     if (!_layers.length) return _layers;
 
     const indexCurrentPeriod = _layers.findIndex(_layer => _layer.slug.includes(_returnPeriod));

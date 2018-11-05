@@ -4,8 +4,9 @@ import { replace } from 'aqueduct-components';
 
 // components
 import Widget from 'components/analyzer/widget';
-import WidgetMap from 'components/analyzer/widget-map';
 import WidgetCompare from 'components/compare/analyzer/widget';
+import WidgetMap from 'components/analyzer/widget-map';
+import WidgetMapCompare from 'components/compare/analyzer/widget-map';
 import Chart from 'components/widgets';
 import MapChart from 'components/widgets/map';
 import TableChart from 'components/widgets/table/cba';
@@ -111,7 +112,7 @@ class AnalyzerCompareOutputs extends Component {
                     params={{ id: widget.id, filters }}
                     onShareWidget={() => this.onShareWidget(widget)}
                   >
-                    {({ data, params }) => (<MapChart data={data} params={params} />)}
+                    {({ params }) => (<MapChart params={params} />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}
@@ -127,8 +128,6 @@ class AnalyzerCompareOutputs extends Component {
 
                         if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
 
-                        if (params.type === 'map') return (<MapChart />)
-
                         if (params.type === 'table') return (<TableChart data={data} />)
 
                         return null;
@@ -139,14 +138,14 @@ class AnalyzerCompareOutputs extends Component {
               {widgetsCompareReadyToDisplay && (
                 <div className="col-md-6">
                   {widget.id === 'inundation_map' ? (
-                    <WidgetMap
+                    <WidgetMapCompare
                       title={replace(widget.params.title, filtersCompare)}
                       params={{ id: widget.id, filtersCompare }}
                       onShareWidget={() => this.onShareWidget(widget)}
                       isCompare
                     >
-                      {({ data, params }) => (<MapChart data={data} params={params} isCompare />)}
-                    </WidgetMap>) : (
+                      {({ params }) => (<MapChart params={params} isCompare />)}
+                    </WidgetMapCompare>) : (
                       <WidgetCompare
                         title={replace(widget.params.title, filtersCompare)}
                         params={{ id: widget.id, filtersCompare }}
@@ -160,8 +159,6 @@ class AnalyzerCompareOutputs extends Component {
                           if (params.type === 'line') return (<Chart spec={LineSpec} params={params} data={{ table: data }} />)
 
                           if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
-
-                          if (params.type === 'map') return (<MapChart />)
 
                           if (params.type === 'table') return (<TableChart data={data} />)
 
