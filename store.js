@@ -8,7 +8,6 @@ import { loadingBarReducer } from 'react-redux-loading-bar';
 
 // modules
 import * as appModule from 'modules/app';
-import * as routesModule from 'modules/routes';
 import * as locationsModule from 'modules/locations';
 import * as mapModule from 'modules/map';
 import * as hazardLegendModule from 'components/ui/map/legend';
@@ -23,7 +22,6 @@ const reducer = combineReducers({
   loadingBar: loadingBarReducer,
 
   app: handleModule(appModule),
-  routes: handleModule(routesModule),
   locations: handleModule(locationsModule),
   map: handleModule(mapModule),
   hazardLegend: handleModule(hazardLegendModule),

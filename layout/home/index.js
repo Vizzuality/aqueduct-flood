@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { setSidebarVisibility, setTab, clearInput } from 'modules/app/actions';
-import { setRoutes } from 'modules/routes/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import { clearLayers } from 'modules/layers/actions';
 
@@ -13,7 +12,6 @@ import Home from "./component";
 
 export default connect(
   state => ({
-    routes: state.routes,
     sidebar: state.app.sidebar,
     tab: state.app.tab,
     tabs: updatedTabs(state),
@@ -26,7 +24,6 @@ export default connect(
     setSidebarVisibility,
     setTab,
     setWidgets,
-    setRoutes,
     clearInput,
     clearLayers
   }

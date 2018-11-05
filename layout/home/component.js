@@ -22,7 +22,6 @@ import './styles.scss';
 
 class Home extends PureComponent {
   static propTypes = {
-    routes: PropTypes.object.isRequired,
     sidebar: PropTypes.bool.isRequired,
     tab: PropTypes.string.isRequired,
     tabs: PropTypes.array.isRequired,
@@ -31,7 +30,6 @@ class Home extends PureComponent {
     hazardLegend: PropTypes.object.isRequired,
     activeLayers: PropTypes.array.isRequired,
     setSidebarVisibility: PropTypes.func.isRequired,
-    setRoutes: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
     clearInput: PropTypes.func.isRequired,
@@ -40,16 +38,14 @@ class Home extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const {
-      routes,
       filters,
       activeLayers,
       mapOptions,
       tab,
       hazardLegend,
-      setRoutes
+      // setRoutes
     } = this.props;
     const {
-      routes: nextRoutes,
       filters: nextFilters,
       activeLayers: nextActiveLayers,
       mapOptions: nextMapOptions,
@@ -57,30 +53,12 @@ class Home extends PureComponent {
       tab: nextTab
     } = nextProps;
     const tabChanged = tab !== nextTab;
-    const routesChanged = !isEqual(routes, nextRoutes);
     const mapOptionsChanged = !isEqual(mapOptions, nextMapOptions);
     const filtersChanged = !isEqual(filters, nextFilters);
     const activeLayersChanged = !isEqual(activeLayers, nextActiveLayers);
     const hazardLegendChanged = !isEqual(hazardLegend, nextHazardLegend);
 
     if (filtersChanged || mapOptionsChanged || activeLayersChanged || tabChanged || hazardLegendChanged) {
-      setRoutes({
-        query: {
-          ...routes.query,
-          p: {
-            ...nextFilters,
-            activeLayers: nextActiveLayers.map(_layer => _layer.id),
-            map: {
-              ...nextMapOptions,
-              ...nextHazardLegend
-            }
-          },
-          tab: nextTab
-        }
-      });
-    }
-
-    if (routesChanged) {
       Router.replaceRoute('home',
         {
           tab: nextTab,
