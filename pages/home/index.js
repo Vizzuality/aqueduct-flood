@@ -10,7 +10,6 @@ import initStore from "store";
 import Home from "layout/home";
 
 // actions
-import { setRoutes } from 'modules/routes/actions';
 import { setTab } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import {
@@ -26,19 +25,13 @@ import { setReturnPeriod } from 'components/ui/map/legend/actions';
 class HomePage extends Page {
   static async getInitialProps(context) {
     const props = await super.getInitialProps(context);
-    const { store, pathname, query, asPath } = context;
+    const { store, query } = context;
     const { tab: queryTab } = query;
 
     if (queryTab) {
       store.dispatch(setTab(queryTab));
       store.dispatch(setWidgets({ nextTab: queryTab }))
     }
-
-    store.dispatch(setRoutes({
-      pathname,
-      query,
-      asPath
-    }));
 
     if (query.p) {
       const filters = JSON.parse(Base64.decode(decodeURIComponent(query.p)));

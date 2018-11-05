@@ -10,7 +10,6 @@ import initStore from "store";
 import CompareLayout from "layout/compare";
 
 // actions
-import { setRoutes } from 'modules/routes/actions';
 import { setTab } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import { setWidgetsCompare } from 'modules/widgets-compare/actions';
@@ -31,14 +30,8 @@ import {
 class Compare extends Page {
   static async getInitialProps(context) {
     const props = await super.getInitialProps(context);
-    const { store, pathname, query, asPath } = context;
+    const { store, query } = context;
     const { tab: queryTab } = query;
-
-    store.dispatch(setRoutes({
-      pathname,
-      query,
-      asPath
-    }));
 
     let params = {}
 

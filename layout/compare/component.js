@@ -19,13 +19,11 @@ class ComparePage extends PureComponent {
   static propTypes = {
     tab: PropTypes.string.isRequired,
     tabs: PropTypes.array.isRequired,
-    routes: PropTypes.object.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     setTab: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
     setWidgetsCompare: PropTypes.func.isRequired,
-    setRoutes:PropTypes.func.isRequired,
     clearInput: PropTypes.func.isRequired,
     clearInputCompare: PropTypes.func.isRequired,
     clearFilters: PropTypes.func.isRequired,
@@ -33,32 +31,17 @@ class ComparePage extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { routes, filters, filtersCompare, tab, setRoutes } = this.props;
+    const { filters, filtersCompare, tab } = this.props;
     const {
-      routes: nextRoutes,
       filters: nextFilters,
       filtersCompare: nextFiltersCompare,
       tab: nextTab
     } = nextProps;
     const tabChanged = tab !== nextTab;
-    const routesChanged = !isEqual(routes, nextRoutes);
     const filtersChanged = !isEqual(filters, nextFilters);
     const filtersCompareChanged = !isEqual(filtersCompare, nextFiltersCompare);
 
     if (filtersChanged || filtersCompareChanged || tabChanged) {
-      setRoutes({
-        query: {
-          ...routes.query,
-          p: {
-            filters: nextFilters,
-            filtersCompare: nextFiltersCompare
-          },
-          tab: nextTab
-        }
-      });
-    }
-
-    if (routesChanged) {
       Router.replaceRoute('compare',
         {
           tab: nextTab,
