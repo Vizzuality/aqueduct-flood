@@ -3,6 +3,8 @@ import queryString from 'query-string';
 
 export const setLocations = createAction('LOCATIONS__SET-LOCATIONS');
 export const setCompareLocations = createAction('LOCATIONS__SET-COMPARE-LOCATIONS');
+export const setDefaultsLoading = createAction('LOCATIONS__SET-DEFAULTS-LOADING');
+export const setCompareDefaultsLoading = createAction('LOCATIONS__SET-COMPARE-DEFAULTS-LOADING');
 
 export const getLocations = createThunkAction('LOCATIONS__GET-LOCATIONS', value =>
   (dispatch) => {
@@ -69,18 +71,23 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
       scenario
     });
 
+    dispatch(setDefaultsLoading(true));
+
     return fetch(`${process.env.API_URL}/cba/default?${queryParams}`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;
       })
       .then(({ data }) => {
+        dispatch(setDefaultsLoading(false));
         const defaults = data[0] || {};
         setFilter({ ...defaults });
 
         return { ...defaults };
       })
       .catch((err) => {
+        dispatch(setDefaultsLoading(false));
+
         if (err && typeof err.json === 'function') {
           err.json()
             .then((errs) => {
@@ -105,16 +112,21 @@ export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPA
       scenario
     });
 
+    dispatch(setCompareDefaultsLoading(true));
+
     return fetch(`${process.env.API_URL}/cba/default?${queryParams}`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;
       })
       .then(({ data }) => {
+        dispatch(setCompareDefaultsLoading(false));
         const defaults = data[0] || {};
         setCompareFilter({ ...defaults });
       })
       .catch((err) => {
+        dispatch(setCompareDefaultsLoading(false));
+
         if (err && typeof err.json === 'function') {
           err.json()
             .then((errs) => {
@@ -129,6 +141,9 @@ export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPA
 export default {
   setLocations,
   setCompareLocations,
+  setDefaultsLoading,
+  setCompareDefaultsLoading,
+
   getLocations,
   getCompareLocations,
   getCountryDefaults,

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 // actions
 import { setModal, setInput } from 'modules/app/actions';
 import { setRiskFilter } from 'modules/filters/actions';
-import { getCountryDefaults } from 'modules/locations/actions';
 
 import InputsRisk from 'components/risk/inputs';
 
@@ -15,7 +14,6 @@ export default connect(
   {
     setModal,
     onChangeFilter: setRiskFilter,
-    getCountryDefaults,
     setInput
   }
 )(InputsRisk);

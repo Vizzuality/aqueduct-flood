@@ -17,6 +17,7 @@ export default connect(
   state => ({
     filters: {
       location: state.filters.common.geogunit_unique_name,
+      existingProt: state.filters.common.existing_prot,
       scenario: state.filters.risk.scenario,
       advanced_settings: state.filters.risk.advanced_settings,
       flood: state.filters.risk.flood,

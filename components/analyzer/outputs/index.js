@@ -11,7 +11,7 @@ export default connect(
     filters: { ...state.filters.common, ...state.filters.cba },
     originalFormatFilters: state.filters,
     filtersStatus: state.app.filters,
-    widgets: state.widgets,
+    widgets: state.widgets
   }),
   {
     applyFilters,

@@ -14,7 +14,8 @@ export default connect(
       compareLocation : state.filtersCompare.common.geogunit_unique_name
     },
     input: state.app.input,
-    advancedSettings: state.filters.risk.advanced_settings
+    advancedSettings: state.filters.risk.advanced_settings,
+    defaultsLoading: state.locations.loaders.defaults
   }),
   {
     setRiskFilter,
