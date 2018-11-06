@@ -14,6 +14,7 @@ class Risk extends PureComponent {
   static propTypes = {
     advancedSettings: PropTypes.bool.isRequired,
     defaultsLoading: PropTypes.bool.isRequired,
+    widgetLoading: PropTypes.bool.isRequired,
     setWidgets: PropTypes.func.isRequired
   }
 
@@ -26,7 +27,8 @@ class Risk extends PureComponent {
   render() {
     const {
       advancedSettings,
-      defaultsLoading
+      defaultsLoading,
+      widgetLoading
     } = this.props;
 
     const loadingStyles = {
@@ -55,7 +57,7 @@ class Risk extends PureComponent {
             </div>
           </div>
         </div>
-        {!defaultsLoading && <ApplyFilters />}
+        {(!defaultsLoading && !widgetLoading) && <ApplyFilters />}
       </div>
     );
   }

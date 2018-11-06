@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import { setRiskFilter } from 'modules/filters/actions';
 import { setWidgets } from 'modules/widgets/actions';
 
+// selectors
+import { isAWidgetLoading } from 'modules/widgets/selectors';
+
+// component
 import Risk from "./component";
 
 export default connect(
@@ -15,7 +19,8 @@ export default connect(
     },
     input: state.app.input,
     advancedSettings: state.filters.risk.advanced_settings,
-    defaultsLoading: state.locations.loaders.defaults
+    defaultsLoading: state.locations.loaders.defaults,
+    widgetLoading: isAWidgetLoading(state)
   }),
   {
     setRiskFilter,

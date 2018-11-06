@@ -14,4 +14,9 @@
   .analyzer-compare-outputs {
     padding: 0 0 #{$space-1 * 15};
   }
+
+  .spinner-container {
+    position: relative;
+    min-height: 250px;
+  }
 }
