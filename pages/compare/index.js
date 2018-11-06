@@ -61,14 +61,17 @@ class Compare extends Page {
 
     if (queryTab) {
       store.dispatch(setTab(queryTab));
-      store.dispatch(setWidgets({
-        nextTab: queryTab,
-        advancedSettings: params.filters.risk ? params.filters.risk.advanced_settings : false
-      }));
-      store.dispatch(setWidgetsCompare({
-        nextTab: queryTab,
-        advancedSettings: params.filtersCompare.risk ? params.filtersCompare.risk.advanced_settings : false
-      }));
+
+      if (params && params.filtersCompare) {
+        store.dispatch(setWidgets({
+          nextTab: queryTab,
+          advancedSettings: params.filters.risk ? params.filters.risk.advanced_settings : false
+        }));
+        store.dispatch(setWidgetsCompare({
+          nextTab: queryTab,
+          advancedSettings: params.filtersCompare.risk ? params.filtersCompare.risk.advanced_settings : false
+        }));
+      }
     }
 
     return { ...props };

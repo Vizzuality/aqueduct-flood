@@ -82,7 +82,7 @@ class AnalyzerFilters extends PureComponent {
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    if (opt) Router.push('/compare/risk');
+    if (opt) Router.push('/compare');
   }
 
   onCheckAdvancedSettings = ({ checked }) => {

@@ -14,18 +14,11 @@ import './styles.scss';
 
 class AnalyzerCompare extends PureComponent {
   static propTypes = {
-    tab: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     loadingDefaults: PropTypes.bool.isRequired,
     loadingCompareDefaults: PropTypes.bool.isRequired,
-    setWidgetsCompare: PropTypes.func.isRequired
-  }
-
-  componentWillMount() {
-    const { tab, setWidgetsCompare } = this.props;
-
-    setWidgetsCompare({ nextTab: tab });
+    widgetLoading: PropTypes.bool.isRequired
   }
 
   render() {

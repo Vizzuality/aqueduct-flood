@@ -5,7 +5,6 @@ import { Spinner } from 'aqueduct-components';
 // components
 import RiskFilters from 'components/risk/filters';
 import RiskInputs from 'components/risk/risk-inputs';
-import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';
@@ -14,7 +13,6 @@ class Risk extends PureComponent {
   static propTypes = {
     advancedSettings: PropTypes.bool.isRequired,
     defaultsLoading: PropTypes.bool.isRequired,
-    widgetLoading: PropTypes.bool.isRequired,
     setWidgets: PropTypes.func.isRequired
   }
 
@@ -28,7 +26,6 @@ class Risk extends PureComponent {
     const {
       advancedSettings,
       defaultsLoading,
-      widgetLoading
     } = this.props;
 
     const loadingStyles = {
@@ -57,7 +54,6 @@ class Risk extends PureComponent {
             </div>
           </div>
         </div>
-        {(!defaultsLoading && !widgetLoading) && <ApplyFilters />}
       </div>
     );
   }

@@ -8,7 +8,7 @@ import AnalyzerOutputs from './component';
 
 export default connect(
   state => ({
-    widgets: state.widgetsCompare,
+    widgets: state.widgets,
     originalFormatFilters: state.filters,
     filters: { ...state.filters.common, ...state.filters.risk },
     originalFormatCompareFilters: state.filtersCompare,

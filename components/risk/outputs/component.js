@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 
@@ -20,7 +20,7 @@ import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'uti
 // styles
 import './styles.scss';
 
-class AnalyzerOutputs extends PureComponent {
+class AnalyzerOutputs extends Component {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
