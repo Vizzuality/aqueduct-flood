@@ -26,7 +26,8 @@ class AnalyzerFilters extends PureComponent {
     getCompareLocations: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
     setInput: PropTypes.func.isRequired,
-    setInputCompare: PropTypes.func.isRequired
+    setInputCompare: PropTypes.func.isRequired,
+    resetWidgets: PropTypes.func.isRequired
   }
 
   onSearch = debounce((value) => {
@@ -36,13 +37,22 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocation = (opt) => {
-    const { setCommonFilter, setCostFilter, filters, setInput, getCountryDefaults } = this.props;
+    const {
+      setCommonFilter,
+      setCostFilter,
+      filters,
+      setInput,
+      getCountryDefaults,
+      resetWidgets
+    } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
+
+    resetWidgets('cba');
 
     getCountryDefaults(setCostFilter)
       .then(() => { setInput({ loading: false }) })

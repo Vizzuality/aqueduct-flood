@@ -29,6 +29,18 @@ export default {
       error: widget.error || null
     }));
   },
+  [actions.resetWidgetsCompare]: (state, { payload: tab }) =>
+    WIDGETS[tab].map(_widget => ({
+      id: _widget.id,
+      params: _widget.params || ({
+        title: _widget.title,
+        description: _widget.description,
+        sources: _widget.sources
+      }),
+      data: _widget.data || [],
+      loading: _widget.loading || false,
+      error: _widget.error || null
+    })),
   [actions.setWidgetData]: (state, { payload }) => {
     const widgetIndex = state.findIndex(w => w.id === payload.id);
     const newState = [...state];

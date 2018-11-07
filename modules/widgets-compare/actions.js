@@ -8,6 +8,7 @@ import { fecthSideMap } from 'modules/layers/helpers';
 import { getUniqueVocabulary } from 'utils/cba';
 
 export const setWidgetsCompare = createAction('WIDGETS-COMPARE__SET-WIDGETS');
+export const resetWidgetsCompare = createAction('WIDGETS-COMPARE__RESET-WIDGETS');
 export const setWidgetData = createAction('WIDGETS-COMPARE__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS-COMPARE__SET-LOADING');
 export const setError = createAction('WIDGETS-COMPARE__SET-ERROR');
@@ -138,6 +139,7 @@ export const getWidgetRiskData = createThunkAction('WIDGETS-COMPARE__GET-RISK-DA
 
 export default {
   setWidgetsCompare,
+  resetWidgetsCompare,
   setWidgetData,
   setLoading,
   setError,

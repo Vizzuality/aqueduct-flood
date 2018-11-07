@@ -31,7 +31,9 @@ class AnalyzerCompareFilters extends PureComponent {
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
-    getCompareCountryDefaults: PropTypes.func.isRequired
+    getCompareCountryDefaults: PropTypes.func.isRequired,
+    resetWidgets: PropTypes.func.isRequired,
+    resetWidgetsCompare: PropTypes.func.isRequired
   }
 
   componentWillMount() {
@@ -59,7 +61,8 @@ class AnalyzerCompareFilters extends PureComponent {
       setInput,
       setCommonFilter,
       setCostFilter,
-      getCountryDefaults
+      getCountryDefaults,
+      resetWidgets
     } = this.props;
     const { location } = filters;
 
@@ -67,6 +70,8 @@ class AnalyzerCompareFilters extends PureComponent {
 
     setInput({ loading: true })
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
+
+    resetWidgets('cba');
 
     getCountryDefaults(setCostFilter)
       .then(() => { setInput({ loading: false }) })
@@ -78,7 +83,8 @@ class AnalyzerCompareFilters extends PureComponent {
       setCostCompareFilter,
       filters,
       setInputCompare,
-      getCompareCountryDefaults
+      getCompareCountryDefaults,
+      resetWidgetsCompare
     } = this.props;
     const { locationCompare } = filters;
 
@@ -86,6 +92,8 @@ class AnalyzerCompareFilters extends PureComponent {
 
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
+
+    resetWidgetsCompare('cba');
 
     getCompareCountryDefaults(setCostCompareFilter)
       .then(() => { setInputCompare({ loading: false }) })

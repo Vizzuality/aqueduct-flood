@@ -8,6 +8,7 @@ import { fecthSideMap } from 'modules/layers/helpers';
 import { getUniqueVocabulary } from 'utils/cba';
 
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
+export const resetWidgets = createAction('WIDGETS__RESET-WIDGETS');
 export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
 export const setWidgetData = createAction('WIDGETS__SET-WIDGET-DATA');
 export const setLoading = createAction('WIDGETS__SET-LOADING');
@@ -146,6 +147,7 @@ export const getWidgetRiskData = createThunkAction('WIDGETS__GET-RISK-DATA', (wi
 
 export default {
   setWidgets,
+  resetWidgets,
   setEmbedWidget,
   setWidgetData,
   setLoading,

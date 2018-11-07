@@ -13,6 +13,8 @@ import {
   getCompareCountryDefaults
 } from 'modules/locations/actions';
 import { setInput, setInputCompare } from 'modules/app/actions';
+import { resetWidgets } from 'modules/widgets/actions';
+import { resetWidgetsCompare } from 'modules/widgets-compare/actions';
 
 // selectors
 import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
@@ -42,6 +44,8 @@ export default connect(
     getCountryDefaults,
     getCompareCountryDefaults,
     setInput,
-    setInputCompare
+    setInputCompare,
+    resetWidgets,
+    resetWidgetsCompare
   }
 )(AnalyzerCompareFilters);
