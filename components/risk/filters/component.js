@@ -40,6 +40,17 @@ class AnalyzerFilters extends PureComponent {
     setWidgets: PropTypes.func.isRequired
   }
 
+  componentWillMount() {
+    const { filters, getCountryDefaults, setRiskFilter, setInput } = this.props;
+    const { existingProt } = filters;
+
+    // call defaults values if we don't have them available initially
+    if (existingProt) return;
+
+    getCountryDefaults(setRiskFilter)
+      .then(() => { setInput({ loading: false }) })
+  }
+
   onSearch = debounce((value) => {
     const { getLocations } = this.props;
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { setRiskFilter } from 'modules/filters/actions';
 import { setWidgets } from 'modules/widgets/actions';
 
+// component
 import Risk from "./component";
 
 export default connect(
@@ -14,7 +15,8 @@ export default connect(
       compareLocation : state.filtersCompare.common.geogunit_unique_name
     },
     input: state.app.input,
-    advancedSettings: state.filters.risk.advanced_settings
+    advancedSettings: state.filters.risk.advanced_settings,
+    defaultsLoading: state.locations.loaders.defaults
   }),
   {
     setRiskFilter,

@@ -14,6 +14,7 @@ export default connect(
   state => ({
     sidebar: state.app.sidebar,
     tab: state.app.tab,
+    appliedFilters: state.app.filters.applied,
     tabs: updatedTabs(state),
     filters: state.filters,
     mapOptions: state.map,

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Spinner } from 'aqueduct-components';
 
 // components
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
@@ -13,20 +14,21 @@ import './styles.scss';
 
 class AnalyzerCompare extends PureComponent {
   static propTypes = {
-    tab: PropTypes.string.isRequired,
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
-    setWidgetsCompare: PropTypes.func.isRequired
-  }
-
-  componentWillMount() {
-    const { tab, setWidgetsCompare } = this.props;
-
-    setWidgetsCompare({ nextTab: tab });
+    loadingDefaults: PropTypes.bool.isRequired,
+    loadingCompareDefaults: PropTypes.bool.isRequired,
+    widgetLoading: PropTypes.bool.isRequired
   }
 
   render() {
-    const { filters, filtersCompare } = this.props;
+    const {
+      loadingDefaults,
+      loadingCompareDefaults,
+      widgetLoading,
+      filters,
+      filtersCompare
+    } = this.props;
     const { geogunit_unique_name: location } = filters;
     const { geogunit_unique_name: locationCompare } = filtersCompare;
 
@@ -40,10 +42,18 @@ class AnalyzerCompare extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-md-6">
-                {location && <AnalyzerInputs />}
+                {loadingDefaults && (
+                  <div className="spinner-container">
+                    <Spinner className="-transparent" />
+                  </div>)}
+                {(location && !loadingDefaults) && <AnalyzerInputs />}
               </div>
               <div className="col-md-6">
-                {locationCompare && <AnalyzerCompareInputs />}
+                {loadingCompareDefaults && (
+                  <div className="spinner-container">
+                    <Spinner className="-transparent" />
+                  </div>)}
+                {(locationCompare && !loadingCompareDefaults) && <AnalyzerCompareInputs />}
               </div>
             </div>
           </div>
@@ -53,7 +63,7 @@ class AnalyzerCompare extends PureComponent {
           <AnalyzerCompareOutputs />
         </div>
 
-        <ApplyFilters />
+        {(!(loadingDefaults || loadingCompareDefaults) && !widgetLoading) && <ApplyFilters />}
       </div>)
   }
 }

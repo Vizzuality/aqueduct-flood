@@ -10,5 +10,9 @@ const list = {
 
 export default {
   list,
-  listCompare: list
+  listCompare: list,
+  loaders: {
+    defaults: false,
+    compareDefaults: false
+  }
 };

@@ -1,18 +1,18 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Spinner } from 'aqueduct-components';
 
 // components
 import RiskFilters from 'components/risk/filters';
 import RiskInputs from 'components/risk/risk-inputs';
-import ApplyFilters from 'components/apply-filters';
 
 // styles
 import './styles.scss';
 
 class Risk extends PureComponent {
   static propTypes = {
-    input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
     advancedSettings: PropTypes.bool.isRequired,
+    defaultsLoading: PropTypes.bool.isRequired,
     setWidgets: PropTypes.func.isRequired
   }
 
@@ -24,13 +24,15 @@ class Risk extends PureComponent {
 
   render() {
     const {
-      input,
-      advancedSettings
+      advancedSettings,
+      defaultsLoading,
     } = this.props;
-    const { loading } = input;
 
     const loadingStyles = {
-      ...loading && { overflowY: 'hidden' }
+      ...defaultsLoading && {
+        display: 'flex',
+        minHeight: 250
+      }
     };
 
     return (
@@ -39,17 +41,19 @@ class Risk extends PureComponent {
           <RiskFilters />
         </div>
 
-        {advancedSettings && (
-          <div className="l-risk-inputs" style={loadingStyles}>
-            <div className="wrapper">
-              <div className="row">
-                <div className="col-xs-12">
-                  <RiskInputs />
-                </div>
+        <div
+          className="l-risk-inputs"
+          style={loadingStyles}
+        >
+          <div className="wrapper">
+            <div className="row">
+              <div className="col-xs-12">
+                {defaultsLoading && <Spinner className="-transparent" />}
+                {(!defaultsLoading && advancedSettings) && <RiskInputs />}
               </div>
             </div>
-          </div>)}
-        <ApplyFilters />
+          </div>
+        </div>
       </div>
     );
   }

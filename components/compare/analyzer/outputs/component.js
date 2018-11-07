@@ -120,7 +120,7 @@ class AnalyzerCompareOutputs extends Component {
                       onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatFilters)}
                     >
-                      {({ data, params }) => {
+                      {({ data, params = {} }) => {
 
                         if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 
@@ -152,7 +152,7 @@ class AnalyzerCompareOutputs extends Component {
                         onMoreInfo={() => this.onMoreInfo(widget, originalFormatCompareFilters)}
                         onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatCompareFilters)}
                       >
-                        {({ data, params }) => {
+                        {({ data, params = {} }) => {
 
                           if (params.type === 'bar') return (<Chart spec={BarChartSpec} params={params} data={{ table: data }} />)
 

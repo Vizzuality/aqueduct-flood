@@ -88,6 +88,7 @@ class RiskCompareOutputs extends PureComponent {
     const widgetsReadyToDisplay = location;
     const widgetsCompareReadyToDisplay = !!locationCompare && !!existingProtCompare;
 
+
     return (
       <div className="c-analyzer-compare-outputs">
         <div className="wrapper">

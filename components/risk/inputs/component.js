@@ -31,9 +31,7 @@ class RiskInputs extends PureComponent {
     filters: PropTypes.shape({ existing_prot: PropTypes.number }).isRequired,
     inputState: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
     onChangeFilter: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired,
-    getCountryDefaults: PropTypes.func.isRequired,
-    setInput: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -43,13 +41,6 @@ class RiskInputs extends PureComponent {
     const { existing_prot: existingProt } = filters;
 
     this.state = { existingProtValue: existingProt };
-  }
-
-  componentWillMount() {
-    const { getCountryDefaults, onChangeFilter, setInput } = this.props;
-
-    getCountryDefaults(onChangeFilter)
-      .then(() => { setInput({ loading: false }) })
   }
 
   componentWillReceiveProps(nextProps) {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
+import { Spinner } from 'aqueduct-components';
 // components
 import AnalyzerFilters from 'components/analyzer/filters';
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
@@ -11,6 +11,8 @@ import './styles.scss';
 
 class Analyzer extends PureComponent {
   static propTypes = {
+    defaultsLoading: PropTypes.bool.isRequired,
+    widgetLoading: PropTypes.bool.isRequired,
     filters: PropTypes.shape({}).isRequired,
     input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
     setCostFilter: PropTypes.func.isRequired
@@ -18,6 +20,8 @@ class Analyzer extends PureComponent {
 
   render() {
     const {
+      defaultsLoading,
+      widgetLoading,
       filters,
       input,
       setCostFilter
@@ -38,12 +42,14 @@ class Analyzer extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-xs-12">
-                <AnalyzerInputs onChangeFilter={setCostFilter} filters={filters} />
+                {defaultsLoading && <Spinner className="-transparent" />}
+                {!defaultsLoading &&
+                  <AnalyzerInputs onChangeFilter={setCostFilter} filters={filters} />}
               </div>
             </div>
           </div>
         </div>
-        <ApplyFilters />
+        {(!defaultsLoading && !widgetLoading) && <ApplyFilters />}
       </div>
     );
   }
