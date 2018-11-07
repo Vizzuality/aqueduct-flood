@@ -1,6 +1,8 @@
 import { createAction, createThunkAction } from 'redux-tools';
 import queryString from 'query-string';
 
+// import { list } from './initial-state';
+
 export const setLocations = createAction('LOCATIONS__SET-LOCATIONS');
 export const setCompareLocations = createAction('LOCATIONS__SET-COMPARE-LOCATIONS');
 export const setDefaultsLoading = createAction('LOCATIONS__SET-DEFAULTS-LOADING');
@@ -10,7 +12,7 @@ export const getLocations = createThunkAction('LOCATIONS__GET-LOCATIONS', value 
   (dispatch) => {
     const queryParams = queryString.stringify({ q: value });
 
-    dispatch(setLocations([]));
+    // dispatch(setLocations(list));
 
     fetch(`/api/locations?${queryParams}`, {})
       .then((response) => {

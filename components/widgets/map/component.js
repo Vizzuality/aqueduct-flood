@@ -11,15 +11,23 @@ import { PluginLeaflet } from 'layer-manager';
 import './styles.scss';
 
 class MapChart extends PureComponent {
-  static propTypes = { data: PropTypes.object.isRequired }
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    bbox: PropTypes.arrayOf(PropTypes.number)
+  }
+
+  static defaultProps = { bbox: [0, 0, 0, 0] }
 
   render() {
-    const { data } = this.props;
+    const { bbox, data } = this.props;
 
     return (
       <div className="c-map-widget">
         <div className="side">
-          <Map customClass="widget-map">
+          <Map
+            customClass="widget-map"
+            bounds={{ bbox }}
+          >
             {(map) => (
               <Fragment>
                 <LayerManager
@@ -38,7 +46,10 @@ class MapChart extends PureComponent {
           </Map>
         </div>
         <div className="side">
-          <Map customClass="widget-map">
+          <Map
+            customClass="widget-map"
+            bounds={{ bbox }}
+          >
             {(map) => (
               <Fragment>
                 <LayerManager
