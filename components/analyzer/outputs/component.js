@@ -29,10 +29,13 @@ class AnalyzerOutputs extends Component {
     filters: PropTypes.object.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
     filtersStatus: PropTypes.object.isRequired,
+    currentLocation: PropTypes.object,
     widgets: PropTypes.array.isRequired,
     applyFilters: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired
   }
+
+  static defaultProps = { currentLocation: {} }
 
   shouldComponentUpdate(nextProps) {
     const { filtersStatus: nextFiltersStatus } = nextProps;
@@ -97,7 +100,7 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters, widgets } = this.props;
+    const { filters, widgets, currentLocation } = this.props;
 
     return (
       <div className="c-analyzer-outputs">
@@ -110,7 +113,7 @@ class AnalyzerOutputs extends Component {
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
                   >
-                    {({ params }) => (<MapChart params={params} />)}
+                    {({ params }) => (<MapChart params={params} bbox={currentLocation.bbox} />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}

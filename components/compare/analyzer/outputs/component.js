@@ -36,7 +36,14 @@ class AnalyzerCompareOutputs extends Component {
     applyFilters: PropTypes.func.isRequired,
     originalFormatFilters: PropTypes.object.isRequired,
     originalFormatCompareFilters: PropTypes.object.isRequired,
+    currentLocation: PropTypes.object,
+    currentLocationCompare: PropTypes.object,
     setModal: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    currentLocation: {},
+    currentLocationCompare: {}
   }
 
   shouldComponentUpdate(nextProps) {
@@ -94,7 +101,15 @@ class AnalyzerCompareOutputs extends Component {
   }
 
   render() {
-    const { widgets, filters, filtersCompare, originalFormatFilters, originalFormatCompareFilters } = this.props;
+    const {
+      widgets,
+      filters,
+      filtersCompare,
+      originalFormatFilters,
+      originalFormatCompareFilters ,
+      currentLocation,
+      currentLocationCompare
+    } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
@@ -112,7 +127,7 @@ class AnalyzerCompareOutputs extends Component {
                     params={{ id: widget.id, filters }}
                     onShareWidget={() => this.onShareWidget(widget)}
                   >
-                    {({ params }) => (<MapChart params={params} />)}
+                    {({ params }) => (<MapChart params={params} bbox={currentLocation.bbox} />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}
@@ -144,7 +159,7 @@ class AnalyzerCompareOutputs extends Component {
                       onShareWidget={() => this.onShareWidget(widget)}
                       isCompare
                     >
-                      {({ params }) => (<MapChart params={params} isCompare />)}
+                      {({ params }) => (<MapChart params={params} isCompare bbox={currentLocationCompare.bbox} />)}
                     </WidgetMapCompare>) : (
                       <WidgetCompare
                         title={replace(widget.params.title, filtersCompare)}
