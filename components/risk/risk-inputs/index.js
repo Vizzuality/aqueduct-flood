@@ -8,7 +8,7 @@ import InputsRisk from 'components/risk/inputs';
 
 export default connect(
   state => ({
-    filters: { ...state.filters.common, ...state.filters.risk },
+    filters: { ...state.filters.risk, ...state.filters.common },
     inputState: state.app.input
   }),
   {
