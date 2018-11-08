@@ -15,8 +15,13 @@ export const calculateClosestPeriodRange = (returnPeriod) =>
   EXISTING_PROTECTION_LEVEL_OPTIONS.reduce((prev, curr) =>
     (returnPeriod >= prev && returnPeriod <= curr) ? prev: curr);
 
+export const calculateNextPeriodRange = (returnPeriod) =>
+  EXISTING_PROTECTION_LEVEL_OPTIONS.reduce((prev, curr) =>
+    returnPeriod > prev ? curr : prev)
+
 
 export default {
   getUniqueVocabulary,
-  calculateClosestPeriodRange
+  calculateClosestPeriodRange,
+  calculateNextPeriodRange
 };

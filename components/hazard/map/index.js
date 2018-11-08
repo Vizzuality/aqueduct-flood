@@ -5,15 +5,14 @@ import { setActiveLayer, deleteActiveLayer } from 'modules/layers/actions';
 import { setMapOptions } from 'modules/map/actions';
 
 // selectors
-import { updatedLayers, getActiveLayers } from 'modules/layers/selectors';
+import { filterLayersByReturnPeriod } from './selectors';
 
 // component
 import HazardMap from './component';
 
 export default connect(
   state => ({
-    activeLayers: getActiveLayers(state),
-    layers: updatedLayers(state),
+    layers: filterLayersByReturnPeriod(state),
     mapOptions: state.map,
     loading: state.layers.loading
   }),

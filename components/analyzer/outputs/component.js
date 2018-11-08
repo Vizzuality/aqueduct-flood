@@ -16,6 +16,10 @@ import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
 // utils
 import {
+  calculateClosestPeriodRange,
+  calculateNextPeriodRange
+} from 'utils/cba';
+import {
   getCbaEmbedURL,
   getCbaPreviewURL,
   generateCbaDownloadURL
@@ -113,7 +117,16 @@ class AnalyzerOutputs extends Component {
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
                   >
-                    {({ params }) => (<MapChart params={params} bbox={currentLocation.bbox} />)}
+                    {({ data, params }) => (
+                      <MapChart
+                        data={data}
+                        params={params}
+                        bbox={currentLocation.bbox}
+                        filters={{
+                          returnPeriodLeft: calculateClosestPeriodRange(filters.existing_prot),
+                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot)
+                        }}
+                      />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}

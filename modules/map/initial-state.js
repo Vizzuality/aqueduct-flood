@@ -1,1 +1,1 @@
-export default { bounds: []};
+export default { bounds: {}};

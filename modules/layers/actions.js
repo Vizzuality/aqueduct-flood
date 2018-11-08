@@ -16,14 +16,13 @@ export const setLoading = createAction('LAYERS__SET-LOADING');
 export const setError = createAction('LAYERS__SET-ERRORS');
 export const clearLayers = createAction('LAYERS__CLEAR-LAYERS');
 
-export const fetchLayer = (layerId, datasetId) => {
-  return fetch(`${process.env.WRI_API_URL}/v1/dataset/${datasetId}/layer/${layerId}`, {})
+export const fetchLayer = (layerId, datasetId) =>
+  fetch(`${process.env.WRI_API_URL}/v1/dataset/${datasetId}/layer/${layerId}`, {})
     .then((response) => {
       if (response.ok) return response.json();
       throw response;
     })
-    .then(response => WRISerializer(response))
-}
+    .then(response => WRISerializer(response));
 
 export const fetchLayers = createThunkAction('LAYERS__FETCH-HAZARD-LAYERS', () =>
   (dispatch, getState) => {

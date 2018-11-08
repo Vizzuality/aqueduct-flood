@@ -10,13 +10,4 @@ export const RETURN_PERIOD_OPTIONS = [
   { label: '1000', value: '1000' }
 ]
 
-export const RETURN_PERIOD_MARKS = {};
-
-RETURN_PERIOD_OPTIONS.forEach((opt) => {
-  RETURN_PERIOD_MARKS[opt.label] = opt.value;
-});
-
-export default {
-  RETURN_PERIOD_OPTIONS,
-  RETURN_PERIOD_MARKS
-};
+export default { RETURN_PERIOD_OPTIONS };
