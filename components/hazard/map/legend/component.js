@@ -36,6 +36,10 @@ class HazardLegend extends PureComponent {
               theme="dark"
             />
           </Field>
+
+          <div className="range-container">
+            <div className="hazard-range" />
+          </div>
         </div>
       </div>
     );
