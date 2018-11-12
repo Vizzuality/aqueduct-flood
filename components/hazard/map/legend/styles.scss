@@ -9,4 +9,16 @@
       margin: $space-1 * 7 0 0;
     }
   }
+
+  .range-container {
+    margin: $space-1 * 2 0 0;
+
+    > .hazard-range {
+      display: flex;
+      height: 5px;
+      width: 100%;
+      border-radius: 6px;
+      background: linear-gradient(to right, #f1eef6 0%, #d0d1e6 14.28%, #a6bddb 28.56%, #74a9cf 42.84%, #3690c0 57.12%, #0570b0 71.4%, #034e7b 100%);
+    }
+  }
 }
