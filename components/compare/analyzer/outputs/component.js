@@ -22,7 +22,10 @@ import {
   getCbaPreviewURL,
   generateCbaDownloadURL
 } from 'utils/share';
-
+import {
+  calculateClosestPeriodRange,
+  calculateNextPeriodRange
+} from 'utils/cba';
 
 // styles
 import './styles.scss';
@@ -127,7 +130,16 @@ class AnalyzerCompareOutputs extends Component {
                     params={{ id: widget.id, filters }}
                     onShareWidget={() => this.onShareWidget(widget)}
                   >
-                    {({ params }) => (<MapChart params={params} bbox={currentLocation.bbox} />)}
+                    {({ params }) => (
+                      <MapChart
+                        params={params}
+                        bbox={currentLocation.bbox}
+                        filters={{
+                          returnPeriodLeft: calculateClosestPeriodRange(filters.existing_prot),
+                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot),
+                          refYear: filters.ref_year
+                        }}
+                      />)}
                   </WidgetMap>) : (
                     <Widget
                       title={replace(widget.params.title, filters)}
@@ -159,7 +171,17 @@ class AnalyzerCompareOutputs extends Component {
                       onShareWidget={() => this.onShareWidget(widget)}
                       isCompare
                     >
-                      {({ params }) => (<MapChart params={params} isCompare bbox={currentLocationCompare.bbox} />)}
+                      {({ params }) => (
+                        <MapChart
+                          params={params}
+                          isCompare
+                          bbox={currentLocationCompare.bbox}
+                          filters={{
+                            returnPeriodLeft: calculateClosestPeriodRange(filtersCompare.existing_prot),
+                            returnPeriodRight: calculateNextPeriodRange(filtersCompare.existing_prot),
+                            refYear: filtersCompare.ref_year
+                          }}
+                        />)}
                     </WidgetMapCompare>) : (
                       <WidgetCompare
                         title={replace(widget.params.title, filtersCompare)}

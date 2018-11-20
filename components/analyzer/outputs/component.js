@@ -124,7 +124,8 @@ class AnalyzerOutputs extends Component {
                         bbox={currentLocation.bbox}
                         filters={{
                           returnPeriodLeft: calculateClosestPeriodRange(filters.existing_prot),
-                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot)
+                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot),
+                          refYear: filters.ref_year
                         }}
                       />)}
                   </WidgetMap>) : (

@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import { Field, Slider } from 'aqueduct-components';
 
 // constants
-import { RETURN_PERIOD_MARKS } from './constants';
+import {
+  RETURN_PERIOD_MARKS,
+  PROBABILITY_CONVERSION
+} from './constants';
 
 // styles
 import './styles.scss';
 
 class HazardLegend extends PureComponent {
   static propTypes = {
+    label: PropTypes.string,
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([
       PropTypes.number,
@@ -18,7 +22,10 @@ class HazardLegend extends PureComponent {
     onChangePeriod: PropTypes.func.isRequired
   }
 
-  static defaultProps = { disabled: false }
+  static defaultProps = {
+    label: null,
+    disabled: false
+  }
 
   onChangePeriod = (value) => {
     const { onChangePeriod } = this.props;
@@ -27,7 +34,11 @@ class HazardLegend extends PureComponent {
   }
 
   render() {
-    const { value, disabled } = this.props;
+    const {
+      label,
+      value,
+      disabled
+    } = this.props;
 
     return (
       <div className="c-hazard-legend">
@@ -35,7 +46,7 @@ class HazardLegend extends PureComponent {
           <Field
             name="existing-protection-level"
             theme="dark"
-            label="Existing Protection Level (Return Period)"
+            {...label && { label }}
             className="-higher-margin-top -bolder"
           >
             <Slider
@@ -45,6 +56,7 @@ class HazardLegend extends PureComponent {
               theme="dark"
               step={null}
               value={value}
+              formatValue={v => PROBABILITY_CONVERSION[v]}
               marks={RETURN_PERIOD_MARKS}
               colorful
               railStyle={{

@@ -25,7 +25,11 @@ class MapChart extends PureComponent {
 
   render() {
     const { bbox, data, filters } = this.props;
-    const { returnPeriodLeft, returnPeriodRight } = filters;
+    const {
+      returnPeriodLeft,
+      returnPeriodRight,
+      refYear
+    } = filters;
 
     return (
       <div className="c-map-widget">
@@ -55,6 +59,7 @@ class MapChart extends PureComponent {
                   >
                     <HazardLegend
                       disabled
+                      label="Flood probability in 2010 with existing protection level"
                       onClickLayer={this.onClickLayer}
                       value={returnPeriodLeft}
                     />
@@ -89,6 +94,7 @@ class MapChart extends PureComponent {
                   >
                     <HazardLegend
                       disabled
+                      label={`Flood probability in ${refYear} with existing protection level`}
                       onClickLayer={this.onClickLayer}
                       value={returnPeriodRight}
                     />

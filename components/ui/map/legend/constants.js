@@ -16,7 +16,21 @@ RETURN_PERIOD_OPTIONS.forEach((opt) => {
   RETURN_PERIOD_MARKS[opt.label] = opt.value;
 });
 
+export const PROBABILITY_CONVERSION = {
+  2: '0.5',
+  5: '0.2',
+  10: '0.1',
+  25: '0.04',
+  50: '0.02',
+  100: '0.01',
+  250: '0.004',
+  500: '0.002',
+  1000: '0.0001'
+};
+
+
 export default {
   RETURN_PERIOD_OPTIONS,
-  RETURN_PERIOD_MARKS
+  RETURN_PERIOD_MARKS,
+  PROBABILITY_CONVERSION
 };

@@ -42,7 +42,7 @@ export const WIDGETS = {
     {
       id: 'inundation_map',
       type: 'side-map',
-      title: 'inundation Map in {{implementation_start}} width {{existing_prot}}-year protection',
+      title: 'Inundation probability maps: current scenario vs. future scenario',
     },
     {
       id: 'table',
