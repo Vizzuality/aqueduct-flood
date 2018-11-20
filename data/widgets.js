@@ -26,7 +26,7 @@ export const WIDGETS = {
     },
     {
       id: 'lp_curve',
-      title: 'probability of food damage to urban in {{geogunit_unique_name}}, {{existing_prot}}'
+      title: 'probability of flood damage to urban in {{geogunit_unique_name}}, {{existing_prot}}'
     }
   ],
   hazard: [],
