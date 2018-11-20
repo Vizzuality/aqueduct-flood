@@ -18,19 +18,12 @@ class HazardLegend extends PureComponent {
     value: PropTypes.oneOfType([
       PropTypes.number,
       PropTypes.string
-    ]).isRequired,
-    onChangePeriod: PropTypes.func.isRequired
+    ]).isRequired
   }
 
   static defaultProps = {
     label: null,
     disabled: false
-  }
-
-  onChangePeriod = (value) => {
-    const { onChangePeriod } = this.props;
-
-    onChangePeriod(value);
   }
 
   render() {
@@ -62,9 +55,7 @@ class HazardLegend extends PureComponent {
               railStyle={{
                 background: 'linear-gradient(to right, #0A125E 0%, #003E88 12.5%, #0066A4 25%, #008EB3 37.5%, #00B4BA 50%, #6BD9BF 62.5%, #88F6DB, 75%, #91FEE3 100%)'
               }}
-              onChange={this.onChangePeriod}
               defaultValue={value}
-              onAfterChange={this.onChangePeriod}
             />
           </Field>
         </div>
