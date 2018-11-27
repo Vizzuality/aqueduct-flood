@@ -48,7 +48,7 @@ class Risk extends PureComponent {
           <div className="wrapper">
             <div className="row">
               <div className="col-xs-12">
-                {defaultsLoading && <Spinner className="-transparent" />}
+                {(defaultsLoading && advancedSettings) && <Spinner className="-transparent" />}
                 {(!defaultsLoading && advancedSettings) && <RiskInputs />}
               </div>
             </div>

@@ -60,16 +60,13 @@ export const getCompareLocations = createThunkAction('LOCATIONS__GET-COMPARE-LOC
     })
   })
 
-export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', (setFilter) =>
+export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', (location) =>
   (dispatch, getState) => {
     const { filters } = getState();
-    const {
-      geogunit_unique_name,
-      scenario
-    } = filters.common;
+    const { scenario } = filters.common;
 
     const queryParams = queryString.stringify({
-      geogunit_unique_name,
+      geogunit_unique_name: location,
       scenario
     });
 
@@ -83,9 +80,15 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
       .then(({ data }) => {
         dispatch(setDefaultsLoading(false));
         const defaults = data[0] || {};
-        setFilter({ ...defaults });
 
-        return { ...defaults };
+        // if (tab === 'risk' ) setFilter({ existing_prot: defaults.existing_prot });
+        // setFilter({
+          // estimated_costs: defaults.estimated_costs,
+          // existing_prot: defaults.existing_prot,
+          // prot_fut: defaults.prot_fut
+        //  });
+
+        return ({ ...defaults });
       })
       .catch((err) => {
         dispatch(setDefaultsLoading(false));
@@ -101,16 +104,13 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
     })
   })
 
-export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', (setCompareFilter) =>
+export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', (location) =>
   (dispatch, getState) => {
     const { filtersCompare } = getState();
-    const {
-      geogunit_unique_name,
-      scenario
-    } = filtersCompare.common;
+    const { scenario } = filtersCompare.common;
 
     const queryParams = queryString.stringify({
-      geogunit_unique_name,
+      geogunit_unique_name: location,
       scenario
     });
 
@@ -124,7 +124,7 @@ export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPA
       .then(({ data }) => {
         dispatch(setCompareDefaultsLoading(false));
         const defaults = data[0] || {};
-        setCompareFilter({ ...defaults });
+        return ({ ...defaults });
       })
       .catch((err) => {
         dispatch(setCompareDefaultsLoading(false));

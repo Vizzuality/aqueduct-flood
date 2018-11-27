@@ -49,13 +49,20 @@ class AnalyzerFilters extends PureComponent {
 
     if ((opt && opt.value) === location) return;
 
-    setInput({ loading: true })
+    setInput({ loading: true });
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
     resetWidgets('cba');
 
-    getCountryDefaults(setCostFilter)
-      .then(() => { setInput({ loading: false }) })
+    getCountryDefaults(opt.value)
+      .then((defaults) => {
+        setInput({ loading: false });
+        setCostFilter({
+          estimated_costs: defaults.estimated_costs,
+          existing_prot: defaults.existing_prot,
+          prot_fut: defaults.prot_fut
+        });
+      });
   }
 
   onSearchCompare = debounce((value) => {

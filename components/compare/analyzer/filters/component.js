@@ -40,9 +40,18 @@ class AnalyzerCompareFilters extends PureComponent {
     const { filters, getCompareCountryDefaults, setCostCompareFilter, setInputCompare } = this.props;
     const { locationCompare } = filters;
 
+    setInputCompare({ loading: true });
+
     if (locationCompare) {
-      getCompareCountryDefaults(setCostCompareFilter)
-        .then(() => { setInputCompare({ loading: false }) })
+      getCompareCountryDefaults(locationCompare)
+        .then((defaults) => {
+          setInputCompare({ loading: false });
+          setCostCompareFilter({
+            estimated_costs: defaults.estimated_costs,
+            existing_prot: defaults.existing_prot,
+            prot_fut: defaults.prot_fut
+          });
+        });
     }
   }
 
@@ -68,13 +77,20 @@ class AnalyzerCompareFilters extends PureComponent {
 
     if ((opt && opt.value) === location) return;
 
-    setInput({ loading: true })
+    setInput({ loading: true });
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
     resetWidgets('cba');
 
-    getCountryDefaults(setCostFilter)
-      .then(() => { setInput({ loading: false }) })
+    getCountryDefaults(opt.value)
+      .then((defaults) => {
+        setInput({ loading: false });
+        setCostFilter({
+          estimated_costs: defaults.estimated_costs,
+          existing_prot: defaults.existing_prot,
+          prot_fut: defaults.prot_fut
+        })
+      });
   }
 
   onChangeLocationCompare = (opt) => {
@@ -95,8 +111,20 @@ class AnalyzerCompareFilters extends PureComponent {
 
     resetWidgetsCompare('cba');
 
-    getCompareCountryDefaults(setCostCompareFilter)
-      .then(() => { setInputCompare({ loading: false }) })
+    getCompareCountryDefaults(opt.value)
+      .then((defaults) => {
+        const {
+          estimated_costs,
+          existing_prot,
+          prot_fut
+        } = defaults;
+        setInputCompare({ loading: false });
+        setCostCompareFilter({
+          estimated_costs,
+          existing_prot,
+          prot_fut
+        })
+      })
   }
 
   onSearch = debounce((value) => {

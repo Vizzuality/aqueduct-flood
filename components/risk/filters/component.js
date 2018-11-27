@@ -40,15 +40,22 @@ class AnalyzerFilters extends PureComponent {
     setWidgets: PropTypes.func.isRequired
   }
 
+  state={ location: this.props.filters.location }
+
   componentWillMount() {
     const { filters, getCountryDefaults, setRiskFilter, setInput } = this.props;
-    const { existingProt } = filters;
+    const { existingProt, location } = filters;
 
-    // call defaults values if we don't have them available initially
+    // calls defaults values if we don't have them available initially
     if (existingProt) return;
 
-    getCountryDefaults(setRiskFilter)
-      .then(() => { setInput({ loading: false }) })
+    setInput({ loading: true });
+
+    getCountryDefaults(location)
+      .then((defaults) => {
+        setInput({ loading: false });
+        setRiskFilter({ existing_prot: defaults.existing_prot })
+      });
   }
 
   onSearch = debounce((value) => {
@@ -58,16 +65,21 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocation = (opt) => {
-    const { setCommonFilter, filters, setInput, getCountryDefaults } = this.props;
+    const { setCommonFilter, setRiskFilter, filters, setInput, getCountryDefaults } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
 
-    setInput({ loading: true })
-    setCommonFilter({ geogunit_unique_name: opt && opt.value });
+    this.setState({ location: opt.value });
 
-    getCountryDefaults(setCommonFilter)
-      .then(() => { setInput({ loading: false }) })
+    setInput({ loading: true });
+
+    getCountryDefaults(opt.value)
+      .then((defaults) => {
+        setInput({ loading: false });
+        setCommonFilter({ geogunit_unique_name: opt.value });
+        setRiskFilter({ existing_prot: defaults.existing_prot });
+      });
   }
 
   onSearchCompare = debounce((value) => {
@@ -113,6 +125,7 @@ class AnalyzerFilters extends PureComponent {
       scenarios,
       setRiskFilter
     } = this.props;
+    const { location } = this.state;
     const isCoastal = filters.flood === 'coastal';
     const { advanced_settings: advancedSettings } = filters;
 
@@ -132,7 +145,7 @@ class AnalyzerFilters extends PureComponent {
                   grouped
                   options={locations}
                   placeholder="Select a location"
-                  value={filters.location}
+                  value={location}
                   onInputChange={this.onSearch}
                   onChange={this.onChangeLocation}
                 />

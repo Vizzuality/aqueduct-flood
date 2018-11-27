@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
 import { Base64 } from 'js-base64';
+import isEqual from 'lodash/isEqual';
 
 // componets
 import Widget from 'components/risk/widget';
@@ -22,7 +23,7 @@ import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'uti
 // styles
 import './styles.scss';
 
-class RiskCompareOutputs extends PureComponent {
+class RiskCompareOutputs extends Component {
   static propTypes = {
     widgets: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
@@ -30,6 +31,18 @@ class RiskCompareOutputs extends PureComponent {
     originalFormatFilters: PropTypes.object.isRequired,
     originalFormatCompareFilters: PropTypes.object.isRequired,
     setModal: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { filters, filtersCompare } = this.props;
+    const {
+      filters: nextFilters,
+      filtersCompare: nextFiltersCompare
+    } = nextProps;
+    const filtersChanged = !isEqual(filters, nextFilters);
+    const filtersCompareChanged = !isEqual(filtersCompare, nextFiltersCompare);
+
+    return filtersChanged || filtersCompareChanged;
   }
 
   onMoreInfo = (widget, filters) => {
@@ -87,7 +100,6 @@ class RiskCompareOutputs extends PureComponent {
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location;
     const widgetsCompareReadyToDisplay = !!locationCompare && !!existingProtCompare;
-
 
     return (
       <div className="c-analyzer-compare-outputs">

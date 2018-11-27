@@ -18,7 +18,7 @@ class RiskFilters extends PureComponent {
     filters: PropTypes.shape({
       location: PropTypes.string,
       scenario: PropTypes.string,
-      locationCompare: PropTypes.string
+      compareLocation: PropTypes.string
     }).isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
@@ -46,13 +46,25 @@ class RiskFilters extends PureComponent {
     setWidgetsCompare: PropTypes.func.isRequired
   }
 
+  state = { locationCompare: this.props.filters.compareLocation }
+
   componentWillMount() {
-    const { filters, getCompareCountryDefaults, setRiskCompareFilter, setInputCompare } = this.props;
+    const {
+      filters,
+      getCompareCountryDefaults,
+      setRiskCompareFilter,
+      setInputCompare
+    } = this.props;
     const { compareLocation } = filters;
 
     if (compareLocation) {
-      getCompareCountryDefaults(setRiskCompareFilter)
-        .then(() => { setInputCompare({ loading: false }) })
+      getCompareCountryDefaults(compareLocation)
+        .then((defaults) => {
+          const { existing_prot: existingProt } = defaults;
+          setInputCompare({ loading: false });
+
+          setRiskCompareFilter({ existing_prot: existingProt })
+        });
     }
   }
 
@@ -94,10 +106,20 @@ class RiskFilters extends PureComponent {
     if ((opt && opt.value) === locationCompare) return;
 
     setInputCompare({ loading: true })
-    setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCompareCountryDefaults(setRiskCompareFilter)
-      .then(() => { setInputCompare({ loading: false }) })
+    this.setState({ locationCompare: opt.value });
+
+    getCompareCountryDefaults(opt.value)
+      .then((defaults) => {
+        const { existing_prot: existingProt } = defaults;
+
+        setInputCompare({ loading: false });
+        setRiskCompareFilter({
+          existing_prot: existingProt,
+          geogunit_unique_name: opt.value
+        });
+        setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
+      });
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
@@ -142,6 +164,7 @@ class RiskFilters extends PureComponent {
       setRiskFilter,
       setRiskCompareFilter
     } = this.props;
+    const { locationCompare } = this.state;
     const isCoastal = filters.flood === 'Coastal';
     const isCoastalCompare = filtersCompare.flood === 'coastal';
 
@@ -202,7 +225,7 @@ class RiskFilters extends PureComponent {
                   options={locationsCompare}
                   placeholder="Compare with..."
                   isDisabled={!filters.location}
-                  value={filtersCompare.geogunit_unique_name}
+                  value={locationCompare}
                   onInputChange={this.onSearchCompare}
                   onChange={this.onChangeLocationCompare}
                 />
