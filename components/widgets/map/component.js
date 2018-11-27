@@ -23,6 +23,17 @@ class MapChart extends PureComponent {
 
   static defaultProps = { bbox: [0, 0, 0, 0] }
 
+  state = { zoom: 3 }
+
+  onZoomEnd = (e, map) => {
+    this.setState({
+      zoom: map.getZoom(),
+      center: map.getCenter()
+    });
+  }
+
+  onDragEnd = (e, map) => { this.setState({ center: map.getCenter() }) ;}
+
   render() {
     const { bbox, data, filters } = this.props;
     const {
@@ -31,12 +42,22 @@ class MapChart extends PureComponent {
       refYear
     } = filters;
 
+    const { zoom, center } = this.state;
+
     return (
       <div className="c-map-widget">
         <div className="side">
           <Map
             customClass="widget-map"
             bounds={{ bbox }}
+            mapOptions={{
+              zoom,
+              ...center && { center }
+            }}
+            events={{
+              zoomend: this.onZoomEnd,
+              dragend: this.onDragEnd
+            }}
           >
             {(map) => (
               <Fragment>
@@ -72,6 +93,14 @@ class MapChart extends PureComponent {
           <Map
             customClass="widget-map"
             bounds={{ bbox }}
+            mapOptions={{
+              zoom,
+              center
+            }}
+            events={{
+              zoomend: this.onZoomEnd,
+              dragend: this.onDragEnd
+            }}
           >
             {(map) => (
               <Fragment>
