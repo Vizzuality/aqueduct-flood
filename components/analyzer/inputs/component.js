@@ -82,9 +82,17 @@ class AnalyzerInputs extends PureComponent {
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
 
     if (location && !existingProt) {
-      setInput({ loading: true })
-      getCountryDefaults(onChangeFilter)
-        .then(() => { setInput({ loading: false }) })
+      setInput({ loading: true });
+
+      getCountryDefaults(location)
+        .then((defaults) => {
+          setInput({ loading: false });
+          onChangeFilter({
+            estimated_costs: defaults.estimated_costs,
+            existing_prot: defaults.existing_prot,
+            prot_fut: defaults.prot_fut
+          });
+        });
     }
   }
 

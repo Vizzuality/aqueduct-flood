@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { replace } from 'aqueduct-components';
+import isEqual from 'lodash/isEqual';
 
 // components
 import Widget from 'components/risk/widget';
@@ -26,6 +27,14 @@ class AnalyzerOutputs extends Component {
     originalFormatFilters: PropTypes.object.isRequired,
     widgets: PropTypes.array.isRequired,
     setModal: PropTypes.func.isRequired
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { filters } = this.props;
+    const { filters: nextFilters } = nextProps;
+    const filtersChanged = !isEqual(filters, nextFilters);
+
+    return filtersChanged;
   }
 
   onMoreInfo = (widget) => {
