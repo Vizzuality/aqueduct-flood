@@ -5164,6 +5164,11 @@ junk@^1.0.1:
   resolved "https://registry.yarnpkg.com/junk/-/junk-1.0.3.tgz#87be63488649cbdca6f53ab39bec9ccd2347f592"
   integrity sha1-h75jSIZJy9ym9Tqzm+yczSNH9ZI=
 
+kdbush@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-2.0.1.tgz#90c6128e3001ac68c550d7c9e2f222c0269666f1"
+  integrity sha512-9KqSdmWCkBIisFIGclT0FRagKhI7IVbMyUjsxCFG0Ly1Dg6whlxJ7b9lrq8ifk3X/fGeJzok1R75LQfZTfA5zQ==
+
 kind-of@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
@@ -5203,7 +5208,7 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-layer-manager@^1.10.0, layer-manager@^1.11.0:
+layer-manager@^1.10.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.11.0.tgz#3a35b1791fb4b865e1f56ce75abf3441b457112f"
   integrity sha512-UPgdrpSdbR/UJeGwekTv2h0OHBPRLm/JmNj6+j5rrUbfTKetJ06bmjsrjS6+lesmyaVDYPk/gURb9Z6KdRWoWQ==
@@ -5211,6 +5216,18 @@ layer-manager@^1.10.0, layer-manager@^1.11.0:
     bluebird "^3.5.2"
     lodash "^4.17.10"
     prop-types "^15.6.2"
+    wri-json-api-serializer "^1.0.1"
+
+layer-manager@^1.13.2:
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/layer-manager/-/layer-manager-1.13.2.tgz#28fd40054b3a22b8de4ca84c2cad5a873a9988c1"
+  integrity sha512-N/98IOLBz9TOEDsdfHYRDu7Om6ha/OtCVcAdBQtF0aUPUlMNI/0pGCfc8YvlCxym71x8YEOK+IEKmhMrXryhtQ==
+  dependencies:
+    bluebird "^3.5.2"
+    lodash "^4.17.10"
+    prop-types "^15.6.2"
+    reselect "^3.0.1"
+    supercluster "^4.1.1"
     wri-json-api-serializer "^1.0.1"
 
 lazy-cache@^0.2.3:
@@ -8803,6 +8820,13 @@ stylis@^3.5.0:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.3.tgz#99fdc46afba6af4deff570825994181a5e6ce546"
   integrity sha512-TxU0aAscJghF9I3V9q601xcK3Uw1JbXvpsBGj/HULqexKOKlOEzzlIpLFRbKkCK990ccuxfXUqmPbIIo7Fq/cQ==
+
+supercluster@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/supercluster/-/supercluster-4.1.1.tgz#cf13c3b28a3fb3db5290bfad7f524e244bd4ce78"
+  integrity sha512-sF0FfUOPFp96DKzwWFLeQOEqqKu2PpcesxAFeFsknA/q7g7igVVn/p3NI2XHEghNSyDAqunKNKqAbqNO8+7NDQ==
+  dependencies:
+    kdbush "^2.0.1"
 
 supports-color@^2.0.0:
   version "2.0.0"

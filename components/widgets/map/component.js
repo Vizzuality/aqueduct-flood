@@ -5,7 +5,7 @@ import Map, {
   MapControls,
   ZoomControl,
 } from 'wri-api-components/dist/map';
-import { LayerManager } from 'layer-manager/dist/react';
+import { LayerManager } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 
 // components

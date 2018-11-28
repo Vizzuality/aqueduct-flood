@@ -29,7 +29,7 @@
     "isomorphic-fetch": "^2.2.1",
     "js-base64": "^2.4.9",
     "jsona": "^1.1.14",
-    "layer-manager": "^1.11.0",
+    "layer-manager": "^1.13.2",
     "lodash": "^4.17.10",
     "mobile-detect": "^1.4.1",
     "morgan": "^1.9.0",

@@ -6,7 +6,7 @@ import {
   ZoomControl,
   Legend
 } from 'wri-api-components';
-import { LayerManager, Layer } from 'layer-manager/dist/react';
+import { LayerManager, Layer } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 import { Spinner } from 'aqueduct-components';
 
@@ -70,9 +70,8 @@ class HazardMap extends PureComponent {
           {(map) => (
             <Fragment>
               <LayerManager map={map} plugin={PluginLeaflet}>
-                {layerManager => layers.map((l, i) => (
+                {layers.map((l, i) => (
                   <Layer
-                    layerManager={layerManager}
                     key={l.id}
                     {...l}
                     zIndex={1000 - i}
