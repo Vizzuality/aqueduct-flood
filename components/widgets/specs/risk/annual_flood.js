@@ -126,7 +126,7 @@ export default {
         },
         "hover": {
           "opacity": {"value": 0.5},
-          "tooltip":{"signal": "{'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg, '~s')}"}
+          "tooltip":{"signal": "datum.index=='2010' ? {'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg, '.3s')} : {'Year': datum.index, 'Max': format(datum.Annual_Damage_Max, '.3s') , 'Avg': '$'+format(datum.Annual_Damage_Avg, '~s'), 'Min':format(datum.Annual_Damage_Min, '.3s')}"}
         }
       }
     },
@@ -147,7 +147,7 @@ export default {
         "hover": {
           "opacity": {"value": 1},
           "size": {"value": 65, "mult":2},
-          "tooltip":{"signal": "{'Year': datum.index, 'Max': format(datum.Percent_Damage_Max, '.3f')+'%' , 'Avg': format(datum.Percent_Damage_Avg, '.3f')+'%' , 'Min':format(datum.Percent_Damage_Min, '.3f')+'%' }"}
+          "tooltip":{"signal": "datum.index=='2010' ? {'Year': datum.index, 'Avg': format(datum.Percent_Damage_Avg, '.3f')+'%'}: {'Year': datum.index, 'Max': format(datum.Percent_Damage_Max, '.3f')+'%' , 'Avg': format(datum.Percent_Damage_Avg, '.3f')+'%' , 'Min':format(datum.Percent_Damage_Min, '.3f')+'%' }"}
         }
       }
     },
@@ -158,12 +158,27 @@ export default {
         "enter": {
           "x": {"scale": "xscale", "field": "index", "band":0.5},
           "fill":{"value":"#ef8e3b"},
-          "width": {"value": 2},
+          "width": {"value": 1},
           "y": {"scale": "yscale_per", "field": "Percent_Damage_Min"},
           "y2": {"scale": "yscale_per", "field": "Percent_Damage_Max"},
           "opacity": {"value": 0}
         },
-        "update":{"opacity": {"signal": "error===true?1:0"}}
+        "update":{"opacity": {"signal": "error===true?0.5:0"}}
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "xscale", "field": "index", "band":0.4},
+          "width": {"value": 1},
+          "fill":{"value":"black"},
+          "y": {"scale": "yscale_amout", "field": "Annual_Damage_Min"},
+          "y2": {"scale": "yscale_amout", "field": "Annual_Damage_Max"},
+          "opacity": {"value": 0}
+        },
+        "update":{"opacity": {"signal": "error===true?0.5:0"}}
       }
     }
   ]
