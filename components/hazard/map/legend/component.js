@@ -5,6 +5,9 @@ import { Field, Timeline } from 'aqueduct-components';
 // styles
 import './styles.scss';
 
+// constants
+import { RANGE_LABELS } from './constants';
+
 class HazardLegend extends PureComponent {
   static propTypes = {
     options: PropTypes.array.isRequired,
@@ -25,7 +28,7 @@ class HazardLegend extends PureComponent {
         <div className="timeline-container">
           <Field
             name="hazard-return-period"
-            label="Existing Protection Level (Return Period)"
+            label="Inundation depth (decimeters)"
             theme="dark"
             customClass="field-timeline"
             className="-bigger"
@@ -39,6 +42,13 @@ class HazardLegend extends PureComponent {
 
           <div className="range-container">
             <div className="hazard-range" />
+            <div className="hazard-labels">
+              {RANGE_LABELS.map((_label) => (
+                <span key={_label}>
+                  {_label}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

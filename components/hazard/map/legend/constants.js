@@ -10,4 +10,9 @@ export const RETURN_PERIOD_OPTIONS = [
   { label: '1000', value: '1000' }
 ]
 
-export default { RETURN_PERIOD_OPTIONS };
+export const RANGE_LABELS = ['>0', '0.2', '0.5', '0.7', '1', '2', '>=5'];
+
+export default {
+  RETURN_PERIOD_OPTIONS,
+  RANGE_LABELS
+};
