@@ -20,6 +20,12 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 // utils
 import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
 
+// constants
+import {
+  getWidgetTitle,
+  WIDGET_TITLE_GENERATOR
+} from 'constants/risk';
+
 // styles
 import './styles.scss';
 
@@ -108,32 +114,51 @@ class RiskCompareOutputs extends Component {
             <div key={widget.id} className="row">
               <div className="col-md-6">
                 <Widget
-                  title={replace(widget.params.title, filters)}
+                  title={replace(widget.params.title, { ...filters, widget_title: getWidgetTitle(filters) })}
                   params={{ id: widget.id, filters }}
                   onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}
                   onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatFilters)}
                 >
                   {({ data, params = {} }) => {
 
-                    if (params.type === 'table') return (<TableChart data={data} />)
+                    if (params.type === 'table') return (<TableChart data={data} filters={filters} />)
 
-                    if (params.type === 'annual_flood') return (<Chart spec={AnnualFloodSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'annual_flood') return (
+                      <Chart
+                        spec={AnnualFloodSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'flood_drivers') return (<Chart spec={FloodDriversSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'flood_drivers') return (
+                      <Chart
+                        spec={FloodDriversSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'benchmark') return (<Chart spec={BenchmarkSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'benchmark') return (
+                      <Chart
+                        spec={BenchmarkSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'lp_curve') return (<Chart spec={LPCurveSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'lp_curve') return (
+                      <Chart
+                        spec={LPCurveSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
                     return null;
-
                   }}
                 </Widget>
               </div>
               {widgetsCompareReadyToDisplay && (
                 <div className="col-md-6">
                   <WidgetCompare
-                    title={replace(widget.params.title, filtersCompare)}
+                    title={replace(widget.params.title, { ...filtersCompare, widget_title: getWidgetTitle(filtersCompare) })}
                     params={{ id: widget.id, filtersCompare }}
                     onShareWidget={() => this.onShareWidget(widget, true)}
                     onMoreInfo={() => this.onMoreInfo(widget, originalFormatCompareFilters)}
@@ -141,15 +166,35 @@ class RiskCompareOutputs extends Component {
                   >
                     {({ data, params = {} }) => {
 
-                      if (params.type === 'table') return (<TableChart data={data} />)
+                      if (params.type === 'table') return (<TableChart data={data} filters={filtersCompare} />)
 
-                      if (params.type === 'annual_flood') return (<Chart spec={AnnualFloodSpec} params={params} data={{ table: data }} />)
+                      if (params.type === 'annual_flood') return (
+                        <Chart
+                          spec={AnnualFloodSpec}
+                          params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare)}}
+                          data={{ table: data }}
+                        />)
 
-                      if (params.type === 'flood_drivers') return (<Chart spec={FloodDriversSpec} params={params} data={{ table: data }} />)
+                      if (params.type === 'flood_drivers') return (
+                        <Chart
+                          spec={FloodDriversSpec}
+                          params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare)}}
+                          data={{ table: data }}
+                        />)
 
-                      if (params.type === 'benchmark') return (<Chart spec={BenchmarkSpec} params={params} data={{ table: data }} />)
+                      if (params.type === 'benchmark') return (
+                        <Chart
+                          spec={BenchmarkSpec}
+                          params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare)}}
+                          data={{ table: data }}
+                        />)
 
-                      if (params.type === 'lp_curve') return (<Chart spec={LPCurveSpec} params={params} data={{ table: data }} />)
+                      if (params.type === 'lp_curve') return (
+                        <Chart
+                          spec={LPCurveSpec}
+                          params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare)}}
+                          data={{ table: data }}
+                        />)
 
                       return null;
                     }}

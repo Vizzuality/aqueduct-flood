@@ -2,29 +2,122 @@
 import { replace } from 'aqueduct-components';
 
 export const updateSpec = (spec = {}, params = {}) => {
-  // let updatedSpec = { ...spec };
   let updatedSpec = Object.assign({}, spec);
-  const { yAxisTitle, type } = params;
+  const {
+    yAxisTitle,
+    chartTitleTop,
+    chartTitleBottom,
+    legend,
+    type
+  } = params;
 
   if (yAxisTitle) {
-    const yAxisIndex = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'left');
+    const yAxisIndexLeft = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'left');
+    const yAxisIndexRight = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'right');
 
-    if (!yAxisIndex) return updatedSpec;
+    if (yAxisIndexLeft === -1 && yAxisIndexRight === -1) return updatedSpec;
 
     const updatedAxes = updatedSpec.axes;
-    let updatedYAxis = updatedAxes[yAxisIndex];
+    let updatedYAxisLeft = updatedAxes[yAxisIndexLeft];
+    let updatedYAxisRight = updatedAxes[yAxisIndexRight];
 
-    updatedYAxis = {
-      ...updatedYAxis,
-      title: yAxisTitle
-    };
+    // updates left y-axis
+    if (updatedYAxisLeft) {
+      updatedYAxisLeft = {
+        ...updatedYAxisLeft,
+        title: yAxisTitle
+      };
 
-    updatedAxes[yAxisIndex] = updatedYAxis;
+      updatedAxes[yAxisIndexLeft] = updatedYAxisLeft;
+    }
+
+    // updates right y-axis
+    if (updatedYAxisRight) {
+      updatedYAxisRight = {
+        ...updatedYAxisRight,
+        title: yAxisTitle
+      };
+
+      updatedAxes[yAxisIndexRight] = updatedYAxisRight;
+    }
 
     updatedSpec = {
       ...updatedSpec,
       axes: updatedAxes
     }
+  }
+
+  if (chartTitleTop) {
+    const xAxisIndex = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'top');
+
+    if (xAxisIndex === -1) return updatedSpec;
+
+    const updatedAxes = updatedSpec.axes;
+    let updatedXTopAxis = updatedAxes[xAxisIndex];
+
+    updatedXTopAxis = {
+      ...updatedXTopAxis,
+      title: chartTitleTop,
+      encode: {
+        ...updatedXTopAxis.encode,
+        title: {
+          update: {
+            ...updatedXTopAxis.title.update,
+            text: {
+              ...updatedXTopAxis.encode.title.update.text,
+              ...type === 'benchmark' && { signal: `if(calc=='Percentage', 'Annual Expected ${chartTitleTop} (%)', 'Annual Expected ${chartTitleTop}')` }
+            }
+          }
+        }
+      }
+    };
+
+    updatedAxes[xAxisIndex] = updatedXTopAxis;
+
+    updatedSpec = {
+      ...updatedSpec,
+      axes: updatedAxes
+    }
+  }
+
+  if (chartTitleBottom) {
+    const xAxisIndex = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'bottom');
+
+    if (xAxisIndex === -1) return updatedSpec;
+
+    const updatedAxes = updatedSpec.axes;
+    let updatedXTopAxis = updatedAxes[xAxisIndex];
+
+    updatedXTopAxis = {
+      ...updatedXTopAxis,
+      title: chartTitleBottom
+    };
+
+    updatedAxes[xAxisIndex] = updatedXTopAxis;
+
+    updatedSpec = {
+      ...updatedSpec,
+      axes: updatedAxes
+    }
+  }
+
+  if (legend) {
+    const _data = updatedSpec.data;
+
+    if (!_data) return updatedSpec;
+
+    const legendIndex = _data.findIndex(_d => _d.name === 'info');
+
+    if (legendIndex === -1) return updatedSpec;
+
+    const newLegend = _data[legendIndex];
+
+    newLegend.values = legend.map(_legendvalue => ({ text: _legendvalue }));
+
+    updatedSpec = {
+      ...updatedSpec,
+      data: _data
+    };
   }
 
   if (type === 'benchmark') {

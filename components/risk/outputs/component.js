@@ -18,6 +18,12 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 // utils
 import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
 
+// constants
+import {
+  getWidgetTitle,
+  WIDGET_TITLE_GENERATOR
+} from 'constants/risk';
+
 // styles
 import './styles.scss';
 
@@ -98,22 +104,42 @@ class AnalyzerOutputs extends Component {
             {widgets.map(widget => (
               <div key={widget.id} className="widget-row">
                 <Widget
-                  title={replace(widget.params.title, filters)}
+                  title={replace(widget.params.title, { ...filters, widget_title: getWidgetTitle(filters) })}
                   params={{ id: widget.id, filters }}
                   onMoreInfo={() => this.onMoreInfo(widget)}
                   onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                 >
                   {({ data, params = {} }) => {
 
-                    if (params.type === 'table') return (<TableChart data={data} />)
+                    if (params.type === 'table') return (<TableChart data={data} filters={filters} />)
 
-                    if (params.type === 'annual_flood') return (<Chart spec={AnnualFloodSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'annual_flood') return (
+                      <Chart
+                        spec={AnnualFloodSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'flood_drivers') return (<Chart spec={FloodDriversSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'flood_drivers') return (
+                      <Chart
+                        spec={FloodDriversSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'benchmark') return (<Chart spec={BenchmarkSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'benchmark') return (
+                      <Chart
+                        spec={BenchmarkSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
-                    if (params.type === 'lp_curve') return (<Chart spec={LPCurveSpec} params={params} data={{ table: data }} />)
+                    if (params.type === 'lp_curve') return (
+                      <Chart
+                        spec={LPCurveSpec}
+                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        data={{ table: data }}
+                      />)
 
                     return null;
                   }}

@@ -11,7 +11,7 @@ export default {
       "value": "2030",
       "bind": {
         "input": "radio",
-        "name":"Year",
+        "name": "Year",
         "options": [
           "2030",
           "2050",
@@ -20,100 +20,107 @@ export default {
       }
     },
     {
-"name": "hover",
-"value": null,
-"on": [
-{
-"events": "@cell:mouseover",
-"update": "datum"
-},
-{
-"events": "@cell:mouseout",
-"update": "null"
-}
-]
-}
+      "name": "hover",
+      "value": null,
+      "on": [
+        {
+          "events": "@cell:mouseover",
+          "update": "datum"
+        },
+        {
+          "events": "@cell:mouseout",
+          "update": "null"
+        }
+      ]
+    }
   ],
   "height": 200,
-  
+
   "data": [
     {
       "name": "table",
       "values": [
-        ],
+      ],
       "transform": [
 
-        {"type": "formula", "as": "x", "expr": "(1/datum.x)*100"},
+        { "type": "formula", "as": "x", "expr": "(1/datum.x)*100" },
         {
-  "type": "collect",
-  "sort": { "field": ["c", "x"],
-    "order": ["descending", "ascending"]}
-},
-        {"type": "filter", "expr": "datum.year === year_curve_signal"}
+          "type": "collect",
+          "sort": {
+            "field": ["c", "x"],
+            "order": ["descending", "ascending"]
+          }
+        },
+        { "type": "filter", "expr": "datum.year === year_curve_signal" }
 
       ]
     },
     {
       "name": "legend",
-      "values":[
-        {"c":"gf","label":"GFDL-ESM2M"},
-        {"c":"ha","label":"HadGEM2-ES"},
-        {"c":"ip","label":"IPSL-CM5A-LR"},
-        {"c":"mi","label":"MIROC-ESM-CHEM"},
-        {"c":"nr","label":"NorESM1-M"},
-         {"c":"avg","label":"Average"}
+      "values": [
+        { "c": "gf", "label": "GFDL-ESM2M" },
+        { "c": "ha", "label": "HadGEM2-ES" },
+        { "c": "ip", "label": "IPSL-CM5A-LR" },
+        { "c": "mi", "label": "MIROC-ESM-CHEM" },
+        { "c": "nr", "label": "NorESM1-M" },
+        { "c": "avg", "label": "Average" }
       ],
-      "transform":[{
-  "type": "collect",
-  "sort": {"field": "c","order":"descending"}
-}]
+      "transform": [{
+        "type": "collect",
+        "sort": { "field": "c", "order": "descending" }
+      }]
     },
-    {"name":"avg",
-     "source":"table",
-     "transform":[{
-      "type": "aggregate",
-      "groupby": ["x"],
-      "fields": ["y"],
-      "ops": ["average"],
-      "as": ["average"]
-    }]
-
-  },
-  {"name":"tooltip",
-  "source":"table",
-  "transform":[
-  {
-  "type": "joinaggregate",
-  "groupby": ["x"],
-  "fields": ["y"],
-  "ops": ["mean"]
-},
-{
-  "type": "pivot",
-  "groupby": ["x", "mean_y"],
-  "field": "c",
-  "value": "y"
-},
-{
-  "type": "window",
-  "ops": ["lag", "lead"],
-  "fields": ["x","x"],
-  "as": ["lagx", "leadx"]
-},
-{"type": "formula", "as": "x0", "expr": "if(datum.lagx===null,0,datum.lagx) + ((datum.x-datum.lagx)/2)"},
-{"type": "formula", "as": "x1", "expr": "datum.x + ((if(datum.leadx===null,50,datum.leadx)-datum.x)/2)"}
-]},
-{"name":"tooltipP",
-  "source":"tooltip",
-  "transform":[
     {
-"type": "filter",
-"expr": "hover && hover.x == datum.x"
-},
-    {"type": "fold", "fields": ["gf","ha","ip","mi","nr","mean_y"]
-  }
-]
-}
+      "name": "avg",
+      "source": "table",
+      "transform": [{
+        "type": "aggregate",
+        "groupby": ["x"],
+        "fields": ["y"],
+        "ops": ["average"],
+        "as": ["average"]
+      }]
+
+    },
+    {
+      "name": "tooltip",
+      "source": "table",
+      "transform": [
+        {
+          "type": "joinaggregate",
+          "groupby": ["x"],
+          "fields": ["y"],
+          "ops": ["mean"]
+        },
+        {
+          "type": "pivot",
+          "groupby": ["x", "mean_y"],
+          "field": "c",
+          "value": "y"
+        },
+        {
+          "type": "window",
+          "ops": ["lag", "lead"],
+          "fields": ["x", "x"],
+          "as": ["lagx", "leadx"]
+        },
+        { "type": "formula", "as": "x0", "expr": "if(datum.lagx===null,0,datum.lagx) + ((datum.x-datum.lagx)/2)" },
+        { "type": "formula", "as": "x1", "expr": "datum.x + ((if(datum.leadx===null,50,datum.leadx)-datum.x)/2)" }
+      ]
+    },
+    {
+      "name": "tooltipP",
+      "source": "tooltip",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "hover && hover.x == datum.x"
+        },
+        {
+          "type": "fold", "fields": ["gf", "ha", "ip", "mi", "nr", "mean_y"]
+        }
+      ]
+    }
   ],
   "scales": [
     {
@@ -172,13 +179,13 @@ export default {
       "ticks": false,
       "tickCount": 5,
       "title": "Damage ($)",
-      "encode":{
-          "labels":{
-            "update":{
-              "text":{"signal": "'$'+format(datum.value, '.0s')"}
-            }
+      "encode": {
+        "labels": {
+          "update": {
+            "text": { "signal": "'$'+format(datum.value, '.0s')" }
           }
         }
+      }
     }
   ],
   "legends": [
@@ -189,12 +196,12 @@ export default {
       "orient": "right",
       "encode": {
         "labels": {
-        "update": {
-          "text":{
-            "signal":"scale('label', datum.label)"
+          "update": {
+            "text": {
+              "signal": "scale('label', datum.label)"
+            }
           }
         }
-      }
       }
     }
   ],
@@ -234,28 +241,28 @@ export default {
       ]
     },
     {
-          "type": "line",
-          "from": {
-            "data": "avg"
+      "type": "line",
+      "from": {
+        "data": "avg"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "x",
+            "field": "x"
           },
-          "encode": {
-            "enter": {
-              "x": {
-                "scale": "x",
-                "field": "x"
-              },
-              "y": {
-                "scale": "y",
-                "field": "average"
-              },
-              "stroke": {
-                "value":"black"
-              },
-              "strokeWidth": {"value": 1},
-              "strokeDash":{"value":[2,1]}
-            }
-          }
-        },
+          "y": {
+            "scale": "y",
+            "field": "average"
+          },
+          "stroke": {
+            "value": "black"
+          },
+          "strokeWidth": { "value": 1 },
+          "strokeDash": { "value": [2, 1] }
+        }
+      }
+    },
     {
       "type": "group",
       "from": {
@@ -265,65 +272,69 @@ export default {
           "groupby": "c"
         }
       },
-      "marks":[{ 
-          "type": "symbol",
-          "from": {
-            "data": "series-p"
-          },
-          "encode": {
-            "enter": {
-              "fill": {
-                "scale": "color",
-                "field": "key"
-              }
+      "marks": [{
+        "type": "symbol",
+        "from": {
+          "data": "series-p"
+        },
+        "encode": {
+          "enter": {
+            "fill": {
+              "scale": "color",
+              "field": "key"
+            }
 
-            },
-            "update": {"x": 
-                {"scale": "x", "field": "x"},
-              "y": {
-                "scale": "y",
-                "field": "value"
-              },
-              "opacity": {"value": 1},
-              "size": {
-                "value": 80
-              }}
-          }
-        }]
-    },
-    {     "name": "cell",
-          "type": "rect",
-          "from": {
-            "data": "tooltip"
           },
-          "encode": {
-            "enter": {
-              "x": {
-                "scale": "x",
-                "field": "x0"
-              },
-              "x2": {
-                "scale": "x",
-                "field": "x1"
-              },
-              "y": {"value": 0},
-
-              "y2": {"field": {"group": "height"}},
-              "fill": {
-                "value":"black"
-              }
+          "update": {
+            "x":
+              { "scale": "x", "field": "x" },
+            "y": {
+              "scale": "y",
+              "field": "value"
             },
-            "update":{
-              "opacity":{
-                "value":0
-              }},
-            "hover":{
-              "tooltip":{"signal": "{'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')}"},
-              "opacity":{
-                "value":0
-              }
+            "opacity": { "value": 1 },
+            "size": {
+              "value": 80
             }
           }
         }
+      }]
+    },
+    {
+      "name": "cell",
+      "type": "rect",
+      "from": {
+        "data": "tooltip"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "x",
+            "field": "x0"
+          },
+          "x2": {
+            "scale": "x",
+            "field": "x1"
+          },
+          "y": { "value": 0 },
+
+          "y2": { "field": { "group": "height" } },
+          "fill": {
+            "value": "black"
+          }
+        },
+        "update": {
+          "opacity": {
+            "value": 0
+          }
+        },
+        "hover": {
+          "tooltip": { "signal": "{'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')}" },
+          "opacity": {
+            "value": 0
+          }
+        }
+      }
+    }
   ]
 };
