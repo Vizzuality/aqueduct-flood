@@ -7,14 +7,22 @@ import {
   format
 } from 'd3-format';
 
+// constants
+import { TABLE_KEYS } from './constants';
+
 // styles
 import '../styles.scss';
 
 class RiskTableChart extends PureComponent {
-  static propTypes = { data: PropTypes.array.isRequired }
+  static propTypes = {
+    data: PropTypes.array.isRequired,
+    filters: PropTypes.object.isRequired
+  }
 
   render() {
-    const { data } = this.props;
+    const { data, filters } = this.props;
+    const { exposure } = filters;
+    const keys = TABLE_KEYS[exposure];
 
     const s = formatSpecifier('-s');
     s.precision = precisionFixed(0.01, 1.01);
@@ -46,7 +54,7 @@ class RiskTableChart extends PureComponent {
           <tbody>
             <tr>
               <td>
-                Annual Expected Urban Damage
+                {keys[0]}
               </td>
               {data.map((_row, i) => (
                 <td key={`${_row.Annual_Damage_Avg}-2010-${i}`}>
@@ -56,7 +64,7 @@ class RiskTableChart extends PureComponent {
             </tr>
             <tr>
               <td>
-                Urban Asset Value
+                {keys[1]}
               </td>
               {data.map((_row, i) => (
                 <td key={`${_row.Asset_Value}-2030-${i}`}>
@@ -66,7 +74,7 @@ class RiskTableChart extends PureComponent {
             </tr>
             <tr>
               <td>
-                % Annual Expected Urban Damage
+                {keys[2]}
               </td>
               {data.map((_row, i) => (
                 <td key={`${_row.Percent_Damage_Avg}-2050-${i}`}>
