@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Router } from 'routes';
 import { Field, CustomSelect, Checkbox, Button } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
 
@@ -150,8 +149,6 @@ class RiskFilters extends PureComponent {
 
     clearCompareFilters();
     setCompareLocations([]);
-
-    Router.push('/');
   }
 
   render() {
