@@ -110,7 +110,7 @@ export default {
 "type": "filter",
 "expr": "hover && hover.x == datum.x"
 },
-    {"type": "fold", "fields": ["gf","ha","ip","mi","nr","mean_y"]
+    {"type": "fold", "fields": ["gf","ha","ip","mi","nr","mean_y", "95","50","05"]
   }
 ]
 }
