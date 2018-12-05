@@ -220,7 +220,7 @@ export default {
       "encode": {
       "labels": {
         "update": {
-          "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', '$'+format(datum.value,'~s'))"}
+            "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', '$'+format(datum.value,'~s'))"}
         }
       },
       "title": {
@@ -228,7 +228,8 @@ export default {
           "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage (%)', 'Annual Expected Urban Damage (US $)')"}
         }
       }
-    },
+    }
+  },
     {
       "scale": "y",
       "orient": "left",

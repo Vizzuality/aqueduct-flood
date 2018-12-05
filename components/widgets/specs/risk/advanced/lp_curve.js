@@ -1,5 +1,7 @@
 export default {
   "$schema": "https://vega.github.io/schema/vega/v4.json",
+  
+  "height":300,
   "autosize": {
     "type": "fit",
     "resize": true,
@@ -34,53 +36,111 @@ export default {
       ]
     }
   ],
-  "height": 200,
-
   "data": [
     {
       "name": "table",
       "values": [
+       
       ],
       "transform": [
-
-        { "type": "formula", "as": "x", "expr": "(1/datum.x)*100" },
+        {
+          "type": "filter",
+          "expr": "datum.x !== 'rp00001'"
+        },
+        {
+          "type": "formula",
+          "as": "x",
+          "expr": "(1/datum.x)*100"
+        },
         {
           "type": "collect",
           "sort": {
-            "field": ["c", "x"],
-            "order": ["descending", "ascending"]
+            "field": [
+              "c",
+              "x"
+            ],
+            "order": [
+              "descending",
+              "ascending"
+            ]
           }
         },
-        { "type": "filter", "expr": "datum.year === year_curve_signal" }
-
+        {
+          "type": "filter",
+          "expr": "datum.year === year_curve_signal"
+        }
       ]
     },
     {
       "name": "legend",
       "values": [
-        { "c": "gf", "label": "GFDL-ESM2M" },
-        { "c": "ha", "label": "HadGEM2-ES" },
-        { "c": "ip", "label": "IPSL-CM5A-LR" },
-        { "c": "mi", "label": "MIROC-ESM-CHEM" },
-        { "c": "nr", "label": "NorESM1-M" },
-        { "c": "avg", "label": "Average" }
+        {
+          "c": "gf",
+          "label": "GFDL-ESM2M"
+        },
+        {
+          "c": "ha",
+          "label": "HadGEM2-ES"
+        },
+        {
+          "c": "ip",
+          "label": "IPSL-CM5A-LR"
+        },
+        {
+          "c": "mi",
+          "label": "MIROC-ESM-CHEM"
+        },
+        {
+          "c": "nr",
+          "label": "NorESM1-M"
+        },
+        {
+          "c": "95",
+          "label": "High"
+        },
+        {
+          "c": "50",
+          "label": "Medium"
+        },
+        {
+          "c": "05",
+          "label": "Low"
+        },
+        {
+          "c": "avg",
+          "label": "Average"
+        }
       ],
-      "transform": [{
-        "type": "collect",
-        "sort": { "field": "c", "order": "descending" }
-      }]
+      "transform": [
+        {
+          "type": "collect",
+          "sort": {
+            "field": "c",
+            "order": "descending"
+          }
+        }
+      ]
     },
     {
       "name": "avg",
       "source": "table",
-      "transform": [{
-        "type": "aggregate",
-        "groupby": ["x"],
-        "fields": ["y"],
-        "ops": ["average"],
-        "as": ["average"]
-      }]
-
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": [
+            "x"
+          ],
+          "fields": [
+            "y"
+          ],
+          "ops": [
+            "average"
+          ],
+          "as": [
+            "average"
+          ]
+        }
+      ]
     },
     {
       "name": "tooltip",
@@ -88,35 +148,80 @@ export default {
       "transform": [
         {
           "type": "joinaggregate",
-          "groupby": ["x"],
-          "fields": ["y"],
-          "ops": ["mean"]
+          "groupby": [
+            "x"
+          ],
+          "fields": [
+            "y"
+          ],
+          "ops": [
+            "mean"
+          ]
         },
         {
           "type": "pivot",
-          "groupby": ["x", "mean_y"],
+          "groupby": [
+            "x",
+            "mean_y"
+          ],
           "field": "c",
           "value": "y"
         },
         {
           "type": "window",
-          "ops": ["lag", "lead"],
-          "fields": ["x", "x"],
-          "as": ["lagx", "leadx"]
+          "ops": [
+            "lag",
+            "lead"
+          ],
+          "fields": [
+            "x",
+            "x"
+          ],
+          "as": [
+            "lagx",
+            "leadx"
+          ]
         },
-        { "type": "formula", "as": "x0", "expr": "if(datum.lagx===null,0,datum.lagx) + ((datum.x-datum.lagx)/2)" },
-        { "type": "formula", "as": "x1", "expr": "datum.x + ((if(datum.leadx===null,50,datum.leadx)-datum.x)/2)" }
+        {
+          "type": "formula",
+          "as": "x0",
+          "expr": "if(datum.lagx===null,0,datum.lagx) + ((datum.x-datum.lagx)/2)"
+        },
+        {
+          "type": "formula",
+          "as": "x1",
+          "expr": "datum.x + ((if(datum.leadx===null,50,datum.leadx)-datum.x)/2)"
+        }
       ]
     },
     {
-"type": "filter",
-"expr": "hover && hover.x == datum.x"
-},
-    {"type": "fold", "fields": ["gf","ha","ip","mi","nr","mean_y", "95","50","05"]
-  }
-]
-}
-
+      "name": "tooltipP",
+      "source": "tooltip",
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "hover && hover.x == datum.x"
+        },
+        {
+          "type": "fold",
+          "fields": [
+            "gf",
+            "ha",
+            "ip",
+            "mi",
+            "nr",
+            "mean_y",
+            "95",
+            "50",
+            "05"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.value != null"
+        }
+      ]
+    }
   ],
   "scales": [
     {
@@ -178,7 +283,9 @@ export default {
       "encode": {
         "labels": {
           "update": {
-            "text": { "signal": "'$'+format(datum.value, '.0s')" }
+            "text": {
+              "signal": "'$'+format(datum.value, '.0s')"
+            }
           }
         }
       }
@@ -194,10 +301,22 @@ export default {
         "labels": {
           "update": {
             "text": {
-              "signal": "scale('label', datum.label)"
+              "signal": "indata('table', 'c', datum.label)|| datum.label=='avg' ? scale('label', datum.label) : null"
             }
           }
+        },
+       "symbols": {
+        "update": {
+          "fill": [
+  {
+    "test": "indata('table', 'c', datum.label)|| datum.label=='avg'",
+    "scale": "color",
+    "field": "label"
+  },
+  {"value": "transparent"}
+]
         }
+      }
       }
     }
   ],
@@ -254,8 +373,15 @@ export default {
           "stroke": {
             "value": "black"
           },
-          "strokeWidth": { "value": 1 },
-          "strokeDash": { "value": [2, 1] }
+          "strokeWidth": {
+            "value": 1
+          },
+          "strokeDash": {
+            "value": [
+              2,
+              1
+            ]
+          }
         }
       }
     },
@@ -268,33 +394,38 @@ export default {
           "groupby": "c"
         }
       },
-      "marks": [{
-        "type": "symbol",
-        "from": {
-          "data": "series-p"
-        },
-        "encode": {
-          "enter": {
-            "fill": {
-              "scale": "color",
-              "field": "key"
-            }
-
+      "marks": [
+        {
+          "type": "symbol",
+          "from": {
+            "data": "series-p"
           },
-          "update": {
-            "x":
-              { "scale": "x", "field": "x" },
-            "y": {
-              "scale": "y",
-              "field": "value"
+          "encode": {
+            "enter": {
+              "fill": {
+                "scale": "color",
+                "field": "key"
+              }
             },
-            "opacity": { "value": 1 },
-            "size": {
-              "value": 80
+            "update": {
+              "x": {
+                "scale": "x",
+                "field": "x"
+              },
+              "y": {
+                "scale": "y",
+                "field": "value"
+              },
+              "opacity": {
+                "value": 1
+              },
+              "size": {
+                "value": 80
+              }
             }
           }
         }
-      }]
+      ]
     },
     {
       "name": "cell",
@@ -312,9 +443,14 @@ export default {
             "scale": "x",
             "field": "x1"
           },
-          "y": { "value": 0 },
-
-          "y2": { "field": { "group": "height" } },
+          "y": {
+            "value": 0
+          },
+          "y2": {
+            "field": {
+              "group": "height"
+            }
+          },
           "fill": {
             "value": "black"
           }
@@ -325,7 +461,9 @@ export default {
           }
         },
         "hover": {
-          "tooltip": { "signal": "{'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')}" },
+          "tooltip": {
+            "signal": "datum.gf!=null ? {'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')} : {'Probability %': datum.x, 'High': '$'+format(datum['95'],'~s'), 'Medium': '$'+format(datum['50'],'~s'), 'Low': '$'+format(datum['05'],'~s'), 'Average': '$'+ format(datum.mean_y,'~s')}"
+          },
           "opacity": {
             "value": 0
           }

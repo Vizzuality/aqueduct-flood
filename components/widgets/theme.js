@@ -43,7 +43,7 @@ export default {
     stroke: '#2955B3'
   },
   range: {
-    "category": ["#2955B3", "#ef8e3b", "#dd565c", "#3A9FDD", "#5da052", "#000000", "#ad7aa1", "#ef9ba7", "#9b7461", "#bab0ac"],
+    "category": ["#2955B3", "#ef8e3b", "#dd565c", "#3A9FDD", "#5da052", "#000000"],
     "symbol": ["square", "circle"],
     "multi-line": [
       "#2955B3",
