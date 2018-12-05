@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect, Button } from 'aqueduct-components';
-import { Router } from 'routes';
 import debounce from 'lodash/debounce';
 
 // constants
@@ -60,8 +59,6 @@ class AnalyzerCompareFilters extends PureComponent {
 
     clearCompareFilters();
     setCompareLocations([]);
-
-    Router.push('/');
   }
 
   onChangeLocation = (opt) => {

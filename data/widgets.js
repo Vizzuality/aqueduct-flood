@@ -6,7 +6,7 @@ export const WIDGETS = {
     },
     {
       id: 'annual_flood',
-      title: 'Annual expected urban damage',
+      title: 'Annual expected {{widget_title}}',
       description: 'Annual flood description',
       sources: [
         { title: 'source 1', url: 'http://source1.com/'},
@@ -17,7 +17,6 @@ export const WIDGETS = {
       id: 'benchmark',
       title: 'Benchmarking flood damage against others'
     }
-
   ],
   advanced_risk: [
     {

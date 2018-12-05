@@ -228,7 +228,6 @@ export default {
           "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage (%)', 'Annual Expected Urban Damage (US $)')"}
         }
       }
-    }
     },
     {
       "scale": "y",
@@ -274,7 +273,7 @@ export default {
             ]
         },
          "hover": {
-        
+
             "opacity": {"value": 1},
             "size": {"signal": "size", "mult": 2},
                "tooltip":{"signal": "{'Country': datum.id, 'Protection standart': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value, '~s'))}"}

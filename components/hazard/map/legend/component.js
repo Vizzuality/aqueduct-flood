@@ -28,7 +28,7 @@ class HazardLegend extends PureComponent {
         <div className="timeline-container">
           <Field
             name="hazard-return-period"
-            label="Inundation depth (decimeters)"
+            label="Flood magnitude (return period in years)"
             theme="dark"
             customClass="field-timeline"
             className="-bigger"
@@ -40,16 +40,23 @@ class HazardLegend extends PureComponent {
             />
           </Field>
 
-          <div className="range-container">
-            <div className="hazard-range" />
-            <div className="hazard-labels">
-              {RANGE_LABELS.map((_label) => (
-                <span key={_label}>
-                  {_label}
-                </span>
-              ))}
+          <Field
+            name="hazard-return-period"
+            label="Inundation depth (decimeters)"
+            theme="dark"
+            className="-bigger"
+          >
+            <div className="range-container">
+              <div className="hazard-range" />
+              <div className="hazard-labels">
+                {RANGE_LABELS.map((_label) => (
+                  <span key={_label}>
+                    {_label}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          </Field>
         </div>
       </div>
     );
