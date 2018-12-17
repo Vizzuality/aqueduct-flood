@@ -42,7 +42,7 @@ class CBATableChart extends PureComponent {
               </td>
               {data.map(_row => (
                 <td key={_row.bcr}>
-                  {parse(_row.bcr)}
+                  {_row.bcr}
                 </td>))
               }
             </tr>
