@@ -32,11 +32,11 @@ export const WIDGETS = {
   'cba': [
     {
       id: 'net_benefits',
-      title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
+      title: 'cumulative net benefits from {{implementation_start}} through {{end}}',
     },
     {
       id: 'annual_costs',
-      title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
+      title: 'annual Total Costs vs benefits from {{implementation_start}} through {{end}}',
     },
     {
       id: 'inundation_map',
@@ -45,19 +45,19 @@ export const WIDGETS = {
     },
     {
       id: 'table',
-      title: 'river flood urban damage in {{geogunit_unique_name}}',
+      title: 'summary of benefits from design infrastructure',
     },
     {
       id: 'impl_cost',
-      title: 'annual Total Costs vs benefits from {{implementation_start}} to {{implementation_end}}',
+      title: 'year-by-year implementation costs from {{implementation_start}} to {{end}}',
     },
     {
       id: 'mainteinance',
-      title: 'year-by-year operation & maintenance costs from {{implementation_start}} through {{implementation_end}}',
+      title: 'year-by-year operation & maintenance costs from {{implementation_start}} through {{end}}',
     },
     {
       id: 'flood_prot',
-      title: 'year-by-year average flood protection levels from {{implementation_start}} through {{implementation_end}}',
+      title: 'year-by-year average flood protection levels from {{implementation_start}} through {{end}}',
     }
   ]
 };

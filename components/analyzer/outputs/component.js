@@ -130,8 +130,15 @@ class AnalyzerOutputs extends Component {
                       />)}
                   </WidgetMap>) : (
                     <Widget
-                      title={replace(widget.params.title, filters)}
-                      params={{ id: widget.id, filters }}
+                      title={replace(
+                        widget.params.title,
+                        { ...filters,
+                          end: filters.implementation_start + filters.infrastructure_life}
+                      )}
+                      params={{
+                        id: widget.id,
+                        filters
+                      }}
                       onMoreInfo={() => this.onMoreInfo(widget)}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                     >

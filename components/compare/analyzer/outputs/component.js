@@ -142,7 +142,11 @@ class AnalyzerCompareOutputs extends Component {
                       />)}
                   </WidgetMap>) : (
                     <Widget
-                      title={replace(widget.params.title, filters)}
+                      title={replace(
+                        widget.params.title,
+                        { ...filters,
+                          end: filters.implementation_start + filters.infrastructure_life}
+                      )}
                       params={{ id: widget.id, filters }}
                       onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatFilters)}
@@ -184,7 +188,11 @@ class AnalyzerCompareOutputs extends Component {
                         />)}
                     </WidgetMapCompare>) : (
                       <WidgetCompare
-                        title={replace(widget.params.title, filtersCompare)}
+                        title={replace(
+                          widget.params.title,
+                          { ...filtersCompare,
+                            end: filtersCompare.implementation_start + filtersCompare.infrastructure_life}
+                        )}
                         params={{ id: widget.id, filtersCompare }}
                         onMoreInfo={() => this.onMoreInfo(widget, originalFormatCompareFilters)}
                         onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget, originalFormatCompareFilters)}
