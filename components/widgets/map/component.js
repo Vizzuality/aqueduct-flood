@@ -64,7 +64,7 @@ class MapChart extends PureComponent {
                 <LayerManager
                   map={map}
                   plugin={PluginLeaflet}
-                  layersSpec={data.left}
+                  layersSpec={[...data.left]}
                 />
                 <MapControls customClass="map-controls">
                   <ZoomControl
@@ -81,7 +81,6 @@ class MapChart extends PureComponent {
                     <HazardLegend
                       disabled
                       label="Flood probability in 2010 with existing protection level"
-                      onClickLayer={this.onClickLayer}
                       value={returnPeriodLeft}
                     />
                   </Legend>)}
@@ -107,7 +106,7 @@ class MapChart extends PureComponent {
                 <LayerManager
                   map={map}
                   plugin={PluginLeaflet}
-                  layersSpec={data.right}
+                  layersSpec={[...data.right]}
                 />
                 <MapControls customClass="map-controls">
                   <ZoomControl
@@ -124,7 +123,6 @@ class MapChart extends PureComponent {
                     <HazardLegend
                       disabled
                       label={`Flood probability in ${refYear} with existing protection level`}
-                      onClickLayer={this.onClickLayer}
                       value={returnPeriodRight}
                     />
                   </Legend>)}
