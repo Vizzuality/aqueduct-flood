@@ -40,14 +40,18 @@ export default {
     {
       "name": "yscale_amout",
       "type": "linear",
-      "domain": { "data": "table", "field": "Annual_Damage_Avg" },
-      "range": "height", "zero": true, "nice": true
+      "clamp": true,
+      "padding":5,
+      "domain": { "data": "table", "fields": ["Annual_Damage_Max", "Annual_Damage_Avg"]},
+      "range": "height", "zero": true, "nice": false, "round":false
     },
     {
       "name": "yscale_per",
       "type": "linear",
-      "domain": { "fields": [{ "data": "table", "field": "Percent_Damage_Avg" }, { "data": "table", "field": "Percent_Damage_Max" }] },
-      "range": "height", "zero": true, "nice": true
+      "clamp": true,
+      "padding":5,
+      "domain": { "data": "table", "fields": ["Percent_Damage_Max", "Percent_Damage_Avg"]},
+      "range": "height", "zero": true, "nice": false, "round":false
     },
     {
       "name": "color",
@@ -67,7 +71,7 @@ export default {
   "axes": [
     { "orient": "bottom", "scale": "xscale" },
     {
-      "orient": "left", "scale": "yscale_amout", "tickCount": 5,
+      "orient": "left", "scale": "yscale_amout", "tickCount": 8, "tickExtra":true, "labelBound": true, "labelFlush": true,"labelFlushOffset":0, "labelOverlap": "greedy",
       "title": "Annual Urban Damage",
       "encode": {
         "labels": {
@@ -78,7 +82,7 @@ export default {
       }
     },
     {
-      "orient": "right", "scale": "yscale_per", "tickCount": 5,
+      "orient": "right", "scale": "yscale_per", "tickCount": 5,"tickExtra":true, "labelBound": true, "labelFlush": true, "labelFlushOffset":0, "labelOverlap": "greedy",
       "title": "% Annual Urban Damage",
       "encode": {
         "labels": {
