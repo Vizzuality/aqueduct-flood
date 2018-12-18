@@ -7,6 +7,8 @@ import { fecthSideMap } from 'modules/layers/helpers';
 // utils
 import { getUniqueVocabulary } from 'utils/cba';
 
+import widgetInitialState from 'modules/filters/initial-state';
+
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
 export const resetWidgets = createAction('WIDGETS__RESET-WIDGETS');
 export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
@@ -16,23 +18,33 @@ export const setError = createAction('WIDGETS__SET-ERROR');
 
 export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (widgetId) =>
   (dispatch, getState) => {
-    const { filters } = getState();
-
+    const { filters, app: { isNullTime } } = getState();
     const { common, cba } = filters;
 
-    const widgetParams = queryString.stringify({
+    const widgetParams = {
       ...common,
       ...cba,
       ...{ discount_rate: filters.cba.discount_rate / 100 },
       ...{ om_costs: filters.cba.om_costs / 100 },
       ...{ user_urb_cost: filters.cba.user_urb_cost || 'null' },
       ...{ user_rur_cost: 'null' }
+    };
+
+    const defaultParams = {
+      ...widgetInitialState.common,
+      ...widgetInitialState.cba
+    };
+
+    Object.keys(defaultParams).forEach(k => {
+      if (!defaultParams[k]) defaultParams[k] = 'null';
     });
+
+    const params = queryString.stringify(isNullTime ? defaultParams : widgetParams);
 
     dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
 
-    fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${widgetParams}`, {})
+    fetch(`${process.env.API_URL}/cba/widget/${widgetId}?${params}`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;

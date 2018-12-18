@@ -6,6 +6,7 @@ import { setCommonCompareFilter } from 'modules/filters-compare/actions';
 import { getLocations, getCompareLocations, getCountryDefaults } from 'modules/locations/actions';
 import { setInput, setInputCompare } from 'modules/app/actions';
 import { resetWidgets } from 'modules/widgets/actions';
+import { applyFilters, setIsNullTime } from 'modules/app/actions';
 
 // selectors
 import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
@@ -32,6 +33,8 @@ export default connect(
     getCountryDefaults,
     setInput,
     setInputCompare,
-    resetWidgets
+    resetWidgets,
+    applyFilters,
+    setIsNullTime
   }
 )(AnalyzerFilters);

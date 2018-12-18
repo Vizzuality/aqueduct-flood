@@ -104,7 +104,7 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters, widgets, currentLocation } = this.props;
+    const { filters, widgets, currentLocation, isNullTime } = this.props;
 
     return (
       <div className="c-analyzer-outputs">
@@ -137,7 +137,8 @@ class AnalyzerOutputs extends Component {
                       )}
                       params={{
                         id: widget.id,
-                        filters
+                        filters,
+                        isNullTime
                       }}
                       onMoreInfo={() => this.onMoreInfo(widget)}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}

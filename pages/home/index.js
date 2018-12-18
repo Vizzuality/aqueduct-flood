@@ -10,7 +10,7 @@ import initStore from "store";
 import Home from "layout/home";
 
 // actions
-import { setTab } from 'modules/app/actions';
+import { setTab, setIsNullTime } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import {
   setCommonFilter,
@@ -48,7 +48,9 @@ class HomePage extends Page {
       store.dispatch(setRiskFilter(risk));
       store.dispatch(setHazardFilter(hazard));
       store.dispatch(setCostFilter(cba));
-      store.dispatch(setMapOptions({ ...map }))
+      store.dispatch(setMapOptions({ ...map }));
+
+      if (cba.existing_prot) store.dispatch(setIsNullTime(false));
 
       if (map.returnPeriod) store.dispatch(setReturnPeriod(map.returnPeriod));
 

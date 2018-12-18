@@ -9,6 +9,7 @@ export const setInput = createAction('APP__SET-INPUT');
 export const clearInput = createAction('APP__CLEAR-INPUT');
 export const setInputCompare = createAction('APP__SET-INPUT-COMPARE');
 export const clearInputCompare = createAction('APP__CLEAR-INPUT-COMPARE');
+export const setIsNullTime = createAction('APP__SET-IS-NULL-TIME');
 
 
 export default {
@@ -20,5 +21,6 @@ export default {
   setInput,
   clearInput,
   setInputCompare,
-  clearInputCompare
+  clearInputCompare,
+  setIsNullTime
 };

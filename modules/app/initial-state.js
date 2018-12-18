@@ -7,5 +7,6 @@ export default {
     options: {}
   },
   input: { loading: false },
-  inputCompare: { loading: false }
+  inputCompare: { loading: false },
+  isNullTime: true
 };
