@@ -43,7 +43,6 @@ class Home extends PureComponent {
       mapOptions,
       tab,
       hazardLegend,
-      // setRoutes
     } = this.props;
     const {
       filters: nextFilters,
@@ -94,15 +93,12 @@ class Home extends PureComponent {
       sidebar,
       tab,
       tabs,
-      filters,
       setSidebarVisibility
     } = this.props;
 
     const isAnalyzerTab = tab === 'cba';
     const isRiskTab = tab === 'risk';
     const isHazardTab = tab === 'hazard';
-    const { existing_prot: existingProt, prot_fut: protFut } = filters.cba;
-    const AnalyzertabReady = !!existingProt && !!protFut;
 
     const sidebarClass = classnames(
       'l-sidebar',
@@ -129,7 +125,7 @@ class Home extends PureComponent {
             </div>
           </Sidebar>
 
-          {isAnalyzerTab && AnalyzertabReady && <AnalyzerOutputs />}
+          {isAnalyzerTab && <AnalyzerOutputs />}
           {isRiskTab && <RiskOutputs />}
           {(!isAnalyzerTab && !isRiskTab) && <HazardMap />}
 

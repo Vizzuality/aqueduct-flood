@@ -35,8 +35,9 @@ class AnalyzerOutputs extends Component {
     filtersStatus: PropTypes.object.isRequired,
     currentLocation: PropTypes.object,
     widgets: PropTypes.array.isRequired,
+    isNullTime: PropTypes.bool.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
   }
 
   static defaultProps = { currentLocation: {} }

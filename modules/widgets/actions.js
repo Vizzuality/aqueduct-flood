@@ -32,7 +32,11 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
 
     const defaultParams = {
       ...widgetInitialState.common,
-      ...widgetInitialState.cba
+      ...widgetInitialState.cba,
+      ...{ discount_rate: filters.cba.discount_rate / 100 },
+      ...{ om_costs: filters.cba.om_costs / 100 },
+      ...{ user_urb_cost: filters.cba.user_urb_cost || 'null' },
+      ...{ user_rur_cost: 'null' }
     };
 
     Object.keys(defaultParams).forEach(k => {
