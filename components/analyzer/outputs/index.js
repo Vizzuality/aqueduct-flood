@@ -15,7 +15,8 @@ export default connect(
     originalFormatFilters: state.filters,
     filtersStatus: state.app.filters,
     widgets: state.widgets,
-    currentLocation: getLocationData(state)
+    currentLocation: getLocationData(state),
+    isNullTime: state.app.isNullTime
   }),
   {
     applyFilters,

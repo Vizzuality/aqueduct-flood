@@ -35,8 +35,9 @@ class AnalyzerOutputs extends Component {
     filtersStatus: PropTypes.object.isRequired,
     currentLocation: PropTypes.object,
     widgets: PropTypes.array.isRequired,
+    isNullTime: PropTypes.bool.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
   }
 
   static defaultProps = { currentLocation: {} }
@@ -104,7 +105,7 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters, widgets, currentLocation } = this.props;
+    const { filters, widgets, currentLocation, isNullTime } = this.props;
 
     return (
       <div className="c-analyzer-outputs">
@@ -137,7 +138,8 @@ class AnalyzerOutputs extends Component {
                       )}
                       params={{
                         id: widget.id,
-                        filters
+                        filters,
+                        isNullTime
                       }}
                       onMoreInfo={() => this.onMoreInfo(widget)}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}

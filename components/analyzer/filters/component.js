@@ -27,8 +27,9 @@ class AnalyzerFilters extends PureComponent {
     getCountryDefaults: PropTypes.func.isRequired,
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
-    resetWidgets: PropTypes.func.isRequired
-  }
+    resetWidgets: PropTypes.func.isRequired,
+    setIsNullTime: PropTypes.func.isRequired
+  };
 
   onSearch = debounce((value) => {
     const { getLocations } = this.props;
@@ -43,11 +44,16 @@ class AnalyzerFilters extends PureComponent {
       filters,
       setInput,
       getCountryDefaults,
-      resetWidgets
+      resetWidgets,
+      applyFilters,
+      setIsNullTime
     } = this.props;
     const { location } = filters;
 
     if ((opt && opt.value) === location) return;
+
+    setIsNullTime(true);
+    applyFilters(true);
 
     setInput({ loading: true });
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
@@ -72,12 +78,13 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocationCompare = (opt) => {
-    const { setInputCompare, setCommonCompareFilter } = this.props;
+    const { setInputCompare, setCommonCompareFilter, setIsNullTime } = this.props;
 
+    setIsNullTime(true);
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
-    if (opt) Router.pushRoute('compare')
+    if (opt) Router.pushRoute('compare');
   }
 
   render() {

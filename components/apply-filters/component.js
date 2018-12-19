@@ -6,15 +6,22 @@ import { Button } from 'aqueduct-components';
 import './styles.scss';
 
 class ApplyFilters extends PureComponent {
-  static propTypes = { applyFilters: PropTypes.func.isRequired }
+  static propTypes = {
+    applyFilters: PropTypes.func.isRequired,
+    setIsNullTime: PropTypes.func.isRequired
+  }
+
+  onClick = () => {
+    const { applyFilters, setIsNullTime } = this.props;
+    applyFilters(true);
+    setIsNullTime(false);
+  }
 
   render() {
-    const { applyFilters } = this.props;
-
     return (
       <div className="c-apply-filters">
         <Button
-          onClick={() => applyFilters(true)}
+          onClick={this.onClick}
           theme="light"
           className="-large -bg-light-blue -uppercase -bold"
         >

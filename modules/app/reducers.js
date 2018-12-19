@@ -23,4 +23,5 @@ export default {
   [actions.clearInput]: state => ({ ...state, input: initialState.input }),
   [actions.setInputCompare]: (state, { payload }) => ({ ...state, inputCompare: { ...state.inputCompare, ...payload} }),
   [actions.clearInputCompare]: state => ({ ...state, inputCompare: initialState.inputCompare }),
+  [actions.setIsNullTime]: (state, { payload }) => ({ ...state, isNullTime: payload }),
 };

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { applyFilters } from 'modules/app/actions';
+import { applyFilters, setIsNullTime } from 'modules/app/actions';
 
 import ApplyFilters from "./component";
 
 export default connect(
   () => ({}),
-  { applyFilters }
+  { applyFilters, setIsNullTime }
 )(ApplyFilters);
