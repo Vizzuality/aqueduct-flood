@@ -277,7 +277,7 @@ export default {
 
             "opacity": {"value": 1},
             "size": {"signal": "size", "mult": 2},
-               "tooltip":{"signal": "{'Country': datum.id, 'Protection standart': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value, '~s'))}"}
+               "tooltip":{"signal": "{'Location': datum.id, 'Protection Standard': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value, '~s'))}"}
          }
       }
     }
