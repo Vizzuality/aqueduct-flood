@@ -52,16 +52,22 @@ class RiskFilters extends PureComponent {
       filters,
       getCompareCountryDefaults,
       setRiskCompareFilter,
-      setInputCompare
+      setInputCompare,
+      filtersCompare
     } = this.props;
     const { compareLocation } = filters;
+    const { flood, sub_scenario: subScenario } = filtersCompare;
 
     if (compareLocation) {
-      getCompareCountryDefaults(compareLocation)
+      const additionalParams = {
+        flood,
+        sub_scenario: subScenario
+      };
+
+      getCompareCountryDefaults({ location: compareLocation, additionalParams })
         .then((defaults) => {
           const { existing_prot: existingProt } = defaults;
           setInputCompare({ loading: false });
-
           setRiskCompareFilter({ existing_prot: existingProt })
         });
     }
@@ -75,14 +81,23 @@ class RiskFilters extends PureComponent {
 
   onChangeLocation = (opt) => {
     const { setCommonFilter, filters, setInput, getCountryDefaults } = this.props;
-    const { location } = filters;
+    const {
+      location,
+      flood,
+      sub_scenario: subScenario
+    } = filters;
+
+    const additionalParams = {
+      flood,
+      sub_scenario: subScenario
+    };
 
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
 
-    getCountryDefaults(setCommonFilter)
+    getCountryDefaults({ location: opt.value, additionalParams })
       .then(() => { setInput({ loading: false }) })
   }
 
@@ -100,15 +115,23 @@ class RiskFilters extends PureComponent {
       setRiskCompareFilter,
       getCompareCountryDefaults
     } = this.props;
-    const { geogunit_unique_name: locationCompare } = filtersCompare;
+    const {
+      geogunit_unique_name: locationCompare,
+      flood,
+      sub_scenario: subScenario
+    } = filtersCompare;
+    const additionalParams = {
+      flood,
+      sub_scenario: subScenario
+    };
 
     if ((opt && opt.value) === locationCompare) return;
 
-    setInputCompare({ loading: true })
+    setInputCompare({ loading: true });
 
     this.setState({ locationCompare: opt.value });
 
-    getCompareCountryDefaults(opt.value)
+    getCompareCountryDefaults({ location: opt.value, additionalParams })
       .then((defaults) => {
         const { existing_prot: existingProt } = defaults;
 
@@ -151,6 +174,107 @@ class RiskFilters extends PureComponent {
     setCompareLocations([]);
   }
 
+  onSelectFloodType = ({ value }) => {
+    const {
+      setRiskFilter,
+      getCountryDefaults,
+      setInput
+    } = this.props;
+    const additionalParams = {
+      flood: value,
+      ...value === 'riverine' && { sub_scenario: false }
+    };
+
+    setInput({ loading: true });
+
+    getCountryDefaults({ location: value, additionalParams })
+      .then(() => {
+        setInput({ loading: false });
+        setRiskFilter({ flood: value });
+      });
+  }
+
+  onSelectFloodTypeCompare = ({ value }) => {
+    const {
+      setInputCompare,
+      setRiskCompareFilter,
+      getCompareCountryDefaults,
+      filtersCompare: { geogunit_unique_name: location }
+    } = this.props;
+    const additionalParams = {
+      flood: value,
+      ...value === 'riverine' && { sub_scenario: false }
+    };
+
+    setInputCompare({ loading: true });
+
+    getCompareCountryDefaults({ location, additionalParams })
+      .then((defaults) => {
+        const { existing_prot: existingProt } = defaults;
+
+        setInputCompare({ loading: false });
+        setRiskCompareFilter({
+          existing_prot: existingProt,
+          flood: value
+        });
+      });
+  }
+
+  onCheckSubsidcience = ({ checked }) => {
+    const {
+      setRiskFilter,
+      setInput,
+      getCompareCountryDefaults,
+      filters: { location, flood }
+    } = this.props;
+    const additionalParams = {
+      flood,
+      sub_scenario: checked
+    };
+
+    setInput({ loading: true });
+
+    getCompareCountryDefaults({ location, additionalParams })
+      .then((defaults) => {
+        const { existing_prot: existingProt } = defaults;
+
+        setInput({ loading: false });
+        setRiskFilter({
+          existing_prot: existingProt,
+          sub_scenario: checked
+        });
+      });
+  }
+
+  onCheckSubsidcienceCompare = ({ checked }) => {
+    const {
+      setRiskCompareFilter,
+      getCompareCountryDefaults,
+      setInputCompare,
+      filtersCompare: {
+        geogunit_unique_name: location,
+        flood
+      }
+    } = this.props;
+    const additionalParams = {
+      flood,
+      sub_scenario: checked
+    };
+
+    setInputCompare({ loading: true });
+
+    getCompareCountryDefaults({ location, additionalParams })
+      .then((defaults) => {
+        const { existing_prot: existingProt } = defaults;
+
+        setInputCompare({ loading: false });
+        setRiskCompareFilter({
+          existing_prot: existingProt,
+          sub_scenario: checked
+        });
+      });
+  }
+
   render() {
     const {
       filters,
@@ -162,7 +286,7 @@ class RiskFilters extends PureComponent {
       setRiskCompareFilter
     } = this.props;
     const { locationCompare } = this.state;
-    const isCoastal = filters.flood === 'Coastal';
+    const isCoastal = filters.flood === 'coastal';
     const isCoastalCompare = filtersCompare.flood === 'coastal';
 
     return (
@@ -281,7 +405,7 @@ class RiskFilters extends PureComponent {
                       options={FLOOD_TYPE_OPTIONS}
                       placeholder="Select a flood type..."
                       value={filters.flood}
-                      onChange={opt => setRiskFilter({ flood: opt && opt.value })}
+                      onChange={this.onSelectFloodType}
                     />
                   </Field>
                 </div>
@@ -315,7 +439,7 @@ class RiskFilters extends PureComponent {
                       options={FLOOD_TYPE_OPTIONS}
                       placeholder="Select a flood type..."
                       value={filtersCompare.flood}
-                      onChange={opt => setRiskCompareFilter({ flood: opt && opt.value })}
+                      onChange={this.onSelectFloodTypeCompare}
                     />
                   </Field>
                 </div>
@@ -340,24 +464,24 @@ class RiskFilters extends PureComponent {
           {/* subsidience */}
           <div className="row">
             <div className="col-md-6">
-              <Checkbox
-                label="Subsidence"
-                name="sub_scenario"
-                theme="light"
-                disabled={!isCoastal}
-                checked={filters.sub_scenario}
-                onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
-              />
+              {isCoastal && (
+                <Checkbox
+                  label="Subsidence"
+                  name="sub_scenario"
+                  theme="light"
+                  checked={filters.sub_scenario}
+                  onChange={this.onCheckSubsidcience}
+                />)}
             </div>
             <div className="col-md-6">
-              <Checkbox
-                label="Subsidence"
-                name="sub_scenario-compare"
-                theme="light"
-                disabled={!isCoastalCompare}
-                checked={filtersCompare.sub_scenario}
-                onChange={({ checked }) => setRiskCompareFilter({ sub_scenario: checked })}
-              />
+              {isCoastalCompare && (
+                <Checkbox
+                  label="Subsidence"
+                  name="sub_scenario-compare"
+                  theme="light"
+                  checked={filtersCompare.sub_scenario}
+                  onChange={this.onCheckSubsidcienceCompare}
+                />)}
             </div>
           </div>
         </div>

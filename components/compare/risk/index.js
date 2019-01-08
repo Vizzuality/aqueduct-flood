@@ -7,8 +7,7 @@ export default connect(
   state => ({
     filters: { ...state.filters.common, ...state.filters.risk },
     filtersCompare: { ...state.filtersCompare.common, ...state.filtersCompare.risk },
-    loadingDefaults: state.locations.loaders.defaults,
-    loadingCompareDefaults: state.locations.loaders.compareDefaults
+    loadingDefaults: state.locations.loaders.defaults
   }),
   null
 )(RiskCompare);

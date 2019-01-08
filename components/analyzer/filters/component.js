@@ -60,7 +60,7 @@ class AnalyzerFilters extends PureComponent {
 
     resetWidgets('cba');
 
-    getCountryDefaults(opt.value)
+    getCountryDefaults({ location: opt.value })
       .then((defaults) => {
         setInput({ loading: false });
         setCostFilter({

@@ -60,15 +60,18 @@ export const getCompareLocations = createThunkAction('LOCATIONS__GET-COMPARE-LOC
     })
   })
 
-export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', (location) =>
+export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFAULTS', (params) =>
   (dispatch, getState) => {
-    const { filters } = getState();
-    const { scenario } = filters.common;
+    const { filters: { common } } = getState();
+    const { scenario } = common;
+    const { location, additionalParams } = params;
 
     const queryParams = queryString.stringify({
       geogunit_unique_name: location,
-      scenario
+      scenario,
+      ...additionalParams
     });
+
 
     dispatch(setDefaultsLoading(true));
 
@@ -104,14 +107,16 @@ export const getCountryDefaults = createThunkAction('LOCATIONS__GET-COUNTRY-DEFA
     })
   })
 
-export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', (location) =>
+export const getCompareCountryDefaults = createThunkAction('LOCATIONS__GET-COMPARE-COUNTRY-DEFAULTS', (params) =>
   (dispatch, getState) => {
-    const { filtersCompare } = getState();
-    const { scenario } = filtersCompare.common;
+    const { filtersCompare: { common } } = getState();
+    const { scenario } = common;
+    const { location, additionalParams } = params;
 
     const queryParams = queryString.stringify({
       geogunit_unique_name: location,
-      scenario
+      scenario,
+      ...additionalParams
     });
 
     dispatch(setCompareDefaultsLoading(true));

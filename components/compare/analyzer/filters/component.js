@@ -42,7 +42,7 @@ class AnalyzerCompareFilters extends PureComponent {
     setInputCompare({ loading: true });
 
     if (locationCompare) {
-      getCompareCountryDefaults(locationCompare)
+      getCompareCountryDefaults({ location: locationCompare })
         .then((defaults) => {
           setInputCompare({ loading: false });
           setCostCompareFilter({
@@ -79,7 +79,7 @@ class AnalyzerCompareFilters extends PureComponent {
 
     resetWidgets('cba');
 
-    getCountryDefaults(opt.value)
+    getCountryDefaults({ location: opt.value })
       .then((defaults) => {
         setInput({ loading: false });
         setCostFilter({
@@ -108,7 +108,7 @@ class AnalyzerCompareFilters extends PureComponent {
 
     resetWidgetsCompare('cba');
 
-    getCompareCountryDefaults(opt.value)
+    getCompareCountryDefaults({ location: opt.value })
       .then((defaults) => {
         const {
           estimated_costs,

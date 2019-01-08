@@ -4,7 +4,7 @@ import { Spinner } from 'aqueduct-components';
 
 // components
 import RiskInputs from 'components/risk/risk-inputs';
-import RiskCompareInputs from 'components/compare/risk/inputs';
+import RiskInputsCompare from 'components/compare/risk/inputs';
 import RiskCompareOutputs from 'components/compare/risk/outputs';
 import RiskCompareFilters from 'components/compare/risk/filters';
 
@@ -15,14 +15,12 @@ class RiskCompare extends PureComponent {
   static propTypes = {
     filters: PropTypes.object.isRequired,
     filtersCompare: PropTypes.object.isRequired,
-    loadingDefaults: PropTypes.bool.isRequired,
-    loadingCompareDefaults: PropTypes.bool.isRequired,
+    loadingDefaults: PropTypes.bool.isRequired
   }
 
   render() {
     const {
       loadingDefaults,
-      loadingCompareDefaults,
       filters,
       filtersCompare
     } = this.props;
@@ -46,11 +44,7 @@ class RiskCompare extends PureComponent {
                 {(location && !loadingDefaults) && <RiskInputs />}
               </div>
               <div className="col-md-6">
-                {loadingCompareDefaults && (
-                  <div className="spinner-container">
-                    <Spinner className="-transparent" />
-                  </div>)}
-                {(locationCompare && !loadingCompareDefaults) && <RiskCompareInputs />}
+                {(locationCompare) && <RiskInputsCompare />}
               </div>
             </div>
           </div>

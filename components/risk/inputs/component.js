@@ -65,7 +65,7 @@ class RiskInputs extends PureComponent {
 
     return (
       <div className="c-analyzer-inputs">
-        {loading && <Spinner />}
+        {loading && <Spinner className="-transparent" />}
         <SectionHeader title="input table" />
         <section>
           <div className="category">

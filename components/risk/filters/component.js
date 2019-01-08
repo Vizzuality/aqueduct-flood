@@ -44,14 +44,24 @@ class AnalyzerFilters extends PureComponent {
 
   componentWillMount() {
     const { filters, getCountryDefaults, setRiskFilter, setInput } = this.props;
-    const { existingProt, location } = filters;
+    const {
+      existingProt,
+      location,
+      flood,
+      sub_scenario: subScenario
+    } = filters;
 
     // calls defaults values if we don't have them available initially
     if (existingProt) return;
 
     setInput({ loading: true });
 
-    getCountryDefaults(location)
+    const additionalParams = {
+      flood,
+      sub_scenario: subScenario
+    };
+
+    getCountryDefaults({ location, additionalParams })
       .then((defaults) => {
         setInput({ loading: false });
         setRiskFilter({ existing_prot: defaults.existing_prot })
@@ -66,7 +76,11 @@ class AnalyzerFilters extends PureComponent {
 
   onChangeLocation = (opt) => {
     const { setCommonFilter, setRiskFilter, filters, setInput, getCountryDefaults } = this.props;
-    const { location } = filters;
+    const {
+      location,
+      flood,
+      sub_scenario: subScenario
+    } = filters;
 
     if ((opt && opt.value) === location) return;
 
@@ -74,7 +88,12 @@ class AnalyzerFilters extends PureComponent {
 
     setInput({ loading: true });
 
-    getCountryDefaults(opt.value)
+    const additionalParams = {
+      flood,
+      sub_scenario: subScenario
+    };
+
+    getCountryDefaults({ location: opt.value, additionalParams })
       .then((defaults) => {
         setInput({ loading: false });
         setCommonFilter({ geogunit_unique_name: opt.value });
@@ -98,7 +117,11 @@ class AnalyzerFilters extends PureComponent {
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
-    const { setRiskFilter, setWidgets, scenarios } = this.props;
+    const {
+      setRiskFilter,
+      setWidgets,
+      scenarios
+    } = this.props;
 
     setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
 
@@ -109,12 +132,55 @@ class AnalyzerFilters extends PureComponent {
   }
 
   onChangeFlood = ({ value }) => {
-    const { setRiskFilter } = this.props;
+    const {
+      setInput,
+      getCountryDefaults,
+      setRiskFilter,
+      filters: { location }
+    } = this.props;
 
-    setRiskFilter({
+    setInput({ loading: true });
+
+    const additionalParams = {
       flood: value,
       ...value === 'riverine' && { sub_scenario: false }
-    });
+    };
+
+
+    getCountryDefaults({ location, additionalParams })
+      .then((defaults) => {
+        setInput({ loading: false });
+        setRiskFilter({
+          existing_prot: defaults.existing_prot,
+          flood: value,
+          ...value === 'riverine' && { sub_scenario: false }
+        });
+      });
+  }
+
+  onCheckSubsidience = ({ checked }) => {
+    const {
+      setRiskFilter,
+      setInput,
+      getCountryDefaults,
+      filters: { location, flood }
+    } = this.props;
+
+    setInput({ loading: true });
+
+    const additionalParams = {
+      sub_scenario: checked,
+      flood
+    };
+
+    getCountryDefaults({ location, additionalParams })
+      .then((defaults) => {
+        setInput({ loading: false });
+        setRiskFilter({
+          existing_prot: defaults.existing_prot,
+          sub_scenario: checked
+        });
+      });
   }
 
   render() {
@@ -233,7 +299,7 @@ class AnalyzerFilters extends PureComponent {
                   name="sub_scenario"
                   theme="light"
                   checked={filters.sub_scenario}
-                  onChange={({ checked }) => setRiskFilter({ sub_scenario: checked })}
+                  onChange={this.onCheckSubsidience}
                 />)}
             </div>
             <div className="col-md-6">

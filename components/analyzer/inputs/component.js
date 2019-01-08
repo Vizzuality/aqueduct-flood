@@ -84,7 +84,7 @@ class AnalyzerInputs extends PureComponent {
     if (location && !existingProt) {
       setInput({ loading: true });
 
-      getCountryDefaults(location)
+      getCountryDefaults({ location })
         .then((defaults) => {
           setInput({ loading: false });
           onChangeFilter({
