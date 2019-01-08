@@ -23,7 +23,7 @@ const parser = (_locations) =>
   {
     label: 'States',
     options: (_locations.states || []).map(_states => ({
-      label: _states.name,
+      label: _states.uniquename,
       value: _states.uniquename
     }))
   },
