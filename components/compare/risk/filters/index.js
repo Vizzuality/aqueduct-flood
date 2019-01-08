@@ -42,6 +42,7 @@ export default connect(
     },
     filtersCompare: {...state.filtersCompare.common, ...state.filtersCompare.risk },
     locations: getFilteredLocations(state),
+    basins: state.locations.list.basins,
     locationsCompare: getFilteredCompareLocations(state),
     scenarios: getScenarios(state)
   }),

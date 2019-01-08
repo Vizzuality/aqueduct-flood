@@ -11,7 +11,7 @@ const parser = (_locations) =>
 [
   {
     label: 'Basins',
-    options: _locations.basins || []
+    options: (_locations.basins || []).map(_basin => ({ ..._basin, type: 'basin' })) || []
   },
    {
     label: 'Countries',
@@ -51,7 +51,6 @@ export const getLocationData = createSelector(
 
     return allLocations.find(_location => _location.uniquename === _locationId);
   }
-
 );
 
 export const getLocationDataCompare = createSelector(

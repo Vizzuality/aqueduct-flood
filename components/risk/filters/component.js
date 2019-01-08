@@ -29,6 +29,7 @@ class AnalyzerFilters extends PureComponent {
         PropTypes.number
       ]).isRequired
     })).isRequired,
+    basins: PropTypes.array.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
     setRiskFilter: PropTypes.func.isRequired,
     setCommonCompareFilter: PropTypes.func.isRequired,
@@ -43,7 +44,13 @@ class AnalyzerFilters extends PureComponent {
   state={ location: this.props.filters.location }
 
   componentWillMount() {
-    const { filters, getCountryDefaults, setRiskFilter, setInput } = this.props;
+    const {
+      filters,
+      getCountryDefaults,
+      setRiskFilter,
+      setInput,
+      basins
+    } = this.props;
     const {
       existingProt,
       location,
@@ -60,6 +67,8 @@ class AnalyzerFilters extends PureComponent {
       flood,
       sub_scenario: subScenario
     };
+
+    if (basins.find(_basin => _basin.value === location)) this.setState({ isBasin: true });
 
     getCountryDefaults({ location, additionalParams })
       .then((defaults) => {
@@ -81,6 +90,8 @@ class AnalyzerFilters extends PureComponent {
       flood,
       sub_scenario: subScenario
     } = filters;
+
+    this.setState({ isBasin: opt && opt.type === 'basin'});
 
     if ((opt && opt.value) === location) return;
 
@@ -191,7 +202,7 @@ class AnalyzerFilters extends PureComponent {
       scenarios,
       setRiskFilter
     } = this.props;
-    const { location } = this.state;
+    const { location, isBasin } = this.state;
     const isCoastal = filters.flood === 'coastal';
     const { advanced_settings: advancedSettings } = filters;
 
@@ -260,19 +271,20 @@ class AnalyzerFilters extends PureComponent {
           <div className="row">
             <div className="col-md-6">
               {/* flood type */}
-              <Field
-                name="flood-type-filter"
-                label="Flood Type"
-                className="-bigger"
-              >
-                <CustomSelect
-                  instanceId="flood"
-                  options={FLOOD_TYPE_OPTIONS}
-                  placeholder="Select a flood type..."
-                  value={filters.flood}
-                  onChange={this.onChangeFlood}
-                />
-              </Field>
+              {!isBasin && (
+                <Field
+                  name="flood-type-filter"
+                  label="Flood Type"
+                  className="-bigger"
+                >
+                  <CustomSelect
+                    instanceId="flood"
+                    options={FLOOD_TYPE_OPTIONS}
+                    placeholder="Select a flood type..."
+                    value={filters.flood}
+                    onChange={this.onChangeFlood}
+                  />
+                </Field>)}
             </div>
             <div className="col-md-6">
               {/* exposure */}
