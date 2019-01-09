@@ -21,6 +21,7 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
     const { filters, app: { isNullTime } } = getState();
     const { common, cba } = filters;
 
+
     const widgetParams = {
       ...common,
       ...cba,
@@ -32,6 +33,7 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
 
     const defaultParams = {
       ...widgetInitialState.common,
+      geogunit_unique_name: common.geogunit_unique_name,
       ...widgetInitialState.cba,
       ...{ discount_rate: filters.cba.discount_rate / 100 },
       ...{ om_costs: filters.cba.om_costs / 100 },
