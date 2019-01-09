@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field, Timeline, CustomSelect, Checkbox } from 'aqueduct-components';
+import {
+  Field,
+  Timeline,
+  CustomSelect,
+  Checkbox
+} from 'aqueduct-components';
 
 // constants
 import {

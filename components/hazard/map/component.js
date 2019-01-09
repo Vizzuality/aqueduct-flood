@@ -8,7 +8,7 @@ import {
 } from 'wri-api-components';
 import { LayerManager, Layer } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
-import { Spinner } from 'aqueduct-components';
+import { Spinner, Icon } from 'aqueduct-components';
 
 // components
 import HazardLegend from './legend';
@@ -80,6 +80,14 @@ class HazardMap extends PureComponent {
               </LayerManager>
 
               <MapControls customClass="map-controls">
+                <a
+                  href="https://storage.googleapis.com/aqueduct30_v01/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="download-btn"
+                >
+                  <Icon name="download" theme="dark" />
+                </a>
                 <ZoomControl
                   map={map}
                   customClass="zoom-controls"

@@ -36,5 +36,15 @@
         }
       }
     }
+
+    .download-btn {
+      display: inline-flex;
+      width: 100%;
+      padding: 7px;
+
+      > svg {
+        margin: 0 auto;
+      }
+    }
   }
 }
