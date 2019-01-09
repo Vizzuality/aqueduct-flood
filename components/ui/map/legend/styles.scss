@@ -41,4 +41,17 @@
       }
     }
   }
+
+  .rc-slider {
+
+    &.-disabled {
+      opacity: .7;
+    }
+
+    .aq__c-tooltip-slider {
+      &.aq__-disabled {
+        opacity: 1;
+      }
+    }
+  }
 }

@@ -122,7 +122,7 @@ class MapChart extends PureComponent {
                   >
                     <HazardLegend
                       disabled
-                      label={`Flood probability in ${refYear} with existing protection level`}
+                      label={`Flood probability in ${refYear} with design protection level`}
                       value={returnPeriodRight}
                     />
                   </Legend>)}
