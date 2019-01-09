@@ -28,6 +28,7 @@ class RiskFilters extends PureComponent {
         PropTypes.number
       ]).isRequired
     })).isRequired,
+    basins: PropTypes.array.isRequired,
     filtersCompare: PropTypes.object.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
     setRiskFilter: PropTypes.func.isRequired,
@@ -53,10 +54,16 @@ class RiskFilters extends PureComponent {
       getCompareCountryDefaults,
       setRiskCompareFilter,
       setInputCompare,
-      filtersCompare
+      filtersCompare,
+      basins
     } = this.props;
-    const { compareLocation } = filters;
+    const { location, compareLocation } = filters;
     const { flood, sub_scenario: subScenario } = filtersCompare;
+
+    this.setState({
+      isBasin: !!basins.find(_basin => _basin.value === location),
+      isBasinCompare: !!basins.find(_basin => _basin.value === compareLocation)
+    });
 
     if (compareLocation) {
       const additionalParams = {
@@ -92,6 +99,8 @@ class RiskFilters extends PureComponent {
       sub_scenario: subScenario
     };
 
+    this.setState({ isBasin: opt.type && opt.type === 'basin' });
+
     if ((opt && opt.value) === location) return;
 
     setInput({ loading: true })
@@ -124,6 +133,8 @@ class RiskFilters extends PureComponent {
       flood,
       sub_scenario: subScenario
     };
+
+    this.setState({ isBasinCompare: opt.type && opt.type === 'basin' });
 
     if ((opt && opt.value) === locationCompare) return;
 
@@ -285,7 +296,11 @@ class RiskFilters extends PureComponent {
       setRiskFilter,
       setRiskCompareFilter
     } = this.props;
-    const { locationCompare } = this.state;
+    const {
+      locationCompare,
+      isBasin,
+      isBasinCompare
+    } = this.state;
     const isCoastal = filters.flood === 'coastal';
     const isCoastalCompare = filtersCompare.flood === 'coastal';
 
@@ -395,19 +410,20 @@ class RiskFilters extends PureComponent {
             <div className="col-md-6">
               <div className="row">
                 <div className="col-md-6">
-                  <Field
-                    name="flood-type-filter"
-                    label="Flood Type"
-                    className="-bigger"
-                  >
-                    <CustomSelect
-                      instanceId="flood"
-                      options={FLOOD_TYPE_OPTIONS}
-                      placeholder="Select a flood type..."
-                      value={filters.flood}
-                      onChange={this.onSelectFloodType}
-                    />
-                  </Field>
+                  {!isBasin && (
+                    <Field
+                      name="flood-type-filter"
+                      label="Flood Type"
+                      className="-bigger"
+                    >
+                      <CustomSelect
+                        instanceId="flood"
+                        options={FLOOD_TYPE_OPTIONS}
+                        placeholder="Select a flood type..."
+                        value={filters.flood}
+                        onChange={this.onSelectFloodType}
+                      />
+                    </Field>)}
                 </div>
                 <div className="col-md-6">
                   <Field
@@ -429,19 +445,20 @@ class RiskFilters extends PureComponent {
             <div className="col-md-6">
               <div className="row">
                 <div className="col-md-6">
-                  <Field
-                    name="flood-type-filter-compare"
-                    label="Flood Type"
-                    className="-bigger"
-                  >
-                    <CustomSelect
-                      instanceId="flood-compare"
-                      options={FLOOD_TYPE_OPTIONS}
-                      placeholder="Select a flood type..."
-                      value={filtersCompare.flood}
-                      onChange={this.onSelectFloodTypeCompare}
-                    />
-                  </Field>
+                  {!isBasinCompare && (
+                    <Field
+                      name="flood-type-filter-compare"
+                      label="Flood Type"
+                      className="-bigger"
+                    >
+                      <CustomSelect
+                        instanceId="flood-compare"
+                        options={FLOOD_TYPE_OPTIONS}
+                        placeholder="Select a flood type..."
+                        value={filtersCompare.flood}
+                        onChange={this.onSelectFloodTypeCompare}
+                      />
+                    </Field>)}
                 </div>
                 <div className="col-md-6">
                   <Field

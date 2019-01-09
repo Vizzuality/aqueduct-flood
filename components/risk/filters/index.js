@@ -26,6 +26,7 @@ export default connect(
       compareLocation: state.filtersCompare.common.geogunit_unique_name
     },
     locations: getFilteredLocations(state),
+    basins: state.locations.list.basins,
     locationsCompare: getFilteredCompareLocations(state),
     scenarios: getScenarios(state)
   }),
