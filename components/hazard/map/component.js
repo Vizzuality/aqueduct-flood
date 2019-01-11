@@ -81,7 +81,7 @@ class HazardMap extends PureComponent {
 
               <MapControls customClass="map-controls">
                 <a
-                  href="https://storage.googleapis.com/aqueduct30_v01/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/"
+                  href="https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="download-btn"

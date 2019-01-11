@@ -24,6 +24,7 @@ export default {
   // cost-benefit analyzer
   cba: {
     existing_prot: null,
+    original_existing_prot: null,
     prot_fut: null,
     ref_year: 2050,
     implementation_start: 2020,

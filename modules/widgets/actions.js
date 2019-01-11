@@ -20,8 +20,6 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
   (dispatch, getState) => {
     const { filters, app: { isNullTime } } = getState();
     const { common, cba } = filters;
-
-
     const widgetParams = {
       ...common,
       ...cba,
@@ -45,7 +43,7 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
       if (!defaultParams[k]) defaultParams[k] = 'null';
     });
 
-    const params = queryString.stringify(isNullTime ? defaultParams : widgetParams);
+    const params = queryString.stringify((isNullTime || cba.original_existing_prot === cba.existing_prot)  ? defaultParams : widgetParams);
 
     dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));

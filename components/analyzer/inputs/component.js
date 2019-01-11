@@ -50,8 +50,7 @@ class AnalyzerInputs extends PureComponent {
     onChangeFilter: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
-    setInput: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setInput: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -88,6 +87,7 @@ class AnalyzerInputs extends PureComponent {
           setInput({ loading: false });
           onChangeFilter({
             estimated_costs: defaults.estimated_costs,
+            original_existing_prot: defaults.existing_prot,
             existing_prot: defaults.existing_prot,
             prot_fut: defaults.prot_fut
           });
