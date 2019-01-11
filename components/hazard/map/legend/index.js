@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
 
+// actions
+import { setModal } from 'modules/app/actions';
+
 import * as actions from './actions';
 import * as reducers from './reducers';
 import initialState from './initial-state';
@@ -14,5 +17,8 @@ export { actions, reducers, initialState };
 
 export default connect(
   state => ({ options: updatedOptions(state) }),
-  { onChangePeriod: actions.setReturnPeriod }
+  {
+    onChangePeriod: actions.setReturnPeriod,
+    setModal
+  }
 )(HazardLegend);

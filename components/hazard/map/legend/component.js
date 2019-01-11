@@ -2,16 +2,20 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Field, Timeline } from 'aqueduct-components';
 
-// styles
-import './styles.scss';
+// utils
+import { generateModalOptions } from 'utils/modal';
 
 // constants
 import { RANGE_LABELS } from './constants';
 
+// styles
+import './styles.scss';
+
 class HazardLegend extends PureComponent {
   static propTypes = {
     options: PropTypes.array.isRequired,
-    onChangePeriod: PropTypes.func.isRequired
+    onChangePeriod: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
   }
 
   onChangePeriod = ({ value }) => {
@@ -21,7 +25,7 @@ class HazardLegend extends PureComponent {
   }
 
   render() {
-    const { options } = this.props;
+    const { options, setModal } = this.props;
 
     return (
       <div className="c-hazard-map-legend">
@@ -32,6 +36,7 @@ class HazardLegend extends PureComponent {
             theme="dark"
             customClass="field-timeline"
             className="-bigger"
+            onMoreInfo={() => setModal(generateModalOptions('info', 'flood-magnitude'))}
           >
             <Timeline
               items={options}

@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { setCommonFilter, setCostFilter } from 'modules/filters/actions';
 import { setCommonCompareFilter } from 'modules/filters-compare/actions';
 import { getLocations, getCompareLocations, getCountryDefaults } from 'modules/locations/actions';
-import { setInput, setInputCompare } from 'modules/app/actions';
+import { setInput, setInputCompare, applyFilters, setIsNullTime, setModal } from 'modules/app/actions';
 import { resetWidgets } from 'modules/widgets/actions';
-import { applyFilters, setIsNullTime } from 'modules/app/actions';
 
 // selectors
 import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
@@ -35,6 +34,7 @@ export default connect(
     setInputCompare,
     resetWidgets,
     applyFilters,
-    setIsNullTime
+    setIsNullTime,
+    setModal
   }
 )(AnalyzerFilters);

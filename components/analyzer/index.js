@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { setCostFilter } from 'modules/filters/actions';
 
 // selectors
+import { setModal } from 'modules/app/actions';
 import { isAWidgetLoading } from 'modules/widgets/selectors';
 
 import Analyzer from "./component";
@@ -17,5 +18,8 @@ export default connect(
     defaultsLoading: state.locations.loaders.defaults,
     widgetLoading: isAWidgetLoading(state)
   }),
-  { setCostFilter }
+  {
+    setCostFilter,
+    setModal
+  }
 )(Analyzer);

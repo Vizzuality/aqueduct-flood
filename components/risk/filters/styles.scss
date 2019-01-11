@@ -9,4 +9,13 @@
       margin: $space-1 * 3 0 0;
     }
   }
+
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+
+    > button {
+      margin: 0 0 0 $space-1;
+    }
+  }
 }

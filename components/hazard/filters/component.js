@@ -4,7 +4,9 @@ import {
   Field,
   Timeline,
   CustomSelect,
-  Checkbox
+  Checkbox,
+  Button,
+  Icon
 } from 'aqueduct-components';
 
 // constants
@@ -15,6 +17,9 @@ import {
   SCENARIOS_OPTIONS
 } from 'constants/hazard';
 
+// utils
+import { generateModalOptions } from 'utils/modal';
+
 // styles
 import './styles.scss';
 
@@ -22,6 +27,7 @@ class HazardFilters extends PureComponent {
   static propTypes = {
     years: PropTypes.array.isRequired,
     filters: PropTypes.object.isRequired,
+    setModal: PropTypes.func.isRequired,
     setHazardFilter: PropTypes.func.isRequired,
     resetActiveLayers: PropTypes.func.isRequired
   }
@@ -55,7 +61,8 @@ class HazardFilters extends PureComponent {
     const {
       years,
       filters,
-      setHazardFilter
+      setHazardFilter,
+      setModal
     } = this.props;
     const isCoastal = filters.flood === 'inuncoast';
     const isBaseline = filters.year === '2010.0';
@@ -73,6 +80,7 @@ class HazardFilters extends PureComponent {
                 label="Year"
                 className="-bigger"
                 customClass="field-timeline"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'year'))}
               >
                 <Timeline
                   items={years}
@@ -88,6 +96,7 @@ class HazardFilters extends PureComponent {
                 name="hazard-flood"
                 label="Flood type"
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'flood-type'))}
               >
                 <CustomSelect
                   instanceId="hazard-flood"
@@ -104,6 +113,7 @@ class HazardFilters extends PureComponent {
                 label="Future Scenario"
                 disabled={isBaseline}
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'future-scenario'))}
               >
                 <CustomSelect
                   instanceId="hazard-scenario"
@@ -121,6 +131,7 @@ class HazardFilters extends PureComponent {
                 label="Projection Model"
                 disabled={isBaseline}
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'projection-model'))}
               >
                 <CustomSelect
                   instanceId="hazard-projection-model"
@@ -135,14 +146,21 @@ class HazardFilters extends PureComponent {
           </div>
           <div className="row">
             <div className="col-xs-12">
-              <Checkbox
-                label="Subsidence"
-                name="hazard-sub_scenario"
-                theme="light"
-                disabled={!isCoastal}
-                checked={filters.sub_scenario}
-                onChange={({ checked }) => setHazardFilter({ sub_scenario: checked })}
-              />
+              <div className="checkbox-container">
+                <Checkbox
+                  label="Subsidence"
+                  name="hazard-sub_scenario"
+                  theme="light"
+                  disabled={!isCoastal}
+                  checked={filters.sub_scenario}
+                  onChange={({ checked }) => setHazardFilter({ sub_scenario: checked })}
+                />
+                <Button
+                  onClick={() => setModal(generateModalOptions('info', 'subsidience'))}
+                >
+                  <Icon name="question" className="-round" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { setCommonFilter, setRiskFilter } from 'modules/filters/actions';
 import { setCommonCompareFilter } from 'modules/filters-compare/actions';
 import { getLocations, getCompareLocations, getCountryDefaults } from 'modules/locations/actions';
-import { setInput, setInputCompare } from 'modules/app/actions';
+import { setInput, setInputCompare, setModal } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
 
 // selectors
@@ -39,6 +39,7 @@ export default connect(
     getCountryDefaults,
     setInput,
     setInputCompare,
-    setWidgets
+    setWidgets,
+    setModal
   }
 )(AnalyzerFilters);

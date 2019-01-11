@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 // acctions
+import { setModal } from 'modules/app/actions';
 import { setHazardFilter } from 'modules/filters/actions';
 import { resetActiveLayers } from 'modules/layers/actions';
 
@@ -14,6 +15,7 @@ export default connect(
     filters: { ...state.filters.hazard }
   }),
   {
+    setModal,
     setHazardFilter,
     resetActiveLayers
   }

@@ -7,6 +7,9 @@ import debounce from 'lodash/debounce';
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
+// utils
+import { generateModalOptions } from 'utils/modal';
+
 // styles
 import './styles.scss';
 
@@ -28,7 +31,9 @@ class AnalyzerFilters extends PureComponent {
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
     resetWidgets: PropTypes.func.isRequired,
-    setIsNullTime: PropTypes.func.isRequired
+    setIsNullTime: PropTypes.func.isRequired,
+    applyFilters: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
   };
 
   onSearch = debounce((value) => {
@@ -92,7 +97,8 @@ class AnalyzerFilters extends PureComponent {
       filters,
       locations,
       locationsCompare,
-      setCommonFilter
+      setCommonFilter,
+      setModal
     } = this.props;
 
     return (
@@ -105,6 +111,7 @@ class AnalyzerFilters extends PureComponent {
                 name="location-filter"
                 label="Select a location"
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'location'))}
               >
                 <CustomSelect
                   instanceId="location"
@@ -121,6 +128,7 @@ class AnalyzerFilters extends PureComponent {
                 name="future-scenario-filter"
                 label="Select a future scenario"
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'future-scenario'))}
               >
                 <CustomSelect
                   instanceId="scenario"
