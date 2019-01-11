@@ -26,15 +26,13 @@ import {
   OPERATION_MAINTENANCE_COST_OPTIONS
 } from 'constants/analyzer';
 
+// utils
+import { generateModalOptions } from 'utils/modal';
+
 // styles
 import './styles.scss';
 
 class AnalyzerInputs extends PureComponent {
-  static generateModalOptions = (type, key) => ({
-    visible: true,
-    options: { type, key }
-  });
-
   static propTypes = {
     filters: PropTypes.shape({
       existing_prot: PropTypes.number,
@@ -52,7 +50,8 @@ class AnalyzerInputs extends PureComponent {
     onChangeFilter: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
-    setInput: PropTypes.func.isRequired
+    setInput: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -169,9 +168,13 @@ class AnalyzerInputs extends PureComponent {
               Design Protection Standards
             </span>
             <Button
-              onClick={() => setModal(AnalyzerInputs.generateModalOptions('info', 'design-protection-standards'))}
+              onClick={() => setModal(generateModalOptions('info', 'design-protection-standards'))}
             >
-              <Icon name="question" theme="dark" className="-round" />
+              <Icon
+                name="question"
+                theme="dark"
+                className="-round"
+              />
             </Button>
           </div>
           <div className="selectors-container">
@@ -181,6 +184,7 @@ class AnalyzerInputs extends PureComponent {
               theme="dark"
               label="Existing Protection Level (Return Period)"
               className="-higher-margin-top -bolder"
+              onClick={() => setModal(generateModalOptions('info', 'design-protection-standards'))}
             >
               <Slider
                 min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
@@ -236,7 +240,7 @@ class AnalyzerInputs extends PureComponent {
               Timeframes
             </span>
             <Button
-              onClick={() => setModal(AnalyzerInputs.generateModalOptions('info', 'timeframes'))}
+              onClick={() => setModal(generateModalOptions('info', 'timeframes'))}
             >
               <Icon name="question" theme="dark" className="-round" />
             </Button>
@@ -301,7 +305,7 @@ class AnalyzerInputs extends PureComponent {
               Costs
             </span>
             <Button
-              onClick={() => setModal(AnalyzerInputs.generateModalOptions('info', 'costs'))}
+              onClick={() => setModal(generateModalOptions('info', 'costs'))}
             >
               <Icon name="question" theme="dark" className="-round" />
             </Button>

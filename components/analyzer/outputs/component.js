@@ -117,6 +117,7 @@ class AnalyzerOutputs extends Component {
                   <WidgetMap
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
+                    onMoreInfo={() => this.onMoreInfo(widget)}
                   >
                     {({ data, params }) => (
                       <MapChart

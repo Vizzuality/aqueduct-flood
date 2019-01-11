@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Icon,
-  Button,
   Field,
   Slider,
   Spinner
@@ -14,9 +12,7 @@ import isEqual from 'lodash/isEqual';
 import SectionHeader from 'components/ui/section-header';
 
 // constants
-import {
-  EXISTING_PROTECTION_LEVEL_OPTIONS
-} from 'constants/analyzer';
+import { EXISTING_PROTECTION_LEVEL_OPTIONS } from 'constants/analyzer';
 
 // styles
 import './styles.scss';
@@ -68,16 +64,6 @@ class RiskInputs extends PureComponent {
         {loading && <Spinner className="-transparent" />}
         <SectionHeader title="input table" />
         <section>
-          <div className="category">
-            <span className="category-name">
-              Design Protection Standards
-            </span>
-            <Button
-              onClick={() => setModal(RiskInputs.generateModalOptions('info', 'design-protection-standards'))}
-            >
-              <Icon name="question" theme="dark" className="-round" />
-            </Button>
-          </div>
           <div className="selectors-container">
             {/* existing protection level */}
             <Field
@@ -85,6 +71,7 @@ class RiskInputs extends PureComponent {
               theme="dark"
               label="Existing Protection Level (Return Period)"
               className="-higher-margin-top -bolder"
+              onMoreInfo={() => setModal(RiskInputs.generateModalOptions('info', 'design-protection-standards'))}
             >
               <Slider
                 min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}

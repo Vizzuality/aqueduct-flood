@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 // selectors
+import { setModal } from 'modules/app/actions';
 import { isAWidgetLoading } from 'modules/widgets/selectors';
 import { isCompareAWidgetLoading } from 'modules/widgets-compare/selectors';
 
@@ -15,5 +16,5 @@ export default connect(
     loadingCompareDefaults: state.locations.loaders.compareDefaults,
     widgetLoading: isAWidgetLoading(state) || isCompareAWidgetLoading(state)
   }),
-  null
+  { setModal }
 )(AnalyzerCompare);

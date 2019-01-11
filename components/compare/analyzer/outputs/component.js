@@ -129,6 +129,7 @@ class AnalyzerCompareOutputs extends Component {
                     title={replace(widget.params.title, filters)}
                     params={{ id: widget.id, filters }}
                     onShareWidget={() => this.onShareWidget(widget)}
+                    onMoreInfo={() => this.onMoreInfo(widget)}
                   >
                     {({ params }) => (
                       <MapChart
@@ -173,6 +174,7 @@ class AnalyzerCompareOutputs extends Component {
                       title={replace(widget.params.title, filtersCompare)}
                       params={{ id: widget.id, filtersCompare }}
                       onShareWidget={() => this.onShareWidget(widget)}
+                      onMoreInfo={() => this.onMoreInfo(widget)}
                       isCompare
                     >
                       {({ params }) => (

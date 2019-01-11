@@ -9,6 +9,9 @@ import AnalyzerCompareOutputs from 'components/compare/analyzer/outputs';
 import AnalyzerCompareFilters from 'components/compare/analyzer/filters';
 import ApplyFilters from 'components/apply-filters';
 
+// utils
+import { generateModalOptions } from 'utils/modal';
+
 // styles
 import './styles.scss';
 
@@ -18,7 +21,17 @@ class AnalyzerCompare extends PureComponent {
     filtersCompare: PropTypes.object.isRequired,
     loadingDefaults: PropTypes.bool.isRequired,
     loadingCompareDefaults: PropTypes.bool.isRequired,
-    widgetLoading: PropTypes.bool.isRequired
+    widgetLoading: PropTypes.bool.isRequired,
+    setModal: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    const { setModal } = this.props;
+
+    if (typeof window !== 'undefined' && !localStorage.getItem('CBA_FIRST_TIME')) {
+      setModal(generateModalOptions('info', 'cba-notification'));
+      localStorage.setItem('CBA_FIRST_TIME', true);
+    }
   }
 
   render() {

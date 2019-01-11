@@ -1,7 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Router } from 'routes';
-import { Field, CustomSelect, Checkbox } from 'aqueduct-components';
+import {
+  Field,
+  CustomSelect,
+  Checkbox,
+  Button,
+  Icon
+} from 'aqueduct-components';
 import debounce from 'lodash/debounce';
 
 // constants
@@ -9,6 +15,9 @@ import {
   FLOOD_TYPE_OPTIONS,
   EXPOSURE_OPTIONS
 } from 'constants/risk';
+
+// utils
+import { generateModalOptions } from 'utils/modal';
 
 // styles
 import './styles.scss';
@@ -38,7 +47,8 @@ class AnalyzerFilters extends PureComponent {
     getCountryDefaults: PropTypes.func.isRequired,
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
-    setWidgets: PropTypes.func.isRequired
+    setWidgets: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
   }
 
   state={ location: this.props.filters.location }
@@ -200,7 +210,8 @@ class AnalyzerFilters extends PureComponent {
       locations,
       locationsCompare,
       scenarios,
-      setRiskFilter
+      setRiskFilter,
+      setModal
     } = this.props;
     const { location, isBasin } = this.state;
     const isCoastal = filters.flood === 'coastal';
@@ -216,6 +227,7 @@ class AnalyzerFilters extends PureComponent {
                 name="location-filter"
                 label="Select a location"
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'location'))}
               >
                 <CustomSelect
                   instanceId="location"
@@ -257,6 +269,7 @@ class AnalyzerFilters extends PureComponent {
                   label="Select a future scenario"
                   className="-bigger"
                   disabled={!filters.advanced_settings}
+                  onMoreInfo={() => setModal(generateModalOptions('info', 'risk-future-scenario'))}
                 >
                   <CustomSelect
                     instanceId="scenario"
@@ -276,6 +289,7 @@ class AnalyzerFilters extends PureComponent {
                   name="flood-type-filter"
                   label="Flood Type"
                   className="-bigger"
+                  onMoreInfo={() => setModal(generateModalOptions('info', 'flood-type'))}
                 >
                   <CustomSelect
                     instanceId="flood"
@@ -292,6 +306,7 @@ class AnalyzerFilters extends PureComponent {
                 name="risk-indicator-filter"
                 label="Risk Indicator"
                 className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'risk-indicator'))}
               >
                 <CustomSelect
                   instanceId="indicator"
@@ -315,13 +330,20 @@ class AnalyzerFilters extends PureComponent {
                 />)}
             </div>
             <div className="col-md-6">
-              <Checkbox
-                label="Show Advanced Settings"
-                name="advanced_settings"
-                theme="light"
-                checked={filters.advanced_settings}
-                onChange={this.onCheckAdvancedSettings}
-              />
+              <div className="checkbox-container">
+                <Checkbox
+                  label="Show Advanced Settings"
+                  name="advanced_settings"
+                  theme="light"
+                  checked={filters.advanced_settings}
+                  onChange={this.onCheckAdvancedSettings}
+                />
+                <Button
+                  onClick={() => setModal(generateModalOptions('info', 'advanced-settings-notification'))}
+                >
+                  <Icon name="question" className="-round" />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

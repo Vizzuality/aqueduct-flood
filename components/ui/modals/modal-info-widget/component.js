@@ -1,22 +1,24 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import ReactIframeResizer from 'react-iframe-resizer-super';
-
 // styles
 import './styles.scss';
 
 class ModalInfoWidget extends PureComponent {
-  static propTypes = {
-    options: PropTypes.object
-  }
+  static propTypes = { options: PropTypes.object }
 
   static defaultProps = { options: {} }
 
   render() {
     const { options } = this.props;
-    const { widget, embedURL } = options;
-    const { params } = widget;
+    const { widget : { params, id }, embedURL } = options;
     const { title, description, sources } = params;
+    const isMap = id === 'inundation_map';
+    const noMapLayout = classnames(
+      'col-xs-12',
+      { 'col-md-4': !isMap }
+    );
 
     return (
       <div className="c-modal-info-widget">
@@ -27,34 +29,33 @@ class ModalInfoWidget extends PureComponent {
         </div>
         <div className="widget-content">
           <div className="row">
-            <div className="col-xs-12 col-md-8">
-              <div className="info-widget">
-                <div className="widget-content">
-                  <ReactIframeResizer
-                    title="widget-preview"
-                    src={embedURL}
-                    frameBorder={0}
-                    style={{
-                      width: '100%',
-                      minHeight: 350
-                    }}
-                    iframeResizerOptions={{
-                      checkOrigin: false,
-                      log: false
-                    }}
-                  />
+            {!isMap && (
+              <div className="col-xs-12 col-md-8">
+                <div className="info-widget">
+                  <div className="widget-content">
+                    <ReactIframeResizer
+                      title="widget-preview"
+                      src={embedURL}
+                      frameBorder={0}
+                      style={{
+                        width: '100%',
+                        minHeight: 350
+                      }}
+                      iframeResizerOptions={{
+                        checkOrigin: false,
+                        log: false
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-xs-12 col-md-4">
+              </div>)}
+            <div className={noMapLayout}>
               <div className="widget-info">
                 <dl>
                   <dt>
                     Description:
                   </dt>
-                  <dd>
-                    {description || 'not available'}
-                  </dd>
+                  <dd dangerouslySetInnerHTML={{ __html: description || 'not available' }} />
                   <dt>
                     Sources:
                   </dt>

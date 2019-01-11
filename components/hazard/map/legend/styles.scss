@@ -4,8 +4,12 @@
   padding: $space-1 * 3;
 
   .field-timeline {
+    .aq__label-container {
+      margin: 0;
+    }
+
     > div {
-      padding: 0 $space-1 * 3;
+      // padding: 0 $space-1 * 3;
       margin: $space-1 * 7 0 0;
     }
   }

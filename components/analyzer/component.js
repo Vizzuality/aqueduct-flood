@@ -6,6 +6,9 @@ import AnalyzerFilters from 'components/analyzer/filters';
 import AnalyzerInputs from 'components/analyzer/analyzer-inputs';
 import ApplyFilters from 'components/apply-filters';
 
+// utils
+import { generateModalOptions } from 'utils/modal';
+
 // styles
 import './styles.scss';
 
@@ -15,7 +18,17 @@ class Analyzer extends PureComponent {
     widgetLoading: PropTypes.bool.isRequired,
     filters: PropTypes.shape({}).isRequired,
     input: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
-    setCostFilter: PropTypes.func.isRequired
+    setCostFilter: PropTypes.func.isRequired,
+    setModal: PropTypes.func.isRequired
+  }
+
+  componentWillMount() {
+    const { setModal } = this.props;
+
+    if (typeof window !== 'undefined' && !localStorage.getItem('CBA_FIRST_TIME')) {
+      setModal(generateModalOptions('info', 'cba-notification'));
+      localStorage.setItem('CBA_FIRST_TIME', true);
+    }
   }
 
   render() {

@@ -1,5 +1,50 @@
 @import 'css/settings';
 
 .c-modal-info {
+  > .modal-title {
+    color: palette(gray, dark);
+    font-weight: $font-weight-semi-bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
+  > .modal-content {
+    margin: $space-1 * 2 0 0;
+
+    .content-key {
+      display: block;
+      margin: $space-1 * 2 0 0;
+      color: palette(gray, dark);
+      font-weight: $font-weight-semi-bold;
+    }
+
+    .content-value {
+      margin: $space-1 * 2 0 0;
+      color: palette(gray, dark);
+
+      a {
+        color: palette(blue, secondary);
+      }
+
+      i {
+        font-style: italic;
+      }
+
+      strong {
+        font-weight: $font-weight-semi-bold;
+      }
+    }
+
+    .projection-model-table {
+      margin: $space-1 * 2 0 0;
+
+      table {
+        thead {
+          td {
+            font-weight: $font-weight-semi-bold;
+          }
+        }
+      }
+    }
+  }
 }
