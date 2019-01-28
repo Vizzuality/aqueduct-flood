@@ -22,7 +22,7 @@ export default connect(
   (state, props) => {
     const { isCompare } = props;
     const widgets = isCompare ? state.widgetsCompare : state.widgets;
-    const mapWidget = widgets.find(_widget => _widget.id === 'inundation_map');
+    const mapWidget = widgets.find(_widget => _widget.id === 'inundation_map') || {};
     const { data } = mapWidget;
 
     const filters = {
