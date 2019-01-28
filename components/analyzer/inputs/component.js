@@ -47,11 +47,18 @@ class AnalyzerInputs extends PureComponent {
       om_costs: PropTypes.number.isRequired
     }).isRequired,
     inputState: PropTypes.shape({ loading: PropTypes.bool.isRequired }).isRequired,
+    isCompare: PropTypes.bool,
     onChangeFilter: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired,
     getCountryDefaults: PropTypes.func.isRequired,
-    setInput: PropTypes.func.isRequired
+    setInput: PropTypes.func.isRequired,
+    setExistingProt: PropTypes.func.isRequired,
+    setProtFut: PropTypes.func.isRequired,
+    setExistingProtCompare: PropTypes.func.isRequired,
+    setProtFutCompare: PropTypes.func.isRequired
   };
+
+  static defaultProps = { isCompare: false }
 
   constructor(props) {
     super(props);
@@ -128,13 +135,47 @@ class AnalyzerInputs extends PureComponent {
   }
 
   onChangeExistingProtectionLevel = debounce((value) => {
-    const { onChangeFilter } = this.props;
+    const {
+      onChangeFilter,
+      setExistingProt,
+      setProtFut,
+      isCompare,
+      setExistingProtCompare,
+      setProtFutCompare
+    } = this.props;
+    const protFutValue = AnalyzerInputs.getProtFutValue(value);
+
+    if (isCompare) {
+      setExistingProtCompare(value);
+      setProtFutCompare(protFutValue);
+    } else {
+      setExistingProt(value);
+      setProtFut(protFutValue);
+    }
 
     onChangeFilter({
       existing_prot: value,
-      prot_fut: AnalyzerInputs.getProtFutValue(value)
+      prot_fut: protFutValue
     });
   }, 300);
+
+  onChangeDesignProtectionLevel = debounce((value) => {
+    const {
+      onChangeFilter,
+      isCompare,
+      setProtFutCompare,
+      setProtFut
+    } = this.props;
+
+    if (isCompare) {
+      setProtFutCompare(value);
+    } else {
+      setProtFut(value);
+    }
+
+    onChangeFilter({ prot_fut: value });
+    setProtFut(value);
+  }, 300)
 
   static getProtFutValue = (existingProt) => {
     let result = 0;
@@ -213,7 +254,7 @@ class AnalyzerInputs extends PureComponent {
                 value={protFut}
                 onChange={(value) => this.setState({ protFut: value })}
                 defaultValue={AnalyzerInputs.getProtFutValue(existingProtValue)}
-                onAfterChange={value => { onChangeFilter({ prot_fut: value }) }}
+                onAfterChange={this.onChangeDesignProtectionLevel}
               />
             </Field>
 

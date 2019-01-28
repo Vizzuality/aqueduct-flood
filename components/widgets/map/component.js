@@ -35,7 +35,11 @@ class MapChart extends PureComponent {
   onDragEnd = (e, map) => { this.setState({ center: map.getCenter() }) ;}
 
   render() {
-    const { bbox, data, filters } = this.props;
+    const {
+      bbox,
+      data,
+      filters,
+    } = this.props;
     const {
       returnPeriodLeft,
       returnPeriodRight,

@@ -21,6 +21,7 @@ import {
 import { setActiveLayer } from "modules/layers/actions";
 import { setMapOptions } from "modules/map/actions";
 import { setReturnPeriod } from 'components/hazard/map/legend/actions';
+import { setExistingProt, setProtFut } from 'modules/widget-map/actions';
 
 class HomePage extends Page {
   static async getInitialProps(context) {
@@ -50,7 +51,13 @@ class HomePage extends Page {
       store.dispatch(setCostFilter(cba));
       store.dispatch(setMapOptions({ ...map }));
 
-      if (cba.existing_prot) store.dispatch(setIsNullTime(false));
+
+      if (cba.existing_prot) {
+        store.dispatch(setIsNullTime(false));
+        store.dispatch(setExistingProt(cba.existing_prot));
+      }
+
+      if (cba.prot_fut) store.dispatch(setProtFut(cba.prot_fut));
 
       if (map.returnPeriod) store.dispatch(setReturnPeriod(map.returnPeriod));
 
