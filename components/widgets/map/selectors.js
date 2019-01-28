@@ -15,10 +15,10 @@ const getCompareLayers = (state) => {
 
   return widget.data;
 };
-const getReturnPeriod = state => state.filters.cba.existing_prot;
-const getFutureReturnPeriod = state => state.filters.cba.prot_fut;
-const getReturnPeriodCompare = state => state.filtersCompare.cba.existing_prot;
-const getFutureReturnPeriodCompare = state => state.filtersCompare.cba.prot_fut;
+const getReturnPeriod = state => state.widgetMap.existing_prot;
+const getFutureReturnPeriod = state => state.widgetMap.prot_fut;
+const getReturnPeriodCompare = state => state.widgetMap.existing_prot_compare;
+const getFutureReturnPeriodCompare = state => state.widgetMap.prot_fut_compare;
 
 export const getLeftLayers = createSelector(
   [getLayers, getReturnPeriod],

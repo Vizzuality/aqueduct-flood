@@ -25,6 +25,12 @@ import {
   setHazardCompareFilter,
   setCostCompareFilter,
 } from 'modules/filters-compare/actions';
+import {
+  setExistingProt,
+  setProtFut,
+  setExistingProtCompare,
+  setProtFutCompare
+} from 'modules/widget-map/actions';
 
 
 class Compare extends Page {
@@ -57,6 +63,12 @@ class Compare extends Page {
       store.dispatch(setRiskCompareFilter(riskCompare));
       store.dispatch(setHazardCompareFilter(hazardCompare));
       store.dispatch(setCostCompareFilter(cbaCompare));
+
+      if (cba.existing_prot) store.dispatch(setExistingProt(cba.existing_prot));
+      if (cba.prot_fut) store.dispatch(setProtFut(cba.prot_fut));
+
+      if (cbaCompare.existing_prot) store.dispatch(setExistingProtCompare(cbaCompare.existing_prot));
+      if (cbaCompare.prot_fut) store.dispatch(setProtFutCompare(cbaCompare.prot_fut));
     }
 
     if (queryTab) {

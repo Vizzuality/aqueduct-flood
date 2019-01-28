@@ -16,10 +16,6 @@ import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
 // utils
 import {
-  calculateClosestPeriodRange,
-  calculateNextPeriodRange
-} from 'utils/cba';
-import {
   getCbaEmbedURL,
   getCbaPreviewURL,
   generateCbaDownloadURL
@@ -105,7 +101,12 @@ class AnalyzerOutputs extends Component {
   }
 
   render() {
-    const { filters, widgets, currentLocation, isNullTime } = this.props;
+    const {
+      filters,
+      widgets,
+      currentLocation,
+      isNullTime,
+    } = this.props;
 
     return (
       <div className="c-analyzer-outputs">
@@ -124,11 +125,6 @@ class AnalyzerOutputs extends Component {
                         data={data}
                         params={params}
                         bbox={currentLocation.bbox}
-                        filters={{
-                          returnPeriodLeft: calculateClosestPeriodRange(filters.existing_prot),
-                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot),
-                          refYear: filters.ref_year
-                        }}
                       />)}
                   </WidgetMap>) : (
                     <Widget

@@ -13,6 +13,7 @@ import * as mapModule from 'modules/map';
 import * as hazardLegendModule from 'components/hazard/map/legend';
 import * as layersModule from 'modules/layers';
 import * as widgetsModule from 'modules/widgets';
+import * as widgetMapModule from 'modules/widget-map';
 import * as widgetsCompareModule from 'modules/widgets-compare';
 import * as filtersModule from 'modules/filters';
 import * as filtersCompareModule from 'modules/filters-compare';
@@ -27,6 +28,7 @@ const reducer = combineReducers({
   hazardLegend: handleModule(hazardLegendModule),
   layers: handleModule(layersModule),
   widgets: handleModule(widgetsModule),
+  widgetMap: handleModule(widgetMapModule),
   widgetsCompare: handleModule(widgetsCompareModule),
   filters: handleModule(filtersModule),
   filtersCompare: handleModule(filtersCompareModule)

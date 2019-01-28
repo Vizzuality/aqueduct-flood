@@ -22,10 +22,6 @@ import {
   getCbaPreviewURL,
   generateCbaDownloadURL
 } from 'utils/share';
-import {
-  calculateClosestPeriodRange,
-  calculateNextPeriodRange
-} from 'utils/cba';
 
 // styles
 import './styles.scss';
@@ -135,11 +131,6 @@ class AnalyzerCompareOutputs extends Component {
                       <MapChart
                         params={params}
                         bbox={currentLocation.bbox}
-                        filters={{
-                          returnPeriodLeft: calculateClosestPeriodRange(filters.existing_prot),
-                          returnPeriodRight: calculateNextPeriodRange(filters.existing_prot),
-                          refYear: filters.ref_year
-                        }}
                       />)}
                   </WidgetMap>) : (
                     <Widget
@@ -182,11 +173,6 @@ class AnalyzerCompareOutputs extends Component {
                           params={params}
                           isCompare
                           bbox={currentLocationCompare.bbox}
-                          filters={{
-                            returnPeriodLeft: calculateClosestPeriodRange(filtersCompare.existing_prot),
-                            returnPeriodRight: calculateNextPeriodRange(filtersCompare.existing_prot),
-                            refYear: filtersCompare.ref_year
-                          }}
                         />)}
                     </WidgetMapCompare>) : (
                       <WidgetCompare

@@ -10,7 +10,8 @@ import InputsAnalyzerCompare from 'components/analyzer/inputs';
 export default connect(
   state => ({
     filters: state.filtersCompare.cba,
-    inputState: state.app.inputCompare
+    inputState: state.app.inputCompare,
+    isCompare: true
   }),
   {
     setModal,
