@@ -70,9 +70,11 @@ class AnalyzerFilters extends PureComponent {
         setInput({ loading: false });
         setCostFilter({
           estimated_costs: defaults.estimated_costs,
-          original_existing_prot: defaults.existing_prot,
           existing_prot: defaults.existing_prot,
-          prot_fut: defaults.prot_fut
+          prot_fut: defaults.prot_fut,
+          original_existing_prot: defaults.existing_prot,
+          original_prot_fut: defaults.prot_fut,
+          original_estimated_costs: defaults.estimated_costs
         });
       });
   }

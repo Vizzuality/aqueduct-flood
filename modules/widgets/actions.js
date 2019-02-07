@@ -7,8 +7,6 @@ import { fecthSideMap } from 'modules/layers/helpers';
 // utils
 import { getUniqueVocabulary } from 'utils/cba';
 
-import widgetInitialState from 'modules/filters/initial-state';
-
 export const setWidgets = createAction('WIDGETS__SET-WIDGETS');
 export const resetWidgets = createAction('WIDGETS__RESET-WIDGETS');
 export const setEmbedWidget = createAction('WIDGETS__SET-EMBED-WIDGET');
@@ -23,27 +21,23 @@ export const getWidgetCostData = createThunkAction('WIDGETS__GET-CBA-DATA', (wid
     const widgetParams = {
       ...common,
       ...cba,
+      ...{ existing_prot: (isNullTime || cba.existing_prot === cba.original_existing_prot) ? 'null' : cba.existing_prot },
+      ...{ prot_fut: (isNullTime || cba.prot_fut === cba.original_prot_fut) ? 'null' : cba.prot_fut },
+      ...{ estimated_costs: (isNullTime || cba.estimated_costs === cba.original_estimated_costs) ? 'null' : cba.estimated_costs },
       ...{ discount_rate: filters.cba.discount_rate / 100 },
       ...{ om_costs: filters.cba.om_costs / 100 },
       ...{ user_urb_cost: filters.cba.user_urb_cost || 'null' },
       ...{ user_rur_cost: 'null' }
     };
 
-    const defaultParams = {
-      ...widgetInitialState.common,
-      geogunit_unique_name: common.geogunit_unique_name,
-      ...widgetInitialState.cba,
-      ...{ discount_rate: filters.cba.discount_rate / 100 },
-      ...{ om_costs: filters.cba.om_costs / 100 },
-      ...{ user_urb_cost: filters.cba.user_urb_cost || 'null' },
-      ...{ user_rur_cost: 'null' }
-    };
+    const {
+      original_existing_prot,
+      original_prot_fut,
+      original_estimated_costs,
+      ...restParams
+    } = widgetParams;
 
-    Object.keys(defaultParams).forEach(k => {
-      if (!defaultParams[k]) defaultParams[k] = 'null';
-    });
-
-    const params = queryString.stringify((isNullTime || cba.original_existing_prot === cba.existing_prot)  ? defaultParams : widgetParams);
+    const params = queryString.stringify(restParams);
 
     dispatch(setError({ id: widgetId, error: null }));
     dispatch(setLoading({ id: widgetId, loading: true }));
