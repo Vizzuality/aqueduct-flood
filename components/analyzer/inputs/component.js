@@ -187,7 +187,7 @@ class AnalyzerInputs extends PureComponent {
       const nextLevel = EXISTING_PROTECTION_LEVEL_OPTIONS[index + 1] ?
         EXISTING_PROTECTION_LEVEL_OPTIONS[index + 1] : EXISTING_PROTECTION_LEVEL_OPTIONS[index]
 
-      if ((existingProt >= value && existingProt <= nextLevel) && !found) {
+      if ((existingProt >= value && existingProt < nextLevel) && !found) {
         result = nextLevel
         found = true;
       }
