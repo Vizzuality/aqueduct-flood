@@ -13,7 +13,7 @@ export const getUniqueVocabulary = (filters = {}, right = false) => {
 
 export const calculateClosestPeriodRange = (returnPeriod) =>
   EXISTING_PROTECTION_LEVEL_OPTIONS.reduce((prev, curr) =>
-    (returnPeriod >= prev && returnPeriod <= curr) ? prev: curr);
+    (returnPeriod >= prev && returnPeriod < curr) ? prev: curr);
 
 export const calculateNextPeriodRange = (returnPeriod) =>
   EXISTING_PROTECTION_LEVEL_OPTIONS.reduce((prev, curr) =>
