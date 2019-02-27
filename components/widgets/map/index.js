@@ -1,10 +1,7 @@
 import { connect } from 'react-redux';
 
 // utils
-import {
-  calculateClosestPeriodRange,
-  calculateNextPeriodRange
-} from 'utils/cba';
+import { calculateNextPeriodRange } from 'utils/cba';
 
 // selectors
 import {
@@ -26,7 +23,7 @@ export default connect(
     const { data } = mapWidget;
 
     const filters = {
-      returnPeriodLeft: calculateClosestPeriodRange(isCompare ? state.widgetMap.existing_prot_compare : state.widgetMap.existing_prot),
+      returnPeriodLeft: calculateNextPeriodRange(isCompare ? state.widgetMap.existing_prot_compare : state.widgetMap.existing_prot),
       returnPeriodRight: calculateNextPeriodRange(isCompare ? state.widgetMap.prot_fut_compare : state.widgetMap.prot_fut),
       refYear: isCompare ? state.filtersCompare.cba.ref_year : state.filters.cba.ref_year
     };
