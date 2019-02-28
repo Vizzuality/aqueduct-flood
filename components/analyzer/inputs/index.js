@@ -20,6 +20,5 @@ export default connect(
     setProtFut,
     setExistingProtCompare,
     setProtFutCompare
-
   }
 )(InputsAnalyzer);

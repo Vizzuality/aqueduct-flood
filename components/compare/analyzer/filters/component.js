@@ -32,11 +32,20 @@ class AnalyzerCompareFilters extends PureComponent {
     getCountryDefaults: PropTypes.func.isRequired,
     getCompareCountryDefaults: PropTypes.func.isRequired,
     resetWidgets: PropTypes.func.isRequired,
-    resetWidgetsCompare: PropTypes.func.isRequired
+    resetWidgetsCompare: PropTypes.func.isRequired,
+    setExistingProt: PropTypes.func.isRequired,
+    setProtFut: PropTypes.func.isRequired
   }
 
   componentWillMount() {
-    const { filters, getCompareCountryDefaults, setCostCompareFilter, setInputCompare } = this.props;
+    const {
+      filters,
+      getCompareCountryDefaults,
+      setCostCompareFilter,
+      setInputCompare,
+      setExistingProt,
+      setProtFut
+    } = this.props;
     const { locationCompare } = filters;
 
     setInputCompare({ loading: true });
@@ -50,6 +59,8 @@ class AnalyzerCompareFilters extends PureComponent {
             existing_prot: defaults.existing_prot,
             prot_fut: defaults.prot_fut
           });
+          setExistingProt(defaults.existing_prot);
+          setProtFut(defaults.prot_fut);
         });
     }
   }
@@ -68,7 +79,9 @@ class AnalyzerCompareFilters extends PureComponent {
       setCommonFilter,
       setCostFilter,
       getCountryDefaults,
-      resetWidgets
+      resetWidgets,
+      setExistingProt,
+      setProtFut
     } = this.props;
     const { location } = filters;
 
@@ -86,7 +99,9 @@ class AnalyzerCompareFilters extends PureComponent {
           estimated_costs: defaults.estimated_costs,
           existing_prot: defaults.existing_prot,
           prot_fut: defaults.prot_fut
-        })
+        });
+        setExistingProt(defaults.existing_prot);
+        setProtFut(defaults.prot_fut);
       });
   }
 
@@ -97,7 +112,9 @@ class AnalyzerCompareFilters extends PureComponent {
       filters,
       setInputCompare,
       getCompareCountryDefaults,
-      resetWidgetsCompare
+      resetWidgetsCompare,
+      setExistingProt,
+      setProtFut
     } = this.props;
     const { locationCompare } = filters;
 
@@ -120,8 +137,10 @@ class AnalyzerCompareFilters extends PureComponent {
           estimated_costs,
           existing_prot,
           prot_fut
-        })
-      })
+        });
+        setExistingProt(existing_prot);
+        setProtFut(prot_fut);
+      });
   }
 
   onSearch = debounce((value) => {

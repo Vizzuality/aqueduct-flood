@@ -15,6 +15,7 @@ import {
 import { setInput, setInputCompare } from 'modules/app/actions';
 import { resetWidgets } from 'modules/widgets/actions';
 import { resetWidgetsCompare } from 'modules/widgets-compare/actions';
+import { setExistingProt, setProtFut } from 'modules/widget-map/actions';
 
 // selectors
 import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
@@ -46,6 +47,8 @@ export default connect(
     setInput,
     setInputCompare,
     resetWidgets,
-    resetWidgetsCompare
+    resetWidgetsCompare,
+    setExistingProt,
+    setProtFut
   }
 )(AnalyzerCompareFilters);

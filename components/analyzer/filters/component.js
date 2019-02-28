@@ -33,7 +33,9 @@ class AnalyzerFilters extends PureComponent {
     resetWidgets: PropTypes.func.isRequired,
     setIsNullTime: PropTypes.func.isRequired,
     applyFilters: PropTypes.func.isRequired,
-    setModal: PropTypes.func.isRequired
+    setModal: PropTypes.func.isRequired,
+    setExistingProt: PropTypes.func.isRequired,
+    setProtFut: PropTypes.func.isRequired
   };
 
   onSearch = debounce((value) => {
@@ -51,7 +53,9 @@ class AnalyzerFilters extends PureComponent {
       getCountryDefaults,
       resetWidgets,
       applyFilters,
-      setIsNullTime
+      setIsNullTime,
+      setExistingProt,
+      setProtFut
     } = this.props;
     const { location } = filters;
 
@@ -76,6 +80,8 @@ class AnalyzerFilters extends PureComponent {
           original_prot_fut: defaults.prot_fut,
           original_estimated_costs: defaults.estimated_costs
         });
+        setExistingProt(defaults.existing_prot);
+        setProtFut(defaults.prot_fut);
       });
   }
 

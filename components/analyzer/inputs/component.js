@@ -83,7 +83,14 @@ class AnalyzerInputs extends PureComponent {
   }
 
   componentWillMount() {
-    const { filters, getCountryDefaults, onChangeFilter, setExistingProt, setInput } = this.props;
+    const {
+      filters,
+      getCountryDefaults,
+      onChangeFilter,
+      setExistingProt,
+      setInput,
+      setProtFut
+    } = this.props;
     const { geogunit_unique_name: location, existing_prot: existingProt } = filters;
 
     if (location && !existingProt) {
@@ -101,6 +108,7 @@ class AnalyzerInputs extends PureComponent {
             original_estimated_costs: defaults.estimated_costs
           });
           setExistingProt(defaults.existing_prot);
+          setProtFut(defaults.prot_fut);
         });
     }
   }
