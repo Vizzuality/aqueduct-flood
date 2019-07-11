@@ -1,4 +1,4 @@
-FROM node:8.10
+FROM node:10.7
 
 ARG API_URL
 ARG PORT
