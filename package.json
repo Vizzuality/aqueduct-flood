@@ -9,7 +9,7 @@
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
     "@zeit/next-sass": "^0.1.2",
-    "aqueduct-components": "^1.1.3",
+    "aqueduct-components": "^1.1.5",
     "autoprefixer": "^9.0.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-plugin-module-resolver": "^3.1.1",
