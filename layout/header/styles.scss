@@ -1,7 +1,10 @@
 @import 'css/settings';
 
 .l-header {
-  padding: 0 $padding-md;
+
+  > header {
+    padding: 0 $padding-md;
+  }
 
   .aq__list {
     .aq__c-icon {
