@@ -86,7 +86,8 @@
     "build": "next build",
     "start": "node index.js",
     "lint": "./node_modules/.bin/eslint --ext .js --ext .jsx .",
-    "heroku-postbuild": "yarn build"
+    "heroku-postbuild": "yarn build",
+    "export": "next export"
   },
   "engines": {
     "node": "10.7.x"
