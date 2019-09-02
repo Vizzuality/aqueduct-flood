@@ -21,7 +21,7 @@ class Header extends PureComponent {
     return (
       <div className={componentClass}>
         <AQHeader
-          title="flood"
+          title="floods"
           app="country-basin-risk-profiles-and-rankings"
           {...this.props}
         >
