@@ -8,9 +8,6 @@ import {
 import debounce from 'lodash/debounce';
 import isEqual from 'lodash/isEqual';
 
-// components
-import SectionHeader from 'components/ui/section-header';
-
 // constants
 import { EXISTING_PROTECTION_LEVEL_OPTIONS } from 'constants/analyzer';
 
@@ -62,7 +59,6 @@ class RiskInputs extends PureComponent {
     return (
       <div className="c-analyzer-inputs">
         {loading && <Spinner className="-transparent" />}
-        <SectionHeader title="input table" />
         <section>
           <div className="selectors-container">
             {/* existing protection level */}
