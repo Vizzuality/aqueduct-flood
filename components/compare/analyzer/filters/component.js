@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field, CustomSelect, Button } from 'aqueduct-components';
+import { Field, CustomSelect, Button, Icon } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
+import { Link } from 'routes';
 
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
@@ -167,6 +168,20 @@ class AnalyzerCompareFilters extends PureComponent {
     return (
       <div className="c-analyzer-compare-filters">
         <div className="wrapper">
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="go-back-container">
+                <Icon
+                  name="arrow-left"
+                  className="-small"
+                  theme="light"
+                />
+                  <Link route='home'>
+                    <a className="go-back-btn">Go back</a>
+                  </Link>
+              </div>
+            </div>
+          </div>
           <div className="row">
             {/* location filters */}
             <div className="col-md-6">

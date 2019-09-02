@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Field, CustomSelect, Checkbox, Button } from 'aqueduct-components';
+import { Field, CustomSelect, Checkbox, Button, Icon } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
+import { Link } from 'routes';
 
 // constants
 import {
@@ -307,6 +308,20 @@ class RiskFilters extends PureComponent {
     return (
       <div className="c-risk-filters">
         <div className="wrapper">
+          <div className="row">
+            <div className="col-xs-12">
+              <div className="go-back-container">
+                <Icon
+                  name="arrow-left"
+                  className="-small"
+                  theme="light"
+                />
+                  <Link route='home'>
+                    <a className="go-back-btn">Go back</a>
+                  </Link>
+              </div>
+            </div>
+          </div>
           {/* advanced settings */}
           <div className="row">
             <div className="col-md-6">

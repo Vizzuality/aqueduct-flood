@@ -341,7 +341,7 @@ class AnalyzerFilters extends PureComponent {
                 <Button
                   onClick={() => setModal(generateModalOptions('info', 'advanced-settings-notification'))}
                 >
-                  <Icon name="question" className="-round" />
+                  <Icon name="question" className="-round" theme="light" />
                 </Button>
               </div>
             </div>
