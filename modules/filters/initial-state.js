@@ -7,7 +7,7 @@ export default {
   // hazard
   hazard: {
     year: '2010.0',
-    flood: 'inuncoast',
+    flood: 'inunriver',
     scenario: 'rcp8p5',
     projection_model: '95.0',
     sub_scenario: true
