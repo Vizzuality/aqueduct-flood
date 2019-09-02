@@ -9,7 +9,7 @@ export default {
     {
       "name": "table",
       "values": [
-        
+
     ],
       "transform": [
         {"type": "fold", "fields": ["Annual_Damage_Avg", "CC_Driver_Avg", "Soc_Driver"]},
@@ -52,30 +52,30 @@ export default {
 
   "axes": [
     {
-      "orient": "top", 
-      "scale": "xscale", 
-      "ticks": false, 
-      "offset": 20, 
-      "labelFontWeight": "bold", 
+      "orient": "top",
+      "scale": "xscale",
+      "ticks": false,
+      "offset": 20,
+      "labelFontWeight": "bold",
       "labelFontSize": 13
     },
     {
-      "orient": "bottom", 
+      "orient": "bottom",
       "scale": "xscale",
-      "grid": false, 
-      "domain": false, 
-      "ticks": false, 
-      "labels":false, 
-      "offset": 5, 
+      "grid": false,
+      "domain": false,
+      "ticks": false,
+      "labels":false,
+      "offset": 5,
       "title": "Annual Damage and Impact Drivers"
     },
     {
-      "orient": "left", 
-      "scale": "yscale", 
-      "ticks": false, 
-      "grid":true, 
-      "format":"s", 
-      "tickCount": 5, 
+      "orient": "left",
+      "scale": "yscale",
+      "ticks": false,
+      "grid":true,
+      "format":"s",
+      "tickCount": 5,
       "title": "Annual Urban Damage (US $)"}
   ],
 
@@ -161,8 +161,8 @@ export default {
             "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1, '~s')}"}
           }
           }
-        } 
-        
+        }
+
       ]
     },
     {
