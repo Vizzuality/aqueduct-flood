@@ -32,7 +32,7 @@ class BasemapControl extends PureComponent {
   }
 
   onBasemapChange({ value }) {
-    this.props.setBasemap({ basemap: value });
+    this.props.setMapOptions({ basemap: value });
   }
 
   toggleDropdown(to) {
@@ -68,7 +68,7 @@ class BasemapControl extends PureComponent {
       >
         {/* First child: This is what the item will be tethered to */}
         <button type="button" className="basemap-button" onClick={() => this.toggleDropdown(true)}>
-          <Icon name="icon-layers" className="-small" />
+          <Icon name="layers" className="-small" />
         </button>
 
         {/* Second child: If present, this item will be tethered to the the first child */}
@@ -79,13 +79,13 @@ class BasemapControl extends PureComponent {
                 const bs = BASEMAPS[k];
                 return {
                   label: bs.label,
-                  value: bs.id
+                  value: bs.id,
+                  checked: bs.id === basemap
                 };
               })}
               name="basemap"
-              selected={basemap}
               onChange={(_basemap) => { this.onBasemapChange(_basemap); }}
-              className="-secondary"
+              // className="-secondary"
             />
 
             <div className="divisor" />
@@ -99,7 +99,7 @@ class BasemapControl extends PureComponent {
 
 BasemapControl.propTypes = {
   basemap: PropTypes.string.isRequired,
-  setBasemap: PropTypes.func.isRequired
+  setMapOptions: PropTypes.func.isRequired
 };
 
 export default BasemapControl;

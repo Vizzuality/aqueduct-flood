@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { calculateNextPeriodRange } from 'utils/cba';
 
 // selectors
+import { parseBasemap } from 'components/hazard/map/selectors';
 import {
   getLeftLayers,
   getRightLayers,
@@ -31,6 +32,7 @@ export default connect(
     return {
       ...props,
       filters,
+      basemap: parseBasemap(state),
       data: {
         left: isCompare ? getLeftLayersCompare(state, data.left) : getLeftLayers(state, data.left),
         right: isCompare ? getRightLayersCompare(state, data.right) : getRightLayers(state, data.right)

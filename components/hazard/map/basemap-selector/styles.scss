@@ -19,4 +19,8 @@
     border-left: 7px solid transparent;
     transform: rotate(180deg);
   }
+
+  .aq__c-radio label > .aq__radio-label {
+    font-weight: $font-weight-regular;
+  }
 }

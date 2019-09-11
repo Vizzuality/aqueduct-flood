@@ -39,6 +39,7 @@ class MapChart extends PureComponent {
       bbox,
       data,
       filters,
+      basemap
     } = this.props;
     const {
       returnPeriodLeft,
@@ -54,6 +55,7 @@ class MapChart extends PureComponent {
           <Map
             customClass="widget-map"
             bounds={{ bbox }}
+            basemap={basemap}
             mapOptions={{
               zoom,
               ...center && { center }
@@ -96,6 +98,7 @@ class MapChart extends PureComponent {
           <Map
             customClass="widget-map"
             bounds={{ bbox }}
+            basemap={basemap}
             mapOptions={{
               zoom,
               center

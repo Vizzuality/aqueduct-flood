@@ -37,13 +37,22 @@
       }
     }
 
-    .download-btn {
+    .download-btn,
+    .basemap-button {
       display: inline-flex;
       width: 100%;
+      height: 36px;
       padding: 7px;
 
       > svg {
         margin: 0 auto;
+      }
+    }
+
+    .basemap-button {
+      > svg {
+        width: 10px;
+        height: 10px;
       }
     }
   }

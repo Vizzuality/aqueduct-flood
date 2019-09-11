@@ -1,1 +1,4 @@
-export default { bounds: {}};
+export default {
+  bounds: {},
+  basemap: 'hydro'
+};

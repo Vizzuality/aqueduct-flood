@@ -53,6 +53,7 @@
     "react-redux-loading-bar": "^4.0.5",
     "react-render-html": "^0.6.0",
     "react-responsive": "^4.1.0",
+    "react-tether": "0.5.7",
     "react-transition-group": "^1.1.2",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",

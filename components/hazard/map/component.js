@@ -12,17 +12,16 @@ import { Spinner, Icon } from 'aqueduct-components';
 
 // components
 import HazardLegend from './legend';
+import BasemapControl from './basemap-selector';
 
 // styles
 import './styles.scss';
 
 class HazardMap extends PureComponent {
   static propTypes = {
-    // used by layerManager
-    // activeLayers: PropTypes.array.isRequired,
-    // used by legend
     layers: PropTypes.array.isRequired,
     mapOptions: PropTypes.object.isRequired,
+    basemap: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     setActiveLayer: PropTypes.func.isRequired,
     deleteActiveLayer: PropTypes.func.isRequired,
@@ -52,11 +51,11 @@ class HazardMap extends PureComponent {
 
   render () {
     const {
-      mapOptions,
+      mapOptions: { bounds },
+      basemap,
       layers,
       loading
     } = this.props;
-    const { bounds } = mapOptions;
 
     return (
       <div className="l-hazard-map">
@@ -65,7 +64,7 @@ class HazardMap extends PureComponent {
           mapOptions={{}}
           bounds={bounds}
           events={this.mapEvents}
-          basemap={{ url: process.env.BASEMAP_URL }}
+          basemap={basemap}
         >
           {(map) => (
             <Fragment>
@@ -80,6 +79,11 @@ class HazardMap extends PureComponent {
               </LayerManager>
 
               <MapControls customClass="map-controls">
+                <ZoomControl
+                  map={map}
+                  customClass="zoom-controls"
+                />
+                <BasemapControl basemap={basemap.id} />
                 <a
                   href="https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/index.html"
                   target="_blank"
@@ -88,10 +92,6 @@ class HazardMap extends PureComponent {
                 >
                   <Icon name="download" theme="dark" />
                 </a>
-                <ZoomControl
-                  map={map}
-                  customClass="zoom-controls"
-                />
               </MapControls>
 
               {layers.length && (
