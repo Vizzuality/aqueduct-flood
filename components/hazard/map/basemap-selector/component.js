@@ -65,34 +65,35 @@ class BasemapControl extends PureComponent {
         classes={{
           element: 'c-basemap-tooltip -arrow-right'
         }}
-      >
-        {/* First child: This is what the item will be tethered to */}
-        <button type="button" className="basemap-button" onClick={() => this.toggleDropdown(true)}>
-          <Icon name="layers" className="-small" />
-        </button>
-
-        {/* Second child: If present, this item will be tethered to the the first child */}
-        {active && (
-          <div>
-            <RadioGroup
-              items={Object.keys(BASEMAPS).map((k) => {
-                const bs = BASEMAPS[k];
-                return {
-                  label: bs.label,
-                  value: bs.id,
-                  checked: bs.id === basemap
-                };
-              })}
-              name="basemap"
-              onChange={(_basemap) => { this.onBasemapChange(_basemap); }}
-              // className="-secondary"
-            />
-
-            <div className="divisor" />
-
-          </div>
+        renderTarget={(ref) => (
+          <button type="button" ref={ref} className="basemap-button" onClick={() => this.toggleDropdown(true)}>
+            <Icon name="layers" className="-small" />
+          </button>
         )}
-      </TetherComponent>
+        renderElement={(ref) => {
+          if (active) return (
+            <div ref={ref}>
+              <RadioGroup
+                items={Object.keys(BASEMAPS).map((k) => {
+                  const bs = BASEMAPS[k];
+                  return {
+                    label: bs.label,
+                    value: bs.id,
+                    checked: bs.id === basemap
+                  };
+                })}
+                name="basemap"
+                onChange={(_basemap) => { this.onBasemapChange(_basemap); }}
+                // className="-secondary"
+              />
+
+              <div className="divisor" />
+
+            </div>
+          );
+          return null;
+        }}
+      />
     );
   }
 }
