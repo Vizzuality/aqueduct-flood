@@ -8,6 +8,16 @@
     }
   }
 
+  .aq__c-header {
+    a {
+      font-weight: $font-weight-regular;
+    }
+
+    .aq__header-title {
+      font-weight: $font-weight-bold;
+    }
+  }
+
   &.-embed {
     padding: 0;
   }
