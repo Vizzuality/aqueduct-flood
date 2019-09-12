@@ -84,11 +84,7 @@ class BasemapControl extends PureComponent {
                 })}
                 name="basemap"
                 onChange={(_basemap) => { this.onBasemapChange(_basemap); }}
-                // className="-secondary"
               />
-
-              <div className="divisor" />
-
             </div>
           );
           return null;

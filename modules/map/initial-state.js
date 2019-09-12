@@ -1,4 +1,5 @@
 export default ({
   bounds: {},
-  basemap: 'hydro'
+  basemap: 'hydro',
+  boundaries: true
 });

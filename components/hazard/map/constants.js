@@ -26,4 +26,12 @@ export const BASEMAPS = {
   }
 };
 
-export default { BASEMAPS };
+export const LABEL_LAYER_CONFIG = {
+  url: 'https://api.tiles.mapbox.com/v4/wri.acf5a04e/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoid3JpIiwiYSI6IjU3NWNiNGI4Njc4ODk4MmIyODFkYmJmM2NhNDgxMWJjIn0.v1tciCeBElMdpnrikGDrPg',
+  options: { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a>' }
+};
+
+export default {
+  BASEMAPS,
+  LABEL_LAYER_CONFIG
+};

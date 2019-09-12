@@ -14,6 +14,9 @@ import { Spinner, Icon } from 'aqueduct-components';
 import HazardLegend from './legend';
 import BasemapControl from './basemap-selector';
 
+// constants
+import { LABEL_LAYER_CONFIG } from './constants';
+
 // styles
 import './styles.scss';
 
@@ -49,9 +52,15 @@ class HazardMap extends PureComponent {
     });
   }
 
+  handleBoundaries() {
+    const { mapOptions: { boundaries }, setMapOptions } = this.props;
+
+    setMapOptions({ boundaries: !boundaries });
+  }
+
   render () {
     const {
-      mapOptions: { bounds },
+      mapOptions: { bounds, boundaries },
       basemap,
       layers,
       loading
@@ -65,6 +74,7 @@ class HazardMap extends PureComponent {
           bounds={bounds}
           events={this.mapEvents}
           basemap={basemap}
+          {...boundaries && { label: LABEL_LAYER_CONFIG }}
         >
           {(map) => (
             <Fragment>
@@ -84,6 +94,13 @@ class HazardMap extends PureComponent {
                   customClass="zoom-controls"
                 />
                 <BasemapControl basemap={basemap.id} />
+                <button
+                  type="submit"
+                  className="boundaries-button"
+                  onClick={() => { this.handleBoundaries(); }}
+                >
+                  <Icon name="boundaries" />
+                </button>
                 <a
                   href="https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/index.html"
                   target="_blank"
