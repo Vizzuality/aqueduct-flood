@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { setSidebarVisibility, setTab, clearInput } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
 import { clearLayers } from 'modules/layers/actions';
+import { setWidgetsCompare } from 'modules/widgets-compare/actions';
 
 // selectors
 import { getActiveLayers } from 'modules/layers/selectors';
@@ -25,6 +26,7 @@ export default connect(
     setSidebarVisibility,
     setTab,
     setWidgets,
+    setWidgetsCompare,
     clearInput,
     clearLayers
   }

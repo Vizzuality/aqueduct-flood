@@ -32,6 +32,7 @@ class Home extends PureComponent {
     setSidebarVisibility: PropTypes.func.isRequired,
     setTab: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
+    setWidgetsCompare: PropTypes.func.isRequired,
     clearInput: PropTypes.func.isRequired,
     clearLayers: PropTypes.func.isRequired
   }
@@ -78,12 +79,14 @@ class Home extends PureComponent {
     const {
       setTab,
       setWidgets,
+      setWidgetsCompare,
       clearInput,
       clearLayers
     } = this.props;
 
     setTab(value);
     setWidgets({ nextTab: value });
+    setWidgetsCompare({ nextTab: value })
     clearInput();
     clearLayers();
   }
