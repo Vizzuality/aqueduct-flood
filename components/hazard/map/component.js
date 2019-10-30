@@ -5,7 +5,7 @@ import {
   MapControls,
   ZoomControl,
   Legend
-} from 'wri-api-components';
+} from 'vizzuality-components';
 import { LayerManager, Layer } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 import { Spinner, Icon } from 'aqueduct-components';

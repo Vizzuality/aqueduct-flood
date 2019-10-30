@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 // styles
-import 'wri-api-components/dist/bundle.css';
+import 'vizzuality-components/dist/bundle.css';
 import 'aqueduct-components/dist/main.css';
 import 'css/index.scss';
 

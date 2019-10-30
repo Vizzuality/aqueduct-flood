@@ -63,8 +63,8 @@
     "sass-flex-mixin": "^1.0.3",
     "vega": "^4.2.0",
     "vega-lib": "^4.2.0",
+    "vizzuality-components": "^3.0.0-beta.11",
     "webpack": "4.39.0",
-    "wri-api-components": "^2.3.1",
     "wri-json-api-serializer": "^1.0.1"
   },
   "devDependencies": {

@@ -1,10 +1,10 @@
 import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Legend } from 'wri-api-components'
+import { Legend } from 'vizzuality-components'
 import Map, {
   MapControls,
   ZoomControl,
-} from 'wri-api-components/dist/map';
+} from 'vizzuality-components/dist/map';
 import { LayerManager } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 
