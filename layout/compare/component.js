@@ -12,6 +12,9 @@ import Layout from "layout/layout";
 import RiskCompare from 'components/compare/risk';
 import AnalyzerCompare from 'components/compare/analyzer';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // styles
 import './styles.scss';
 
@@ -74,6 +77,8 @@ class ComparePage extends PureComponent {
 
     clearFilters();
     clearCompareFilters();
+
+    logEvent('[AQ-Flood]', 'user changes tab in compare', value);
   }
 
   render() {

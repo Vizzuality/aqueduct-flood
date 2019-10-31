@@ -5,6 +5,9 @@ import TetherComponent from 'react-tether';
 // components
 import { Icon, RadioGroup } from 'aqueduct-components';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // constants
 import { BASEMAPS } from '../constants';
 
@@ -32,7 +35,10 @@ class BasemapControl extends PureComponent {
   }
 
   onBasemapChange({ value }) {
-    this.props.setMapOptions({ basemap: value });
+    const { setMapOptions } = this.props;
+
+    setMapOptions({ basemap: value });
+    logEvent('[AQ-Flood]', 'hazard tab: user sets basemap', value);
   }
 
   toggleDropdown(to) {

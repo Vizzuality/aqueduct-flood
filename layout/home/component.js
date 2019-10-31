@@ -17,6 +17,9 @@ import HazardMap from 'components/hazard/map';
 import AnalyzerOutputs from 'components/analyzer/outputs';
 import RiskOutputs from 'components/risk/outputs';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // styles
 import './styles.scss';
 
@@ -89,6 +92,8 @@ class Home extends PureComponent {
     setWidgetsCompare({ nextTab: value })
     clearInput();
     clearLayers();
+
+    logEvent('[AQ-Flood]', 'user changes tab', value);
   }
 
   render() {

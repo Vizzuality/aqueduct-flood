@@ -10,6 +10,9 @@ import {
   EXPOSURE_OPTIONS
 } from 'constants/risk';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // styles
 import './styles.scss';
 
@@ -109,6 +112,8 @@ class RiskFilters extends PureComponent {
 
     getCountryDefaults({ location: opt.value, additionalParams })
       .then(() => { setInput({ loading: false }) })
+
+    logEvent('[AQ-Flood]', `risk compare tab: user selects a country:`, opt.value);
   }
 
   onSearchCompare = debounce((value) => {
@@ -154,6 +159,8 @@ class RiskFilters extends PureComponent {
         });
         setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
       });
+
+    logEvent('[AQ-Flood]', `risk compare tab: user selects a country to compare with:`, opt.value);
   }
 
   onCheckAdvancedSettings = ({ checked }) => {
@@ -177,6 +184,8 @@ class RiskFilters extends PureComponent {
       advanced_settings: checked,
       ...!checked && { scenario: scenarios[0].value }
     })
+
+    logEvent('[AQ-Flood]', `risk compare tab: user checks on advanced settings:`, checked.toString());
   }
 
   onClearCompareFilters = () => {
@@ -204,6 +213,8 @@ class RiskFilters extends PureComponent {
         setInput({ loading: false });
         setRiskFilter({ flood: value });
       });
+
+    logEvent('[AQ-Flood]', `risk compare tab: user selects flood type:`, value);
   }
 
   onSelectFloodTypeCompare = ({ value }) => {
@@ -230,6 +241,8 @@ class RiskFilters extends PureComponent {
           flood: value
         });
       });
+
+      logEvent('[AQ-Flood]', `risk compare tab: user selects flood type to compare with:`, value);
   }
 
   onCheckSubsidcience = ({ checked }) => {
@@ -256,6 +269,8 @@ class RiskFilters extends PureComponent {
           sub_scenario: checked
         });
       });
+
+    logEvent('[AQ-Flood]', `risk compare tab: user checks on subsidence:`, checked.toString());
   }
 
   onCheckSubsidcienceCompare = ({ checked }) => {
@@ -285,6 +300,8 @@ class RiskFilters extends PureComponent {
           sub_scenario: checked
         });
       });
+
+    logEvent('[AQ-Flood]', `risk compare tab: user checks on subsidence to compare with:`, checked.toString());
   }
 
   render() {
@@ -398,7 +415,10 @@ class RiskFilters extends PureComponent {
                   isDisabled={!filters.advanced_settings}
                   placeholder="Select a future scenario"
                   value={filters.scenario}
-                  onChange={opt => setRiskFilter({ scenario: opt && opt.value })}
+                  onChange={opt => {
+                    setRiskFilter({ scenario: opt && opt.value })
+                    logEvent('[AQ-Flood]', `risk compare tab: user selects scenario:`, opt.value);
+                  }}
                 />
               </Field>
             </div>
@@ -415,7 +435,10 @@ class RiskFilters extends PureComponent {
                   isDisabled={!filters.advanced_settings}
                   placeholder="Select a future scenario"
                   value={filtersCompare.scenario}
-                  onChange={opt => setRiskCompareFilter({ scenario: opt && opt.value })}
+                  onChange={opt => {
+                    setRiskCompareFilter({ scenario: opt && opt.value })
+                    logEvent('[AQ-Flood]', `risk compare tab: user selects scenario to compare with:`, opt.value);
+                  }}
                 />
               </Field>
             </div>
@@ -451,7 +474,10 @@ class RiskFilters extends PureComponent {
                       options={EXPOSURE_OPTIONS}
                       placeholder="Select a risk indicator..."
                       value={filters.exposure}
-                      onChange={opt => setRiskFilter({ exposure: opt && opt.value })}
+                      onChange={opt => {
+                        setRiskFilter({ exposure: opt && opt.value });
+                        logEvent('[AQ-Flood]', `risk compare tab: user selects risk indicator:`, opt.value);
+                      }}
                     />
                   </Field>
                 </div>
@@ -486,7 +512,10 @@ class RiskFilters extends PureComponent {
                       options={EXPOSURE_OPTIONS}
                       placeholder="Select a risk indicator..."
                       value={filtersCompare.exposure}
-                      onChange={opt => setRiskCompareFilter({ exposure: opt && opt.value })}
+                      onChange={opt => {
+                        setRiskCompareFilter({ exposure: opt && opt.value });
+                        logEvent('[AQ-Flood]', `risk compare tab: user selects risk indicator to compare with:`, opt.value);
+                      }}
                     />
                   </Field>
                 </div>

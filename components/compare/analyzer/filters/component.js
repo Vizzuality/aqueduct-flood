@@ -7,6 +7,9 @@ import { Link } from 'routes';
 // constants
 import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // styles
 import './styles.scss';
 
@@ -104,6 +107,8 @@ class AnalyzerCompareFilters extends PureComponent {
         setExistingProt(defaults.existing_prot);
         setProtFut(defaults.prot_fut);
       });
+
+    logEvent('[AQ-Flood]', 'analyzer compare tab: user sets location', opt.value);
   }
 
   onChangeLocationCompare = (opt) => {
@@ -142,6 +147,8 @@ class AnalyzerCompareFilters extends PureComponent {
         setExistingProt(existing_prot);
         setProtFut(prot_fut);
       });
+
+    logEvent('[AQ-Flood]', 'analyzer compare tab: user sets location to compare', opt.value);
   }
 
   onSearch = debounce((value) => {
@@ -243,7 +250,10 @@ class AnalyzerCompareFilters extends PureComponent {
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a scenario"
                   value={filters.scenario}
-                  onChange={opt => { setCommonFilter({ scenario: opt && opt.value })}}
+                  onChange={opt => {
+                    setCommonFilter({ scenario: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'analyzer compare tab: user sets scenario', opt.value);
+                  }}
                 />
               </Field>
             </div>
@@ -260,7 +270,10 @@ class AnalyzerCompareFilters extends PureComponent {
                   placeholder="Select a scenario"
                   isDisabled={!filters.locationCompare}
                   value={filters.scenarioCompare}
-                  onChange={opt => { setCommonCompareFilter({ scenario: opt && opt.value })}}
+                  onChange={opt => {
+                    setCommonCompareFilter({ scenario: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'analyzer compare tab: user sets scenario to compare with', opt.value);
+                  }}
                 />
               </Field>
             </div>

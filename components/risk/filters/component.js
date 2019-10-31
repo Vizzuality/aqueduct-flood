@@ -18,6 +18,8 @@ import {
 
 // utils
 import { generateModalOptions } from 'utils/modal';
+import { logEvent } from 'utils/analytics';
+
 
 // styles
 import './styles.scss';
@@ -107,6 +109,7 @@ class AnalyzerFilters extends PureComponent {
 
     this.setState({ location: opt.value });
 
+
     setInput({ loading: true });
 
     const additionalParams = {
@@ -120,6 +123,8 @@ class AnalyzerFilters extends PureComponent {
         setCommonFilter({ geogunit_unique_name: opt.value });
         setRiskFilter({ existing_prot: defaults.existing_prot });
       });
+
+    logEvent('[AQ-Flood]', 'risk tab: user sets location', opt.value);
   }
 
   onSearchCompare = debounce((value) => {
@@ -134,6 +139,8 @@ class AnalyzerFilters extends PureComponent {
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
 
+    logEvent('[AQ-Flood]', 'risk tab: user sets location to compare', opt.value);
+
     if (opt) Router.push('/compare');
   }
 
@@ -145,6 +152,8 @@ class AnalyzerFilters extends PureComponent {
     } = this.props;
 
     setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
+
+    logEvent('[AQ-Flood]', 'risk tab: user checks advanced settings', checked.toString());
 
     setRiskFilter({
       advanced_settings: checked,
@@ -177,6 +186,8 @@ class AnalyzerFilters extends PureComponent {
           ...value === 'riverine' && { sub_scenario: false }
         });
       });
+
+    logEvent('[AQ-Flood]', 'risk tab: user sets flood type', value);
   }
 
   onCheckSubsidience = ({ checked }) => {
@@ -202,6 +213,8 @@ class AnalyzerFilters extends PureComponent {
           sub_scenario: checked
         });
       });
+
+    logEvent('[AQ-Flood]', 'risk tab: user checks subsidence', checked.toString());
   }
 
   render() {
@@ -276,7 +289,10 @@ class AnalyzerFilters extends PureComponent {
                     options={scenarios}
                     placeholder="Select a future scenario"
                     value={filters.scenario}
-                    onChange={opt => setRiskFilter({ scenario: opt && opt.value })}
+                    onChange={opt => {
+                      setRiskFilter({ scenario: opt && opt.value });
+                      logEvent('[AQ-Flood]', 'risk tab: user sets scenario', opt.value);
+                    }}
                   />
                 </Field>
               </div>
@@ -313,7 +329,10 @@ class AnalyzerFilters extends PureComponent {
                   options={EXPOSURE_OPTIONS}
                   placeholder="Select a risk indicator..."
                   value={filters.exposure}
-                  onChange={opt => setRiskFilter({ exposure: opt && opt.value })}
+                  onChange={opt => {
+                    setRiskFilter({ exposure: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'risk tab: user sets a risk indicator', opt.value);
+                  }}
                 />
               </Field>
             </div>

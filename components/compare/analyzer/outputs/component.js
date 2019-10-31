@@ -22,6 +22,7 @@ import {
   getCbaPreviewURL,
   generateCbaDownloadURL
 } from 'utils/share';
+import { logEvent } from 'utils/analytics';
 
 // styles
 import './styles.scss';
@@ -74,6 +75,8 @@ class AnalyzerCompareOutputs extends Component {
         embedURL: getCbaPreviewURL(widget, filters)
       }
     }));
+
+    logEvent('[AQ-Flood]', `analyzer compare tab: user clicks on more info of widget "${widget.id}"`);
   }
 
   onDownloadWidget = (option, widget, filters) => {
@@ -97,6 +100,8 @@ class AnalyzerCompareOutputs extends Component {
     }
 
     if (['json', 'csv'].includes(option)) generateCbaDownloadURL(widget, filters, option);
+
+    logEvent('[AQ-Flood]', `hazard tab: user downloads widget "${widget.id}" in format:`, option);
   }
 
   render() {

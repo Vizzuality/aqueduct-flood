@@ -10,12 +10,17 @@ import { LayerManager, Layer } from 'layer-manager/lib/react';
 import { PluginLeaflet } from 'layer-manager';
 import { Spinner, Icon } from 'aqueduct-components';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 // components
 import HazardLegend from './legend';
 import BasemapControl from './basemap-selector';
 
+
 // constants
 import { LABEL_LAYER_CONFIG } from './constants';
+
 
 // styles
 import './styles.scss';
@@ -56,6 +61,7 @@ class HazardMap extends PureComponent {
     const { mapOptions: { boundaries }, setMapOptions } = this.props;
 
     setMapOptions({ boundaries: !boundaries });
+    logEvent('[AQ-Flood]', 'hazard tab: user toggles bondaries', (!boundaries).toString());
   }
 
   render () {

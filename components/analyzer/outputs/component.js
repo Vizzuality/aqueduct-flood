@@ -20,6 +20,7 @@ import {
   getCbaPreviewURL,
   generateCbaDownloadURL
 } from 'utils/share';
+import { logEvent } from 'utils/analytics';
 
 // styles
 import './styles.scss';
@@ -98,6 +99,8 @@ class AnalyzerOutputs extends Component {
     }
 
     if (['json', 'csv'].includes(option)) generateCbaDownloadURL(widget, originalFormatFilters, option);
+
+    logEvent('[AQ-Flood]', `analyser tab: user downloads widget "${widget.id}" in format:`, option);
   }
 
   render() {
@@ -138,7 +141,11 @@ class AnalyzerOutputs extends Component {
                         filters,
                         isNullTime
                       }}
-                      onMoreInfo={() => this.onMoreInfo(widget)}
+                      onMoreInfo={() => {
+                        this.onMoreInfo(widget)
+
+                        logEvent('[AQ-Flood]', `analyzer tab: user clicks in more info for widget ${widget.id}`);
+                      }}
                       onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                     >
                       {({ data, params }) => {

@@ -19,6 +19,7 @@ import {
 
 // utils
 import { generateModalOptions } from 'utils/modal';
+import { logEvent } from 'utils/analytics';
 
 // styles
 import './styles.scss';
@@ -34,6 +35,8 @@ class HazardFilters extends PureComponent {
 
   onChangeYear = ({ value }) => {
     const { setHazardFilter } = this.props;
+
+    logEvent('[AQ-Flood]', 'hazard tab: user sets year', value);
 
     setHazardFilter({
       year: value,
@@ -53,6 +56,8 @@ class HazardFilters extends PureComponent {
       sub_scenario: !isRiverine,
       projection_model: projectionModelOptions.find(_opt => _opt.default).value
     });
+
+    logEvent('[AQ-Flood]', 'hazard tab: user sets flood type', isRiverine ? 'Riverine' : 'Coastal');
 
     resetActiveLayers();
   }
@@ -121,7 +126,10 @@ class HazardFilters extends PureComponent {
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a scenario"
                   value={filters.scenario}
-                  onChange={opt => setHazardFilter({ scenario: opt && opt.value })}
+                  onChange={(opt) => {
+                    setHazardFilter({ scenario: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'hazard tab: user sets scenario', opt.value === 'rcp4p5' ? 'Optimistic' : 'Business as usual / Pessimistic');
+                  }}
                 />
               </Field>
             </div>
@@ -139,7 +147,10 @@ class HazardFilters extends PureComponent {
                   options={modelProjectionOptions}
                   placeholder="Select a projection model"
                   value={filters.projection_model}
-                  onChange={opt => setHazardFilter({ projection_model: opt && opt.value })}
+                  onChange={opt => {
+                    setHazardFilter({ projection_model: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'hazard tab: user sets projection model', opt.value);
+                  }}
                 />
               </Field>
             </div>
@@ -153,7 +164,10 @@ class HazardFilters extends PureComponent {
                   theme="light"
                   disabled={!isCoastal}
                   checked={filters.sub_scenario}
-                  onChange={({ checked }) => setHazardFilter({ sub_scenario: checked })}
+                  onChange={({ checked }) => {
+                    setHazardFilter({ sub_scenario: checked });
+                    logEvent('[AQ-Flood]', 'hazard tab: user sets subsidence option', checked.toString());
+                  }}
                 />
                 <Button
                   onClick={() => setModal(generateModalOptions('info', 'subsidience'))}

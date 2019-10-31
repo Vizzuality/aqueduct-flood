@@ -17,6 +17,7 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
 // utils
 import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
+import { logEvent } from 'utils/analytics';
 
 // constants
 import {
@@ -92,6 +93,8 @@ class AnalyzerOutputs extends Component {
     }
 
     if (['json', 'csv'].includes(option)) generateRiskDownloadURL(widget, originalFormatFilters, option);
+
+    logEvent('[AQ-Flood]', `risk tab: user downloads widget "${widget.id}" in format:`, option);
   }
 
   render() {
@@ -106,7 +109,10 @@ class AnalyzerOutputs extends Component {
                 <Widget
                   title={replace(widget.params.title, { ...filters, widget_title: getWidgetTitle(filters) })}
                   params={{ id: widget.id, filters }}
-                  onMoreInfo={() => this.onMoreInfo(widget)}
+                  onMoreInfo={() => {
+                    this.onMoreInfo(widget);
+                    logEvent('[AQ-Flood]', `risk tab: user clicks on more info of widget "${widget.id}"`);
+                  }}
                   onDownloadWidget={(option, _widget) => this.onDownloadWidget(option, _widget)}
                 >
                   {({ data, params = {} }) => {

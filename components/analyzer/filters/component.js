@@ -9,6 +9,7 @@ import { SCENARIOS_OPTIONS } from 'constants/analyzer';
 
 // utils
 import { generateModalOptions } from 'utils/modal';
+import { logEvent } from 'utils/analytics';
 
 // styles
 import './styles.scss';
@@ -83,6 +84,8 @@ class AnalyzerFilters extends PureComponent {
         setExistingProt(defaults.existing_prot);
         setProtFut(defaults.prot_fut);
       });
+
+    logEvent('[AQ-Flood]', 'analyzer tab: user sets location', opt.value);
   }
 
   onSearchCompare = debounce((value) => {
@@ -97,6 +100,8 @@ class AnalyzerFilters extends PureComponent {
     setIsNullTime(true);
     setInputCompare({ loading: true })
     setCommonCompareFilter({ geogunit_unique_name: opt && opt.value });
+
+    logEvent('[AQ-Flood]', 'analyzer tab: user sets location to compare', opt.value);
 
     if (opt) Router.pushRoute('compare');
   }
@@ -144,7 +149,10 @@ class AnalyzerFilters extends PureComponent {
                   options={SCENARIOS_OPTIONS}
                   placeholder="Select a future scenario"
                   value={filters.scenario}
-                  onChange={opt => setCommonFilter({ scenario: opt && opt.value })}
+                  onChange={opt => {
+                    setCommonFilter({ scenario: opt && opt.value });
+                    logEvent('[AQ-Flood]', 'analyzer tab: user sets scenario', opt.value);
+                  }}
                 />
               </Field>
             </div>

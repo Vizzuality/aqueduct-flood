@@ -19,6 +19,7 @@ import LPCurveSpec from 'components/widgets/specs/risk/advanced/lp_curve';
 
 // utils
 import { getRiskEmbedURL, getRiskPreviewURL, generateRiskDownloadURL } from 'utils/share';
+import { logEvent } from 'utils/analytics';
 
 // constants
 import {
@@ -68,6 +69,8 @@ class RiskCompareOutputs extends Component {
         embedURL: getRiskPreviewURL(widget, filters)
       }
     }));
+
+    logEvent('[AQ-Flood]', `risk compare tab: user clicks on more info of widget "${widget.id}"`);
   }
 
   onDownloadWidget = (option, widget, filters) => {
@@ -91,6 +94,8 @@ class RiskCompareOutputs extends Component {
     }
 
     if (option === 'json') generateRiskDownloadURL(widget, filters);
+
+    logEvent('[AQ-Flood]', `risk compare tab: user downloads widget "${widget.id}" in format:`, option);
   }
 
   getEmbedURL = ({ id }, compare) => {
