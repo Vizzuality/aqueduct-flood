@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Field,
-  Slider,
-  Spinner
-} from 'aqueduct-components';
+import { Field, Spinner } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
 import isEqual from 'lodash/isEqual';
+
+// components
+import SliderInput from 'components/ui/slider-input';
 
 // constants
 import { EXISTING_PROTECTION_LEVEL_OPTIONS } from 'constants/analyzer';
@@ -56,6 +55,8 @@ class RiskInputs extends PureComponent {
     const { loading } = inputState;
     const { existingProtValue } = this.state;
 
+    console.log(existingProtValue)
+
     return (
       <div className="c-analyzer-inputs">
         {loading && <Spinner className="-transparent" />}
@@ -69,13 +70,12 @@ class RiskInputs extends PureComponent {
               className="-higher-margin-top -bolder"
               onMoreInfo={() => setModal(RiskInputs.generateModalOptions('info', 'design-protection-standards'))}
             >
-              <Slider
+              <SliderInput
+                name="existing-protection-level"
+                value={existingProtValue}
                 min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
                 max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
-                theme="dark"
-                value={existingProtValue}
                 onChange={(value) => this.setState({ existingProtValue: value })}
-                defaultValue={existingProtValue}
                 onAfterChange={this.onChangeExistingProtectionLevel}
               />
             </Field>
