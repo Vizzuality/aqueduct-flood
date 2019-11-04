@@ -14,6 +14,7 @@ import isEqual from 'lodash/isEqual';
 
 // components
 import SectionHeader from 'components/ui/section-header';
+import SliderInput from 'components/ui/slider-input';
 
 // constants
 import {
@@ -235,16 +236,17 @@ class AnalyzerInputs extends PureComponent {
               name="existing-protection-level"
               theme="dark"
               label="Existing Protection Level (Return Period)"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
               onClick={() => setModal(generateModalOptions('info', 'design-protection-standards'))}
             >
-              <Slider
+              <SliderInput
+                name="existing-protection-level"
                 min={EXISTING_PROTECTION_LEVEL_OPTIONS[0]}
                 max={EXISTING_PROTECTION_LEVEL_OPTIONS[EXISTING_PROTECTION_LEVEL_OPTIONS.length - 1]}
                 theme="dark"
                 value={existingProtValue}
-                onChange={(value) => this.setState({ existingProtValue: value })}
                 defaultValue={existingProtValue}
+                onChange={(value) => this.setState({ existingProtValue: value })}
                 onAfterChange={this.onChangeExistingProtectionLevel}
               />
             </Field>
@@ -324,13 +326,16 @@ class AnalyzerInputs extends PureComponent {
               name="infrastructure-life-time"
               theme="dark"
               label="Infrastructure Life Time"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
             >
-              <Slider
+              <SliderInput
+                name="infrastructure-life-time"
                 min={INFRASTRUCTURE_LIFE_TIME_OPTIONS[0]}
                 max={INFRASTRUCTURE_LIFE_TIME_OPTIONS[1]}
                 theme="dark"
+                value={filters.infrastructure_life}
                 defaultValue={filters.infrastructure_life}
+                onChange={value => { onChangeFilter({ infrastructure_life: value }) }}
                 onAfterChange={value => { onChangeFilter({ infrastructure_life: value }) }}
               />
             </Field>
@@ -339,13 +344,16 @@ class AnalyzerInputs extends PureComponent {
               name="benefit-start-year"
               theme="dark"
               label="Benefit Start Year"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
             >
-              <Slider
+              <SliderInput
+                name="benefit-start-year"
                 min={filters.implementation_start}
                 max={filters.implementation_end}
                 theme="dark"
+                value={filters.benefits_start}
                 defaultValue={filters.benefits_start}
+                onChange={value => { onChangeFilter({ benefits_start: value }) }}
                 onAfterChange={value => { onChangeFilter({ benefits_start: value }) }}
               />
             </Field>
@@ -367,9 +375,10 @@ class AnalyzerInputs extends PureComponent {
               name="user-urb-cost"
               theme="dark"
               label="Unit Cost ($million/meter/kilometer)"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
             >
-              <Slider
+              <SliderInput
+                name="user-urb-cost"
                 min={UNIT_COST_OPTIONS[0]}
                 max={UNIT_COST_OPTIONS[1]}
                 step={0.01}
@@ -384,14 +393,17 @@ class AnalyzerInputs extends PureComponent {
               name="discount-rate"
               theme="dark"
               label="Annual Discount Rate (%)"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
             >
-              <Slider
+              <SliderInput
+                name="discount-rate"
                 min={DISCOUNT_RATE_OPTIONS[0]}
                 max={DISCOUNT_RATE_OPTIONS[1]}
                 theme="dark"
+                value={filters.discount_rate}
                 defaultValue={filters.discount_rate}
                 formatValue={value => `${value}%`}
+                onChange={value => { onChangeFilter({ discount_rate: value }) }}
                 onAfterChange={value => { onChangeFilter({ discount_rate: value }) }}
               />
             </Field>
@@ -399,14 +411,17 @@ class AnalyzerInputs extends PureComponent {
               name="operation-maintenance-cost"
               theme="dark"
               label="Operation & Maintenance Cost (%)"
-              className="-higher-margin-top -bolder"
+              className="-bolder"
             >
-              <Slider
+              <SliderInput
+                name="operation-maintenance-cost"
                 min={OPERATION_MAINTENANCE_COST_OPTIONS[0]}
                 max={OPERATION_MAINTENANCE_COST_OPTIONS[1]}
                 theme="dark"
+                value={filters.om_costs}
                 defaultValue={filters.om_costs}
                 formatValue={value => `${value}%`}
+                onChange={value => { onChangeFilter({ om_costs: value }) }}
                 onAfterChange={value => { onChangeFilter({ om_costs: value }) }}
               />
             </Field>
