@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+import App from './App';
 
 import 'vizzuality-components/dist/bundle.css';
 import 'aqueduct-components/dist/main.css';
