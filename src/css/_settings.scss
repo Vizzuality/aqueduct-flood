@@ -1,0 +1,34 @@
+@import 'functions';
+
+@import '~aqueduct-components/styles/settings';
+
+// flexbox grid
+$sm: 24rem;
+$md: 48rem;
+$lg: 62rem;
+$xlg: 80rem;
+
+$flexboxgrid-max-width: 1280px;
+$flexboxgrid-grid-columns: 12;
+$flexboxgrid-gutter-width: 2rem;
+$flexboxgrid-outer-margin: 2rem;
+$flexboxgrid-breakpoints: (
+  sm: $sm,
+  md: $md,
+  lg: $lg,
+  xlg: $xlg
+);
+
+// dimensions
+$sidebar-width: 700px;
+
+// spacing
+$space-1: 8px;
+$padding: $flexboxgrid-outer-margin / 2;
+$padding-md: $flexboxgrid-outer-margin;
+
+// responsive – media queries
+$mq-sm: screen and (min-width: $sm);
+$mq-md: screen and (min-width: $md);
+$mq-lg: screen and (min-width: $lg);
+

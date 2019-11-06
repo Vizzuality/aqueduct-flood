@@ -1,0 +1,60 @@
+@import 'css/settings';
+
+.l-hazard-map {
+  height: calc(100vh - #{$size-header});
+
+  .wri_api__c-legend-map {
+    position: absolute;
+    right: $size-header / 2;
+    bottom: $size-header / 2;
+  }
+
+  .map-controls {
+    top: 30px;
+    right: 30px;
+
+    .zoom-controls {
+      > button {
+        width: 36px;
+        height: 36px;
+        transition: background-color linear $animation-time;
+
+        &:hover {
+          background: palette(gray, lightest)
+        }
+
+        &:not(:first-child) {
+          border-top: 1px solid palette(gray);
+        }
+
+        &:disabled {
+          cursor: default;
+
+          &:hover {
+            background: inherit;
+          }
+        }
+      }
+    }
+
+    .download-btn,
+    .basemap-button,
+    .boundaries-button {
+      display: inline-flex;
+      width: 100%;
+      height: 36px;
+      padding: 7px;
+
+      > svg {
+        margin: 0 auto;
+      }
+    }
+
+    .basemap-button {
+      > svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+}

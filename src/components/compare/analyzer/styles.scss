@@ -1,0 +1,22 @@
+@import 'css/settings';
+
+.c-analyzer-compare {
+
+  .analyzer-compare-inputs,
+  .analyzer-compare-outputs {
+    background: palette(sand);
+  }
+
+  .analyzer-compare-inputs {
+    padding: #{$space-1 * 4} 0 0;
+  }
+
+  .analyzer-compare-outputs {
+    padding: 0 0 #{$space-1 * 15};
+  }
+
+  .spinner-container {
+    position: relative;
+    min-height: 250px;
+  }
+}

@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react';
+import { Provider } from 'react-redux';
+import configureStore from './store';
 
-function App() {
+import Page from 'pages';
+import URLManager from 'components/url-manager';
+
+// constants
+import { URL_PROPS } from 'components/url-manager/constants';
+
+const App = () => {
+  const store = configureStore();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Fragment>
+        <URLManager urlProps={URL_PROPS} />
+        <Page />
+      </Fragment>
+    </Provider>
   );
-}
+};
 
 export default App;

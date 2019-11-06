@@ -1,0 +1,10 @@
+@import 'css/settings';
+
+.c-risk {
+  overflow: auto;
+  height: 100%;
+
+  .l-risk-inputs {
+    background: palette(sand);
+  }
+}

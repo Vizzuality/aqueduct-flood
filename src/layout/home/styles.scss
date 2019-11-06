@@ -1,0 +1,42 @@
+@import 'css/settings';
+
+.l-home {
+  position: relative;
+
+  .l-sidebar {
+    z-index: 2;
+    position: absolute;
+    height: calc(100vh - #{$size-header});
+    max-width: $sidebar-width;
+    width: 100%;
+    background: palette(sand);
+
+    > .overflow-container {
+      overflow: hidden;
+      height: 100%;
+
+      .l-tabs {
+        > ul {
+          height: 53px;
+
+          button {
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    &.-hazard-tab {
+      height: auto;
+      background: none;
+
+      > .overflow-container {
+        overflow: visible;
+      }
+    }
+  }
+
+  .l-map {
+    min-height: calc(100vh - #{$size-header});
+  }
+}

@@ -1,0 +1,81 @@
+
+@import 'css/settings';
+
+.c-widget {
+
+  .vega-bindings {
+    padding: 20px;
+
+     > .vega-bind {
+
+      &:not(:first-child) {
+        margin: $space-1 0 0 0;
+      }
+
+      > .vega-bind-name {
+        display: inline-block;
+        min-width: 35px;
+        font-weight: $font-weight-semi-bold;
+      }
+
+      > .vega-bind-radio {
+        margin: 0 0 0 $space-1;
+
+        > input {
+          margin: 0 0 0 $space-1 * 2;
+          visibility: hidden;
+
+          &:checked + label {
+
+            &:before {
+              border-color: palette(blue, 'secondary');
+            }
+
+            &:after {
+              transform: translate(-50%, -50%) scale(1);
+            }
+          }
+        }
+
+        > label {
+          display: inline-block;
+          position: relative;
+          top: 0;
+          left: 0;
+          padding: 2px 0 2px $space-1 * 3;
+          width: auto;
+          line-height: 1;
+          transition: color .1s linear;
+          cursor: pointer;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            border: 1px solid palette(blue, light);
+            border-radius: 50%;
+            transform: translate(0, -50%);
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: palette(blue, 'secondary');
+            transform: translate(-50%, -50%) scale(0);
+            transition: all $animation-time $ease-in-out-sine;
+          }
+        }
+      }
+    }
+  }
+}

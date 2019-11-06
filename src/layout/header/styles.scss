@@ -1,0 +1,24 @@
+@import 'css/settings';
+
+.l-header {
+
+  .aq__list {
+    .aq__c-icon {
+      fill: palette(sand);
+    }
+  }
+
+  .aq__c-header {
+    a {
+      font-weight: $font-weight-regular;
+    }
+
+    .aq__header-title {
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &.-embed {
+    padding: 0;
+  }
+}

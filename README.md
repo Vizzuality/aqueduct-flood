@@ -1,68 +1,44 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Aqueduct Flood
 
-## Available Scripts
+Aqueduct Flood is the third tool of the Aqueduct family. More info soon.
 
-In the project directory, you can run:
+## Requirements 🛠️
+```
+  node 10.7.0
+```
 
-### `yarn start`
+## Getting Started 👨‍💻
+---
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Once you have the project locally, run `nvm use` to detect the Node version used in the project. Install if needed.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Run `yarn` to install project's dependencies.
 
-### `yarn test`
+Clone `.env.default` to `.env` and fill it.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To start working run `yarn dev`.
 
-### `yarn build`
+## Working with AQ-components 🔗
+--- 
+[AQ-components](https://vizzuality.github.io/aqueduct-components/) provides a bunch of useful components to use in the different AQ apps.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To work with it, go to your AQ-components project, and run `yarn link`. This will generate a symlink to the project. Now, let's compile
+the code and make it responsive to changes: run `yarn components:watch`.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Go to your application and link the components: `yarn link aqueduct-components`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+You should be ready to work!
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Deploy 🚀
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[TO-DO]
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Recommendations 🐰
+---
 
-## Learn More
+It's strongly recommended to use [nvm](https://github.com/creationix/nvm) for managing different Node versions easily.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

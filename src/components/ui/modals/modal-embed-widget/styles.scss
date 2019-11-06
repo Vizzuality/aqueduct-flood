@@ -1,0 +1,42 @@
+@import 'css/settings';
+
+.c-modal-embed-widget {
+
+  > .url-sharer {
+    display: flex;
+    justify-content: flex-end;
+
+    input {
+      flex: 1;
+      padding: 0 $space-1 * 2 0 0;
+      border-bottom: 1px solid palette(blue, secondary);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    button {
+      min-width: 182px;
+    }
+  }
+
+  > .container {
+    margin: $space-1 * 2 0 0;
+  }
+
+  .url-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+
+    > .url-code {
+      height: 100%;
+      margin: 0 0 $space-1 * 2 0;
+      border: 0;
+      font-size: inherit;
+
+      resize: none;
+      outline: none;
+    }
+  }
+}

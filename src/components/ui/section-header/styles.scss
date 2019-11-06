@@ -1,0 +1,22 @@
+@import 'css/settings';
+
+.c-section-header {
+  > .section-title {
+    position: relative;
+    padding: $space-1 * 2 0 0;
+    font-weight: $font-weight-light;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 3px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: palette(blue, dark);
+    }
+  }
+}

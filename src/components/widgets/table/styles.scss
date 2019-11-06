@@ -1,0 +1,41 @@
+@import 'css/settings';
+
+.c-table-widget {
+  padding: 10px;
+  overflow: auto;
+
+  > table {
+    width: 100%;
+    min-height: 180px;
+    max-height: 200px;
+
+    thead {
+      tr {
+        td {
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    tr {
+      td {
+        padding: $space-1 * 2 $space-1;
+
+        &:first-child {
+          padding-left: $space-1 * 2;
+          font-weight: $font-weight-bold;
+        }
+      }
+
+
+    }
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background: palette(blue, lightest);
+        }
+      }
+    }
+  }
+}

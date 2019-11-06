@@ -1,0 +1,27 @@
+.l-filters {
+  .row {
+    &:not(:first-child) {
+      padding: $padding-md 0 0;
+    }
+  }
+}
+
+.l-analyzer-inputs {
+  display: flex;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.go-back-container {
+  display: flex;
+  align-items: center;
+
+  > .go-back-btn {
+    margin: 0 0 0 $space-1;
+    color: palette(white);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
