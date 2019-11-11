@@ -2,7 +2,6 @@
   "name": "aq-flood-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://vizzuality.github.io/aqueduct-flood",
   "dependencies": {
     "aqueduct-components": "^1.1.9",
     "autoprefixer": "^9.0.1",
@@ -20,7 +19,6 @@
     "es6-promise": "^4.2.4",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "gh-pages": "^2.1.1",
     "http-status": "^1.2.0",
     "iframe-resizer": "^3.6.2",
     "isomorphic-fetch": "^2.2.1",
@@ -85,9 +83,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "yarn build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "heroku-postbuild": "yarn build"
   },
   "eslintConfig": {
     "extends": "react-app"
