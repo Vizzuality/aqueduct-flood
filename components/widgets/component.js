@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { VegaChart } from 'vizzuality-components/dist/widgets';
+import VegaChart from 'components/widgets/vega-chart';
 import isEqual from 'lodash/isEqual';
 
 // utils
