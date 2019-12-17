@@ -16,7 +16,7 @@ Run `yarn` to install project's dependencies.
 
 Clone `.env.default` to `.env` and fill it.
 
-To start working run `yarn dev`.
+To start working run `yarn start`.
 
 ## Working with AQ-components 🔗
 --- 

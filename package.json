@@ -60,12 +60,10 @@
     "vega-lib": "^4.2.0",
     "vega-tooltip": "^0.19.1",
     "vizzuality-components": "^3.0.0-beta.11",
-    "webpack": "4.39.0",
     "wri-json-api-serializer": "^1.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.2",
-    "eslint": "4.19.1",
+    "eslint": "^6.1.0",
     "eslint-config-airbnb": "17.0.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-vizzuality": "^1.1.6",
