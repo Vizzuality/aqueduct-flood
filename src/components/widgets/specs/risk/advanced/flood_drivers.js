@@ -12,8 +12,15 @@ export default {
 
     ],
       "transform": [
-        {"type": "fold", "fields": ["Annual_Damage_Avg", "CC_Driver_Avg", "Soc_Driver"]},
-        {"type": "formula", "as": "type", "expr": "if(datum.key=='Annual_Damage_Avg','Damage','Impact driver')"},
+{
+  "type": "window",
+  "ops": ["first_value"],
+  "fields": ["Annual_Damage_Avg"],
+  "as": ["baseline_value"]
+},
+{"type": "formula", "as": "Annual_Damage_Avg", "expr": "if(datum.index!='2010',datum.Annual_Damage_Avg-datum.baseline_value, datum.Annual_Damage_Avg)"},
+        {"type": "fold", "fields": ["Annual_Damage_Avg", "CC_Driver_Avg", "Soc_Driver", "Sub_Driver"]},
+        {"type": "formula", "as": "type", "expr": "if(datum.key=='Annual_Damage_Avg','Total change','Drivers')"},
         {
           "type": "stack",
           "groupby": ["index", "type"],
@@ -94,7 +101,7 @@ export default {
         },
         "labels":{
           "update": {
-          "text": {"signal": "if(datum.label=='Annual_Damage_Avg', 'Total', if(datum.label=='Soc_Driver', 'Socioeconomic', 'Climate'))"},
+          "text": {"signal": "if(datum.label=='Annual_Damage_Avg', 'Total change', if(datum.label=='Soc_Driver', 'Socioeconomic', if(datum.label=='Sub_Driver', ['Subsidence','test'], 'Climate')))"},
         }
         }
       }
@@ -158,7 +165,7 @@ export default {
             "hover": {"opacity":{
               "value":0.5
             },
-            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.y1, '~s')}"}
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.value, '~s')}"}
           }
           }
         }

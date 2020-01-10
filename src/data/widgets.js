@@ -28,7 +28,7 @@ export const WIDGETS = {
   advanced_risk: [
     {
       id: 'flood_drivers',
-      title: 'Projected Change in {{flood}} Flood Annual Expected and Drivers in {{geogunit_unique_name}}',
+      title: 'Projected Change in {{flood}} Flood Annual Expected {{getWidgetTitle}} and Drivers in {{geogunit_unique_name}}',
       description: `<p>This figure illustrates the drivers of flood damage in the future compared to baseline (2010)
         flood damage. Annual expected damage (Y-axis) is displayed for each year of the analysis (2010, 2030, 2050, and 2080).
         For Riverine floods, climate and socio-economic conditions drive change in damage. For Coastal floods, climate,
