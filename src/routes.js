@@ -10,6 +10,8 @@ export const ROUTES = {
   home: '/:tab?',
   compare: '/compare/:tab?',
   'widget-preview': '/preview/:tab/widget/:id',
+  'cba-embed': '/embed/cba',
+  'cba-embed-compare': '/embed/cba/compare',
   'widget-embed': '/embed/:tab/widget/:id',
   [NOT_FOUND]: 'NotFound'
 };

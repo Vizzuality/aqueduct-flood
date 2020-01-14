@@ -10,18 +10,24 @@ import { APP_NAVIGATION } from './constants';
 import './styles.scss';
 
 class Header extends PureComponent {
-  static propTypes = { className: PropTypes.string }
+  static propTypes = { 
+    className: PropTypes.string,
+    title: PropTypes.string
+  }
 
-  static defaultProps = { className: null }
+  static defaultProps = { 
+    className: null,
+    title: 'floods'
+  }
 
   render() {
-    const { className } = this.props;
+    const { className, title } = this.props;
     const componentClass = classnames('l-header', { [className] : !!className});
 
     return (
       <div className={componentClass}>
         <AQHeader
-          title="floods"
+          title={title}
           app="country-basin-risk-profiles-and-rankings"
           {...this.props}
         >
