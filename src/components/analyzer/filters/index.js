@@ -23,7 +23,8 @@ export default connect(
     },
     locations: parseLocations(state),
     locationsCompare: parseCompareLocations(state),
-    tab: state.app.tab
+    tab: state.app.tab,
+    router: state.router,
   }),
   {
     setCommonFilter,

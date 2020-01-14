@@ -54,10 +54,10 @@ export const getParamsFromUrl = createSelector(
 export const getUrl = createSelector(
   [router, filters, filtersCompare, activeLayers, map, hazardLegend, urlProps, getUrlFromParams], 
   (_router, _filters, _filtersCompare, _activeLayers, _map, _hazardLegend, _urlProps, _urlParams) => {
-    const { pathname, type, payload } = _router;
+    const { pathname, type } = _router;
     let encodedParams = null;
 
-    if (type === 'home') {
+    if (type === 'home' || type === 'cba-embed') {
       encodedParams = Base64.encode(JSON.stringify({
         ..._filters,
         activeLayers: _activeLayers.map(_layer => _layer.id),
@@ -68,7 +68,7 @@ export const getUrl = createSelector(
       }))
     }
 
-    if (type === 'compare') {
+    if (type === 'compare' || type === 'cba-embed-compare') {
       encodedParams = Base64.encode(JSON.stringify({
         filters: _filters,
         filtersCompare: _filtersCompare
