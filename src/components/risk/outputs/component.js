@@ -99,6 +99,7 @@ class AnalyzerOutputs extends Component {
 
   render() {
     const { filters, widgets } = this.props;
+    const { flood, geogunit_unique_name } = filters;
 
     return (
       <div className="c-risk-outputs">
@@ -129,7 +130,11 @@ class AnalyzerOutputs extends Component {
                     if (params.type === 'flood_drivers') return (
                       <Chart
                         spec={FloodDriversSpec}
-                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        params={{ 
+                          ...params, 
+                          ...WIDGET_TITLE_GENERATOR(params.type, filters),
+                          chartTitleBottom: `Projected Change in ${flood} Flood Annual Expected ${getWidgetTitle(filters)} and Drivers in ${geogunit_unique_name}`
+                        }}
                         data={{ table: data }}
                       />)
 

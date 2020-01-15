@@ -146,7 +146,6 @@ export default {
       ],
 
       "marks": [
-
         {
           "name": "bars",
           "from": {"data": "facet"},
@@ -169,7 +168,6 @@ export default {
           }
           }
         }
-
       ]
     },
     {
