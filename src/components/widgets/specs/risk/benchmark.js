@@ -216,18 +216,18 @@ export default {
       "orient": "top",
       "ticks": true,
       "tickCount": 10,
-      "title": "Annual Expected Urban Damage (US $)",
+      // "title": "Annual Expected Urban Damage",
       "encode": {
       "labels": {
         "update": {
             "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', '$'+format(datum.value,'~s'))"}
         }
       },
-      "title": {
-        "update": {
-          "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage (%)', 'Annual Expected Urban Damage (US $)')"}
-        }
-      }
+      // "title": {
+      //   "update": {
+      //     "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage', 'Annual Expected Urban Damage')"}
+      //   }
+      // }
     }
   },
     {
@@ -236,7 +236,7 @@ export default {
       "ticks": true,
       "titlePadding": 5,
       "tickCount": 5,
-      "title": "Protection standard"
+      "title": "Estimated Flood Protection Standard"
     }
   ],
 

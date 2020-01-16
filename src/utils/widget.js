@@ -71,18 +71,18 @@ export const updateSpec = (spec = {}, params = {}) => {
     updatedXTopAxis = {
       ...updatedXTopAxis,
       title: chartTitleTop,
-      encode: {
-        ...updatedXTopAxis.encode,
-        title: {
-          update: {
-            ...updatedXTopAxis.title.update,
-            text: {
-              ...updatedXTopAxis.encode.title.update.text,
-              ...type === 'benchmark' && { signal: `if(calc=='Percentage', 'Annual Expected ${chartTitleTop} (%)', 'Annual Expected ${chartTitleTop}')` }
-            }
-          }
-        }
-      }
+      // encode: {
+      //   ...updatedXTopAxis.encode,
+      //   title: {
+      //     update: {
+      //       ...updatedXTopAxis.title.update,
+      //       text: {
+      //         ...updatedXTopAxis.encode.title.update.text,
+      //         ...type === 'benchmark' && { signal: `if(calc=='Percentage', 'Annual Expected ${chartTitleTop} (%)', 'Annual Expected ${chartTitleTop}')` }
+      //       }
+      //     }
+      //   }
+      // }
     };
 
     updatedAxes[xAxisIndex] = updatedXTopAxis;

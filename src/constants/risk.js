@@ -45,11 +45,11 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
         chartTitleBottom: `Projected Change in ${flood} Flood Annual Expected ${riskIndicator} and Drivers in ${geogunit_unique_name}`
       };
     case 'benchmark':
-      return { chartTitleTop: currentTitle };
+      return { chartTitleTop: `Annual Expected ${riskIndicator}` };
     case 'lp_curve':
       return {
         // chartTitleBottom: currentTitle,
-        yAxisTitle: currentTitle
+        yAxisTitle: riskIndicator
       };
     default:
       return {};

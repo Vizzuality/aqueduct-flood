@@ -272,7 +272,7 @@ export default {
       "scale": "x",
       "ticks": true,
       "tickCount": 6,
-      "title": "Probability of event occurring (%)"
+      "title": "Probability of event occurring in any given year (%)"
     },
     {
       "orient": "left",
