@@ -24,7 +24,11 @@ export const getWidgetTitle = (filters) => {
 }
 
 export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
-  const { exposure } = filters;
+  const { 
+    exposure,
+    flood,
+    geogunit_unique_name
+  } = filters;
   const currentTitle = WIDGET_TITLES[exposure];
 
   switch(type) {
@@ -34,7 +38,10 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
         yAxisTitle: currentTitle,
       };
     case 'flood_drivers':
-      return { yAxisTitle: currentTitle };
+      return { 
+        yAxisTitle: currentTitle,
+        chartTitleBottom: `Projected Change in ${flood} Flood Annual Expected ${getWidgetTitle(filters)} and Drivers in ${geogunit_unique_name}`
+      };
     case 'benchmark':
       return { chartTitleTop: currentTitle };
     case 'lp_curve':
