@@ -176,7 +176,10 @@ class RiskCompareOutputs extends Component {
                       if (params.type === 'annual_flood') return (
                         <Chart
                           spec={AnnualFloodSpec}
-                          params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare)}}
+                          params={{ 
+                            ...params, 
+                            ...WIDGET_TITLE_GENERATOR(params.type, filtersCompare),
+                          }}
                           data={{ table: data }}
                         />)
 

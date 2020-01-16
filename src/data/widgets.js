@@ -10,7 +10,7 @@ export const WIDGETS = {
     },
     {
       id: 'annual_flood',
-      title: '{{flood}} Annual expected in {{geogunit_unique_name}}',
+      title: '{{flood}} Flood {{widget_title}} in {{geogunit_unique_name}}',
       description: `<p>This figure displays the expected annual damage to be incurred (primary Y-axis) for each year of the analysis
         (X-axis). The relative amount of damage is also displayed (secondary Y-axis). Uncertainty bars for both the annual damage
         and relative damage can be accessed by checking on the "Error Bars" box. Error bars are bound by the minimum and maximum

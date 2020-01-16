@@ -5,6 +5,7 @@ export const updateSpec = (spec = {}, params = {}) => {
   let updatedSpec = Object.assign({}, spec);
   const {
     yAxisTitle,
+    yAxisTitleRight,
     chartTitleTop,
     chartTitleBottom,
     legend,
@@ -13,13 +14,11 @@ export const updateSpec = (spec = {}, params = {}) => {
 
   if (yAxisTitle) {
     const yAxisIndexLeft = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'left');
-    const yAxisIndexRight = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'right');
 
-    if (yAxisIndexLeft === -1 && yAxisIndexRight === -1) return updatedSpec;
+    if (yAxisIndexLeft === -1) return updatedSpec;
 
     const updatedAxes = updatedSpec.axes;
     let updatedYAxisLeft = updatedAxes[yAxisIndexLeft];
-    let updatedYAxisRight = updatedAxes[yAxisIndexRight];
 
     // updates left y-axis
     if (updatedYAxisLeft) {
@@ -31,11 +30,25 @@ export const updateSpec = (spec = {}, params = {}) => {
       updatedAxes[yAxisIndexLeft] = updatedYAxisLeft;
     }
 
+    updatedSpec = {
+      ...updatedSpec,
+      axes: updatedAxes
+    }
+  }
+
+  if (yAxisTitleRight) {
+    const yAxisIndexRight = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'right');
+
+    if (yAxisIndexRight === -1) return updatedSpec;
+
+    const updatedAxes = updatedSpec.axes;
+    let updatedYAxisRight = updatedAxes[yAxisIndexRight];
+
     // updates right y-axis
     if (updatedYAxisRight) {
       updatedYAxisRight = {
         ...updatedYAxisRight,
-        title: yAxisTitle
+        title: yAxisTitleRight
       };
 
       updatedAxes[yAxisIndexRight] = updatedYAxisRight;
