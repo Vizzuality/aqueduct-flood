@@ -60,7 +60,7 @@ export const getUrl = createSelector(
     if (type === 'home' || type === 'cba-embed') {
       encodedParams = Base64.encode(JSON.stringify({
         ..._filters,
-        activeLayers: _activeLayers.map(_layer => _layer.id),
+        activeLayers: _activeLayers,
         map: {
           ..._map,
           ..._hazardLegend
