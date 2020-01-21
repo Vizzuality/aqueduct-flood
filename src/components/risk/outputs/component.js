@@ -123,7 +123,10 @@ class AnalyzerOutputs extends Component {
                     if (params.type === 'annual_flood') return (
                       <Chart
                         spec={AnnualFloodSpec}
-                        params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
+                        params={{ 
+                          ...params, 
+                          ...WIDGET_TITLE_GENERATOR(params.type, filters)
+                        }}
                         data={{ table: data }}
                       />)
 
