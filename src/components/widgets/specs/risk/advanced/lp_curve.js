@@ -96,15 +96,15 @@ export default {
         },
         {
           "c": "95",
-          "label": "High"
+          "label": "High Sea-Level Rise"
         },
         {
           "c": "50",
-          "label": "Medium"
+          "label": "Medium Sea-Level Rise"
         },
         {
           "c": "05",
-          "label": "Low"
+          "label": "Low Sea-Level Rise"
         },
         {
           "c": "avg",

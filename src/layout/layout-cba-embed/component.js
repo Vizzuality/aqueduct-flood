@@ -51,7 +51,6 @@ class LayoutCBAEmbed extends PureComponent {
         <Head title={title} description={description} />
         <Header 
           appRoute="https://www.wri.org/applications/aqueduct/floods" 
-          title="Floods - World Bank"
         />
         <div className="page-content">
           {children}

@@ -47,10 +47,7 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
     case 'benchmark':
       return { chartTitleTop: `Annual Expected ${riskIndicator}` };
     case 'lp_curve':
-      return {
-        // chartTitleBottom: currentTitle,
-        yAxisTitle: riskIndicator
-      };
+      return { yAxisTitle: riskIndicator };
     default:
       return {};
   }
