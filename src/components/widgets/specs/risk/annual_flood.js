@@ -8,7 +8,7 @@ export default {
   "signals": [
     {
       "name": "error", "value": false,
-      "bind": { "name": "Error bars", "input": "checkbox" }
+      "bind": { "name": "Show Uncertainty", "input": "checkbox" }
     }
   ],
   "height": 220,
@@ -87,7 +87,7 @@ export default {
       "encode": {
         "labels": {
           "update": {
-            "text": { "signal": "format(datum.value, '.3f') + '%'" }
+            "text": { "signal": "format(datum.value, '.3f')" }
           }
         }
       }

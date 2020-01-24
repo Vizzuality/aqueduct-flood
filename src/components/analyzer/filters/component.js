@@ -20,6 +20,7 @@ class AnalyzerFilters extends PureComponent {
       scenario: PropTypes.string,
       locationCompare: PropTypes.string
     }).isRequired,
+    router: PropTypes.object.isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
@@ -94,7 +95,7 @@ class AnalyzerFilters extends PureComponent {
   }, 150)
 
   onChangeLocationCompare = (opt) => {
-    const { setInputCompare, setCommonCompareFilter, setIsNullTime, setRouter, tab } = this.props;
+    const { setInputCompare, setCommonCompareFilter, setIsNullTime, setRouter, tab, router } = this.props;
 
     setIsNullTime(true);
     setInputCompare({ loading: true })
@@ -102,7 +103,10 @@ class AnalyzerFilters extends PureComponent {
 
     logEvent('[AQ-Flood]', 'analyzer tab: user sets location to compare', opt.value);
 
-    if (opt) setRouter('compare', { tab });
+    if (opt) {
+      if (router.type === 'cba-embed') return setRouter('cba-embed-compare'); 
+      setRouter('compare', { tab }); 
+    }
   }
 
   render() {

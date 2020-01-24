@@ -31,7 +31,8 @@ export default connect(
       ...state.filtersCompare.common.scenario && { scenarioCompare: state.filtersCompare.common.scenario },
     },
     locations: parseLocations(state),
-    locationsCompare: parseCompareLocations(state)
+    locationsCompare: parseCompareLocations(state),
+    router: state.router
   }),
   {
     setCommonFilter,

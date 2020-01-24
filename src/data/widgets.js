@@ -10,7 +10,7 @@ export const WIDGETS = {
     },
     {
       id: 'annual_flood',
-      title: '{{flood}} Annual expected in {{geogunit_unique_name}}',
+      title: '{{flood}} Flood {{widget_title}} in {{geogunit_unique_name}}',
       description: `<p>This figure displays the expected annual damage to be incurred (primary Y-axis) for each year of the analysis
         (X-axis). The relative amount of damage is also displayed (secondary Y-axis). Uncertainty bars for both the annual damage
         and relative damage can be accessed by checking on the "Error Bars" box. Error bars are bound by the minimum and maximum
@@ -28,7 +28,7 @@ export const WIDGETS = {
   advanced_risk: [
     {
       id: 'flood_drivers',
-      title: 'Projected Change in {{flood}} Flood Annual Expected and Drivers in {{geogunit_unique_name}}',
+      title: 'Projected Change in {{flood}} Flood Annual Expected {{widget_title}} and Drivers in {{geogunit_unique_name}}',
       description: `<p>This figure illustrates the drivers of flood damage in the future compared to baseline (2010)
         flood damage. Annual expected damage (Y-axis) is displayed for each year of the analysis (2010, 2030, 2050, and 2080).
         For Riverine floods, climate and socio-economic conditions drive change in damage. For Coastal floods, climate,

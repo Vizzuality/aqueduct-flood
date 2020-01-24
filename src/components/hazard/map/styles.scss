@@ -1,9 +1,9 @@
-@import 'css/settings';
+@import 'src/css/settings';
 
 .l-hazard-map {
   height: calc(100vh - #{$size-header});
 
-  .wri_api__c-legend-map {
+  .vizzuality__c-legend-map {
     position: absolute;
     right: $size-header / 2;
     bottom: $size-header / 2;

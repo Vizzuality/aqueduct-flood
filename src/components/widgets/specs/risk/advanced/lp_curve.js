@@ -96,15 +96,15 @@ export default {
         },
         {
           "c": "95",
-          "label": "High"
+          "label": "High Sea-Level Rise"
         },
         {
           "c": "50",
-          "label": "Medium"
+          "label": "Medium Sea-Level Rise"
         },
         {
           "c": "05",
-          "label": "Low"
+          "label": "Low Sea-Level Rise"
         },
         {
           "c": "avg",
@@ -272,7 +272,7 @@ export default {
       "scale": "x",
       "ticks": true,
       "tickCount": 6,
-      "title": "Probability of event occurring (%)"
+      "title": "Probability of event occurring in any given year (%)"
     },
     {
       "orient": "left",

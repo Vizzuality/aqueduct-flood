@@ -2,24 +2,40 @@
 import { replace } from 'aqueduct-components';
 
 export const updateSpec = (spec = {}, params = {}) => {
+  console.log(params.type)
   let updatedSpec = Object.assign({}, spec);
   const {
     yAxisTitle,
+    yAxisTitleRight,
     chartTitleTop,
     chartTitleBottom,
     legend,
     type
   } = params;
 
+  if (type === 'lp_curve') {
+    console.log(params)
+    const legends = updatedSpec.legends;
+    legends[0] = {
+      ...legends[0],
+      title: params.flood === 'coastal' ? 'Scenarios' : 'Models',
+    };
+
+    console.log(legends)
+
+    return {
+      ...updatedSpec,
+      legends,
+    }
+  }
+
   if (yAxisTitle) {
     const yAxisIndexLeft = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'left');
-    const yAxisIndexRight = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'right');
 
-    if (yAxisIndexLeft === -1 && yAxisIndexRight === -1) return updatedSpec;
+    if (yAxisIndexLeft === -1) return updatedSpec;
 
     const updatedAxes = updatedSpec.axes;
     let updatedYAxisLeft = updatedAxes[yAxisIndexLeft];
-    let updatedYAxisRight = updatedAxes[yAxisIndexRight];
 
     // updates left y-axis
     if (updatedYAxisLeft) {
@@ -31,11 +47,25 @@ export const updateSpec = (spec = {}, params = {}) => {
       updatedAxes[yAxisIndexLeft] = updatedYAxisLeft;
     }
 
+    updatedSpec = {
+      ...updatedSpec,
+      axes: updatedAxes
+    }
+  }
+
+  if (yAxisTitleRight) {
+    const yAxisIndexRight = (updatedSpec.axes || []).findIndex(axis => axis.orient === 'right');
+
+    if (yAxisIndexRight === -1) return updatedSpec;
+
+    const updatedAxes = updatedSpec.axes;
+    let updatedYAxisRight = updatedAxes[yAxisIndexRight];
+
     // updates right y-axis
     if (updatedYAxisRight) {
       updatedYAxisRight = {
         ...updatedYAxisRight,
-        title: yAxisTitle
+        title: yAxisTitleRight
       };
 
       updatedAxes[yAxisIndexRight] = updatedYAxisRight;
@@ -58,18 +88,18 @@ export const updateSpec = (spec = {}, params = {}) => {
     updatedXTopAxis = {
       ...updatedXTopAxis,
       title: chartTitleTop,
-      encode: {
-        ...updatedXTopAxis.encode,
-        title: {
-          update: {
-            ...updatedXTopAxis.title.update,
-            text: {
-              ...updatedXTopAxis.encode.title.update.text,
-              ...type === 'benchmark' && { signal: `if(calc=='Percentage', 'Annual Expected ${chartTitleTop} (%)', 'Annual Expected ${chartTitleTop}')` }
-            }
-          }
-        }
-      }
+      // encode: {
+      //   ...updatedXTopAxis.encode,
+      //   title: {
+      //     update: {
+      //       ...updatedXTopAxis.title.update,
+      //       text: {
+      //         ...updatedXTopAxis.encode.title.update.text,
+      //         ...type === 'benchmark' && { signal: `if(calc=='Percentage', 'Annual Expected ${chartTitleTop} (%)', 'Annual Expected ${chartTitleTop}')` }
+      //       }
+      //     }
+      //   }
+      // }
     };
 
     updatedAxes[xAxisIndex] = updatedXTopAxis;

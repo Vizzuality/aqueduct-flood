@@ -21,6 +21,7 @@ class AnalyzerCompareFilters extends PureComponent {
       locationCompare: PropTypes.string,
       scenarioCompare: PropTypes.string
     }).isRequired,
+    router: PropTypes.object.isRequired,
     locations: PropTypes.array.isRequired,
     locationsCompare: PropTypes.array.isRequired,
     setCommonFilter: PropTypes.func.isRequired,
@@ -168,9 +169,13 @@ class AnalyzerCompareFilters extends PureComponent {
       filters,
       locations,
       locationsCompare,
+      router,
       setCommonCompareFilter,
       setCommonFilter
     } = this.props;
+    const { type } = router;
+
+    const route = type === 'cba-embed-compare' ? { type: 'cba-embed' } : { type: 'home', payload: { tab: 'cba' } };
 
     return (
       <div className="c-analyzer-compare-filters">
@@ -184,7 +189,7 @@ class AnalyzerCompareFilters extends PureComponent {
                   theme="light"
                 />
                   <Link 
-                    to={{ type: 'home', payload: { tab: 'cba' } }}
+                    to={route}
                     className="go-back-btn"
                   >
                     Go back
