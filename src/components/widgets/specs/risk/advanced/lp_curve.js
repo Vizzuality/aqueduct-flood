@@ -284,7 +284,7 @@ export default {
         "labels": {
           "update": {
             "text": {
-              "signal": "'$'+format(datum.value, '.0s')"
+              "signal": "format(datum.value, '.0s')"
             }
           }
         }
@@ -462,7 +462,7 @@ export default {
         },
         "hover": {
           "tooltip": {
-            "signal": "datum.gf!=null ? {'Probability %': datum.x, 'GFDL-ESM2M': '$'+format(datum.gf,'~s'),'HadGEM2-ES':'$'+format(datum.ha,'~s'),'IPSL-CM5A-LR':'$'+ format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M':'$'+format(datum.nr,'~s'),'Average': '$'+ format(datum.mean_y,'~s')} : {'Probability %': datum.x, 'High': '$'+format(datum['95'],'~s'), 'Medium': '$'+format(datum['50'],'~s'), 'Low': '$'+format(datum['05'],'~s'), 'Average': '$'+ format(datum.mean_y,'~s')}"
+            "signal": "datum.gf!=null ? {'Probability %': datum.x, 'GFDL-ESM2M': format(datum.gf,'~s'),'HadGEM2-ES': format(datum.ha,'~s'),'IPSL-CM5A-LR': format(datum.ip,'~s'),'MIROC-ESM-CHEM':format(datum.mi,'~s'),'NorESM1-M': format(datum.nr,'~s'),'Average': format(datum.mean_y,'~s')} : {'Probability %': datum.x, 'High': format(datum['95'],'~s'), 'Medium': format(datum['50'],'~s'), 'Low': format(datum['05'],'~s'), 'Average': format(datum.mean_y,'~s')}"
           },
           "opacity": {
             "value": 0
