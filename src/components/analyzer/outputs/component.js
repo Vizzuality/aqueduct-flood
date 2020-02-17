@@ -134,7 +134,7 @@ class AnalyzerOutputs extends Component {
                       title={replace(
                         widget.params.title,
                         { ...filters,
-                          end: filters.implementation_start + filters.infrastructure_life}
+                          end: filters.implementation_start + filters.infrastructure_life }
                       )}
                       params={{
                         id: widget.id,

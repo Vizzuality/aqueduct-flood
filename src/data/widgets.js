@@ -47,14 +47,14 @@ export const WIDGETS = {
   'cba': [
     {
       id: 'net_benefits',
-      title: 'cumulative net benefits from {{implementation_start}} through {{implementation_end}}',
+      title: 'cumulative net benefits from {{implementation_start}} through {{end}}',
       description: `This figure displays the cumulative net benefits of the designed project. The cumulative net benefit
         is calculated by summing the avoided damage to urban assets each year and subtracting out the cost to build, operate,
         and maintain the design infrastructure. When the bar plot rises above the X-axis, the project has profited.`
     },
     {
       id: 'annual_costs',
-      title: 'annual Total Costs vs benefits from {{implementation_start}} through {{implementation_end}}',
+      title: 'annual Total Costs vs benefits from {{implementation_start}} through {{end}}',
       description: `This figure compares the annual cost  of the design infrastructure to the annual
         benefits (Y-axis) for every year in the “Infrastructure Life Time” of the project (X-axis).
         Costs include both construction costs and operation and maintenance. Benefits represent
@@ -79,13 +79,13 @@ export const WIDGETS = {
     },
     {
       id: 'impl_cost',
-      title: 'year-by-year implementation costs from {{implementation_start}} to {{implementation_end}}',
+      title: 'year-by-year implementation costs from {{implementation_start}} through {{end}}',
       description: `<p>This figure displays the annual costs (Y-Axis) of the design infrastructure incurred during the construction
         years (X-Axis), defined by the “Implementation Range”. Note: This figure does not include the discount rate.</p>`
     },
     {
       id: 'mainteinance',
-      title: 'year-by-year operation & maintenance costs from {{implementation_start}} through {{implementation_end}}',
+      title: 'year-by-year operation & maintenance costs from {{implementation_start}} through {{end}}',
       description: `<p>This figure displays the annual costs (Y-Axis) for operating and maintaining (O&M) the design
         infrastructure over the lifespan of the project (X-Axis), defined by the “Infrastructure Life Time”. O&M costs during
         the construction years equal to the “Operation & Maintenance Cost (%)” rate times the annual cost of implementation.
@@ -93,7 +93,7 @@ export const WIDGETS = {
     },
     {
       id: 'flood_prot',
-      title: 'year-by-year average flood protection levels from {{implementation_start}} through {{implementation_end}}',
+      title: 'year-by-year average flood protection levels from {{implementation_start}} through {{end}}',
       description: `<p>This figure displays the level of flood protection through time. The line begins with the existing level of
         protection up until the first "build" year, after which the line becomes dotted. Once construction is complete, the solid line
         returns. The slope of the solid lines reflects the influence of climate change on flood protection (both the magnitude and the direction).</p>`
