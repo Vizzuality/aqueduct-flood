@@ -4,9 +4,6 @@ import thunk from 'redux-thunk';
 import { handleModule } from 'redux-tools';
 import { connectRoutes } from 'redux-first-router'
 
-// third-party reducers
-import { loadingBarReducer } from 'react-redux-loading-bar';
-
 // modules
 import * as appModule from 'modules/app';
 import * as locationsModule from 'modules/locations';
@@ -30,7 +27,6 @@ const {
 
 const reducer = combineReducers({
   // global
-  loadingBar: loadingBarReducer,
   router: routesReducer,
 
   app: handleModule(appModule),

@@ -93,7 +93,7 @@ export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA'
       .then((_layers) => {
         dispatch(setWidgetData({
           id: widgetId,
-          ... {
+          ...{
             data: {
               left: [..._layers[0]],
               right: [..._layers[1]]
