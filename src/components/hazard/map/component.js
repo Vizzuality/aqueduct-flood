@@ -108,7 +108,7 @@ class HazardMap extends PureComponent {
                   <Icon name="boundaries" />
                 </button>
                 <a
-                  href="https://wri-projects.s3.amazonaws.com/AqueductFloodTool/download/Y2018M08D16_RH_Convertt_Geotiff_V01/output_V03/output_V03/index.html"
+                  href="https://www.wri.org/resources/data-sets/aqueduct-floods-data"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="download-btn"
