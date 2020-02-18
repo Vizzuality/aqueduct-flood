@@ -36,7 +36,7 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
     case 'annual_flood':
       return {
         legend: [`Annual Expected ${riskIndicator}`, `% Annual Expected ${riskIndicator}`],
-        yAxisTitle: `Annual Expected ${riskIndicator}`,
+        yAxisTitle: `Annual Expected ${riskIndicator} ($)`,
         yAxisTitleRight: `% Annual Expected ${riskIndicator}`,
       };
     case 'flood_drivers':

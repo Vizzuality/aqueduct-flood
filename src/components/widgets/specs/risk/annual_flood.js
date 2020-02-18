@@ -76,7 +76,7 @@ export default {
       "encode": {
         "labels": {
           "update": {
-            "text": { "signal": "'$ '+format(datum.value, '~s')" }
+            "text": { "signal": "format(datum.value, '~s')" }
           }
         }
       }
