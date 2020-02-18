@@ -40,7 +40,10 @@ class EmbedWidget extends PureComponent {
   render() {
     const { tab, widget, filters } = this.props;
     const Widget = ['risk', 'advanced_risk'].includes(tab) ? RiskWidget : AnalyzerWidget;
-    const widgetTitle = replace(widget.params.title, filters);
+    const widgetTitle = replace(widget.params.title, {
+      ...filters,
+      end: filters.implementation_start + filters.infrastructure_life
+    });
 
     return (
       <LayoutEmbed
@@ -74,7 +77,7 @@ class EmbedWidget extends PureComponent {
               // common types
               if (params.type === 'map') return (<MapChart />)
 
-              if (params.type === 'table') return (<TableChart data={data} />)
+              if (params.type === 'table') return (<TableChart data={data} filters={filters} />)
 
               return null;
             }}

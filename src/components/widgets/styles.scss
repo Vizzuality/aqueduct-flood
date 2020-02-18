@@ -76,6 +76,10 @@
           }
         }
       }
+
+      > input[type="checkbox"] {
+        margin: 0 0 0 $space-1;
+      }
     }
   }
 }

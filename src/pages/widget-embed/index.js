@@ -14,7 +14,7 @@ import {
 import WidgetEmbedPage from './component';
 
 export default connect(
-  state => ({}),
+  state => ({ router: state.router }),
   {
     setTab,
     setEmbedWidget,

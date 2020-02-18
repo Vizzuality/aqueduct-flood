@@ -11,7 +11,8 @@ import AnalyzerWidget from 'components/analyzer/widget';
 
 // components
 import Chart from 'components/widgets';
-import TableChart from 'components/widgets/table/risk';
+import RiskTableChart from 'components/widgets/table/risk';
+import CbaTableChart from 'components/widgets/table/cba';
 import MapChart from 'components/widgets/map';
 
 // specs
@@ -27,6 +28,9 @@ import BarChartSpec from 'components/widgets/specs/cba/bar-chart';
 import LineSpec from 'components/widgets/specs/cba/line';
 import MultiLineSpec from 'components/widgets/specs/cba/multi-line';
 
+// styles
+import './styles.scss';
+
 class EmbedWidget extends PureComponent {
   static propTypes = {
     tab: PropTypes.string.isRequired,
@@ -37,7 +41,10 @@ class EmbedWidget extends PureComponent {
   render() {
     const { tab, widget, filters } = this.props;
     const Widget = ['risk', 'advanced_risk'].includes(tab) ? RiskWidget : AnalyzerWidget;
-    const widgetTitle = replace(widget.params.title, filters);
+    const widgetTitle = replace(widget.params.title, {
+      ...filters,
+      end: filters.implementation_start + filters.infrastructure_life
+    });
 
     return (
       <LayoutPreview
@@ -58,6 +65,8 @@ class EmbedWidget extends PureComponent {
 
               if (params.type === 'multi-line') return (<Chart spec={MultiLineSpec} params={params} data={{ table: data }} />)
 
+              if (params.type === 'table' && tab === 'cba') return (<CbaTableChart data={data} filters={filters} />)
+
               // risk types
               if (params.type === 'annual_flood') return (<Chart spec={AnnualFloodSpec} params={params} data={{ table: data }} />)
 
@@ -70,7 +79,7 @@ class EmbedWidget extends PureComponent {
               // common types
               if (params.type === 'map') return (<MapChart />)
 
-              if (params.type === 'table') return (<TableChart data={data} />)
+              if (params.type === 'table' && tab !== 'cba') return (<RiskTableChart data={data} filters={filters} />)
 
               return null;
             }}
