@@ -220,7 +220,7 @@ export default {
       "encode": {
       "labels": {
         "update": {
-            "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', '$'+format(datum.value,'~s'))"}
+            "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', format(datum.value,'~s'))"}
         }
       },
       // "title": {
@@ -277,7 +277,7 @@ export default {
 
             "opacity": {"value": 1},
             "size": {"signal": "size", "mult": 2},
-               "tooltip":{"signal": "{'Location': datum.id, 'Protection Standard': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', '$'+format(datum.value, '~s'))}"}
+               "tooltip":{"signal": "{'Location': datum.id, 'Protection Standard': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', format(datum.value, '~s'))}"}
          }
       }
     }
