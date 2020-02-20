@@ -129,7 +129,7 @@ export default {
         },
         "hover": {
           "opacity": { "value": 0.5 },
-          "tooltip": { "signal": "datum.index=='2010' ? {'Year': datum.index, 'Avg': '$'+format(datum.Annual_Damage_Avg, '.3s')} : {'Year': datum.index, 'Max': format(datum.Annual_Damage_Max, '.3s') , 'Avg': '$'+format(datum.Annual_Damage_Avg, '~s'), 'Min':format(datum.Annual_Damage_Min, '.3s')}" }
+          "tooltip": { "signal": "datum.index=='2010' ? {'Year': datum.index, 'Avg': format(datum.Annual_Damage_Avg, '.3s')} : {'Year': datum.index, 'Max': format(datum.Annual_Damage_Max, '.3s') , 'Avg': format(datum.Annual_Damage_Avg, '~s'), 'Min':format(datum.Annual_Damage_Min, '.3s')}" }
         }
       }
     },
