@@ -19,3 +19,8 @@ a {
 .aq__overflow-container {
   overflow-y: visible !important;
 }
+
+.preview-content {
+  min-height: 375px;
+  background: palette(white);
+}
