@@ -46,9 +46,9 @@ export default {
       error: _widget.error || null
     })),
   [actions.setEmbedWidget]: (state, { payload }) => {
-    const { nextTab, id } = payload;
+    const { id } = payload;
+    const embedWidget = state.find(_w => _w.id === id );
 
-    const embedWidget = WIDGETS[nextTab].find(_w => _w.id === id );
     return [{
       id: embedWidget.id,
       params: embedWidget.params || ({ title: embedWidget.title }),
