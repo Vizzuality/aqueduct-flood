@@ -6,7 +6,8 @@ export const WIDGETS = {
       description:  `<p>This table displays a summary of flood damage for each year of the analysis (2010, 2030, 2050, and 2080).
         The expected annual damage is listed (first row) and compared to the total asset value (second row) in order to estimate the
         relative amount of damage (third row). The level of flood protection through time is also displayed (fourth row) to reflect
-        how changes in climate impact the amount of protection provided by flood infrastructure.</p>`
+        how changes in climate impact the amount of protection provided by flood infrastructure. Numbers are formatted using metric 
+        prefixes (i.e., million is Mega [M], billion is Giga [G], etc.)</p>`
     },
     {
       id: 'annual_flood',
