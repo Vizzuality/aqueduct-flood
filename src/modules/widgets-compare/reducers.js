@@ -5,9 +5,9 @@ import * as actions from './actions';
 
 export default {
   [actions.setWidgetsCompare]: (state, { payload }) => {
-    const { nextTab, advancedSettings } = payload;
+    const { nextTab } = payload;
 
-    if (nextTab === 'risk' && advancedSettings) {
+    if (nextTab === 'advanced_risk') {
       return [...WIDGETS.risk, ...WIDGETS.advanced_risk].map(widget => ({
         id: widget.id,
         params: widget.params || ({

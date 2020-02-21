@@ -60,17 +60,19 @@ class ComparePage extends PureComponent {
     }
 
     if (tab) {
-      setTab(tab);
-
+      let _tab = tab;
+     
       if (params && params.filtersCompare) {
-        setWidgets({
-          nextTab: tab,
-          advancedSettings: params.filters.risk ? params.filters.risk.advanced_settings : false
-        });
-        setWidgetsCompare({
-          nextTab: tab,
-          advancedSettings: params.filtersCompare.risk ? params.filtersCompare.risk.advanced_settings : false
-        });
+        const { risk: { advanced_settings: advancedSettingsCompare } } = params.filtersCompare;
+        const { risk: { advanced_settings: advancedSettings } } = params.filters;
+
+        const _advancedSettings = (advancedSettingsCompare || advancedSettings);
+
+        setTab(_tab);
+        setRiskFilter({ advanced_settings: _advancedSettings })
+        setRiskCompareFilter({ advanced_settings: _advancedSettings });
+        setWidgets({ nextTab: _advancedSettings ? 'advanced_risk' : _tab });
+        setWidgetsCompare({ nextTab: _advancedSettings ? 'advanced_risk' : _tab });
       }
     }
   }

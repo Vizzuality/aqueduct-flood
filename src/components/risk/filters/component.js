@@ -49,6 +49,7 @@ class AnalyzerFilters extends PureComponent {
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
+    setWidgetsCompare: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired
   }
 
@@ -146,11 +147,14 @@ class AnalyzerFilters extends PureComponent {
   onCheckAdvancedSettings = ({ checked }) => {
     const {
       setRiskFilter,
+      setRiskCompareFilter,
       setWidgets,
+      setWidgetsCompare,
       scenarios
     } = this.props;
 
     setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
+    setWidgetsCompare({ nextTab: checked ? 'advanced_risk' : 'risk' });
 
     logEvent('[AQ-Flood]', 'risk tab: user checks advanced settings', checked.toString());
 
@@ -158,6 +162,8 @@ class AnalyzerFilters extends PureComponent {
       advanced_settings: checked,
       ...!checked && { scenario: scenarios[0].value }
     });
+
+    setRiskCompareFilter({ advanced_settings: checked });
   }
 
   onChangeFlood = ({ value }) => {
