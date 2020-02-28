@@ -216,18 +216,12 @@ export default {
       "orient": "top",
       "ticks": true,
       "tickCount": 10,
-      // "title": "Annual Expected Urban Damage",
       "encode": {
       "labels": {
         "update": {
-            "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', format(datum.value,'~s'))"}
+            "text": {"signal": "if(calc=='Percentage', format(datum.value,'.3')+'%', format(datum.value,'.3s'))"}
         }
-      },
-      // "title": {
-      //   "update": {
-      //     "text": {"signal": "if(calc=='Percentage', 'Annual Expected Urban Damage', 'Annual Expected Urban Damage')"}
-      //   }
-      // }
+      }
     }
   },
     {
@@ -277,7 +271,7 @@ export default {
 
             "opacity": {"value": 1},
             "size": {"signal": "size", "mult": 2},
-               "tooltip":{"signal": "{'Location': datum.id, 'Protection Standard': datum.prot +' years', 'Damage': if(calc=='Percentage', datum.value+'%', format(datum.value, '~s'))}"}
+               "tooltip":{"signal": "{'Location': datum.id, 'Protection Standard': datum.prot +' years', 'Damage': if(calc=='Percentage', format(datum.value, '.4')+'%', format(datum.value, '.4s'))}"}
          }
       }
     }
