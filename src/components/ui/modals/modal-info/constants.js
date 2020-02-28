@@ -78,9 +78,8 @@ export const MODAL_INFO_DEFINITIONS = {
   'future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a climate scenario to project inundation in future years.</p>',
-    description: `<p>The "Business as Usual/ Pessimistic" scenario (Representative Concentration Pathways 8.5)
-      represents a world with steadily rising global carbon emissions. The "Optimistic" scenario (Representative Concentration Pathways 4.5)
-      represents a world with carbon emissions peaking and declining by 2040.</p>`,
+    description: `<p> The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. 
+      The "Optimistic" scenario (Representative Concentration Pathways 4.5) represents a world with carbon emissions peaking and declining by 2040.</p>`,
     source: `<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about
       climate scenarios used in this analysis. The scenarios are based on the
       <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
@@ -187,8 +186,8 @@ export const MODAL_INFO_DEFINITIONS = {
       Benefits represent the accrual of avoided damage to urban assets.</p>`
   },
   'cba-notification': {
-    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure in a given country, state, or
-      river basin. The analysis is highly customizable, so please allow time for extra time as the calculations run in the background.</p>`
+    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure in a given country, state, or river basin. 
+    The analysis is highly customizable, so please allow time for extra time as the calculations run in the background.</p>`
   }
 }
 
