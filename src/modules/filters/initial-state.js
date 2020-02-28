@@ -9,7 +9,7 @@ export default {
     year: '2010.0',
     flood: 'inunriver',
     scenario: 'rcp8p5',
-    projection_model: '95.0',
+    projection_model: '0000GFDL-ESM2M',
     sub_scenario: true
   },
   // risk
