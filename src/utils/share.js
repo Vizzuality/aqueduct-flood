@@ -1,11 +1,7 @@
 import { Base64 } from 'js-base64';
 import * as queryString from 'query-string';
-
-const triggerDownload = (url) => {
-  const link = document.createElement('a');
-  link.href = url;
-  link.click();
-}
+import axios from 'axios';
+import { saveAs } from 'file-saver';
 
 export const getCbaEmbedURL = ({ id }, filters) => `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(filters))}`;
 export const getCbaPreviewURL = ({ id }, filters) => `/preview/cba/widget/${id}?p=${Base64.encode(JSON.stringify(filters))}`
@@ -19,9 +15,9 @@ export const generateCbaDownloadURL = ({ id }, filters, format) => {
     ...{ user_urb_cost: cba.user_urb_cost || 'null' },
     ...{ user_rur_cost: 'null' },
     format
-  });
-
-  triggerDownload(`${process.env.REACT_APP_API_URL}/cba/widget/${id}?${widgetParams}`);
+  }); 
+  
+  saveAs(`${process.env.REACT_APP_API_URL}/cba/widget/${id}?${widgetParams}`, `${id}.${format}`);
 }
 
 export const getRiskEmbedURL = ({ id }, filters) => `/embed/${filters.advanced_settings ? 'advanced_risk' : 'risk'}/widget/${id}?p=${Base64.encode(JSON.stringify(filters))}`;
@@ -48,7 +44,7 @@ export const generateRiskDownloadURL = ({ id }, filters, format) => {
     format
   });
 
-  triggerDownload(`${process.env.REACT_APP_API_URL}/risk/widget/${id}?${widgetParams}`);
+  saveAs(`${process.env.REACT_APP_API_URL}/risk/widget/${id}?${widgetParams}`, `${id}.${format}`);
 }
 
 
