@@ -72,17 +72,14 @@ export const MODAL_INFO_DEFINITIONS = {
     description: `<p>The “Coastal” hazard represents flooding from storm surges and occurs along coastlines
       around the world. The “Riverine” hazard represents flooding from river overflow and occurs
       in river basins with an area of at least 10,000 km2.</p>`,
-    source: `<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming)
-      to learn more about the types of hazards featured in this analysis.</p>`
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a climate scenario to project inundation in future years.</p>',
-    description: `<p> The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. 
-      The "Optimistic" scenario (Representative Concentration Pathways 4.5) represents a world with carbon emissions peaking and declining by 2040.</p>`,
-    source: `<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about
-      climate scenarios used in this analysis. The scenarios are based on the
-      <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
+    description: `<p>The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. </p>
+      <p>The "Optimistic" scenario (Representative Concentration Pathways 4.5) represents a world with carbon emissions peaking and declining by 2040.</p>`,
+    source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
   },
   'projection-model': {
     title: 'Projection Model',
@@ -91,24 +88,20 @@ export const MODAL_INFO_DEFINITIONS = {
       Three different probabilities for sea level change are available: 5%, 50% and 95%.</p>
       <p>For “Riverine” floods, projection models refer to five common general circulation models from the following organizations:</p>
       ${renderProjectionModelTable}`,
-    source: `<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about the projection
-      models used in this analysis. For Coastal projection models , see the RISES-AM project
-      <a href="dx.doi.org/10.1088/1748-9326/9/10/104008" target="_blank" rel="noopener noreferrer">(Jevrejeva et al., 2014)</a>.
-      For Riverine projection models, see the
-      <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
 
   },
   'subsidience': {
     title: 'Subsidience',
-    instructions: `<p>Check on “Subsidence” to project inundation depths in future years using both climate change and land
-      subsidence scenarios. Check off “Subsidence” to project inundation depths in future years using only climate change scenarios.</p>`,
-    description: '<p>Subsidence refers to the lowering of land levels. Groundwater extraction is a dominant cause of human-induced land subsidence in many coastal areas.</p>',
-    source: '<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about subsidence modeling.</p>'
+    instructions: `<p>Available for Coastal floods only. Check on “Subsidence” to project inundation depths in future years using both 
+      climate change and land subsidence scenarios. Check off “Subsidence” to project inundation depths in future years using only climate change scenarios.</p>`,
+    description: '<p>Subsidence refers to the lowering of land levels. In this analysis, human-induced land subsidence was caused specifically by groundwater extraction.</p>',
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'flood-magnitude': {
     title: 'Flood magnitude (return period in years)',
     instructions: '<p>Select the severity of the flooding hazard, expressed in return periods.</p>',
-    description: '<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence) is less severe than a 50-year (2% probability of occurrence).</p>'
+    description: '<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence per year) is less severe than a 50-year (2% probability of occurrence per year)</p>'
   },
   // risk
   'location': {
@@ -118,33 +111,36 @@ export const MODAL_INFO_DEFINITIONS = {
   'risk-future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
-    description: `<p>The "Business as Usual" scenario (Shared Socioeconomic Pathway (SSP) 2, Representative Concentration Pathways (RCP) 8.5)
-      represents a world with stable economic development and steadily rising global carbon emissions. The "Optimistic" scenario (SSP 2, RCP 4.5)
-      represents a world with stable economic development and carbon emissions peaking and declining by 2040. The "Pessimistic" scenario (SSP 3, RCP 8.5)
-      represents a fragmented world with uneven economic development and steadily rising global carbon emissions.</p>`,
-    source: `<p> See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about
-    climate scenarios used in this analysis. The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report.</a></p>`
+    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2,) represents a 
+      pessimistic climate scenario under Business as Usual development. In other words, the world would see steadily rising carbon emissions carbon emissions 
+      and stable economic development. The "Optimistic" scenario (RCP 4.5, SSP 2) represents a world with carbon emissions peaking and declining by 2040 and 
+      stable economic development. The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world with steadily rising global carbon emissions and 
+      uneven economic development.</p>`,
+    source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report.</a></p>`
   },
   'risk-indicator': {
     title: 'Risk Indicator',
-    instructions: 'Select the type exposure used to calculate risk.',
+    instructions: 'Select a type of exposure from the dropdown list in order to run the analysis.',
     description: `For “Affected Population” and “Affected GDP”, exposure was measured using gridded maps of population count and GDP respectively.
       For urban damage, exposure was measured using a land use map showing which cells are built-up and not built-up.`,
-    source: 'See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about the types of exposure to flood risk.'
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'existing-protection-level': {
     title: 'Existing Protection Level (Return Period)',
-    instructions: '<p>Select the level of flood protection as of 2010 to be used in the risk analysis.</p>',
-    description: `<p>The “Existing Protection Level” reflects the level of flood protection provided by dikes in each location,
-      expressed as a return period. For example, if the flood protection level in a given state is for a return period of 100 years,
-      this means that floods up to that return period would not lead to impacts. The default level of flood protection for 2010 comes
-      from the FLOPROS model. Users may select any protection level from 2 to 1,000.</p>`,
-    source: '<p>See <i>A methodology to estimate global riverine and coastal flood risks</i> (forthcoming) to learn more about modeling flood protection standards.</p>'
+    instructions: '<p>Select the level of flood protection to be used in the risk analysis</p>',
+    description: `<p>Flood protection level represents the strongest magnitude flood that flood infrastructure can protect against (given as a return period). 
+      For example, a 10-year flood protection level will prevent 10-year floods (or smaller) from damaging assets. The level of flood protection 
+      used in the default analysis was modeled to using FLOPROS.</p>
+      <p>FLOPROS provides flood protection estimates at the state value. For larger locations, like countries and river basins, the average protection 
+      was estimated by first summing all expected annual damage (EAD) from the state level within the location (for river basins, only the portion of the 
+        state within the basin was used). Next, the location’s loss-probability curve was run through several trials using a range of flood protection 
+        values to estimate EAD. Once a trial matched the actual EAD, the corresponding flood protection was set as that location’s default.</p>`,
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'advanced-settings-notification': {
-    description: `<p>In the Advanced Setting, users can customize the Risk Analysis by altering the level of flood protection.
-      Due to the complexity of the calculation, the Advanced analysis runs at a coarser scale than the default analysis. Therefore,
-      <strong>Advanced results may look different than default results.</strong></p>`
+    description: `<p>In the Advanced Setting, users can customize the Risk Analysis by altering the level of flood protection and selecting different future scenarios. 
+      Due to the complexity of the calculation, the Advanced analysis runs at a coarser scale than the default analysis. Therefore, Advanced results may look different than default results.
+      </p>`
   },
   // CBA
   'design-protection-standards': {
@@ -155,7 +151,8 @@ export const MODAL_INFO_DEFINITIONS = {
       in the year 2050.</p><p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage
       if no improvements to flood protection are made). Flood damage will then be recalculated using the "Design Protection Level".
       The analysis calculates difference between the baseline and design scenarios. Benefits represent the avoided damage to urban assets,
-      population, and GDP provided by the design infrastructure.</p>`
+      population, and GDP provided by the design infrastructure.</p>`,
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'timeframes': {
     title: 'Timeframes',
@@ -163,7 +160,8 @@ export const MODAL_INFO_DEFINITIONS = {
     description: `<p>The "Implementation Range" represents the years in which the design infrastructure will be constructed.
       The "Infrastructure Lifetime" represents how long the infrastructure will be functional (and thus provide benefits).
       The "Benefit Start year" represents the year when benefits will start to accrue. Only a fraction of the benefits can
-      be accrued during construction-- full benefits will be accumulated once the construction is complete.</p>`
+      be accrued during construction-- full benefits will be accumulated once the construction is complete.</p>`,
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'costs': {
     title: 'Costs',
@@ -171,7 +169,8 @@ export const MODAL_INFO_DEFINITIONS = {
     description: `<p>The "Unit Costs" represents the rate (in $US) to construct dike infrastructure per meter (depth)
       per kilometer (length). A default rate that incorporates a country's purchasing power parity (PPP) is provided.
       The "Annual Discount Rate" represents rate in which present value will change through time. The "Operation & Maintenance Cost"
-      represents the fraction of the total construction cost to be used to estimate the operation and maintenance expenses annually.</p>`
+      represents the fraction of the total construction cost to be used to estimate the operation and maintenance expenses annually.</p>`,
+    source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'cumulative-benefits': {
     title: 'Cumulative Benefits',

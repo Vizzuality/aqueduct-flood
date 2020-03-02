@@ -16,10 +16,10 @@ export const WIDGETS = {
     {
       id: 'annual_flood',
       title: '{{flood}} Flood {{widget_title}} in {{geogunit_unique_name}}',
-      description: `<p>This figure displays the expected annual damage to be incurred (primary Y-axis) for each year of the analysis
-        (X-axis). The relative amount of damage is also displayed (secondary Y-axis). Uncertainty bars for both the annual damage
-        and relative damage can be accessed by checking on the "Error Bars" box. Error bars are bound by the minimum and maximum
-        damage estimates.</p>`,
+      description: `<p>'This figure displays the expected annual damage to be incurred (primary Y-axis) for each year of the analysis (X-axis). 
+        The relative amount of damage is also displayed (secondary Y-axis). Uncertainty bars for both the annual damage and relative damage can be 
+        accessed by checking on the "Error Bars" box. Error bars are bound by the minimum and maximum damage estimates from the different climate models. 
+        See "Projection Model" help box in the "Hazard" tab for more information on the various climate models used in this analysis.</p>`,
         sources: [{
           title: 'WRI Aqueduct Floods',
           url: 'https://www.wri.org/publication/aqueduct-floods'
@@ -42,11 +42,11 @@ export const WIDGETS = {
     {
       id: 'flood_drivers',
       title: 'Projected Change in {{flood}} Flood Annual Expected {{widget_title}} and Drivers in {{geogunit_unique_name}}',
-      description: `<p>This figure illustrates the drivers of flood damage in the future compared to baseline (2010)
-        flood damage. Annual expected damage (Y-axis) is displayed for each year of the analysis (2010, 2030, 2050, and 2080).
-        For Riverine floods, climate and socio-economic conditions drive change in damage. For Coastal floods, climate,
-        socio-economic, and/or land subsidence drive change in damage. Drivers that appear below the X-axis indicate
-        a reduction in flood damage; drivers that appear above the X-axis indicate an intensification of flood damage.</p>`,
+      description: `<p>This figure illustrates the drivers of flood damage in the future compared to baseline (2010) flood damage. 
+        The change in expected annual damage (Y-axis) is displayed for future years (2030, 2050, and 2080). For Riverine floods, 
+        climate and socio-economic conditions drive change in damage (that is, subsidence is NOT factored in). For Coastal floods, climate, 
+        socio-economic, and/or land subsidence drive change in damage. Drivers that appear below the X-axis indicate a reduction in flood damage; 
+        drivers that appear above the X-axis indicate an intensification of flood damage.</p>`,
       sources: [{
         title: 'WRI Aqueduct Floods',
         url: 'https://www.wri.org/publication/aqueduct-floods'
