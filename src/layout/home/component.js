@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { Sidebar, Tabs } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
-import { Base64 } from 'js-base64';
 
 // layout
 import Layout from "layout/layout";

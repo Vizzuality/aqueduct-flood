@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
-import { showLoading, hideLoading } from 'react-redux-loading-bar';
+
+// actions
 import { resetModal } from 'modules/app/actions';
 
+// components
 import LayoutCBAEmbed from './component';
 
 export default connect(
   state => ({ modal: state.app.modal }),
-  {
-    showLoading,
-    hideLoading,
-    resetModal
-  }
+  { resetModal }
 )(LayoutCBAEmbed);

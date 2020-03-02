@@ -1,20 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { Sidebar, Tabs } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
-import { Base64 } from 'js-base64';
-
-// layout
-import LayoutCBAEmbed from "layout/layout-cba-embed";
+import { Sidebar } from 'aqueduct-components';
 
 // components
-import Risk from 'components/risk';
+import LayoutCBAEmbed from "layout/layout-cba-embed";
 import Analyzer from 'components/analyzer';
-import Hazard from 'components/hazard';
-import HazardMap from 'components/hazard/map';
 import AnalyzerOutputs from 'components/analyzer/outputs';
-import RiskOutputs from 'components/risk/outputs';
 
 // utils
 import { logEvent } from 'utils/analytics';
@@ -64,18 +56,9 @@ class Home extends PureComponent {
     const {
       sidebar,
       tab,
-      tabs,
       setSidebarVisibility
     } = this.props;
-
-    const isAnalyzerTab = tab === 'cba';
-    const isRiskTab = tab === 'risk';
-    const isHazardTab = tab === 'hazard';
-
-    const sidebarClass = classnames(
-      'l-sidebar',
-      { '-hazard-tab': isHazardTab }
-    );
+    const sidebarClass = classnames('l-sidebar', { '-hazard-tab': tab === 'hazard' });
 
     return (
       <LayoutCBAEmbed title="Homepage" description="Aqueduct Flood description">

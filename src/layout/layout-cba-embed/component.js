@@ -1,22 +1,16 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-// Utils
-import { initGA, logPageView } from 'utils/analytics';
-
-// Next
-// import { Router } from 'routes';
-
 import { Modal } from 'aqueduct-components';
 
 // components
-import LoadingBar from 'react-redux-loading-bar';
 import Head from 'layout/head';
 import Header from 'layout/header';
-// components – modals
 import ModalInfo from 'components/ui/modals/modal-info';
 import ModalEmbedWidget from 'components/ui/modals/modal-embed-widget';
 import ModalInfoWidget from 'components/ui/modals/modal-info-widget';
+
+// utils
+import { initGA, logPageView } from 'utils/analytics';
 
 class LayoutCBAEmbed extends PureComponent {
   static propTypes = {
@@ -28,12 +22,9 @@ class LayoutCBAEmbed extends PureComponent {
       options: PropTypes.object.isRequired
     }).isRequired,
     resetModal: PropTypes.func.isRequired,
-    showLoading: PropTypes.func.isRequired,
-    hideLoading: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const { showLoading, hideLoading } = this.props;
     // Google Analytics
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -50,13 +41,11 @@ class LayoutCBAEmbed extends PureComponent {
       <div id="#main" className="l-page">
         <Head title={title} description={description} />
         <Header 
-          appRoute="https://www.wri.org/applications/aqueduct/floods" 
+          appRoute="https://www.wri.org/publication/aqueduct-floods" 
         />
         <div className="page-content">
           {children}
         </div>
-        <LoadingBar className="c-loading-bar" />
-
         <Modal
           isOpen={modal.visible}
           appElement=".l-page"

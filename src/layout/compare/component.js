@@ -1,13 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
-import { Base64 } from 'js-base64';
-
-// layout
-import Layout from "layout/layout";
 
 // components
+import Layout from "layout/layout";
 import RiskCompare from 'components/compare/risk';
 import AnalyzerCompare from 'components/compare/analyzer';
 
@@ -31,31 +27,6 @@ class ComparePage extends PureComponent {
     clearFilters: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired
   }
-
-  componentWillReceiveProps(nextProps) {
-    const { filters, filtersCompare, tab } = this.props;
-    const {
-      filters: nextFilters,
-      filtersCompare: nextFiltersCompare,
-      tab: nextTab
-    } = nextProps;
-    const tabChanged = tab !== nextTab;
-    const filtersChanged = !isEqual(filters, nextFilters);
-    const filtersCompareChanged = !isEqual(filtersCompare, nextFiltersCompare);
-
-    // if (filtersChanged || filtersCompareChanged || tabChanged) {
-    //   Router.replaceRoute('compare',
-    //     {
-    //       tab: nextTab,
-    //       p: Base64.encode(JSON.stringify({
-    //         filters: nextFilters,
-    //         filtersCompare: nextFiltersCompare
-    //       }))
-    //     },
-    //     { shallow: true });
-    // }
-  }
-
   onChangeTab = ({ value }) => {
     const {
       setTab,

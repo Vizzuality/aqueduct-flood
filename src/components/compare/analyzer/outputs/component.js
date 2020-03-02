@@ -69,7 +69,11 @@ class AnalyzerCompareOutputs extends Component {
           ...widget,
           params: {
             ...widget.params,
-            title: replace(widget.params.title, { ...filters.common, ...filters.cba })
+            title: replace(widget.params.title, { 
+              ...filters.common, 
+              ...filters.cba,
+              end: filters.cba.implementation_start + filters.cba.infrastructure_life
+            })
           }
         },
         embedURL: getCbaPreviewURL(widget, filters)
@@ -91,10 +95,15 @@ class AnalyzerCompareOutputs extends Component {
             ...widget,
             params: {
               ...widget.params,
-              title: replace(widget.params.title, { ...filters.common, ...filters.cba })
+              title: replace(widget.params.title, { 
+                ...filters.common, 
+                ...filters.cba,
+                end: filters.cba.implementation_start + filters.cba.infrastructure_life
+              })
             }
           },
-          embedURL: getCbaEmbedURL(widget, filters)
+          embedURL: getCbaEmbedURL(widget, filters),
+          previewURL: getCbaPreviewURL(widget, filters),
         }
       }));
     }
@@ -142,7 +151,8 @@ class AnalyzerCompareOutputs extends Component {
                       title={replace(
                         widget.params.title,
                         { ...filters,
-                          end: filters.implementation_start + filters.infrastructure_life}
+                          end: filters.implementation_start + filters.infrastructure_life 
+                        }
                       )}
                       params={{ id: widget.id, filters }}
                       onMoreInfo={() => this.onMoreInfo(widget, originalFormatFilters)}

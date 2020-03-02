@@ -21,6 +21,7 @@ export default {
 {"type": "formula", "as": "Annual_Damage_Avg", "expr": "if(datum.index!='2010',datum.Annual_Damage_Avg-datum.baseline_value, datum.Annual_Damage_Avg)"},
         {"type": "fold", "fields": ["Annual_Damage_Avg", "CC_Driver_Avg", "Soc_Driver", "Sub_Driver"]},
         {"type": "formula", "as": "type", "expr": "if(datum.key=='Annual_Damage_Avg','Total change','Drivers')"},
+        {"type": "filter", "expr": "datum.index!='2010'"},
         {
           "type": "stack",
           "groupby": ["index", "type"],
@@ -73,6 +74,7 @@ export default {
       "domain": false,
       "ticks": false,
       "labels":false,
+      "titleLimit":350,
       "offset": 5,
       "title": "Annual Damage and Impact Drivers"
     },
@@ -101,7 +103,7 @@ export default {
         },
         "labels":{
           "update": {
-          "text": {"signal": "if(datum.label=='Annual_Damage_Avg', 'Total change', if(datum.label=='Soc_Driver', 'Socioeconomic', if(datum.label=='Sub_Driver', ['Subsidence','test'], 'Climate')))"},
+          "text": {"signal": "if(datum.label=='Annual_Damage_Avg', 'Total change', if(datum.label=='Soc_Driver', 'Socioeconomic', if(datum.label=='Sub_Driver','Subsidence', 'Climate')))"},
         }
         }
       }
@@ -164,7 +166,7 @@ export default {
             "hover": {"opacity":{
               "value":0.5
             },
-            "tooltip":{"signal": "{'Year': datum.index, 'Value': '$'+format(datum.value, '~s')}"}
+            "tooltip":{"signal": "{'Year': datum.index, 'Value': format(datum.value, '.3s')}"}
           }
           }
         }

@@ -9,8 +9,8 @@ import WidgetPreview from 'pages/widget-preview';
 export const PAGES_DICTIONARY = {
   home: HomePage,
   compare: ComparePage,
-  'widget-preview': WidgetEmbed,
-  'widget-embed': WidgetPreview,
+  'widget-preview': WidgetPreview,
+  'widget-embed': WidgetEmbed,
   'cba-embed': CBAEmbed,
   'cba-embed-compare': CBAEmbedCompare
 };

@@ -70,7 +70,7 @@ export default {
         },
         "hover": {
           "opacity": { "value": 0.5 },
-          "tooltip":{"signal": "{'Year': datum.year, 'Value': '$'+format(datum.value, 's')}"}
+          "tooltip":{"signal": "{'Year': datum.year, 'Value': '$'+format(datum.value, '.3s')}"}
         }
       }
     }

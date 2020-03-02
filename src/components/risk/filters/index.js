@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 
 // acctions
 import { setCommonFilter, setRiskFilter } from 'modules/filters/actions';
-import { setCommonCompareFilter } from 'modules/filters-compare/actions';
+import { setCommonCompareFilter, setRiskCompareFilter } from 'modules/filters-compare/actions';
 import { getLocations, getCompareLocations, getCountryDefaults } from 'modules/locations/actions';
 import { setInput, setInputCompare, setModal, setRouter } from 'modules/app/actions';
 import { setWidgets } from 'modules/widgets/actions';
+import { setWidgetsCompare } from 'modules/widgets-compare/actions';
 
 // selectors
 import { getFilteredLocations, getFilteredCompareLocations, getScenarios } from './selectors';
@@ -41,7 +42,9 @@ export default connect(
     setInput,
     setInputCompare,
     setWidgets,
+    setWidgetsCompare,
     setModal,
-    setRouter
+    setRouter,
+    setRiskCompareFilter
   }
 )(AnalyzerFilters);

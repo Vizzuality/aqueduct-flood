@@ -59,10 +59,10 @@ class AnalyzerOutputs extends Component {
           ...widget,
           params: {
             ...widget.params,
-            title: replace(widget.params.title, filters)
+            title: replace(widget.params.title, { ...filters, widget_title: getWidgetTitle(filters) })
           }
         },
-        embedURL: getRiskPreviewURL(widget, originalFormatFilters)
+        embedURL: getRiskPreviewURL(widget, originalFormatFilters),
       }
     }));
   }
@@ -84,10 +84,11 @@ class AnalyzerOutputs extends Component {
             ...widget,
             params: {
               ...widget.params,
-              title: replace(widget.params.title, filters)
+              title: replace(widget.params.title, { ...filters, widget_title: getWidgetTitle(filters) })
             }
           },
-          embedURL: getRiskEmbedURL(widget, originalFormatFilters)
+          embedURL: getRiskEmbedURL(widget, originalFormatFilters),
+          previewURL: getRiskPreviewURL(widget, originalFormatFilters),
         }
       }));
     }
@@ -128,6 +129,7 @@ class AnalyzerOutputs extends Component {
                           ...WIDGET_TITLE_GENERATOR(params.type, filters)
                         }}
                         data={{ table: data }}
+                        filters={filters}
                       />)
 
                     if (params.type === 'flood_drivers') return (
@@ -139,6 +141,7 @@ class AnalyzerOutputs extends Component {
                           chartTitleBottom: `Projected Change in ${flood} Flood Annual Expected ${getWidgetTitle(filters)} and Drivers in ${geogunit_unique_name}`
                         }}
                         data={{ table: data }}
+                        filters={filters}
                       />)
 
                     if (params.type === 'benchmark') return (
@@ -146,6 +149,7 @@ class AnalyzerOutputs extends Component {
                         spec={BenchmarkSpec}
                         params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
                         data={{ table: data }}
+                        filters={filters}
                       />)
 
                     if (params.type === 'lp_curve') return (
@@ -153,6 +157,7 @@ class AnalyzerOutputs extends Component {
                         spec={LPCurveSpec}
                         params={{ ...params, ...WIDGET_TITLE_GENERATOR(params.type, filters)}}
                         data={{ table: data }}
+                        filters={filters}
                       />)
 
                     return null;

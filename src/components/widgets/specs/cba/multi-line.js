@@ -217,7 +217,7 @@ export default {
             "value": 0
           }
         },
-        "hover":{"tooltip":{"signal": "{'Year': hover.datum.year, 'Value': '$'+format(hover.datum.value, 's')}"}}
+        "hover":{"tooltip":{"signal": "{'Year': hover.datum.year, 'Value': '$'+format(hover.datum.value, '.3s')}"}}
       }
     }
   ],

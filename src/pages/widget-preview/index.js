@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 // actions
 import { setTab } from 'modules/app/actions';
-import { setEmbedWidget } from 'modules/widgets/actions';
+import { setWidgets, setEmbedWidget } from 'modules/widgets/actions';
 import {
   setCommonFilter,
   setRiskFilter,
@@ -17,6 +17,7 @@ export default connect(
   state => ({ router: state.router }),
   {
     setTab,
+    setWidgets,
     setEmbedWidget,
     setCommonFilter,
     setRiskFilter,

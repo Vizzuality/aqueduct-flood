@@ -66,7 +66,7 @@ class RiskInputs extends PureComponent {
               theme="dark"
               label="Existing Protection Level (Return Period)"
               className="-higher-margin-top -bolder"
-              onMoreInfo={() => setModal(RiskInputs.generateModalOptions('info', 'design-protection-standards'))}
+              onMoreInfo={() => setModal(RiskInputs.generateModalOptions('info', 'existing-protection-level'))}
             >
               <SliderInput
                 name="existing-protection-level"

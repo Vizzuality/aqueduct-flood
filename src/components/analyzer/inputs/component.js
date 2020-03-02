@@ -377,8 +377,8 @@ class AnalyzerInputs extends PureComponent {
               label="Unit Cost ($million/meter/kilometer)"
               className="-bolder"
             >
-              <SliderInput
-                name="user-urb-cost"
+              <Slider
+                name="user-urb-cost-slider"
                 min={UNIT_COST_OPTIONS[0]}
                 max={UNIT_COST_OPTIONS[1]}
                 step={0.01}

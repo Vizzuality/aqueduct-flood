@@ -2,6 +2,13 @@
 
 .c-modal-embed-widget {
 
+  .widget-title {
+    color: $color-text-1;
+    font-weight: $font-weight-semi-bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
   > .url-sharer {
     display: flex;
     justify-content: flex-end;

@@ -12,7 +12,7 @@ export const FLOOD_TYPE_OPTIONS = [
 
 export const WIDGET_TITLES = {
   urban_damage_v2: 'Urban Damage (US $)',
-  popexp: 'Affected Population (number of people)',
+  popexp: 'Affected Population (nº people)',
   gdpexp: 'Affected GDP (US $)'
 };
 export const getWidgetTitle = (filters) => {
@@ -36,7 +36,7 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
     case 'annual_flood':
       return {
         legend: [`Annual Expected ${riskIndicator}`, `% Annual Expected ${riskIndicator}`],
-        yAxisTitle: `Annual Expected ${riskIndicator}`,
+        yAxisTitle: `Annual Expected ${riskIndicator} ($)`,
         yAxisTitleRight: `% Annual Expected ${riskIndicator}`,
       };
     case 'flood_drivers':
@@ -45,7 +45,7 @@ export const WIDGET_TITLE_GENERATOR = (type, filters = {}) => {
         chartTitleBottom: `Projected Change in ${flood} Flood Annual Expected ${riskIndicator} and Drivers in ${geogunit_unique_name}`
       };
     case 'benchmark':
-      return { chartTitleTop: `Annual Expected ${riskIndicator}` };
+      return { chartTitleTop: `Annual Expected ${currentTitle}` };
     case 'lp_curve':
       return { yAxisTitle: riskIndicator };
     default:

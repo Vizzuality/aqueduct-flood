@@ -8,6 +8,8 @@ body {
   font-family: $font-family-1;
   font-size: $font-size-default;
   line-height: 1.5;
+
+  background: palette(sand);
 }
 
 a {
@@ -16,4 +18,9 @@ a {
 
 .aq__overflow-container {
   overflow-y: visible !important;
+}
+
+.preview-content {
+  min-height: 375px;
+  background: palette(white);
 }

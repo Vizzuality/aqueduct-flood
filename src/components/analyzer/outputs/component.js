@@ -66,7 +66,9 @@ class AnalyzerOutputs extends Component {
           ...widget,
           params: {
             ...widget.params,
-            title: replace(widget.params.title, filters)
+            title: replace(widget.params.title, { ...filters,
+              end: filters.implementation_start + filters.infrastructure_life 
+            })
           }
         },
         embedURL: getCbaPreviewURL(widget, originalFormatFilters)
@@ -90,10 +92,14 @@ class AnalyzerOutputs extends Component {
             ...widget,
             params: {
               ...widget.params,
-              title: replace(widget.params.title, filters)
+              title: replace(widget.params.title, {
+                ...filters,
+                end: filters.implementation_start + filters.infrastructure_life
+              })
             }
           },
-          embedURL: getCbaEmbedURL(widget, originalFormatFilters)
+          embedURL: getCbaEmbedURL(widget, originalFormatFilters),
+          previewURL: getCbaPreviewURL(widget, filters),
         }
       }));
     }
@@ -134,7 +140,7 @@ class AnalyzerOutputs extends Component {
                       title={replace(
                         widget.params.title,
                         { ...filters,
-                          end: filters.implementation_start + filters.infrastructure_life}
+                          end: filters.implementation_start + filters.infrastructure_life }
                       )}
                       params={{
                         id: widget.id,

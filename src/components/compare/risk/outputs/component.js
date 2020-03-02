@@ -85,10 +85,14 @@ class RiskCompareOutputs extends Component {
             ...widget,
             params: {
               ...widget.params,
-              title: replace(widget.params.title, { ...filters.common, ...filters.risk })
+              title: replace(widget.params.title, { 
+                ...filters.common, 
+                ...filters.risk,
+              })
             }
           },
-          embedURL: getRiskEmbedURL(widget, filters)
+          embedURL: getRiskEmbedURL(widget, filters),
+          previewURL: getRiskPreviewURL(widget, filters),
         }
       }));
     }

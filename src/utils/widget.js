@@ -2,7 +2,6 @@
 import { replace } from 'aqueduct-components';
 
 export const updateSpec = (spec = {}, params = {}) => {
-  console.log(params.type)
   let updatedSpec = Object.assign({}, spec);
   const {
     yAxisTitle,
@@ -14,14 +13,11 @@ export const updateSpec = (spec = {}, params = {}) => {
   } = params;
 
   if (type === 'lp_curve') {
-    console.log(params)
     const legends = updatedSpec.legends;
     legends[0] = {
       ...legends[0],
       title: params.flood === 'coastal' ? 'Scenarios' : 'Models',
     };
-
-    console.log(legends)
 
     return {
       ...updatedSpec,

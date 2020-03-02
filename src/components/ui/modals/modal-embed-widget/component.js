@@ -41,7 +41,7 @@ class ModalEmbedWidget extends PureComponent {
   render() {
     const { options } = this.props;
     const { width, height, copied } = this.state;
-    const { embedURL, widget } = options;
+    const { embedURL, previewURL, widget } = options;
     const { params } = widget;
     const { title } = params;
     const shareableUrl  = `${window.location.origin}${embedURL}`;
@@ -51,13 +51,13 @@ class ModalEmbedWidget extends PureComponent {
       <div className="c-modal-embed-widget">
         <div className="row">
           <div className="col-xs-12 col-md-8">
-            <h2>
+            <h2 className="widget-title">
               {title}
             </h2>
             <div className="container">
               <ReactIframeResizer
                 title="widget-preview"
-                src={embedURL}
+                src={previewURL}
                 frameBorder={0}
                 style={{
                   width: '100%',

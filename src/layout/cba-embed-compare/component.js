@@ -1,14 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs } from 'aqueduct-components';
-import isEqual from 'lodash/isEqual';
-import { Base64 } from 'js-base64';
-
-// layout
-import LayoutCBAEmbed from "layout/layout-cba-embed";
 
 // components
-import RiskCompare from 'components/compare/risk';
+import LayoutCBAEmbed from "layout/layout-cba-embed";
 import AnalyzerCompare from 'components/compare/analyzer';
 
 // utils
@@ -30,30 +24,6 @@ class ComparePage extends PureComponent {
     clearInputCompare: PropTypes.func.isRequired,
     clearFilters: PropTypes.func.isRequired,
     clearCompareFilters: PropTypes.func.isRequired
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { filters, filtersCompare, tab } = this.props;
-    const {
-      filters: nextFilters,
-      filtersCompare: nextFiltersCompare,
-      tab: nextTab
-    } = nextProps;
-    const tabChanged = tab !== nextTab;
-    const filtersChanged = !isEqual(filters, nextFilters);
-    const filtersCompareChanged = !isEqual(filtersCompare, nextFiltersCompare);
-
-    // if (filtersChanged || filtersCompareChanged || tabChanged) {
-    //   Router.replaceRoute('compare',
-    //     {
-    //       tab: nextTab,
-    //       p: Base64.encode(JSON.stringify({
-    //         filters: nextFilters,
-    //         filtersCompare: nextFiltersCompare
-    //       }))
-    //     },
-    //     { shallow: true });
-    // }
   }
 
   onChangeTab = ({ value }) => {
@@ -83,21 +53,9 @@ class ComparePage extends PureComponent {
   }
 
   render() {
-    const { tab, tabs } = this.props;
-
     return (
       <LayoutCBAEmbed title="Compare" description="Aqueduct Flood description">
         <div className="l-compare">
-          {/* <div className="l-tabs">
-            <div className="wrapper">
-              <Tabs
-                tabs={tabs}
-                onChange={this.onChangeTab}
-              />
-            </div>
-          </div> */}
-          {/* {tab === 'risk' && <RiskCompare />}
-          {tab === 'hazard' && <AnalyzerCompare />} */}
           <AnalyzerCompare />
         </div>
       </LayoutCBAEmbed>

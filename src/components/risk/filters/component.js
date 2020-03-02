@@ -49,6 +49,7 @@ class AnalyzerFilters extends PureComponent {
     setInput: PropTypes.func.isRequired,
     setInputCompare: PropTypes.func.isRequired,
     setWidgets: PropTypes.func.isRequired,
+    setWidgetsCompare: PropTypes.func.isRequired,
     setModal: PropTypes.func.isRequired
   }
 
@@ -79,8 +80,6 @@ class AnalyzerFilters extends PureComponent {
       sub_scenario: subScenario
     };
 
-    if (basins.find(_basin => _basin.value === location)) this.setState({ isBasin: true });
-
     getCountryDefaults({ location, additionalParams })
       .then((defaults) => {
         setInput({ loading: false });
@@ -101,8 +100,6 @@ class AnalyzerFilters extends PureComponent {
       flood,
       sub_scenario: subScenario
     } = filters;
-
-    this.setState({ isBasin: opt && opt.type === 'basin'});
 
     if ((opt && opt.value) === location) return;
 
@@ -146,11 +143,14 @@ class AnalyzerFilters extends PureComponent {
   onCheckAdvancedSettings = ({ checked }) => {
     const {
       setRiskFilter,
+      setRiskCompareFilter,
       setWidgets,
+      setWidgetsCompare,
       scenarios
     } = this.props;
 
     setWidgets({ nextTab: checked ? 'advanced_risk' : 'risk' });
+    setWidgetsCompare({ nextTab: checked ? 'advanced_risk' : 'risk' });
 
     logEvent('[AQ-Flood]', 'risk tab: user checks advanced settings', checked.toString());
 
@@ -158,6 +158,8 @@ class AnalyzerFilters extends PureComponent {
       advanced_settings: checked,
       ...!checked && { scenario: scenarios[0].value }
     });
+
+    setRiskCompareFilter({ advanced_settings: checked });
   }
 
   onChangeFlood = ({ value }) => {
@@ -225,7 +227,7 @@ class AnalyzerFilters extends PureComponent {
       setRiskFilter,
       setModal
     } = this.props;
-    const { location, isBasin } = this.state;
+    const { location } = this.state;
     const isCoastal = filters.flood === 'coastal';
     const { advanced_settings: advancedSettings } = filters;
 
@@ -299,21 +301,20 @@ class AnalyzerFilters extends PureComponent {
           <div className="row">
             <div className="col-md-6">
               {/* flood type */}
-              {!isBasin && (
-                <Field
-                  name="flood-type-filter"
-                  label="Flood Type"
-                  className="-bigger"
-                  onMoreInfo={() => setModal(generateModalOptions('info', 'flood-type'))}
-                >
-                  <CustomSelect
-                    instanceId="flood"
-                    options={FLOOD_TYPE_OPTIONS}
-                    placeholder="Select a flood type..."
-                    value={filters.flood}
-                    onChange={this.onChangeFlood}
-                  />
-                </Field>)}
+              <Field
+                name="flood-type-filter"
+                label="Flood Type"
+                className="-bigger"
+                onMoreInfo={() => setModal(generateModalOptions('info', 'flood-type'))}
+              >
+                <CustomSelect
+                  instanceId="flood"
+                  options={FLOOD_TYPE_OPTIONS}
+                  placeholder="Select a flood type..."
+                  value={filters.flood}
+                  onChange={this.onChangeFlood}
+                />
+              </Field>
             </div>
             <div className="col-md-6">
               {/* exposure */}
