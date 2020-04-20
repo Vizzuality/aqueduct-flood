@@ -185,8 +185,9 @@ export const MODAL_INFO_DEFINITIONS = {
       Benefits represent the accrual of avoided damage to urban assets.</p>`
   },
   'cba-notification': {
-    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure in a given country, state, or river basin. 
-    The analysis is highly customizable, so please allow time for extra time as the calculations run in the background.</p>`
+    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure to protect against riverine floods 
+      in a given country, state, or river basin (coastal flooding is not assessed). The analysis is highly customizable, so please allow time 
+      for extra time as the calculations run in the background.</p>`
   }
 }
 
