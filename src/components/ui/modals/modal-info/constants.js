@@ -76,9 +76,10 @@ export const MODAL_INFO_DEFINITIONS = {
   },
   'future-scenario': {
     title: 'Future Scenario',
-    instructions: '<p>Select a climate scenario to project inundation in future years.</p>',
-    description: `<p>The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. </p>
-      <p>The "Optimistic" scenario (Representative Concentration Pathways 4.5) represents a world with carbon emissions peaking and declining by 2040.</p>`,
+    instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
+    description: `<p>The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. 
+      The Pessimistic climate scenario is also used in the "Business as Usual" pathway. The "Optimistic" scenario (Representative Concentration Pathways 4.5) 
+      represents a world with carbon emissions peaking and declining by 2040.</p>`,
     source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
   },
   'projection-model': {
@@ -101,21 +102,23 @@ export const MODAL_INFO_DEFINITIONS = {
   'flood-magnitude': {
     title: 'Flood magnitude (return period in years)',
     instructions: '<p>Select the severity of the flooding hazard, expressed in return periods.</p>',
-    description: '<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence per year) is less severe than a 50-year (2% probability of occurrence per year)</p>'
+    description: `<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence per year) is less severe 
+      than a 50-year (2% probability of occurrence per year). The reference year for the flood magnitude is the selected year, not the baseline. 
+      For example, the maps can display what a 100-year flood will look like in 2030, not what a current 100-year flood will look like in 2030. 
+      Note: the 2-year flood is bankfull, and is ignored in our risk calculation.</p>`
   },
   // risk
   'location': {
     title: 'Select a location',
-    instructions: '<p>Type in or select from the drop-down menu the name of a country, state, river basin, or city</p>'
+    instructions: '<p>Type in or select from the drop-down menu the name of a country, state, or river basin.</p>'
   },
   'risk-future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
-    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2,) represents a 
-      pessimistic climate scenario under Business as Usual development. In other words, the world would see steadily rising carbon emissions carbon emissions 
-      and stable economic development. The "Optimistic" scenario (RCP 4.5, SSP 2) represents a world with carbon emissions peaking and declining by 2040 and 
-      stable economic development. The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world with steadily rising global carbon emissions and 
-      uneven economic development.</p>`,
+    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2,) represents a pessimistic climate scenario 
+      under Business as Usual development. In other words, the world would see steadily rising carbon emissions and stable economic development. The "Optimistic" scenario (RCP 4.5, SSP 2) 
+      represents a world with carbon emissions peaking and declining by 2040 and stable economic development. The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world 
+      with steadily rising global carbon emissions and uneven economic development.</p>`,
     source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report.</a></p>`
   },
   'risk-indicator': {
@@ -145,7 +148,9 @@ export const MODAL_INFO_DEFINITIONS = {
   // CBA
   'design-protection-standards': {
     title: 'Design Protection Standards',
-    instructions: '<p>Set the existing (current) and design (target) levels of protection for the analysis.</p>',
+    instructions: `<p>Customize the performance expectations for the designed infrastructure. 
+      Set the existing (current) and design (target) levels of protection. Select the target year in 
+      which the infrastructure will be at peak performance. </p>`,
     description: `<p>Users must also define the year in which the design level of protection should be valid. For example, selecting a
       design protection level of 100 with a target year of 2050 means that floods up the 100-year return period would not lead to impacts
       in the year 2050.</p><p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage
