@@ -283,7 +283,7 @@ class AnalyzerFilters extends PureComponent {
                   label="Select a future scenario"
                   className="-bigger"
                   disabled={!filters.advanced_settings}
-                  onMoreInfo={() => setModal(generateModalOptions('info', 'risk-future-scenario'))}
+                  onMoreInfo={() => setModal(generateModalOptions('info', 'future-scenario'))}
                 >
                   <CustomSelect
                     instanceId="scenario"
