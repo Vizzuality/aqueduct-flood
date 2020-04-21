@@ -77,9 +77,10 @@ export const MODAL_INFO_DEFINITIONS = {
   'future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
-    description: `<p>The "Pessimistic" scenario (Representative Concentration Pathways 8.5) represents a world with steadily rising global carbon emissions. 
-      The Pessimistic climate scenario is also used in the "Business as Usual" pathway. The "Optimistic" scenario (Representative Concentration Pathways 4.5) 
-      represents a world with carbon emissions peaking and declining by 2040.</p>`,
+    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2) represents a 
+      pessimistic climate scenario under Business as Usual development. In other words, the world would see steadily rising carbon emissions and stable economic development. 
+      The "Optimistic" scenario (RCP 4.5, SSP 2) represents a world with carbon emissions peaking and declining by 2040 and stable economic development. 
+      The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world with steadily rising global carbon emissions and uneven economic development.</p>`,
     source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
   },
   'projection-model': {
@@ -112,15 +113,6 @@ export const MODAL_INFO_DEFINITIONS = {
     title: 'Select a location',
     instructions: '<p>Type in or select from the drop-down menu the name of a country, state, or river basin.</p>'
   },
-  'risk-future-scenario': {
-    title: 'Future Scenario',
-    instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
-    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2,) represents a pessimistic climate scenario 
-      under Business as Usual development. In other words, the world would see steadily rising carbon emissions and stable economic development. The "Optimistic" scenario (RCP 4.5, SSP 2) 
-      represents a world with carbon emissions peaking and declining by 2040 and stable economic development. The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world 
-      with steadily rising global carbon emissions and uneven economic development.</p>`,
-    source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report.</a></p>`
-  },
   'risk-indicator': {
     title: 'Risk Indicator',
     instructions: 'Select a type of exposure from the dropdown list in order to run the analysis.',
@@ -151,12 +143,12 @@ export const MODAL_INFO_DEFINITIONS = {
     instructions: `<p>Customize the performance expectations for the designed infrastructure. 
       Set the existing (current) and design (target) levels of protection. Select the target year in 
       which the infrastructure will be at peak performance. </p>`,
-    description: `<p>Users must also define the year in which the design level of protection should be valid. For example, selecting a
-      design protection level of 100 with a target year of 2050 means that floods up the 100-year return period would not lead to impacts
-      in the year 2050.</p><p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage
-      if no improvements to flood protection are made). Flood damage will then be recalculated using the "Design Protection Level".
-      The analysis calculates difference between the baseline and design scenarios. Benefits represent the avoided damage to urban assets,
-      population, and GDP provided by the design infrastructure.</p>`,
+    description: `<p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage if no improvements to 
+      flood protection are made). Flood damage will then be recalculated using the "Design Protection Level". Users must define the year in which the design level 
+      of protection should be valid. For example, selecting a design protection level of 100 for a target year of 2050 means that the designed infrastructure would 
+      protect against 100-year floods in the year 2050. The analysis calculates difference between the baseline and design scenarios. Benefits represent the avoided damage 
+      to urban assets, population, and GDP provided by the design infrastructure. The analysis does not allow for negative benefits (i.e., existing infrastructure performs 
+      better than the design).</p>`,
     source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'timeframes': {
