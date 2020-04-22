@@ -39,16 +39,27 @@ class AnalyzerOutputs extends Component {
 
   static defaultProps = { currentLocation: {} }
 
-  shouldComponentUpdate(nextProps) {
+  constructor(props) {
+    super();
+    this.state = { allowToLoadWidgets: props.loadAtStart };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
     const { filtersStatus: nextFiltersStatus } = nextProps;
+
+    if (!this.state.allowToLoadWidgets && nextState.allowToLoadWidgets) return true;
 
     return nextFiltersStatus.applied;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { applyFilters } = this.props;
 
     applyFilters(false);
+
+    if (this.props.filtersStatus.applied) {
+      this.setState({ allowToLoadWidgets: this.props.filtersStatus.applied });
+    }
   }
 
   onMoreInfo = (widget) => {
@@ -67,7 +78,7 @@ class AnalyzerOutputs extends Component {
           params: {
             ...widget.params,
             title: replace(widget.params.title, { ...filters,
-              end: filters.implementation_start + filters.infrastructure_life 
+              end: filters.implementation_start + filters.infrastructure_life
             })
           }
         },
@@ -116,6 +127,10 @@ class AnalyzerOutputs extends Component {
       currentLocation,
       isNullTime,
     } = this.props;
+
+    const { allowToLoadWidgets } = this.state;
+
+    if (!allowToLoadWidgets) return false;
 
     return (
       <div className="c-analyzer-outputs">

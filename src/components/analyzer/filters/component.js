@@ -53,8 +53,8 @@ class AnalyzerFilters extends PureComponent {
       setInput,
       getCountryDefaults,
       resetWidgets,
-      applyFilters,
-      setIsNullTime,
+      // applyFilters,
+      // setIsNullTime,
       setExistingProt,
       setProtFut
     } = this.props;
@@ -62,8 +62,8 @@ class AnalyzerFilters extends PureComponent {
 
     if ((opt && opt.value) === location) return;
 
-    setIsNullTime(true);
-    applyFilters(true);
+    // setIsNullTime(true);
+    // applyFilters(true);
 
     setInput({ loading: true });
     setCommonFilter({ geogunit_unique_name: opt && opt.value });
@@ -104,8 +104,8 @@ class AnalyzerFilters extends PureComponent {
     logEvent('[AQ-Flood]', 'analyzer tab: user sets location to compare', opt.value);
 
     if (opt) {
-      if (router.type === 'cba-embed') return setRouter('cba-embed-compare'); 
-      setRouter('compare', { tab }); 
+      if (router.type === 'cba-embed') return setRouter('cba-embed-compare');
+      setRouter('compare', { tab });
     }
   }
 
