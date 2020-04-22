@@ -9,8 +9,8 @@ export default {
     filters: {
       ...state.filters,
       applied: payload
-      }
-    }),
+    }
+  }),
   [actions.setModal]: (state, { payload }) => ({
     ...state,
     modal: {
