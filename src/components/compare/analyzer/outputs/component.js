@@ -46,16 +46,27 @@ class AnalyzerCompareOutputs extends Component {
     currentLocationCompare: {}
   }
 
-  shouldComponentUpdate(nextProps) {
+  constructor(props) {
+    super();
+    this.state = { allowToLoadWidgets: props.loadAtStart };
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
     const { filtersStatus: nextFiltersStatus } = nextProps;
+
+    if (!this.state.allowToLoadWidgets && nextState.allowToLoadWidgets) return true;
 
     return nextFiltersStatus.applied;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { applyFilters } = this.props;
 
     applyFilters(false);
+
+    if (this.props.filtersStatus.applied) {
+      this.setState({ allowToLoadWidgets: this.props.filtersStatus.applied });
+    }
   }
 
   onMoreInfo = (widget, filters) => {
@@ -127,6 +138,9 @@ class AnalyzerCompareOutputs extends Component {
     const { geogunit_unique_name: locationCompare, existing_prot: existingProtCompare } = filtersCompare;
     const widgetsReadyToDisplay = location && existingProt;
     const widgetsCompareReadyToDisplay = locationCompare && existingProtCompare;
+    const { allowToLoadWidgets } = this.state;
+
+    if (!allowToLoadWidgets) return false;
 
     return (
       <div className="c-analyzer-compare-outputs">
