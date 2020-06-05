@@ -61,7 +61,6 @@ class AnalyzerFilters extends PureComponent {
       getCountryDefaults,
       setRiskFilter,
       setInput,
-      basins
     } = this.props;
     const {
       existingProt,

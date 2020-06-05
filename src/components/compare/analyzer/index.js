@@ -10,6 +10,7 @@ import AnalyzerCompare from './component';
 
 export default connect(
   state => ({
+    loadAtStart: state.app.tab !== 'cba',
     filters: state.filters.common,
     filtersCompare: state.filtersCompare.common,
     loadingDefaults: state.locations.loaders.defaults,

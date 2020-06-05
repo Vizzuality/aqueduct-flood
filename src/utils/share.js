@@ -1,6 +1,5 @@
 import { Base64 } from 'js-base64';
 import * as queryString from 'query-string';
-import axios from 'axios';
 import { saveAs } from 'file-saver';
 
 export const getCbaEmbedURL = ({ id }, filters) => `/embed/cba/widget/${id}?p=${Base64.encode(JSON.stringify(filters))}`;
