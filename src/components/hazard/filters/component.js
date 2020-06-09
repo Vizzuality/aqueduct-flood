@@ -14,8 +14,8 @@ import {
   RIVERINE_PROJECTION_MODEL_OPTIONS,
   COASTAL_PROJECTION_MODEL_OPTIONS,
   FLOOD_TYPES_OPTIONS,
-  SCENARIOS_OPTIONS
 } from 'constants/hazard';
+import { SCENARIOS_OPTIONS } from 'constants/app';
 
 // utils
 import { generateModalOptions } from 'utils/modal';
