@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import { parseLocations, parseCompareLocations } from 'modules/locations/selectors';
 
 // constants
-import { SCENARIOS_OPTIONS } from 'constants/analyzer';
+import { SCENARIOS_OPTIONS } from 'constants/app';
 
 const advancedSettings = state => state.filters.risk.advanced_settings;
 const floodType = state => state.filters.risk.flood;
