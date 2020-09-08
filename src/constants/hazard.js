@@ -12,11 +12,6 @@ export const FLOOD_TYPES_OPTIONS = [
   { label: 'Riverine', value: 'inunriver' }
 ];
 
-export const SCENARIOS_OPTIONS = [
-  { label: 'Business as usual / Pessimistic', value: 'rcp8p5', default: true },
-  { label: 'Optimistic', value: 'rcp4p5' }
-];
-
 export const RIVERINE_PROJECTION_MODEL_OPTIONS = [
   { label: 'GFDL-ESM2M', value: '0000GFDL-ESM2M', default: true },
   { label: 'HadGEM2_ES', value: '0000HadGEM2-ES' },
@@ -35,7 +30,6 @@ export default {
   FETCH_HAZARD_DATASET_ID,
   YEAR_OPTIONS,
   FLOOD_TYPES_OPTIONS,
-  SCENARIOS_OPTIONS,
   RIVERINE_PROJECTION_MODEL_OPTIONS,
   COASTAL_PROJECTION_MODEL_OPTIONS
 };

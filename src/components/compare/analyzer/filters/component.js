@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import Link from 'redux-first-router-link'
 
 // constants
-import { SCENARIOS_OPTIONS } from 'constants/analyzer';
+import { SCENARIOS_OPTIONS } from 'constants/app';
 
 // utils
 import { logEvent } from 'utils/analytics';

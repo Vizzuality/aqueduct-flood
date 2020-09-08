@@ -4,4 +4,7 @@ export const APP_TABS = [
   { label: 'Cost-benefit Analyzer', value: 'cba' }
 ];
 
-export default { APP_TABS };
+export const SCENARIOS_OPTIONS = [
+  { label: 'Business as usual / Pessimistic', value: 'rcp8p5', default: true },
+  { label: 'Optimistic', value: 'rcp4p5' }
+];

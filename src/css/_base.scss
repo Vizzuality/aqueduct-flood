@@ -20,6 +20,13 @@ a {
   overflow-y: visible !important;
 }
 
+.l-sidebar {
+  .aq__btn-toggle {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .preview-content {
   min-height: 375px;
   background: palette(white);

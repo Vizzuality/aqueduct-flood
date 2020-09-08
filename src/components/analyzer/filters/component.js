@@ -4,7 +4,7 @@ import { Field, CustomSelect } from 'aqueduct-components';
 import debounce from 'lodash/debounce';
 
 // constants
-import { SCENARIOS_OPTIONS } from 'constants/analyzer';
+import { SCENARIOS_OPTIONS } from 'constants/app';
 
 // utils
 import { generateModalOptions } from 'utils/modal';
