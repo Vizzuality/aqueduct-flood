@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/applications/aqueduct/floods/static/css/main.aedbcaab.chunk.css",
-    "main.js": "/applications/aqueduct/floods/static/js/main.86bbf7c7.chunk.js",
-    "main.js.map": "/applications/aqueduct/floods/static/js/main.86bbf7c7.chunk.js.map",
-    "runtime-main.js": "/applications/aqueduct/floods/static/js/runtime-main.eead42ba.js",
-    "runtime-main.js.map": "/applications/aqueduct/floods/static/js/runtime-main.eead42ba.js.map",
-    "static/css/2.38ea5221.chunk.css": "/applications/aqueduct/floods/static/css/2.38ea5221.chunk.css",
-    "static/js/2.7fa4e6dd.chunk.js": "/applications/aqueduct/floods/static/js/2.7fa4e6dd.chunk.js",
-    "static/js/2.7fa4e6dd.chunk.js.map": "/applications/aqueduct/floods/static/js/2.7fa4e6dd.chunk.js.map",
-    "index.html": "/applications/aqueduct/floods/index.html",
-    "precache-manifest.904cbf8d6e5f7f6b5cc49d0acbe38e00.js": "/applications/aqueduct/floods/precache-manifest.904cbf8d6e5f7f6b5cc49d0acbe38e00.js",
-    "service-worker.js": "/applications/aqueduct/floods/service-worker.js",
-    "static/css/2.38ea5221.chunk.css.map": "/applications/aqueduct/floods/static/css/2.38ea5221.chunk.css.map",
-    "static/css/main.aedbcaab.chunk.css.map": "/applications/aqueduct/floods/static/css/main.aedbcaab.chunk.css.map"
+    "main.css": "./static/css/main.aedbcaab.chunk.css",
+    "main.js": "./static/js/main.12e06ab3.chunk.js",
+    "main.js.map": "./static/js/main.12e06ab3.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.a27f3749.js",
+    "runtime-main.js.map": "./static/js/runtime-main.a27f3749.js.map",
+    "static/css/2.38ea5221.chunk.css": "./static/css/2.38ea5221.chunk.css",
+    "static/js/2.7fa4e6dd.chunk.js": "./static/js/2.7fa4e6dd.chunk.js",
+    "static/js/2.7fa4e6dd.chunk.js.map": "./static/js/2.7fa4e6dd.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.ffd6456d5354f8e2b4743d298ca69926.js": "./precache-manifest.ffd6456d5354f8e2b4743d298ca69926.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.38ea5221.chunk.css.map": "./static/css/2.38ea5221.chunk.css.map",
+    "static/css/main.aedbcaab.chunk.css.map": "./static/css/main.aedbcaab.chunk.css.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.eead42ba.js",
+    "static/js/runtime-main.a27f3749.js",
     "static/css/2.38ea5221.chunk.css",
     "static/js/2.7fa4e6dd.chunk.js",
     "static/css/main.aedbcaab.chunk.css",
-    "static/js/main.86bbf7c7.chunk.js"
+    "static/js/main.12e06ab3.chunk.js"
   ]
 }
