@@ -2,7 +2,7 @@ export default {
   // common
   common:  {
     geogunit_unique_name: 'Japan',
-    scenario: 'business as usual'
+    scenario: 'rcp8p5'
   },
   // hazard
   hazard: {
@@ -14,7 +14,7 @@ export default {
   },
   // risk
   risk: {
-    scenario: 'business as usual',
+    scenario: 'rcp8p5',
     flood: 'riverine',
     exposure: 'urban_damage_v2',
     existing_prot: null,

@@ -60,7 +60,7 @@ export const getWidgetMapData = createThunkAction('WIDGETS-COMPARE__GET-WIDGET-M
 
     const leftVocabulary = getUniqueVocabulary({
       year: '2010.0',
-      scenario: 'historical'
+      scenario,
     });
     const rightVocabulary = getUniqueVocabulary({
       year: `${refYear}.0`,
