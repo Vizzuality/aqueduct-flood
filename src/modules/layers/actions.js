@@ -17,7 +17,9 @@ export const setError = createAction('LAYERS__SET-ERRORS');
 export const clearLayers = createAction('LAYERS__CLEAR-LAYERS');
 
 export const fetchLayer = (layerId, datasetId) =>
-  fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${datasetId}/layer/${layerId}`, {})
+  fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${datasetId}/layer/${layerId}`, {
+    application: 'aqueduct',
+  })
     .then((response) => {
       if (response.ok) return response.json();
       throw response;
@@ -31,7 +33,10 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-HAZARD-LAYERS', () =
     const { activeLayers } = layers;
 
     const uniqueVocabulary = getUniqueVocabulary(hazardFilters);
-    const queryParams = queryString.stringify({ aqueductfloods: uniqueVocabulary });
+    const queryParams = queryString.stringify({
+      application: 'aqueduct',
+      aqueductfloods: uniqueVocabulary,
+    });
 
     dispatch(setLoading(true));
 
