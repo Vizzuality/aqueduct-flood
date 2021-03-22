@@ -8,11 +8,7 @@ import { FETCH_CBA_DATASET_ID } from 'constants/analyzer';
 
 export const fecthSideMap = (queryParams) =>
   new Promise ((resolve) => {
-    const params = {
-      ...queryParams,
-      application: 'aqueduct',
-    };
-    fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${FETCH_CBA_DATASET_ID}/layer/vocabulary/find?${params}`, {})
+    fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${FETCH_CBA_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;

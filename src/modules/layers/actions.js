@@ -35,7 +35,7 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-HAZARD-LAYERS', () =
     const uniqueVocabulary = getUniqueVocabulary(hazardFilters);
     const queryParams = queryString.stringify({
       application: 'aqueduct',
-      aqueductfloods: uniqueVocabulary,
+      aqueductfloods_v2: uniqueVocabulary,
     });
 
     dispatch(setLoading(true));

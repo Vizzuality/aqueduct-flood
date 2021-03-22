@@ -78,11 +78,11 @@ export const getWidgetMapData = createThunkAction('WIDGETS__GET-WIDGET-MAP-DATA'
 
     const rightVocabulary = getUniqueVocabulary({
       year: `${refYear}.0`,
-      scenario
+      scenario,
     }, true);
 
-    const leftQueryParams = queryString.stringify({ aqueductfloods: leftVocabulary });
-    const rightQueryParams = queryString.stringify({ aqueductfloods: rightVocabulary });
+    const leftQueryParams = queryString.stringify({ aqueductfloods_v2: leftVocabulary, application: 'aqueduct' });
+    const rightQueryParams = queryString.stringify({ aqueductfloods_v2: rightVocabulary, application: 'aqueduct' });
     const lefSidefetch = fecthSideMap(leftQueryParams);
     const rightSidefetch = fecthSideMap(rightQueryParams);
 
