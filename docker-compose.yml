@@ -1,0 +1,39 @@
+# This is for development (not deployment)
+version: '3.7'
+
+x-app: &app
+  image: wri-floods:0.10
+  stdin_open: true
+  tty: true
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+    args:
+      NODE_VERSION: '10.20.1'
+  environment: &env
+    EDITOR: vi
+    HISTFILE: /log/.bash_history
+    NODE_ENV: ${NODE_ENV:-development}
+    REACT_APP_WRI_API_URL: //api.resourcewatch.org
+  tmpfs:
+    - /tmp
+  volumes:
+    - .:/app:cached
+    - node_modules:/node_modules
+
+services:
+  web:
+    <<: *app
+    # This might be helpful:
+    #   docker-compose run web yarn build
+    # but I'm not sure how Pantheon works yet.
+    command: yarn start
+    expose:
+      - "3000"
+    ports:
+      - "3030:3000"
+    environment:
+      <<: *env
+
+volumes:
+  node_modules:
