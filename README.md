@@ -7,9 +7,6 @@
 3. Cd into the repo and run docker compose up  to build your image and fire up the container. Visit localhost:3030. Ctrl C to stop.
 4. The app hangs up on API calls to Carto currently. If you want it to load without trying to access Carto, comment out this line in docker-compose.yml: REACT_APP_WRI_API_URL: //api.resourcewatch.org
 
-## Branches
-
-1. Treat aqueduct-gr as the main/production branch. This is the only branch we should push to Pantheon. Do not use master.
 
 ## Deployment
 
