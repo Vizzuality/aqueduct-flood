@@ -15,7 +15,7 @@ EXISTING_PROTECTION_LEVEL_OPTIONS.forEach((opt) => {
 
 export const IMPLEMENTATION_YEAR_OPTIONS = [2020, 2079]
 export const INFRASTRUCTURE_LIFE_TIME_OPTIONS = [1, 100];
-export const UNIT_COST_OPTIONS = [0.8, 1.1];
+export const UNIT_COST_OPTIONS = [(0.8 * 7,) (1.1 * 7)];
 export const DISCOUNT_RATE_OPTIONS = [0, 100];
 export const OPERATION_MAINTENANCE_COST_OPTIONS = [0, 100];
 
