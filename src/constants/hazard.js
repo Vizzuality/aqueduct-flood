@@ -1,4 +1,14 @@
-export const FETCH_HAZARD_DATASET_ID = 'ae684dd2-14fb-4c8b-ba58-c3ed7b450ff8';
+// Dataset that was in use when we forked the repo, returned 404s for resource watch api calls:
+// export const FETCH_HAZARD_DATASET_ID = 'ae684dd2-14fb-4c8b-ba58-c3ed7b450ff8';
+
+// Dataset that had the right name but no layers:
+// export const FETCH_HAZARD_DATASET_ID = "1c65b467-ba2d-42e0-965e-6e7eaba23b6a";
+
+// Dataset that Liz found that looked like it might be correct--loads menu at bottom right corner:
+// export const FETCH_HAZARD_DATASET_ID = "cbe2c493-125a-41b3-a401-98deb000d57e";
+
+// Restored dataset from backup:
+export const FETCH_HAZARD_DATASET_ID = "f39f474d-f6d3-4113-a0d4-ceedd53d5bc3";
 
 export const YEAR_OPTIONS = [
   { label: 'Baseline', value: '2010.0', selected: true },

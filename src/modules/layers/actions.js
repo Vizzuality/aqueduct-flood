@@ -1,3 +1,5 @@
+// src/modules/layers/actions.js floods
+
 import { createAction, createThunkAction } from 'redux-tools';
 import WRISerializer from 'wri-json-api-serializer';
 import * as queryString from 'query-string';
@@ -34,15 +36,23 @@ export const fetchLayers = createThunkAction('LAYERS__FETCH-HAZARD-LAYERS', () =
     const queryParams = queryString.stringify({ aqueductfloods: uniqueVocabulary });
 
     dispatch(setLoading(true));
-
-    return fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${FETCH_HAZARD_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
+// Some things to try with the query below:
+// /layer?name=inunriver
+// /layer
+// /layer?page[size]=100
+    // Original: return fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${FETCH_HAZARD_DATASET_ID}/layer/vocabulary/find?${queryParams}`, {})
+    return fetch(`${process.env.REACT_APP_WRI_API_URL}/v1/dataset/${FETCH_HAZARD_DATASET_ID}/layer?page[size]=600`, {})
       .then((response) => {
         if (response.ok) return response.json();
         throw response;
       })
-      .then(response => WRISerializer(response))
+      // Original: .then(response => WRISerializer(response))
+      .then(response => response.data)
       .then((data = []) => {
-        const layerIds = ((data[0] || {}).resources || []).map(_layer => _layer.id);
+        console.log(data)
+        // Original: const layerIds = ((data[0] || {}).resources || []).map(_layer => _layer.id);
+        const layerIds = data.map(_layer => _layer.id);
+        // const layerIds = ["e8b81ef9-ed40-48df-9b8a-b3f7f019328b"]
         const promises = layerIds.map(_layerId => fetchLayer(_layerId, FETCH_HAZARD_DATASET_ID));
 
         Promise.all(promises)
