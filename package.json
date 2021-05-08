@@ -27,7 +27,7 @@
     "js-base64": "^2.4.9",
     "jsona": "^1.1.14",
     "layer-manager": "^1.13.2",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mobile-detect": "^1.4.1",
     "morgan": "^1.9.0",
     "node-sass": "^4.9.0",
