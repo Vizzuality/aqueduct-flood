@@ -15,26 +15,37 @@ export const getUniqueVocabulary = (filters = {}) => {
   return `hazards_${flood}_${year}_${_scenario}_perc_${subsidience}_${model}`;
 }
 
+// Translates filter options into regex expressions that match API layer names
 export const getNameFromFilters = (filters = {}) => {
   const { year, flood, scenario, projection_model: model, sub_scenario: subScenario } = filters;
   const subsidience = subScenario ? 'wtsub' : 'nosub';
 
   const _scenario = year === '2010.0' ? 'historical' : scenario;
 
-  if (flood === 'inunriver') {
+  // We want to query for all RPs so that the user can select the RP via the map legend.
+  const return_period = '.*';
 
+  if (flood === 'inunriver') {
     const _model = year === '2010.0' ? '000000000WATCH' : model;
 
-    // TODO: this isn't working. How do we get the right layer name to match "2010",
-    // i.e. the baseline year?
+    // Baseline year layers are labeled as 1980 in the API.
+    // We receive other years with a decimal point, but in the API they are an int.
+    const _year = year === '2010.0' ? '1980' : Math.round(+year);
+
+    return `${flood}_${_scenario}_${_model}_${_year}_${return_period}`;
+  } else if (flood === 'inuncoast') {
+    const projection_model_translations = {
+      "95.0": "0",
+      "5.0": "0_perc_05",
+      "50.0": "0_perc_50",
+    }
+    const _model = projection_model_translations[model]
+
+    // Baseline year layers are labeled as "hist" in the API.
+    // We receive other years with a decimal point, but in the API they are an int.
     const _year = year === '2010.0' ? 'hist' : Math.round(+year);
 
-    // This returns something like inunriver_historical_000000000WATCH_2010
-    // which matches inunriver_historical_000000000WATCH_2010_rp00050
-    // or inunriver_historical_000000000WATCH_2010_rp00020
-    // or any other RP (return period).
-    // We want to query for all RPs so that the user can selct the RP via the map legend.
-    return `${flood}_${_scenario}_${_model}_${_year}`;
+    return `${flood}_${_scenario}_${subsidience}_${_year}_${return_period}_${_model}$`;
   }
 
   return `${flood}_${_scenario}_${year}_perc_${subsidience}_${model}`;
