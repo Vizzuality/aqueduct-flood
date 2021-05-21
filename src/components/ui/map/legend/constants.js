@@ -1,5 +1,4 @@
 export const RETURN_PERIOD_OPTIONS = [
-  { label: '2', value: '0002' },
   { label: '5', value: '0005' },
   { label: '10', value: '0010' },
   { label: '25', value: '0025' },
@@ -17,7 +16,6 @@ RETURN_PERIOD_OPTIONS.forEach((opt) => {
 });
 
 export const PROBABILITY_CONVERSION = {
-  2: '0.5',
   5: '0.2',
   10: '0.1',
   25: '0.04',

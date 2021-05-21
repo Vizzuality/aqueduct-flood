@@ -10,6 +10,7 @@ import {
 
 // styles
 import './styles.scss';
+import { RETURN_PERIOD_OPTIONS } from 'components/hazard/map/legend/constants';
 
 class HazardLegend extends PureComponent {
   static propTypes = {
