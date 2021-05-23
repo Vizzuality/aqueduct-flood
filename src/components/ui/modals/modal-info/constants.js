@@ -77,9 +77,9 @@ export const MODAL_INFO_DEFINITIONS = {
   'future-scenario': {
     title: 'Future Scenario',
     instructions: '<p>Select a socioeconomic and climate scenario to project flooding in future years.</p>',
-    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2) represents a 
-      pessimistic climate scenario under Business as Usual development. In other words, the world would see steadily rising carbon emissions and stable economic development. 
-      The "Optimistic" scenario (RCP 4.5, SSP 2) represents a world with carbon emissions peaking and declining by 2040 and stable economic development. 
+    description: `<p>The "Business as Usual" scenario (Representative Concentration Pathways (RCP) 8.5, Shared Socioeconomic Pathway (SSP) 2) represents a
+      pessimistic climate scenario under Business as Usual development. In other words, the world would see steadily rising carbon emissions and stable economic development.
+      The "Optimistic" scenario (RCP 4.5, SSP 2) represents a world with carbon emissions peaking and declining by 2040 and stable economic development.
       The "Pessimistic" scenario (RCP 8.5, SSP 3) represents a fragmented world with steadily rising global carbon emissions and uneven economic development.</p>`,
     source: `<p>The scenarios are based on the <a href="https://www.ipcc.ch/report/ar5/syr/" target="_blank" rel="noopener noreferrer">IPCC 5th assessment report</a>.</p>`
   },
@@ -94,18 +94,18 @@ export const MODAL_INFO_DEFINITIONS = {
 
   },
   'subsidience': {
-    title: 'Subsidience',
-    instructions: `<p>Available for Coastal floods only. Check on “Subsidence” to project inundation depths in future years using both 
-      climate change and land subsidence scenarios. Check off “Subsidence” to project inundation depths in future years using only climate change scenarios.</p>`,
+    title: 'Subsidence',
+    instructions: `<p>Available for Coastal floods only. Check the “Subsidence” box to project inundation depths in future years using both
+      climate change and land subsidence scenarios. Uncheck “Subsidence” to project inundation depths in future years using only climate change scenarios.</p>`,
     description: '<p>Subsidence refers to the lowering of land levels. In this analysis, human-induced land subsidence was caused specifically by groundwater extraction.</p>',
     source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'flood-magnitude': {
     title: 'Flood magnitude (return period in years)',
     instructions: '<p>Select the severity of the flooding hazard, expressed in return periods.</p>',
-    description: `<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence per year) is less severe 
-      than a 50-year (2% probability of occurrence per year). The reference year for the flood magnitude is the selected year, not the baseline. 
-      For example, the maps can display what a 100-year flood will look like in 2030, not what a current 100-year flood will look like in 2030. 
+    description: `<p>Smaller flood occur more regularly than larger floods. For example, a 5-year flood (20% probability of occurrence per year) is less severe
+      than a 50-year (2% probability of occurrence per year). The reference year for the flood magnitude is the selected year, not the baseline.
+      For example, the maps can display what a 100-year flood will look like in 2030, not what a current 100-year flood will look like in 2030.
       Note: the 2-year flood is bankfull, and is ignored in our risk calculation.</p>`
   },
   // risk
@@ -123,31 +123,31 @@ export const MODAL_INFO_DEFINITIONS = {
   'existing-protection-level': {
     title: 'Existing Protection Level (Return Period)',
     instructions: '<p>Select the level of flood protection to be used in the risk analysis</p>',
-    description: `<p>Flood protection level represents the strongest magnitude flood that flood infrastructure can protect against (given as a return period). 
-      For example, a 10-year flood protection level will prevent 10-year floods (or smaller) from damaging assets. The level of flood protection 
+    description: `<p>Flood protection level represents the strongest magnitude flood that flood infrastructure can protect against (given as a return period).
+      For example, a 10-year flood protection level will prevent 10-year floods (or smaller) from damaging assets. The level of flood protection
       used in the default analysis was modeled to using FLOPROS.</p>
-      <p>FLOPROS provides flood protection estimates at the state value. For larger locations, like countries and river basins, the average protection 
-      was estimated by first summing all expected annual damage (EAD) from the state level within the location (for river basins, only the portion of the 
-        state within the basin was used). Next, the location’s loss-probability curve was run through several trials using a range of flood protection 
+      <p>FLOPROS provides flood protection estimates at the state value. For larger locations, like countries and river basins, the average protection
+      was estimated by first summing all expected annual damage (EAD) from the state level within the location (for river basins, only the portion of the
+        state within the basin was used). Next, the location’s loss-probability curve was run through several trials using a range of flood protection
         values to estimate EAD. Once a trial matched the actual EAD, the corresponding flood protection was set as that location’s default.</p>`,
     source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
   'advanced-settings-notification': {
-    description: `<p>In the Advanced Setting, users can customize the Risk Analysis by altering the level of flood protection and selecting different future scenarios. 
+    description: `<p>In the Advanced Setting, users can customize the Risk Analysis by altering the level of flood protection and selecting different future scenarios.
       Due to the complexity of the calculation, the Advanced analysis runs at a coarser scale than the default analysis. Therefore, Advanced results may look different than default results.
       </p>`
   },
   // CBA
   'design-protection-standards': {
     title: 'Design Protection Standards',
-    instructions: `<p>Customize the performance expectations for the designed infrastructure. 
-      Set the existing (current) and design (target) levels of protection. Select the target year in 
+    instructions: `<p>Customize the performance expectations for the designed infrastructure.
+      Set the existing (current) and design (target) levels of protection. Select the target year in
       which the infrastructure will be at peak performance. </p>`,
-    description: `<p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage if no improvements to 
-      flood protection are made). Flood damage will then be recalculated using the "Design Protection Level". Users must define the year in which the design level 
-      of protection should be valid. For example, selecting a design protection level of 100 for a target year of 2050 means that the designed infrastructure would 
-      protect against 100-year floods in the year 2050. The analysis calculates difference between the baseline and design scenarios. Benefits represent the avoided damage 
-      to urban assets, population, and GDP provided by the design infrastructure. The analysis does not allow for negative benefits (i.e., existing infrastructure performs 
+    description: `<p>The "Existing Protection Level" will be used to calculate the baseline flood damage (expected annual damage if no improvements to
+      flood protection are made). Flood damage will then be recalculated using the "Design Protection Level". Users must define the year in which the design level
+      of protection should be valid. For example, selecting a design protection level of 100 for a target year of 2050 means that the designed infrastructure would
+      protect against 100-year floods in the year 2050. The analysis calculates difference between the baseline and design scenarios. Benefits represent the avoided damage
+      to urban assets, population, and GDP provided by the design infrastructure. The analysis does not allow for negative benefits (i.e., existing infrastructure performs
       better than the design).</p>`,
     source: `<a href="https://www.wri.org/publication/aqueduct-floods" target="_blank" rel="noopener noreferrer">WRI Aqueduct Floods</a>`
   },
@@ -182,8 +182,8 @@ export const MODAL_INFO_DEFINITIONS = {
       Benefits represent the accrual of avoided damage to urban assets.</p>`
   },
   'cba-notification': {
-    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure to protect against riverine floods 
-      in a given country, state, or river basin (coastal flooding is not assessed). The analysis is highly customizable, so please allow time 
+    description: `<p>The Cost-Benefit Analysis assesses the feasibility of improving dike infrastructure to protect against riverine floods
+      in a given country, state, or river basin (coastal flooding is not assessed). The analysis is highly customizable, so please allow time
       for extra time as the calculations run in the background.</p>`
   }
 }
