@@ -4,7 +4,8 @@
 
 1. Install Docker
 2. Clone the repo: https://github.com/greenriver/aqueduct-flood
-3. Run `docker-compose up` to build your image and fire up the container. Visit localhost:3030. Ctrl-C to stop.
+3. Be sure to set the necessary environment variables in `.env.development.local`. Ask an established developer for help with this step.
+4. Run `docker-compose up` to build your image and fire up the container. Visit localhost:3030. Ctrl-C to stop.
 
 ## Deployment
 
