@@ -5,6 +5,6 @@ export const APP_TABS = [
 ];
 
 export const SCENARIOS_OPTIONS = [
-  { label: 'Business as usual / Pessimistic', value: 'rcp8p5', default: true },
+  { label: 'Business as usual / Pessimistic', value: "business as usual", default: true },
   { label: 'Optimistic', value: 'rcp4p5' }
 ];

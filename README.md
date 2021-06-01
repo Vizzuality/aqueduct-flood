@@ -13,6 +13,7 @@
 2. Copy the contents of the `build` directory to the `wriorg` repo.
     - Make sure you are on the `aqueduct-gr` branch of the `wriorg` repo.
     - Copy the build to the `wriorg/applications/aqueduct/floods` directory.
+    - This command may work for you too: `rsync -a build/ ../wriorg/applications/aqueduct/floods/`
 3. From the `wriorg` repo, commit and push changes to the `aqueduct-gr` branch. Enter your Pantheon password when/if prompted.
     - In your commit message, include the app name and the hash for the commit from that app's repo that you are deploying, for example:
       > Update aqueduct-flood to commit 8df15603a5d939995b03ade0429f90434a19e6ca
