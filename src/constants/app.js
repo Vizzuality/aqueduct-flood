@@ -12,5 +12,5 @@ export const SCENARIO_OPTIONS = [
 export const RISK_SCENARIO_OPTIONS = [
   { label: 'Business as usual', value: "business as usual", default: true },
   { label: 'Optimistic', value: 'rcp4p5' },
-  { label: 'Pessimistic', value: 'rcp4p5' }
+  { label: 'Pessimistic', value: 'rcp8p5' }
 ];
