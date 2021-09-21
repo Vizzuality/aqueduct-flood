@@ -8,10 +8,10 @@
 
 ## Git Flow
 
-1. Create all new branches by branching off `main`.
-2. Open pull requests against `main` as well.
-3. Merge branches into `develop` when they are ready to be deployed for testing. Add the `on develop` label to the PR so others know it should be there.
-4. When a change is ready to be deployed to the production website, merge it into `main`.
+1. Create all new branches by branching off `develop`.
+2. Open pull requests against `develop` as well.
+3. Merge branches into `develop` when they are ready to be deployed for testing.
+4. When a change is ready to be deployed to the production website, merge `develop` into `main`.
 
 ## Deployment
 
