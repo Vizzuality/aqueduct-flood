@@ -7,6 +7,15 @@
 3. Be sure to set the necessary environment variables in `.env.development.local`. Ask an established developer for help with this step.
 4. Run `docker-compose up` to build your image and fire up the container. Visit localhost:3030. Ctrl-C to stop.
 
+
+## Git Flow
+
+1. Create all new branches by branching off `develop`.
+2. Open pull requests against `develop` as well.
+3. Merge branches into `develop` when they are ready to be deployed for testing.
+4. When a change is ready to be deployed to the production website, merge `develop` into `main`.
+
+
 ## Deployment
 
 ### Deploying to staging
@@ -24,6 +33,7 @@
 ### Deploying to production
 
 To deploy to production, follow the same steps as above but use the `aqueduct-gr` branch of the `wriorg` repo instead of the `aqueductgr2` branch. You must then ask WRI staff to merge and promote the update to production.
+
 
 ## Requirements
 ```
