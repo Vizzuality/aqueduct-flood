@@ -1,5 +1,8 @@
 # Aqueduct Floods
 
+Repository for WRI's [Aqueduct Floods tool](https://www.wri.org/applications/aqueduct/floods/).
+
+
 ## Getting Started
 
 1. Install Docker
@@ -42,7 +45,7 @@ May encounter problems upgrading because of component dependencies.
 ## Working with AQ-components
 
 ---
-[AQ-components](https://vizzuality.github.io/aqueduct-components/) provides a bunch of useful components to use in the different AQ apps.
+[AQ-components](https://greenriver.github.io/aqueduct-components/) provides a bunch of useful components to use in the different AQ apps.
 
 To work with it, go to your AQ-components project, and run `yarn link`. This will generate a symlink to the project. Now, let's compile
 the code and make it responsive to changes: run `yarn components:watch`.
@@ -52,3 +55,10 @@ Go to your application and link the components: `yarn link aqueduct-components`.
 You should be ready to work!
 
 
+## Aqueduct Repo Directory
+
+- [Aqueduct Water Risk Atlas](https://www.wri.org/applications/aqueduct/water-risk-atlas) - https://github.com/greenriver/aqueduct-water-risk
+- [Aqueduct Country Rankings](https://www.wri.org/applications/aqueduct/country-rankings) - https://github.com/greenriver/aqueduct-countries-ranking
+- [Aqueduct Food](https://www.wri.org/applications/aqueduct/food/#/) - https://github.com/greenriver/aqueduct-food
+- [Aqueduct Floods](https://www.wri.org/applications/aqueduct/floods/) - https://github.com/greenriver/aqueduct-flood
+- [Aqueduct Components](https://greenriver.github.io/aqueduct-components/) - https://github.com/greenriver/aqueduct-components
