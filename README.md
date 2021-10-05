@@ -16,6 +16,13 @@
 4. When a change is ready to be deployed to the production website, merge `develop` into `main`.
 
 
+## Git Flow
+
+1. Create all new branches by branching off `develop`.
+2. Open pull requests against `develop` as well.
+3. Merge branches into `develop` when they are ready to be deployed for testing.
+4. When a change is ready to be deployed to the production website, merge `develop` into `main`.
+
 ## Deployment
 
 ### Deploying to staging
@@ -36,6 +43,7 @@ To deploy to production, follow the same steps as above but use the `aqueduct-gr
 
 
 ## Requirements
+
 ```
   node 10.20.1
 ```
